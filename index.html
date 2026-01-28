@@ -1,0 +1,204 @@
+
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI-Broker | Fixed 2026</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Poprawiony import Chart.js -->
+    <script src="https://cdn.jsdelivr.net"></script>
+    <style>
+        :root { --accent: #1d4ed8; --bg: #0b0f19; --card: #161b2a; }
+        body { background: var(--bg); color: #e5e7eb; font-family: sans-serif; margin: 0; overflow: hidden; }
+        .tab-content { display: none; width: 100%; height: 100%; overflow-y: auto; }
+        .tab-content.active { display: block; }
+        .card { background: var(--card); border: 1px solid #2d334a; border-radius: 12px; padding: 16px; }
+        .sidebar-item-active { background: var(--accent) !important; color: white !important; }
+        .chart-container { position: relative; width: 100%; height: 250px; }
+    </style>
+</head>
+<body class="flex h-screen">
+
+    <!-- SIDEBAR -->
+    <aside class="w-64 bg-[#111827] p-6 flex flex-col gap-4 border-r border-gray-800 shrink-0">
+        <div class="mb-8 text-xl font-black text-blue-400 italic">AI-Broker Pro</div>
+        <nav class="flex flex-col gap-1 flex-1">
+            <button onclick="switchTab('dashboard')" id="btn-dashboard" class="nav-btn flex items-center gap-3 p-3 rounded-lg sidebar-item-active text-sm">📊 Dashboard</button>
+            <button onclick="switchTab('products')" id="btn-products" class="nav-btn flex items-center gap-3 p-3 rounded-lg text-gray-400 text-sm hover:bg-gray-800">📦 Moje Moduły</button>
+            <button onclick="switchTab('finance')" id="btn-finance" class="nav-btn flex items-center gap-3 p-3 rounded-lg text-gray-400 text-sm hover:bg-gray-800">📑 Finanse</button>
+            <button onclick="switchTab('shop')" id="btn-shop" class="nav-btn flex items-center gap-3 p-3 rounded-lg text-gray-400 text-sm hover:bg-gray-800">🛒 Marketplace</button>
+        </nav>
+        <div class="text-[9px] text-blue-500 font-bold opacity-50 text-center">Tomasz Hajduk | 2026</div>
+    </aside>
+
+    <main class="flex-1 flex flex-col overflow-hidden">
+        <header class="p-6 border-b border-white/5 flex justify-between items-center">
+            <h2 class="text-[10px] font-black uppercase text-gray-500 tracking-widest">System Control 2026</h2>
+            <div id="usd-rate-display" class="text-blue-400 font-mono text-xs">USD: Ładowanie...</div>
+        </header>
+
+        <div class="flex-1 overflow-y-auto p-8">
+            <!-- 1. DASHBOARD -->
+            <section id="content-dashboard" class="tab-content active">
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+                    <div class="card border-l-4 border-emerald-500 text-center"><p class="text-[9px] text-emerald-400">PLN</p><p id="stat-revenue-pln" class="text-lg font-bold">0</p></div>
+                    <div class="card border-l-4 border-blue-500 text-center"><p class="text-[9px] text-blue-400">USD</p><p id="stat-revenue-usd" class="text-lg font-bold">0</p></div>
+                    <div class="card border-l-4 border-purple-500 text-center"><p class="text-[9px] text-purple-400">Moduły</p><p id="stat-orders" class="text-lg font-bold">0</p></div>
+                    <div class="card border-l-4 border-orange-500 text-center text-emerald-500 text-[10px] font-bold">ONLINE 2026</div>
+                </div>
+                
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-4 mb-6">
+                    <div class="card lg:col-span-2"><div class="chart-container"><canvas id="historyChartCanvas"></canvas></div></div>
+                    <div class="card"><div class="chart-container"><canvas id="categoryChartCanvas"></canvas></div></div>
+                </div>
+                <div id="system-logs" class="card bg-black/40 font-mono text-[9px] text-emerald-500/60 h-24 overflow-y-auto p-2"></div>
+            </section>
+
+            <!-- 2. PRODUKTY (MODUŁY) -->
+            <section id="content-products" class="tab-content">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                    <div class="card">
+                        <h3 class="text-blue-400 font-bold uppercase text-[9px] mb-4 font-black">Dodaj Moduł</h3>
+                        <form onsubmit="addAgent(event)" class="space-y-3">
+                            <input type="text" id="name" placeholder="Nazwa" class="w-full p-3 rounded bg-black/40 border border-gray-800 text-xs" required>
+                            <input type="number" id="price" placeholder="Cena PLN" class="w-full p-3 rounded bg-black/40 border border-gray-800 text-xs" required>
+                            <button type="submit" class="w-full bg-blue-600 p-3 rounded font-black text-[10px] uppercase">Wdróż</button>
+                        </form>
+                    </div>
+                    <div class="card"><div id="list-container" class="space-y-2"></div></div>
+                </div>
+            </section>
+
+            <section id="content-finance" class="tab-content">
+                <div class="card text-center py-20"><p id="finance-total-pln" class="text-6xl font-black text-emerald-400">0 PLN</p></div>
+            </section>
+
+            <section id="content-shop" class="tab-content">
+                <div id="shop-container" class="grid grid-cols-3 gap-4"></div>
+            </section>
+        </div>
+    </main>
+
+    <script>
+        const LS_KEY = 'ai_broker_2026_save';
+        let charts = { h: null, c: null };
+        let usdRate = 4.00;
+
+        function getData() { return JSON.parse(localStorage.getItem(LS_KEY)) || []; }
+        function saveData(data) { localStorage.setItem(LS_KEY, JSON.stringify(data)); updateUI(); }
+
+        async function fetchUsdRate() {
+            try {
+                const res = await fetch('https://api.nbp.pl');
+                const d = await res.json();
+                usdRate = d.rates[0].mid;
+                document.getElementById('usd-rate-display').innerText = `USD/PLN: ${usdRate.toFixed(4)}`;
+            } catch (e) { console.log("NBP Offline"); }
+            updateUI();
+        }
+
+        function switchTab(id) {
+            document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+            document.getElementById(`content-${id}`).classList.add('active');
+            document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('sidebar-item-active'));
+            document.getElementById(`btn-${id}`).classList.add('sidebar-item-active');
+            if(id === 'dashboard') setTimeout(updateUI, 100);
+        }
+
+        function updateUI() {
+            const data = getData();
+            const total = data.reduce((sum, item) => sum + parseFloat(item.price), 0);
+
+            document.getElementById('stat-revenue-pln').innerText = total.toLocaleString() + ' PLN';
+            document.getElementById('stat-revenue-usd').innerText = (total / usdRate).toFixed(0) + ' USD';
+            document.getElementById('stat-orders').innerText = data.length;
+            if(document.getElementById('finance-total-pln')) document.getElementById('finance-total-pln').innerText = total.toLocaleString() + ' PLN';
+
+            const list = document.getElementById('list-container');
+            if(list) list.innerHTML = data.map(i => `
+                <div class="p-3 bg-black/20 border border-gray-800 rounded flex justify-between items-center text-[11px]">
+                    <span>${i.name}</span>
+                    <div class="flex gap-4">
+                        <span class="text-emerald-500">${parseFloat(i.price).toLocaleString()} PLN</span>
+                        <button onclick="deleteAgent('${i.id}')" class="text-red-500 font-bold">USUŃ</button>
+                    </div>
+                </div>`).join('');
+
+            const shop = document.getElementById('shop-container');
+            if(shop && shop.innerHTML === "") {
+                const items = [{n:'Voice AI', p:45000}, {n:'Cyber Guard', p:120000}, {n:'Market AI', p:75000}];
+                shop.innerHTML = items.map(x => `
+                    <div class="card text-center">
+                        <p class="font-bold text-xs uppercase mb-2">${x.n}</p>
+                        <p class="text-emerald-500 text-sm mb-4">${x.p.toLocaleString()} PLN</p>
+                        <button onclick="buyModule('${x.n}', ${x.p})" class="w-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-500 p-2 rounded text-[9px] font-bold">KUP</button>
+                    </div>`).join('');
+            }
+
+            renderCharts(data, total);
+        }
+
+        function renderCharts(data, total) {
+            const ctxH = document.getElementById('historyChartCanvas');
+            const ctxC = document.getElementById('categoryChartCanvas');
+            if(!ctxH || !ctxC || typeof Chart === 'undefined') return;
+
+            if(charts.h) charts.h.destroy();
+            if(charts.c) charts.c.destroy();
+
+            charts.h = new Chart(ctxH, {
+                type: 'line',
+                data: {
+                    labels: ['Start', 'Q2', 'Q3', '2026'],
+                    datasets: [{
+                        label: 'PLN',
+                        data: [total*0.3, total*0.6, total*0.8, total],
+                        borderColor: '#3b82f6',
+                        backgroundColor: 'rgba(59, 130, 246, 0.1)',
+                        fill: true,
+                        tension: 0.4
+                    }]
+                },
+                options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } } }
+            });
+
+            charts.c = new Chart(ctxC, {
+                type: 'doughnut',
+                data: {
+                    datasets: [{
+                        data: [data.length, 10 - data.length],
+                        backgroundColor: ['#10b981', '#1e293b'],
+                        borderWidth: 0
+                    }]
+                },
+                options: { cutout: '80%', responsive: true, maintainAspectRatio: false }
+            });
+        }
+
+        function addAgent(e) {
+            e.preventDefault();
+            const data = getData();
+            data.push({ id: Date.now().toString(), name: document.getElementById('name').value, price: document.getElementById('price').value });
+            saveData(data);
+            e.target.reset();
+        }
+
+        function deleteAgent(id) {
+            const data = getData().filter(i => i.id !== id);
+            saveData(data);
+        }
+
+        function buyModule(n, p) {
+            const data = getData();
+            data.push({ id: Date.now().toString(), name: n, price: p });
+            saveData(data);
+        }
+
+        window.onload = () => {
+            if(!localStorage.getItem(LS_KEY)) localStorage.setItem(LS_KEY, JSON.stringify([{id: '1', name: 'System Core 2026', price: 100000}]));
+            fetchUsdRate();
+        };
+    </script>
+</body>
+</html>
