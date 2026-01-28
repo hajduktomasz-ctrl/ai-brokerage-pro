@@ -4,98 +4,176 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI-Broker | Fixed 2026</title>
+    <title>Pośrednictwo AI PRO | Tomasz Hajduk</title>
+    
+    <!-- FAVICON (IKONA ROBOTA W KARCIE) -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🤖</text></svg>">
+    
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Poprawiony import Chart.js -->
-    <script src="https://cdn.jsdelivr.net"></script>
+    <link href="https://fonts.googleapis.com" rel="stylesheet">
     <style>
-        :root { --accent: #1d4ed8; --bg: #0b0f19; --card: #161b2a; }
-        body { background: var(--bg); color: #e5e7eb; font-family: sans-serif; margin: 0; overflow: hidden; }
-        .tab-content { display: none; width: 100%; height: 100%; overflow-y: auto; }
-        .tab-content.active { display: block; }
-        .card { background: var(--card); border: 1px solid #2d334a; border-radius: 12px; padding: 16px; }
-        .sidebar-item-active { background: var(--accent) !important; color: white !important; }
-        .chart-container { position: relative; width: 100%; height: 250px; }
+        :root { --accent: #3b82f6; --bg: #05070a; --card: rgba(22, 27, 42, 0.9); }
+        body { background: var(--bg); color: #e5e7eb; font-family: 'JetBrains Mono', monospace; margin: 0; overflow-x: hidden; transition: background 0.1s; }
+        .tab-content { display: none; width: 100%; height: 100%; overflow-y: auto; padding: 20px; padding-bottom: 100px; }
+        .tab-content.active { display: block; animation: slideUp 0.3s ease-out; }
+        @keyframes slideUp { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .card { background: var(--card); backdrop-filter: blur(15px); border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 16px; padding: 15px; }
+        .sidebar-item-active { background: linear-gradient(90deg, var(--accent), transparent) !important; border-left: 4px solid var(--accent); color: white !important; }
+        .ticker-wrap { position: fixed; bottom: 0; width: 100%; overflow: hidden; background: rgba(0,0,0,0.9); border-top: 1px solid #f97316; z-index: 100; height: 30px; }
+        .ticker { display: inline-block; white-space: nowrap; animation: ticker 30s linear infinite; color: #f97316; font-size: 10px; line-height: 30px; font-weight: bold; }
+        @keyframes ticker { 0% { transform: translateX(100%); } 100% { transform: translateX(-100%); } }
+        .custom-scrollbar::-webkit-scrollbar { width: 4px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: rgba(0,0,0,0.2); }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 10px; }
+        .glitch-active { animation: glitch-anim 0.2s ease-in-out infinite; filter: hue-rotate(90deg) contrast(150%); }
+        @keyframes glitch-anim { 0% { transform: translate(0); } 20% { transform: translate(-5px, 5px); } 60% { transform: translate(5px, 5px); } 100% { transform: translate(0); } }
+        .terminal-stream { font-size: 9px; color: #10b981; line-height: 1.2; overflow: hidden; height: 100%; }
+        .terminal-line { white-space: nowrap; opacity: 0.7; }
+        .scan-line { height: 2px; background: rgba(59, 130, 246, 0.2); width: 100%; position: absolute; top: 0; animation: scan 3s linear infinite; }
+        @keyframes scan { from { top: 0; } to { top: 100%; } }
     </style>
 </head>
-<body class="flex h-screen">
+<body class="flex flex-col md:flex-row h-screen overflow-hidden" id="main-body">
 
-    <!-- SIDEBAR -->
-    <aside class="w-64 bg-[#111827] p-6 flex flex-col gap-4 border-r border-gray-800 shrink-0">
-        <div class="mb-8 text-xl font-black text-blue-400 italic">AI-Broker Pro</div>
-        <nav class="flex flex-col gap-1 flex-1">
-            <button onclick="switchTab('dashboard')" id="btn-dashboard" class="nav-btn flex items-center gap-3 p-3 rounded-lg sidebar-item-active text-sm">📊 Dashboard</button>
-            <button onclick="switchTab('products')" id="btn-products" class="nav-btn flex items-center gap-3 p-3 rounded-lg text-gray-400 text-sm hover:bg-gray-800">📦 Moje Moduły</button>
-            <button onclick="switchTab('finance')" id="btn-finance" class="nav-btn flex items-center gap-3 p-3 rounded-lg text-gray-400 text-sm hover:bg-gray-800">📑 Finanse</button>
-            <button onclick="switchTab('shop')" id="btn-shop" class="nav-btn flex items-center gap-3 p-3 rounded-lg text-gray-400 text-sm hover:bg-gray-800">🛒 Marketplace</button>
+    <div id="lead-alert" class="card border-orange-500 bg-orange-950/80 w-64 shadow-[0_0_30px_rgba(249,115,22,0.4)] fixed top-5 right-5 z-50 hidden">
+        <p class="text-[10px] font-black text-orange-400 uppercase mb-2">🔥 NOWY LEAD WYKRYTY!</p>
+        <p id="lead-name" class="text-[8px] mb-3 text-white">Skanowanie...</p>
+        <button onclick="catchLead()" class="w-full py-2 bg-orange-500 text-black text-[9px] font-black rounded uppercase hover:bg-white transition-all">Przejmij Kontrakt</button>
+    </div>
+
+    <aside class="sidebar w-full md:w-72 bg-black/95 md:p-6 flex flex-col border-r border-white/5 shrink-0 h-full">
+        <div class="mb-8 hidden md:block text-center">
+            <div class="text-xl font-black text-white tracking-tighter uppercase italic">Tomasz<br>Hajduk</div>
+            <div class="text-[8px] text-blue-500 mt-2 font-bold tracking-widest">PROJEKTANT AI 2026</div>
+        </div>
+        <nav class="flex flex-col gap-2 flex-grow">
+            <button onclick="switchTab('dashboard')" id="btn-dashboard" class="nav-btn flex items-center gap-4 p-4 rounded-xl sidebar-item-active text-[10px] font-bold uppercase transition-all">📊 Dashboard</button>
+            <button onclick="switchTab('shop')" id="btn-shop" class="nav-btn flex items-center gap-4 p-4 rounded-xl text-gray-500 text-[10px] font-bold uppercase transition-all">🛒 Sklep AI</button>
+            <button onclick="switchTab('products')" id="btn-products" class="nav-btn flex items-center gap-4 p-4 rounded-xl text-gray-500 text-[10px] font-bold uppercase transition-all">📦 Zasoby & Umowy</button>
+            <button onclick="switchTab('market')" id="btn-market" class="nav-btn flex items-center gap-4 p-4 rounded-xl text-gray-500 text-[10px] font-bold uppercase transition-all">📈 Giełda</button>
+            <div class="mt-auto pt-6 border-t border-white/5 flex flex-col gap-2 mb-12">
+                <button onclick="exportCertificate()" class="w-full py-3 bg-emerald-600/20 border border-emerald-500/50 rounded-xl text-[9px] font-black text-emerald-400 uppercase hover:bg-emerald-600/40 transition-all">🖨️ CERTYFIKAT</button>
+                <button onclick="resetSystem()" class="w-full py-3 bg-red-600/20 border border-red-500/50 rounded-xl text-[9px] font-black text-red-400 uppercase hover:bg-red-600/40 transition-all">💥 RESET</button>
+            </div>
         </nav>
-        <div class="text-[9px] text-blue-500 font-bold opacity-50 text-center">Tomasz Hajduk | 2026</div>
     </aside>
 
-    <main class="flex-1 flex flex-col overflow-hidden">
-        <header class="p-6 border-b border-white/5 flex justify-between items-center">
-            <h2 class="text-[10px] font-black uppercase text-gray-500 tracking-widest">System Control 2026</h2>
-            <div id="usd-rate-display" class="text-blue-400 font-mono text-xs">USD: Ładowanie...</div>
+    <main class="flex-1 relative flex flex-col overflow-hidden">
+        <header class="p-4 md:p-6 flex justify-between items-center bg-black/40 border-b border-white/5">
+            <div>
+                <div class="text-xs font-black text-white uppercase tracking-widest">Pośrednictwo AI PRO</div>
+                <div class="text-[8px] text-blue-400 italic">Tomasz Hajduk // 2026.01.28</div>
+            </div>
+            <div id="status-display" class="text-[9px] font-bold text-emerald-400 border border-emerald-500/30 px-3 py-1 rounded-full uppercase">System: Online</div>
         </header>
 
-        <div class="flex-1 overflow-y-auto p-8">
-            <!-- 1. DASHBOARD -->
+        <div class="flex-1 relative overflow-hidden">
             <section id="content-dashboard" class="tab-content active">
-                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
-                    <div class="card border-l-4 border-emerald-500 text-center"><p class="text-[9px] text-emerald-400">PLN</p><p id="stat-revenue-pln" class="text-lg font-bold">0</p></div>
-                    <div class="card border-l-4 border-blue-500 text-center"><p class="text-[9px] text-blue-400">USD</p><p id="stat-revenue-usd" class="text-lg font-bold">0</p></div>
-                    <div class="card border-l-4 border-purple-500 text-center"><p class="text-[9px] text-purple-400">Moduły</p><p id="stat-orders" class="text-lg font-bold">0</p></div>
-                    <div class="card border-l-4 border-orange-500 text-center text-emerald-500 text-[10px] font-bold">ONLINE 2026</div>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6 text-center">
+                    <div class="card border-l-4 border-emerald-500 text-[10px] uppercase font-bold text-emerald-500">Saldo<p id="stat-balance" class="text-lg text-white font-black mt-1">0</p></div>
+                    <div class="card border-l-4 border-blue-500 text-[10px] uppercase font-bold text-blue-500">Zasoby<p id="stat-assets" class="text-lg text-white font-black mt-1">0</p></div>
+                    <div class="card border-l-4 border-purple-500 text-[10px] uppercase font-bold text-purple-500">Zysk/s<p id="stat-income" class="text-lg text-white font-black mt-1">0</p></div>
+                    <div class="card border-l-4 border-orange-500 text-[10px] uppercase font-bold text-orange-500">Leady<p id="stat-leads" class="text-lg text-white font-black mt-1">0</p></div>
                 </div>
-                
-                <div class="grid grid-cols-1 lg:grid-cols-3 gap-4 mb-6">
-                    <div class="card lg:col-span-2"><div class="chart-container"><canvas id="historyChartCanvas"></canvas></div></div>
-                    <div class="card"><div class="chart-container"><canvas id="categoryChartCanvas"></canvas></div></div>
-                </div>
-                <div id="system-logs" class="card bg-black/40 font-mono text-[9px] text-emerald-500/60 h-24 overflow-y-auto p-2"></div>
-            </section>
 
-            <!-- 2. PRODUKTY (MODUŁY) -->
-            <section id="content-products" class="tab-content">
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                    <div class="card">
-                        <h3 class="text-blue-400 font-bold uppercase text-[9px] mb-4 font-black">Dodaj Moduł</h3>
-                        <form onsubmit="addAgent(event)" class="space-y-3">
-                            <input type="text" id="name" placeholder="Nazwa" class="w-full p-3 rounded bg-black/40 border border-gray-800 text-xs" required>
-                            <input type="number" id="price" placeholder="Cena PLN" class="w-full p-3 rounded bg-black/40 border border-gray-800 text-xs" required>
-                            <button type="submit" class="w-full bg-blue-600 p-3 rounded font-black text-[10px] uppercase">Wdróż</button>
-                        </form>
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                    <div class="lg:col-span-2 card h-[420px] flex flex-col border-t-2 border-blue-500 overflow-hidden">
+                        <div class="text-blue-400 font-black text-[10px] uppercase italic mb-4 shrink-0">Terminal Monitorowania Operacji</div>
+                        <div class="relative h-[200px] bg-black/50 rounded-lg p-3 border border-white/5 overflow-hidden shrink-0">
+                            <div class="scan-line"></div>
+                            <div id="terminal-stream" class="terminal-stream custom-scrollbar"></div>
+                        </div>
+                        <div class="mt-4 flex-1 overflow-y-auto pr-2 border-t border-white/5 pt-4 custom-scrollbar" id="system-logs"></div>
                     </div>
-                    <div class="card"><div id="list-container" class="space-y-2"></div></div>
+                    <div class="lg:col-span-1 card h-[420px] border-t-2 border-emerald-500 flex flex-col gap-4">
+                        <div class="text-emerald-400 font-black text-[10px] uppercase italic mb-2">Szybkie Akcje</div>
+                        <button onclick="document.getElementById('partner-modal').classList.remove('hidden')" class="w-full py-4 bg-blue-600/10 border border-blue-500/50 rounded-lg text-[9px] font-black text-blue-400 hover:bg-blue-600/20 uppercase transition-all">Podpisz Umowę 🤝</button>
+                        <button onclick="document.getElementById('product-modal').classList.remove('hidden')" class="w-full py-4 bg-emerald-600/10 border border-emerald-500/50 rounded-lg text-[9px] font-black text-emerald-400 hover:bg-emerald-600/20 uppercase transition-all">Dodaj Zasób 📦</button>
+                        <button onclick="document.getElementById('transfer-modal').classList.remove('hidden')" class="w-full py-4 bg-purple-600/10 border border-purple-500/50 rounded-lg text-[9px] font-black text-purple-400 hover:bg-purple-600/20 uppercase transition-all">Przelej Środki 💸</button>
+                    </div>
                 </div>
             </section>
-
-            <section id="content-finance" class="tab-content">
-                <div class="card text-center py-20"><p id="finance-total-pln" class="text-6xl font-black text-emerald-400">0 PLN</p></div>
-            </section>
-
-            <section id="content-shop" class="tab-content">
-                <div id="shop-container" class="grid grid-cols-3 gap-4"></div>
-            </section>
+            <section id="content-shop" class="tab-content"><div id="shop-list" class="grid grid-cols-1 md:grid-cols-3 gap-4"></div></section>
+            <section id="content-products" class="tab-content"><div id="list-container" class="grid grid-cols-1 md:grid-cols-3 gap-4"></div></section>
+            <section id="content-market" class="tab-content"><div id="market-list" class="grid grid-cols-1 md:grid-cols-2 gap-4"></div></section>
         </div>
     </main>
 
+    <!-- MODAL PRZELEWU -->
+    <div id="transfer-modal" class="hidden fixed inset-0 bg-black/95 backdrop-blur-md z-50 flex items-center justify-center p-4">
+        <div class="card w-full max-w-md border-purple-500">
+            <h3 class="text-purple-400 font-black mb-4 uppercase text-xs">Dyspozycja Przelewu</h3>
+            <select id="bank-select" class="w-full bg-black border border-white/10 p-3 text-[10px] text-white mb-4 outline-none focus:border-purple-500">
+                <option value="PKO BP">PKO BP</option><option value="mBank">mBank</option><option value="Santander">Santander</option>
+            </select>
+            <input type="text" id="bank-account" placeholder="Numer konta" maxlength="26" class="w-full bg-black border border-white/10 p-3 text-[10px] text-white mb-4 outline-none focus:border-purple-500">
+            <div class="flex gap-2">
+                <button onclick="executeTransfer()" class="flex-1 bg-purple-600 py-3 text-[10px] font-black text-white rounded uppercase">Autoryzuj</button>
+                <button onclick="document.getElementById('transfer-modal').classList.add('hidden')" class="flex-1 bg-gray-800 py-3 text-[10px] font-black text-white rounded uppercase">Anuluj</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODALE POMOCNICZE -->
+    <div id="partner-modal" class="hidden fixed inset-0 bg-black/95 backdrop-blur-md z-50 flex items-center justify-center p-4">
+        <div class="card w-full max-w-md border-blue-500">
+            <h3 class="text-blue-400 font-black mb-4 uppercase text-xs">Nowa Umowa</h3>
+            <input type="text" id="p-name" placeholder="Firma" class="w-full bg-black border border-white/10 p-3 text-[10px] text-white mb-4 outline-none">
+            <input type="number" id="p-commission" placeholder="Zysk (PLN/s)" class="w-full bg-black border border-white/10 p-3 text-[10px] text-white mb-4 outline-none">
+            <button onclick="savePartner()" class="w-full bg-blue-600 py-3 text-[10px] font-black text-white rounded uppercase">Podpisz</button>
+        </div>
+    </div>
+
+    <div id="product-modal" class="hidden fixed inset-0 bg-black/95 backdrop-blur-md z-50 flex items-center justify-center p-4">
+        <div class="card w-full max-w-md border-emerald-500">
+            <h3 class="text-emerald-400 font-black mb-4 uppercase text-xs">Dodaj Zasób</h3>
+            <input type="text" id="pr-name" placeholder="Nazwa" class="w-full bg-black border border-white/10 p-3 text-[10px] text-white mb-4 outline-none">
+            <input type="number" id="pr-price" placeholder="Koszt (PLN)" class="w-full bg-black border border-white/10 p-3 text-[10px] text-white mb-4 outline-none">
+            <input type="number" id="pr-income" placeholder="Zysk (PLN/s)" class="w-full bg-black border border-white/10 p-3 text-[10px] text-white mb-4 outline-none">
+            <button onclick="saveQuickProduct()" class="w-full bg-emerald-600 py-3 text-[10px] font-black text-white rounded uppercase">Aktywuj</button>
+        </div>
+    </div>
+
+    <div class="ticker-wrap"><div id="news-ticker" class="ticker">>>> SYSTEM OPERACYJNY TOMASZ HAJDUK v2.1 // STATUS: ONLINE // DATA: 2026.01.28 // GIEŁDA AI AKTYWNA...</div></div>
+
     <script>
-        const LS_KEY = 'ai_broker_2026_save';
-        let charts = { h: null, c: null };
-        let usdRate = 4.00;
+        const LS_KEY = 'hajduk_final_2026';
+        let currentLead = null;
+        let leadsCaught = 0;
 
-        function getData() { return JSON.parse(localStorage.getItem(LS_KEY)) || []; }
-        function saveData(data) { localStorage.setItem(LS_KEY, JSON.stringify(data)); updateUI(); }
+        const shopItems = [
+            { id: 'n1', name: 'Algorytm Arbitrażowy', price: 25000, icon: '🤖', income: 45 },
+            { id: 'q1', name: 'Węzeł Kwantowy', price: 150000, icon: '⚛️', income: 320 },
+            { id: 's1', name: 'AI Sentinel V3', price: 800000, icon: '🛡️', income: 1800 },
+            { id: 'v1', name: 'Klastry Obliczeniowe', price: 3000000, icon: '🌌', income: 7500 }
+        ];
 
-        async function fetchUsdRate() {
-            try {
-                const res = await fetch('https://api.nbp.pl');
-                const d = await res.json();
-                usdRate = d.rates[0].mid;
-                document.getElementById('usd-rate-display').innerText = `USD/PLN: ${usdRate.toFixed(4)}`;
-            } catch (e) { console.log("NBP Offline"); }
-            updateUI();
+        function getData() { return JSON.parse(localStorage.getItem(LS_KEY)) || [{ id:'root', name:'MODUŁ RDZENNY', price:100000, income:150, icon:'💎', instId: Date.now() }]; }
+        function saveData(d) { localStorage.setItem(LS_KEY, JSON.stringify(d)); }
+        function getBal() { return parseFloat(localStorage.getItem(LS_KEY + '_BAL')) || 50000; }
+        function setBal(v) { localStorage.setItem(LS_KEY + '_BAL', v.toFixed(2)); }
+
+        function triggerGlitch() {
+            const body = document.getElementById('main-body');
+            body.classList.add('glitch-active');
+            setTimeout(() => body.classList.remove('glitch-active'), 300);
+        }
+
+        function addLog(m, c = 'text-blue-400/60') { 
+            const l = document.getElementById('system-logs'); 
+            if(l) l.innerHTML = `<div class="${c} text-[7px] mb-1 border-l border-current pl-2 uppercase font-bold">>> ${m}</div>` + l.innerHTML;
+        }
+
+        function runTerminal() {
+            const stream = document.getElementById('terminal-stream');
+            const msgs = ["SCANNING AI NETWORK...", "DECRYPTING NODE X-72...", "ENCRYPTING TRANSACTION...", "OPTIMIZING NEURAL PATHS...", "INJECTING QUANTUM CODE...", "SYNCING DATA WITH NBP..."];
+            setInterval(() => {
+                const line = document.createElement('div');
+                line.className = 'terminal-line';
+                line.innerText = `[${new Date().toLocaleTimeString()}] ${msgs[Math.floor(Math.random()*msgs.length)]}`;
+                stream.prepend(line);
+                if (stream.childNodes.length > 15) stream.removeChild(stream.lastChild);
+            }, 800);
         }
 
         function switchTab(id) {
@@ -103,102 +181,106 @@
             document.getElementById(`content-${id}`).classList.add('active');
             document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('sidebar-item-active'));
             document.getElementById(`btn-${id}`).classList.add('sidebar-item-active');
-            if(id === 'dashboard') setTimeout(updateUI, 100);
+            updateUI();
         }
+
+        function executeTransfer() {
+            const bank = document.getElementById('bank-select').value;
+            const account = document.getElementById('bank-account').value;
+            const amount = getBal();
+            if (!bank || account.length < 10) return addLog("BŁĄD: Dane przelewu.", "text-red-500");
+            setBal(0);
+            triggerGlitch();
+            addLog(`PRZELEW: ${Math.floor(amount).toLocaleString()} PLN -> ${bank}`, "text-purple-400 font-black");
+            document.getElementById('transfer-modal').classList.add('hidden');
+            updateUI();
+        }
+
+        function savePartner() {
+            const nI = document.getElementById('p-name'), cI = document.getElementById('p-commission');
+            if (nI.value && cI.value > 0) {
+                const d = getData();
+                d.push({ id:'p_'+Date.now(), name:`UMOWA: ${nI.value.toUpperCase()}`, price:0, icon:'🤝', income: parseFloat(cI.value), instId: Date.now() });
+                saveData(d); addLog(`NOWA UMOWA: ${nI.value}`, "text-blue-400");
+                document.getElementById('partner-modal').classList.add('hidden');
+                nI.value = ''; cI.value = ''; updateUI();
+            }
+        }
+
+        function saveQuickProduct() {
+            const nI = document.getElementById('pr-name'), pI = document.getElementById('pr-price'), iI = document.getElementById('pr-income');
+            if (nI.value && pI.value >= 0 && iI.value > 0 && getBal() >= pI.value) {
+                const d = getData(); setBal(getBal() - pI.value);
+                d.push({ id:'pr_'+Date.now(), name: nI.value.toUpperCase(), price: parseFloat(pI.value), income: parseFloat(iI.value), icon:'📦', instId: Date.now() });
+                saveData(d); addLog(`DODANO ZASÓB: ${nI.value}`, "text-emerald-400");
+                document.getElementById('product-modal').classList.add('hidden');
+                nI.value = ''; pI.value = ''; iI.value = ''; updateUI();
+            }
+        }
+
+        function catchLead() {
+            if (currentLead) {
+                const d = getData();
+                d.push({ id:'l_'+Date.now(), name:`LEAD: ${currentLead.name}`, price:0, icon:'🔥', income: currentLead.income, instId: Date.now() });
+                leadsCaught++; triggerGlitch(); saveData(d);
+                addLog(`LEAD PRZEJĘTY: ${currentLead.name}`, "text-orange-400 font-black");
+                document.getElementById('lead-alert').style.display = 'none'; updateUI();
+            }
+        }
+
+        function resetSystem() { if (confirm('RESET SYSTEMU?')) { localStorage.clear(); window.location.reload(); } }
 
         function updateUI() {
-            const data = getData();
-            const total = data.reduce((sum, item) => sum + parseFloat(item.price), 0);
+            const d = getData(), bal = getBal();
+            document.getElementById('stat-balance').innerText = Math.floor(bal).toLocaleString() + " PLN";
+            document.getElementById('stat-assets').innerText = d.length;
+            document.getElementById('stat-income').innerText = d.reduce((s, i) => s + i.income, 0).toLocaleString() + " /s";
+            document.getElementById('stat-leads').innerText = leadsCaught;
+            
+            document.getElementById('shop-list').innerHTML = shopItems.map(p => `<div class="card flex flex-col justify-between border-t-2 ${bal >= p.price ? 'border-emerald-500' : 'border-red-900 opacity-60'}">
+                <div><div class="text-3xl mb-2">${p.icon}</div><div class="text-[10px] font-bold uppercase">${p.name}</div><div class="text-[8px] text-gray-500">+${p.income} PLN/s</div></div>
+                <button onclick="buyProduct('${p.id}')" class="mt-4 w-full py-2 border rounded text-[9px] font-black uppercase ${bal >= p.price ? 'bg-emerald-600/20 border-emerald-500' : 'bg-gray-800 border-gray-700 opacity-50'}">${p.price.toLocaleString()} PLN</button>
+            </div>`).join('');
+            
+            document.getElementById('list-container').innerHTML = d.map(i => `<div class="card text-center border-b border-blue-500/20">
+                <div class="text-xl">${i.icon}</div><div class="text-[8px] font-black uppercase mt-1">${i.name}</div><div class="text-[7px] text-blue-400">${i.income} PLN/s</div>
+            </div>`).join('');
+        }
 
-            document.getElementById('stat-revenue-pln').innerText = total.toLocaleString() + ' PLN';
-            document.getElementById('stat-revenue-usd').innerText = (total / usdRate).toFixed(0) + ' USD';
-            document.getElementById('stat-orders').innerText = data.length;
-            if(document.getElementById('finance-total-pln')) document.getElementById('finance-total-pln').innerText = total.toLocaleString() + ' PLN';
-
-            const list = document.getElementById('list-container');
-            if(list) list.innerHTML = data.map(i => `
-                <div class="p-3 bg-black/20 border border-gray-800 rounded flex justify-between items-center text-[11px]">
-                    <span>${i.name}</span>
-                    <div class="flex gap-4">
-                        <span class="text-emerald-500">${parseFloat(i.price).toLocaleString()} PLN</span>
-                        <button onclick="deleteAgent('${i.id}')" class="text-red-500 font-bold">USUŃ</button>
-                    </div>
-                </div>`).join('');
-
-            const shop = document.getElementById('shop-container');
-            if(shop && shop.innerHTML === "") {
-                const items = [{n:'Voice AI', p:45000}, {n:'Cyber Guard', p:120000}, {n:'Market AI', p:75000}];
-                shop.innerHTML = items.map(x => `
-                    <div class="card text-center">
-                        <p class="font-bold text-xs uppercase mb-2">${x.n}</p>
-                        <p class="text-emerald-500 text-sm mb-4">${x.p.toLocaleString()} PLN</p>
-                        <button onclick="buyModule('${x.n}', ${x.p})" class="w-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-500 p-2 rounded text-[9px] font-bold">KUP</button>
-                    </div>`).join('');
+        function buyProduct(id) {
+            const p = shopItems.find(x => x.id === id);
+            if (getBal() >= p.price) {
+                const d = getData(); setBal(getBal() - p.price);
+                d.push({ ...p, instId: Date.now() });
+                saveData(d); addLog(`ZAKUP: ${p.name}`, "text-emerald-400"); updateUI();
             }
-
-            renderCharts(data, total);
+        }
+        
+        function exportCertificate() {
+            const bal = Math.floor(getBal()), inc = getData().reduce((s, i) => s + i.income, 0);
+            const w = window.open('', '_blank');
+            w.document.write(`<body style="background:#05070a;color:#fff;font-family:monospace;text-align:center;padding:50px;">
+                <div style="border:5px solid #3b82f6;padding:40px;max-width:600px;margin:auto;background:rgba(22,27,42,0.9);">
+                <h2 style="color:#3b82f6;letter-spacing:5px;">CERTYFIKAT OPERATORA AI</h2><hr style="border:1px solid #1e293b;margin:20px 0;">
+                <h1 style="font-size:35px;margin:10px 0;">TOMASZ HAJDUK</h1>
+                <p style="color:#10b981;">SALDO: ${bal.toLocaleString()} PLN</p>
+                <p style="color:#3b82f6;">ZYSK: ${inc.toLocaleString()} /s</p>
+                <button onclick="window.print()" style="margin-top:30px;padding:10px 20px;background:#3b82f6;color:white;border:none;cursor:pointer;">DRUKUJ PDF</button></div></body>`);
         }
 
-        function renderCharts(data, total) {
-            const ctxH = document.getElementById('historyChartCanvas');
-            const ctxC = document.getElementById('categoryChartCanvas');
-            if(!ctxH || !ctxC || typeof Chart === 'undefined') return;
+        setInterval(() => {
+            let d = getData(); setBal(getBal() + d.reduce((s, i) => s + i.income, 0));
+            updateUI();
+            if (Math.random() < 0.04) {
+                const names = ["SpaceX Ads", "Uber AI", "Tesla Sales"];
+                currentLead = { name: names[Math.floor(Math.random()*names.length)], income: 150 };
+                document.getElementById('lead-name').innerText = currentLead.name;
+                document.getElementById('lead-alert').style.display = 'block';
+                setTimeout(() => document.getElementById('lead-alert').style.display = 'none', 4000);
+            }
+        }, 1000);
 
-            if(charts.h) charts.h.destroy();
-            if(charts.c) charts.c.destroy();
-
-            charts.h = new Chart(ctxH, {
-                type: 'line',
-                data: {
-                    labels: ['Start', 'Q2', 'Q3', '2026'],
-                    datasets: [{
-                        label: 'PLN',
-                        data: [total*0.3, total*0.6, total*0.8, total],
-                        borderColor: '#3b82f6',
-                        backgroundColor: 'rgba(59, 130, 246, 0.1)',
-                        fill: true,
-                        tension: 0.4
-                    }]
-                },
-                options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } } }
-            });
-
-            charts.c = new Chart(ctxC, {
-                type: 'doughnut',
-                data: {
-                    datasets: [{
-                        data: [data.length, 10 - data.length],
-                        backgroundColor: ['#10b981', '#1e293b'],
-                        borderWidth: 0
-                    }]
-                },
-                options: { cutout: '80%', responsive: true, maintainAspectRatio: false }
-            });
-        }
-
-        function addAgent(e) {
-            e.preventDefault();
-            const data = getData();
-            data.push({ id: Date.now().toString(), name: document.getElementById('name').value, price: document.getElementById('price').value });
-            saveData(data);
-            e.target.reset();
-        }
-
-        function deleteAgent(id) {
-            const data = getData().filter(i => i.id !== id);
-            saveData(data);
-        }
-
-        function buyModule(n, p) {
-            const data = getData();
-            data.push({ id: Date.now().toString(), name: n, price: p });
-            saveData(data);
-        }
-
-        window.onload = () => {
-            if(!localStorage.getItem(LS_KEY)) localStorage.setItem(LS_KEY, JSON.stringify([{id: '1', name: 'System Core 2026', price: 100000}]));
-            fetchUsdRate();
-        };
+        window.onload = () => { updateUI(); runTerminal(); addLog("SYSTEM TOMASZA HAJDUKA ONLINE.", "text-emerald-500"); };
     </script>
 </body>
 </html>
