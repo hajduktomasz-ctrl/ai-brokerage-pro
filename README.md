@@ -21,4 +21,9 @@ Zaktualizowany projekt dostępny pod adresem:
 
 ---
 *Projekt stworzony przez Tomasza Hajduka - 2026*
+# 🤖 AI Brokerage PRO v2.1 | Tomasz Hajduk
 ![Podgląd Systemu](preview.png)
+
+## 🚀 Live Demo
+Projekt dostępny pod adresem:
+[https://hajduktomasz-ctrl.github.io](https://hajduktomasz-ctrl.github.io)
