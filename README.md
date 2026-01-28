@@ -26,4 +26,7 @@ Zaktualizowany projekt dostępny pod adresem:
 
 ## 🚀 Live Demo
 Projekt dostępny pod adresem:
-[https://hajduktomasz-ctrl.github.io]
+[https://hajduktomasz-ctrl.github.io/AI-Brokerage-PRO/](https://hajduktomasz-ctrl.github.io/AI-Brokerage-PRO/)
+
+
+
