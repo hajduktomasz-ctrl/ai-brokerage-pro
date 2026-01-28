@@ -1,11 +1,17 @@
-
 <html lang="pl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pośrednictwo AI PRO | Tomasz Hajduk</title>
+    <title>AI Brokerage PRO | Tomasz Hajduk</title>
+    
+    <!-- Meta Tagi Social Media -->
+    <meta property="og:title" content="AI Brokerage PRO | Tomasz Hajduk">
+    <meta property="og:description" content="Symulator Imperium AI - Zarządzaj zasobami przyszłości.">
+    <meta property="og:url" content="https://hajduktomasz-ctrl.github.io">
+
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com" rel="stylesheet">
+    
     <style>
         :root { --accent: #3b82f6; --bg: #05070a; --card: rgba(22, 27, 42, 0.9); }
         body { background: var(--bg); color: #e5e7eb; font-family: 'JetBrains Mono', monospace; margin: 0; overflow: hidden; height: 100vh; }
@@ -22,9 +28,6 @@
             0% { transform: translate(1px, 1px) rotate(0deg); }
             10% { transform: translate(-1px, -2px) rotate(-1deg); }
             20% { transform: translate(-3px, 0px) rotate(1deg); }
-            30% { transform: translate(3px, 2px) rotate(0deg); }
-            40% { transform: translate(1px, -1px) rotate(1deg); }
-            50% { transform: translate(-1px, 2px) rotate(-1deg); }
             100% { transform: translate(0px, 0px) rotate(0deg); }
         }
         .shake-active { animation: shake-anim 0.4s ease-in-out; }
@@ -32,6 +35,10 @@
         #lead-alert { display: none; position: fixed; top: 80px; right: 20px; z-index: 9999; animation: pulse 1s infinite; }
         @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.02); } 100% { transform: scale(1); } }
         
+        .ticker-wrap { position: fixed; bottom: 0; width: 100%; overflow: hidden; background: rgba(0,0,0,0.9); border-top: 1px solid #f97316; z-index: 100; height: 30px; }
+        .ticker { display: inline-block; white-space: nowrap; animation: ticker 40s linear infinite; color: #f97316; font-size: 10px; line-height: 30px; font-weight: bold; }
+        @keyframes ticker { 0% { transform: translateX(100%); } 100% { transform: translateX(-100%); } }
+
         .terminal-stream { font-size: 9px; color: #10b981; line-height: 1.2; overflow: hidden; height: 100%; }
         .custom-scrollbar::-webkit-scrollbar { width: 4px; }
         .custom-scrollbar::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 10px; }
@@ -40,24 +47,26 @@
 <body class="flex flex-col md:flex-row h-screen" id="main-body">
 
     <div id="lead-alert" class="card border-orange-500 bg-orange-950/90 w-72">
-        <p class="text-[10px] font-black text-orange-400 uppercase mb-2 italic">🔥 PRZYCHODZĄCE ZLECENIE</p>
-        <p id="lead-name" class="text-[11px] mb-3 text-white font-bold">Inicjalizacja...</p>
-        <button onclick="catchLead()" class="w-full py-2 bg-orange-500 text-black text-[10px] font-black rounded uppercase">Przejmij Kontrakt</button>
+        <p class="text-[10px] font-black text-orange-400 uppercase mb-2 italic">🔥 NOWY LEAD AI</p>
+        <p id="lead-name" class="text-[11px] mb-3 text-white font-bold italic">Skanowanie...</p>
+        <button onclick="catchLead()" class="w-full py-2 bg-orange-500 text-black text-[10px] font-black rounded uppercase">Przejmij</button>
     </div>
 
-    <aside class="w-full md:w-72 bg-black/95 md:p-6 flex flex-col border-r border-white/5 shrink-0 h-full">
+    <aside class="sidebar w-full md:w-72 bg-black/95 md:p-6 flex flex-col border-r border-white/5 shrink-0">
         <div class="mb-8 hidden md:block text-center">
             <div class="text-xl font-black text-white tracking-tighter uppercase italic">Tomasz<br>Hajduk</div>
-            <div class="text-[8px] text-blue-500 mt-2 font-bold uppercase">PROJEKTANT AI 2026</div>
+            <div class="text-[8px] text-blue-500 mt-2 font-bold uppercase tracking-widest">Operator AI 2026</div>
         </div>
         <nav class="flex flex-col gap-2 flex-grow">
             <button onclick="switchTab('dashboard')" id="btn-dashboard" class="nav-btn flex items-center gap-4 p-4 rounded-xl sidebar-item-active text-[10px] font-bold uppercase">📊 Dashboard</button>
             <button onclick="switchTab('shop')" id="btn-shop" class="nav-btn flex items-center gap-4 p-4 rounded-xl text-gray-500 text-[10px] font-bold uppercase">🛒 Sklep AI</button>
             <button onclick="switchTab('products')" id="btn-products" class="nav-btn flex items-center gap-4 p-4 rounded-xl text-gray-500 text-[10px] font-bold uppercase">📦 Zasoby</button>
             <button onclick="switchTab('market')" id="btn-market" class="nav-btn flex items-center gap-4 p-4 rounded-xl text-gray-500 text-[10px] font-bold uppercase">📈 Giełda</button>
+            
             <div class="mt-auto pt-6 border-t border-white/5 flex flex-col gap-2 mb-12">
-                <button onclick="exportCertificate()" class="w-full py-3 bg-emerald-600/20 border border-emerald-500/50 rounded-xl text-[9px] font-black text-emerald-400 uppercase">🖨️ PDF Certyfikat</button>
-                <button onclick="resetSystem()" class="w-full py-3 bg-red-600/20 border border-red-500/50 rounded-xl text-[9px] font-black text-red-400 uppercase">💥 Reset Systemu</button>
+                <button onclick="activatePrestige()" class="w-full py-3 bg-purple-600/20 border border-purple-500/50 rounded-xl text-[9px] font-black text-purple-400 uppercase">💎 PRESTIŻ</button>
+                <button onclick="exportCertificate()" class="w-full py-3 bg-emerald-600/20 border border-emerald-500/50 rounded-xl text-[9px] font-black text-emerald-400 uppercase">🖨️ RAPORT PDF</button>
+                <button onclick="resetSystem()" class="w-full py-3 bg-red-600/20 border border-red-500/50 rounded-xl text-[9px] font-black text-red-400 uppercase">💥 RESET</button>
             </div>
         </nav>
     </aside>
@@ -65,8 +74,8 @@
     <main class="flex-1 relative flex flex-col overflow-hidden">
         <header class="p-4 md:p-6 flex justify-between items-center bg-black/40 border-b border-white/5 z-40">
             <div>
-                <div class="text-xs font-black text-white uppercase">Pośrednictwo AI PRO</div>
-                <div class="text-[8px] text-blue-400 uppercase italic">Tomasz Hajduk // System v2.7</div>
+                <div class="text-xs font-black text-white uppercase">AI Brokerage System</div>
+                <div class="text-[8px] text-blue-400 font-bold italic">User: Tomasz Hajduk // Mult: <span id="ui-multiplier">1.0</span>x</div>
             </div>
             <div class="text-[9px] font-bold text-emerald-400 font-mono border border-emerald-500/30 px-3 py-1 rounded-full uppercase">Status: Online</div>
         </header>
@@ -81,19 +90,16 @@
                 </div>
                 <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
                     <div class="lg:col-span-2">
-                        <div class="card h-[400px] flex flex-col border-t-2 border-blue-500 overflow-hidden">
-                            <div class="text-blue-400 font-black text-[10px] uppercase mb-4 italic">Terminal Operacyjny</div>
-                            <div class="relative h-[120px] w-full bg-black/50 rounded-lg p-3 border border-white/5 overflow-hidden mb-4 shrink-0">
-                                <div id="terminal-stream" class="terminal-stream"></div>
-                            </div>
-                            <div class="flex-1 overflow-y-auto custom-scrollbar" id="system-logs"></div>
+                        <div class="card h-[400px] flex flex-col border-t-2 border-blue-500">
+                            <div class="text-blue-400 font-black text-[10px] uppercase mb-4 italic">Terminal_Sync</div>
+                            <div id="system-logs" class="flex-1 overflow-y-auto custom-scrollbar text-[8px] space-y-1"></div>
                         </div>
                     </div>
                     <div class="lg:col-span-1">
                         <div class="card h-[400px] border-t-2 border-emerald-500 flex flex-col justify-around p-6">
-                            <button onclick="openModal('partner-modal')" class="w-full py-5 bg-blue-600/10 border border-blue-500/50 rounded-lg text-[10px] font-black text-blue-400 uppercase">Podpisz Umowę 🤝</button>
-                            <button onclick="openModal('product-modal')" class="w-full py-5 bg-emerald-600/10 border border-emerald-500/50 rounded-lg text-[10px] font-black text-emerald-400 uppercase">Dodaj Zasób 📦</button>
-                            <button onclick="openModal('transfer-modal')" class="w-full py-5 bg-purple-600/10 border border-purple-500/50 rounded-lg text-[10px] font-black text-purple-400 uppercase">Przelej Środki 💸</button>
+                            <button onclick="openModal('partner-modal')" class="w-full py-5 bg-blue-600/10 border border-blue-500/50 rounded-lg text-[10px] font-black text-blue-400 uppercase">Podpisz Umowę</button>
+                            <button onclick="openModal('product-modal')" class="w-full py-5 bg-emerald-600/10 border border-emerald-500/50 rounded-lg text-[10px] font-black text-emerald-400 uppercase">Dodaj Zasób</button>
+                            <button onclick="openModal('transfer-modal')" class="w-full py-5 bg-purple-600/10 border border-purple-500/50 rounded-lg text-[10px] font-black text-purple-400 uppercase">Przelej Środki</button>
                         </div>
                     </div>
                 </div>
@@ -105,29 +111,29 @@
     </main>
 
     <!-- MODALE -->
-    <div id="transfer-modal" class="hidden fixed inset-0 bg-black/90 backdrop-blur-md z-[100] flex items-center justify-center p-4">
+    <div id="transfer-modal" class="hidden fixed inset-0 bg-black/90 backdrop-blur-md z-50 flex items-center justify-center p-4">
         <div class="card w-full max-w-md border-purple-500">
-            <h3 class="text-purple-400 font-black mb-4 uppercase text-xs italic">Dyspozycja Przelewu</h3>
+            <h3 class="text-purple-400 font-black mb-4 uppercase text-xs">Dyspozycja Przelewu</h3>
             <input type="text" id="bank-account" placeholder="Numer konta" class="w-full bg-black border border-white/10 p-3 text-[10px] rounded text-white mb-4">
-            <button onclick="executeTransfer()" class="w-full bg-purple-600 py-3 rounded text-[10px] font-black text-white uppercase">Realizuj</button>
-            <button onclick="closeModal('transfer-modal')" class="w-full mt-2 text-[8px] text-gray-500 uppercase">Zamknij</button>
+            <button onclick="executeTransfer()" class="w-full bg-purple-600 py-3 rounded text-[10px] font-black text-white uppercase">Wyslij</button>
+            <button onclick="closeModal('transfer-modal')" class="w-full mt-2 text-[8px] text-gray-500 uppercase">Anuluj</button>
         </div>
     </div>
 
-    <div id="partner-modal" class="hidden fixed inset-0 bg-black/90 backdrop-blur-md z-[100] flex items-center justify-center p-4">
+    <div id="partner-modal" class="hidden fixed inset-0 bg-black/90 backdrop-blur-md z-50 flex items-center justify-center p-4">
         <div class="card w-full max-w-md border-blue-500">
-            <h3 class="text-blue-400 font-black mb-4 uppercase text-xs italic">Nowa Umowa B2B</h3>
-            <input type="text" id="p-name" placeholder="Nazwa Podmiotu" class="w-full bg-black border border-white/10 p-3 text-[10px] rounded text-white mb-4">
-            <input type="number" id="p-commission" placeholder="Zysk (PLN/s)" class="w-full bg-black border border-white/10 p-3 text-[10px] rounded text-white mb-4">
+            <h3 class="text-blue-400 font-black mb-4 uppercase text-xs">Nowa Umowa AI</h3>
+            <input type="text" id="p-name" placeholder="Firma" class="w-full bg-black border border-white/10 p-3 text-[10px] rounded text-white mb-4">
+            <input type="number" id="p-commission" placeholder="Przychód/s" class="w-full bg-black border border-white/10 p-3 text-[10px] rounded text-white mb-4">
             <button onclick="savePartner()" class="w-full bg-blue-600 py-3 rounded text-[10px] font-black text-white uppercase">Podpisz</button>
             <button onclick="closeModal('partner-modal')" class="w-full mt-2 text-[8px] text-gray-500 uppercase">Anuluj</button>
         </div>
     </div>
 
-    <div id="product-modal" class="hidden fixed inset-0 bg-black/90 backdrop-blur-md z-[100] flex items-center justify-center p-4">
+    <div id="product-modal" class="hidden fixed inset-0 bg-black/90 backdrop-blur-md z-50 flex items-center justify-center p-4">
         <div class="card w-full max-w-md border-emerald-500">
-            <h3 class="text-emerald-400 font-black mb-4 uppercase text-xs italic">Dodaj Nowy Zasób</h3>
-            <input type="text" id="pr-name" placeholder="Nazwa Zasobu" class="w-full bg-black border border-white/10 p-3 text-[10px] rounded text-white mb-4">
+            <h3 class="text-emerald-400 font-black mb-4 uppercase text-xs">Zasób Systemowy</h3>
+            <input type="text" id="pr-name" placeholder="Nazwa" class="w-full bg-black border border-white/10 p-3 text-[10px] rounded text-white mb-4">
             <input type="number" id="pr-price" placeholder="Koszt" class="w-full bg-black border border-white/10 p-3 text-[10px] rounded text-white mb-4">
             <input type="number" id="pr-income" placeholder="Zysk/s" class="w-full bg-black border border-white/10 p-3 text-[10px] rounded text-white mb-4">
             <button onclick="saveQuickProduct()" class="w-full bg-emerald-600 py-3 rounded text-[10px] font-black text-white uppercase">Aktywuj</button>
@@ -135,46 +141,49 @@
         </div>
     </div>
 
+    <div class="ticker-wrap"><div class="ticker">>>> SYSTEM HAJDUK v2.8 // GIEŁDA: LIVE // CERTYFIKATY PDF: ACTIVE // USER: TOMASZ HAJDUK</div></div>
+
     <script>
-        const LS_KEY = 'hajduk_v27_final_save';
+        const LS_KEY = 'hajduk_final_save_v28'; // Unikalny klucz
         let currentLead = null;
         let leadsCaught = 0;
+        let prestigeMultiplier = parseFloat(localStorage.getItem(LS_KEY + '_MULT')) || 1.0;
 
         const shopItems = [
             { id: 'n1', name: 'Bot Arbitrażowy', price: 15000, icon: '🤖', income: 30 },
             { id: 'q1', name: 'Węzeł Kwantowy', price: 120000, icon: '⚛️', income: 280 },
             { id: 's1', name: 'AI Sentinel V3', price: 750000, icon: '🛡️', income: 1500 },
             { id: 'a1', name: 'Neural Nexus', price: 2500000, icon: '🧠', income: 6000 },
-            { id: 'a2', name: 'Cyber-Doradca', price: 8000000, icon: '📊', income: 22000 },
-            { id: 'a3', name: 'Sztuczna Inteligencja OMEGA', price: 25000000, icon: '🌌', income: 85000 }
+            { id: 'a2', name: 'Cyber-Doradca', price: 8500000, icon: '📊', income: 25000 },
+            { id: 'a3', name: 'AI GOD-MODE', price: 50000000, icon: '🌌', income: 150000 }
         ];
 
-        const stockItems = [
-            { id: 'TLA', name: 'TESLA AI', icon: '🚗', price: 610, fluctuation: 0.08 },
-            { id: 'NVDA', name: 'NVIDIA RTX', icon: '🧠', price: 980, fluctuation: 0.12 },
-            { id: 'PLTR', name: 'PALANTIR', icon: '👁️', price: 345, fluctuation: 0.06 }
+        let stockItems = [
+            { id: 'TLA', name: 'TESLA AI', icon: '🚗', price: 620, fluctuation: 0.06 },
+            { id: 'NVDA', name: 'NVIDIA RTX', icon: '🧠', price: 950, fluctuation: 0.08 },
+            { id: 'PLTR', name: 'PALANTIR', icon: '👁️', price: 340, fluctuation: 0.04 }
         ];
 
         function triggerShake() {
-            const body = document.getElementById('main-body');
-            body.classList.add('shake-active');
-            setTimeout(() => body.classList.remove('shake-active'), 400);
+            const b = document.getElementById('main-body');
+            b.classList.add('shake-active');
+            setTimeout(() => b.classList.remove('shake-active'), 400);
         }
 
-        function getData() { return JSON.parse(localStorage.getItem(LS_KEY)) || [{ name:'RDZEŃ SYSTEMU', income:150, currentPrice:10000, icon:'💎' }]; }
+        function getData() { return JSON.parse(localStorage.getItem(LS_KEY)) || [{ name:'RDZEŃ', income:120, currentPrice:10000, icon:'💎' }]; }
         function saveData(d) { localStorage.setItem(LS_KEY, JSON.stringify(d)); }
         function getBal() { return parseFloat(localStorage.getItem(LS_KEY + '_BAL')) || 50000; }
         function setBal(v) { localStorage.setItem(LS_KEY + '_BAL', v.toFixed(2)); }
         function getOwnedStocks() { return JSON.parse(localStorage.getItem(LS_KEY + '_STK')) || {}; }
         function saveOwnedStocks(s) { localStorage.setItem(LS_KEY + '_STK', JSON.stringify(s)); }
 
+        function addLog(m, c = 'text-blue-400') { 
+            const l = document.getElementById('system-logs'); 
+            l.innerHTML = `<div class="${c} border-l-2 border-current pl-2">>> ${m}</div>` + l.innerHTML;
+        }
+
         function openModal(id) { document.getElementById(id).style.display = 'flex'; }
         function closeModal(id) { document.getElementById(id).style.display = 'none'; }
-
-        function addLog(m, c = 'text-blue-400/60') { 
-            const l = document.getElementById('system-logs'); 
-            if(l) { l.innerHTML = `<div class="${c} mb-1 border-l-2 border-current pl-2 text-[8px] font-bold uppercase">>> ${m}</div>` + l.innerHTML; }
-        }
 
         function switchTab(id) {
             document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
@@ -184,16 +193,16 @@
             updateUI();
         }
 
-        function updateUI() {
-            const d = getData(); const bal = getBal(); const owned = getOwnedStocks();
-            document.getElementById('stat-balance').innerText = Math.floor(bal).toLocaleString() + " PLN";
-            document.getElementById('stat-assets').innerText = Math.floor(d.reduce((s, i) => s + (i.currentPrice || 0), 0)).toLocaleString() + " PLN";
-            document.getElementById('stat-income').innerText = d.reduce((s, i) => s + i.income, 0).toLocaleString() + " /s";
-            document.getElementById('stat-leads-count').innerText = leadsCaught;
-            
-            document.getElementById('market-list').innerHTML = stockItems.map(s => `<div class="card border-t-2 border-blue-500"><div class="flex justify-between mb-2"><span class="text-xl">${s.icon}</span><span class="text-[9px] font-black uppercase">${s.name}</span></div><div class="text-lg font-bold">${Math.floor(s.price)} PLN</div><div class="text-[7px] text-gray-500 mb-4 italic">PORTFEL: ${owned[s.id] || 0}</div><div class="flex gap-2"><button onclick="tradeStock('${s.id}', 'buy')" class="flex-1 py-2 bg-emerald-600/20 border border-emerald-500 text-[8px] font-black uppercase">Kup</button><button onclick="tradeStock('${s.id}', 'sell')" class="flex-1 py-2 bg-red-600/20 border border-red-500 text-[8px] font-black uppercase">Sprzedaj</button></div></div>`).join('');
-            document.getElementById('shop-list').innerHTML = shopItems.map(p => `<div class="card flex flex-col justify-between border-t-2 ${bal >= p.price ? 'border-emerald-500' : 'border-red-900 opacity-60'}"><div><div class="text-3xl mb-2">${p.icon}</div><div class="text-[10px] font-black uppercase">${p.name}</div><div class="text-[8px] text-gray-500">+${p.income} PLN/s</div></div><button onclick="buyProduct('${p.id}')" class="mt-4 w-full py-2 border rounded text-[9px] font-black uppercase ${bal >= p.price ? 'border-emerald-500 bg-emerald-500/10' : 'border-gray-800'}">${p.price.toLocaleString()} PLN</button></div>`).join('');
-            document.getElementById('list-container').innerHTML = d.map(i => `<div class="card text-center border-b border-blue-500/20 p-4"><div class="text-3xl mb-2">${i.icon}</div><div class="text-[10px] font-black uppercase">${i.name}</div><div class="text-[8px] text-blue-400 mt-2">${i.income} PLN/s</div></div>`).join('');
+        function activatePrestige() {
+            const bal = getBal();
+            if (bal >= 100000000) {
+                const bonus = (bal / 200000000);
+                if (confirm(`RESET PRESTIŻU. Nowy mnożnik: x${(prestigeMultiplier + bonus).toFixed(2)}`)) {
+                    localStorage.clear();
+                    localStorage.setItem(LS_KEY + '_MULT', (prestigeMultiplier + bonus).toFixed(4));
+                    location.reload();
+                }
+            } else { alert("Wymagane 100,000,000 PLN!"); }
         }
 
         function tradeStock(id, type) {
@@ -202,13 +211,42 @@
             if (type === 'buy' && getBal() >= stock.price) {
                 setBal(getBal() - stock.price);
                 owned[id] = (owned[id] || 0) + 1;
-                addLog(`GIEŁDA: KUPNO ${id}`, "text-emerald-400");
-            } else if (type === 'sell' && (owned[id] || 0) > 0) {
+                addLog(`KUPNO: ${id}`, "text-emerald-400");
+            } else if (type === 'sell' && owned[id] > 0) {
                 setBal(getBal() + stock.price);
                 owned[id] -= 1;
-                addLog(`GIEŁDA: SPRZEDAŻ ${id}`, "text-orange-400");
+                addLog(`SPRZEDAŻ: ${id}`, "text-orange-400");
             }
             saveOwnedStocks(owned); updateUI();
+        }
+
+        function updateUI() {
+            const d = getData(); const bal = getBal(); const owned = getOwnedStocks();
+            document.getElementById('stat-balance').innerText = Math.floor(bal).toLocaleString() + " PLN";
+            document.getElementById('stat-assets').innerText = Math.floor(d.reduce((s, i) => s + (i.currentPrice || 0), 0)).toLocaleString() + " PLN";
+            const inc = d.reduce((s, i) => s + i.income, 0) * prestigeMultiplier;
+            document.getElementById('stat-income').innerText = Math.floor(inc).toLocaleString() + " /s";
+            document.getElementById('stat-leads-count').innerText = leadsCaught;
+            document.getElementById('ui-multiplier').innerText = prestigeMultiplier.toFixed(2);
+            
+            document.getElementById('market-list').innerHTML = stockItems.map(s => `
+                <div class="card border-t-2 border-blue-500">
+                    <div class="flex justify-between"><span>${s.icon} ${s.name}</span></div>
+                    <div class="text-xl font-bold">${Math.floor(s.price)} PLN</div>
+                    <div class="text-[9px] text-gray-500 mb-4">PORTFEL: ${owned[s.id] || 0}</div>
+                    <div class="flex gap-2">
+                        <button onclick="tradeStock('${s.id}', 'buy')" class="flex-1 py-2 bg-emerald-600/20 border border-emerald-500 text-[9px] font-black uppercase">Kup</button>
+                        <button onclick="tradeStock('${s.id}', 'sell')" class="flex-1 py-2 bg-red-600/20 border border-red-500 text-[9px] font-black uppercase">Sell</button>
+                    </div>
+                </div>`).join('');
+
+            document.getElementById('shop-list').innerHTML = shopItems.map(p => `
+                <div class="card flex flex-col justify-between border-t-2 ${bal >= p.price ? 'border-emerald-500' : 'border-red-900 opacity-60'}">
+                    <div><div class="text-3xl">${p.icon}</div><div class="font-black text-[10px] uppercase">${p.name}</div><div class="text-[8px]">+${p.income}/s</div></div>
+                    <button onclick="buyProduct('${p.id}')" class="mt-4 py-2 border rounded text-[9px] font-black ${bal >= p.price ? 'bg-emerald-500/10 border-emerald-500' : 'border-gray-800'}">${p.price.toLocaleString()} PLN</button>
+                </div>`).join('');
+
+            document.getElementById('list-container').innerHTML = d.map(i => `<div class="card text-center border-b border-blue-500/20 p-4"><div class="text-2xl">${i.icon}</div><div class="text-[9px] font-black">${i.name}</div><div class="text-[8px] text-blue-400">${(i.income * prestigeMultiplier).toFixed(1)}/s</div></div>`).join('');
         }
 
         function buyProduct(id) { 
@@ -216,7 +254,7 @@
             if (getBal() >= p.price) { 
                 const d = getData(); setBal(getBal() - p.price); 
                 d.push({ ...p, currentPrice: p.price }); saveData(d); 
-                addLog(`SKLEP: ZAKUP ${p.name}`, "text-emerald-400 font-bold"); updateUI(); 
+                addLog(`ZAKUP: ${p.name}`, "text-emerald-400 font-bold"); updateUI(); 
             } 
         }
 
@@ -232,14 +270,13 @@
             const n = document.getElementById('pr-name').value, p = parseFloat(document.getElementById('pr-price').value), i = parseFloat(document.getElementById('pr-income').value);
             if (n && i > 0 && getBal() >= p) {
                 const d = getData(); setBal(getBal() - p); d.push({ name: n.toUpperCase(), income: i, icon: '📦', currentPrice: p });
-                saveData(d); addLog(`ZASÓB: DODANO ${n}`, "text-emerald-400"); closeModal('product-modal'); updateUI();
+                saveData(d); triggerShake(); addLog(`DODANO: ${n}`, "text-emerald-400"); closeModal('product-modal'); updateUI();
             }
         }
 
         function executeTransfer() {
             const amt = getBal(); setBal(0);
-            triggerShake();
-            addLog(`PRZELEW: ${Math.floor(amt)} PLN`, "text-purple-400 font-bold");
+            triggerShake(); addLog(`PRZELEW: ${Math.floor(amt)} PLN`, "text-purple-400 font-bold");
             closeModal('transfer-modal'); updateUI();
         }
 
@@ -248,44 +285,32 @@
                 triggerShake();
                 const d = getData(); d.push({ name: `LEAD: ${currentLead.name}`, income: currentLead.income, icon: '🔥', currentPrice: 0 }); 
                 saveData(d); leadsCaught++; document.getElementById('lead-alert').style.display = 'none'; 
-                addLog("PRZEJĘTO LEAD!", "text-orange-400 font-bold"); currentLead = null; updateUI(); 
+                addLog("PRZEJĘTO LEAD!", "text-orange-400"); currentLead = null; updateUI(); 
             } 
         }
 
         setInterval(() => {
-            let d = getData(); setBal(getBal() + d.reduce((s, i) => s + i.income, 0));
+            let d = getData(); setBal(getBal() + (d.reduce((s, i) => s + i.income, 0) * prestigeMultiplier));
             stockItems.forEach(s => s.price *= (1 + (Math.random() - 0.5) * s.fluctuation));
             updateUI();
-            
             if (Math.random() < 0.025 && !currentLead) {
-                const names = ["ORACLE CLOUD", "SPACEX CORE", "TESLA GRID", "UBER NEURAL"];
-                currentLead = { name: names[Math.floor(Math.random()*names.length)], income: Math.floor(Math.random()*400)+150 };
-                document.getElementById('lead-name').innerText = `${currentLead.name} (+${currentLead.income} /s)`;
+                currentLead = { name: "NEURAL GRID", income: Math.floor(Math.random()*400)+200 };
+                document.getElementById('lead-name').innerText = `${currentLead.name} (+${currentLead.income}/s)`;
                 document.getElementById('lead-alert').style.display = 'block';
-                setTimeout(() => { document.getElementById('lead-alert').style.display = 'none'; currentLead = null; }, 6000);
+                setTimeout(() => { document.getElementById('lead-alert').style.display = 'none'; currentLead = null; }, 5000);
             }
         }, 1000);
 
-        function resetSystem() { if(confirm("CZYŚCIĆ SYSTEM?")) { triggerShake(); localStorage.clear(); location.reload(); } }
-
         function exportCertificate() {
-            const b = Math.floor(getBal()), i = getData().reduce((s, x) => s + x.income, 0);
-            const date = new Date().toLocaleDateString();
+            const b = Math.floor(getBal()), i = Math.floor(getData().reduce((s, x) => s + x.income, 0) * prestigeMultiplier);
             const w = window.open('', '_blank');
-            w.document.write(`<html><head><style>body{background:#05070a;color:white;font-family:monospace;display:flex;justify-content:center;align-items:center;height:100vh;margin:0;}.cert{border:10px double #3b82f6;padding:60px;text-align:center;background:#0a0f1d;max-width:600px;}h1{color:#3b82f6;text-transform:uppercase;}.val{font-size:24px;color:#10b981;font-weight:bold;}.btn{background:#3b82f6;color:white;padding:15px 30px;border:none;cursor:pointer;font-weight:bold;margin-top:30px;}</style></head><body><div class="cert"><p style="color:#3b82f6;">OFFICIAL AUTHENTICATION // 2026</p><h1>CERTYFIKAT OPERATORA AI</h1><h2 style="font-size:32px;">TOMASZ HAJDUK</h2><hr style="border:1px solid #1e293b;margin:30px 0;"><p>SALDO: <span class="val">${b.toLocaleString()} PLN</span></p><p>WYDAJNOŚĆ: <span class="val">${i.toLocaleString()} PLN/s</span></p><button class="btn" onclick="window.print()">DRUKUJ PDF</button></div></body></html>`);
+            w.document.write(`<html><body style="background:#000;color:#3b82f6;text-align:center;padding:100px;font-family:monospace;border:10px double #3b82f6;"><h1>CERT_TOMASZ_HAJDUK_2026</h1><p>SALDO: ${b.toLocaleString()} PLN</p><p>MOC: ${i.toLocaleString()} /s</p><button onclick="window.print()">PRINT PDF</button></body></html>`);
             w.document.close();
         }
 
-        window.onload = () => { 
-            updateUI(); 
-            addLog("SYSTEM HAJDUK v2.7 ZAŁADOWANY."); 
-            const stream = document.getElementById('terminal-stream');
-            setInterval(() => {
-                const l = document.createElement('div'); l.innerText = `> SYNC_DATA_NODE_${Math.random().toString(16).slice(2,6).toUpperCase()}... OK`;
-                stream.prepend(l); if(stream.childNodes.length > 8) stream.removeChild(stream.lastChild);
-            }, 3000);
-        };
+        function resetSystem() { if(confirm("CZYŚCIĆ SYSTEM?")) { localStorage.clear(); location.reload(); } }
+
+        window.onload = () => { updateUI(); addLog("SYSTEM HAJDUK v2.8 READY."); };
     </script>
 </body>
 </html>
-
