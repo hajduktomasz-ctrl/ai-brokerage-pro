@@ -1,14 +1,10 @@
 
+<html lang="pl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AI Brokerage PRO | Tomasz Hajduk</title>
     
-    <!-- Meta Tagi Social Media -->
-    <meta property="og:title" content="AI Brokerage PRO | Tomasz Hajduk">
-    <meta property="og:description" content="Symulator Imperium AI - Zarządzaj zasobami przyszłości.">
-    <meta property="og:url" content="https://hajduktomasz-ctrl.github.io">
-
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com" rel="stylesheet">
     
@@ -23,7 +19,6 @@
         .card { background: var(--card); backdrop-filter: blur(15px); border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 16px; padding: 15px; }
         .sidebar-item-active { background: linear-gradient(90deg, var(--accent), transparent) !important; border-left: 4px solid var(--accent); color: white !important; }
         
-        /* EFEKT ZATRZĘSIENIA (SHAKE) */
         @keyframes shake-anim {
             0% { transform: translate(1px, 1px) rotate(0deg); }
             10% { transform: translate(-1px, -2px) rotate(-1deg); }
@@ -39,7 +34,13 @@
         .ticker { display: inline-block; white-space: nowrap; animation: ticker 40s linear infinite; color: #f97316; font-size: 10px; line-height: 30px; font-weight: bold; }
         @keyframes ticker { 0% { transform: translateX(100%); } 100% { transform: translateX(-100%); } }
 
-        .terminal-stream { font-size: 9px; color: #10b981; line-height: 1.2; overflow: hidden; height: 100%; }
+        /* NOWY STYL TERMINALA */
+        #system-logs { display: flex; flex-direction: column; gap: 6px; padding: 10px; }
+        .log-entry { background: rgba(59, 130, 246, 0.03); padding: 8px 12px; border-radius: 6px; border-left: 3px solid #3b82f6; font-size: 9px; line-height: 1.4; }
+        .log-success { border-color: #10b981; color: #34d399; background: rgba(16, 185, 129, 0.05); }
+        .log-alert { border-color: #f97316; color: #fb923c; background: rgba(249, 115, 22, 0.05); }
+        .log-info { border-color: #3b82f6; color: #60a5fa; }
+
         .custom-scrollbar::-webkit-scrollbar { width: 4px; }
         .custom-scrollbar::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 10px; }
     </style>
@@ -83,20 +84,20 @@
         <div class="flex-1 relative overflow-hidden">
             <section id="content-dashboard" class="tab-content active">
                 <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6 text-center">
-                    <div class="card border-l-4 border-emerald-500"><p class="text-[8px] text-emerald-500 uppercase">Saldo</p><p id="stat-balance" class="text-lg font-bold">0</p></div>
+                    <div class="card border-l-4 border-emerald-500"><p class="text-[8px] text-emerald-500 uppercase">Saldo</p><p id="stat-balance" class="text-lg font-bold">0 PLN</p></div>
                     <div class="card border-l-4 border-blue-500"><p class="text-[8px] text-blue-400 uppercase">Aktywa</p><p id="stat-assets" class="text-lg font-bold">0</p></div>
-                    <div class="card border-l-4 border-purple-500"><p class="text-[8px] text-purple-400 uppercase">Zysk/s</p><p id="stat-income" class="text-lg font-bold">0</p></div>
+                    <div class="card border-l-4 border-purple-500"><p class="text-[8px] text-purple-400 uppercase">Zysk/s</p><p id="stat-income" class="text-lg font-bold">0/s</p></div>
                     <div class="card border-l-4 border-orange-500"><p class="text-[8px] text-orange-400 uppercase">Leady</p><p id="stat-leads-count" class="text-lg font-bold">0</p></div>
                 </div>
                 <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
                     <div class="lg:col-span-2">
-                        <div class="card h-[400px] flex flex-col border-t-2 border-blue-500">
-                            <div class="text-blue-400 font-black text-[10px] uppercase mb-4 italic">Terminal_Sync</div>
-                            <div id="system-logs" class="flex-1 overflow-y-auto custom-scrollbar text-[8px] space-y-1"></div>
+                        <div class="card h-[450px] flex flex-col border-t-2 border-blue-500 p-0 overflow-hidden">
+                            <div class="p-3 border-b border-white/5 bg-white/5 text-blue-400 font-black text-[10px] uppercase italic">Terminal_Sync_Active</div>
+                            <div id="system-logs" class="flex-1 overflow-y-auto custom-scrollbar"></div>
                         </div>
                     </div>
                     <div class="lg:col-span-1">
-                        <div class="card h-[400px] border-t-2 border-emerald-500 flex flex-col justify-around p-6">
+                        <div class="card h-[450px] border-t-2 border-emerald-500 flex flex-col justify-around p-6">
                             <button onclick="openModal('partner-modal')" class="w-full py-5 bg-blue-600/10 border border-blue-500/50 rounded-lg text-[10px] font-black text-blue-400 uppercase">Podpisz Umowę</button>
                             <button onclick="openModal('product-modal')" class="w-full py-5 bg-emerald-600/10 border border-emerald-500/50 rounded-lg text-[10px] font-black text-emerald-400 uppercase">Dodaj Zasób</button>
                             <button onclick="openModal('transfer-modal')" class="w-full py-5 bg-purple-600/10 border border-purple-500/50 rounded-lg text-[10px] font-black text-purple-400 uppercase">Przelej Środki</button>
@@ -144,9 +145,9 @@
     <div class="ticker-wrap"><div class="ticker">>>> SYSTEM HAJDUK v2.8 // GIEŁDA: LIVE // CERTYFIKATY PDF: ACTIVE // USER: TOMASZ HAJDUK</div></div>
 
     <script>
-        const LS_KEY = 'hajduk_final_save_v28'; // Unikalny klucz
+        const LS_KEY = 'hajduk_final_save_v28';
         let currentLead = null;
-        let leadsCaught = 0;
+        let leadsCaught = parseInt(localStorage.getItem(LS_KEY + '_LC')) || 0;
         let prestigeMultiplier = parseFloat(localStorage.getItem(LS_KEY + '_MULT')) || 1.0;
 
         const shopItems = [
@@ -177,13 +178,15 @@
         function getOwnedStocks() { return JSON.parse(localStorage.getItem(LS_KEY + '_STK')) || {}; }
         function saveOwnedStocks(s) { localStorage.setItem(LS_KEY + '_STK', JSON.stringify(s)); }
 
-        function addLog(m, c = 'text-blue-400') { 
+        function addLog(m, type = 'log-info') { 
             const l = document.getElementById('system-logs'); 
-            l.innerHTML = `<div class="${c} border-l-2 border-current pl-2">>> ${m}</div>` + l.innerHTML;
+            const time = new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit', second:'2-digit'});
+            l.innerHTML = `<div class="log-entry ${type}"><span class="opacity-40">[${time}]</span> ${m}</div>` + l.innerHTML;
+            if(l.children.length > 50) l.lastElementChild.remove();
         }
 
-        function openModal(id) { document.getElementById(id).style.display = 'flex'; }
-        function closeModal(id) { document.getElementById(id).style.display = 'none'; }
+        function openModal(id) { document.getElementById(id).classList.remove('hidden'); document.getElementById(id).style.display = 'flex'; }
+        function closeModal(id) { document.getElementById(id).classList.add('hidden'); document.getElementById(id).style.display = 'none'; }
 
         function switchTab(id) {
             document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
@@ -193,16 +196,48 @@
             updateUI();
         }
 
-        function activatePrestige() {
+        function updateUI() {
+            const d = getData();
             const bal = getBal();
-            if (bal >= 100000000) {
-                const bonus = (bal / 200000000);
-                if (confirm(`RESET PRESTIŻU. Nowy mnożnik: x${(prestigeMultiplier + bonus).toFixed(2)}`)) {
-                    localStorage.clear();
-                    localStorage.setItem(LS_KEY + '_MULT', (prestigeMultiplier + bonus).toFixed(4));
-                    location.reload();
-                }
-            } else { alert("Wymagane 100,000,000 PLN!"); }
+            const mult = prestigeMultiplier;
+            const totalIncome = d.reduce((s, i) => s + i.income, 0) * mult;
+
+            // Statystyki górne
+            document.getElementById('stat-balance').innerText = Math.floor(bal).toLocaleString() + " PLN";
+            document.getElementById('stat-assets').innerText = d.length;
+            document.getElementById('stat-income').innerText = totalIncome.toFixed(1) + "/s";
+            document.getElementById('stat-leads-count').innerText = leadsCaught;
+            document.getElementById('ui-multiplier').innerText = mult.toFixed(2);
+
+            // Giełda
+            const owned = getOwnedStocks();
+            document.getElementById('market-list').innerHTML = stockItems.map(s => `
+                <div class="card border-t-2 border-orange-500/30">
+                    <div class="flex justify-between mb-2"><span class="text-xl">${s.icon}</span><span class="text-[10px] font-black text-orange-400">${s.id}</span></div>
+                    <div class="text-lg font-bold mb-1">${Math.floor(s.price)} PLN</div>
+                    <div class="text-[8px] text-gray-500 uppercase mb-4">Posiadasz: ${owned[s.id] || 0}</div>
+                    <div class="grid grid-cols-2 gap-2">
+                        <button onclick="tradeStock('${s.id}', 'buy')" class="py-1 bg-emerald-500/10 border border-emerald-500/50 text-[8px] font-black uppercase rounded">Kup</button>
+                        <button onclick="tradeStock('${s.id}', 'sell')" class="py-1 bg-red-500/10 border border-red-500/50 text-[8px] font-black uppercase rounded">Sprzedaj</button>
+                    </div>
+                </div>`).join('');
+
+            // Sklep
+            document.getElementById('shop-list').innerHTML = shopItems.map(p => `
+                <div class="card flex flex-col justify-between border-t-2 ${bal >= p.price ? 'border-emerald-500' : 'border-red-900 opacity-60'}">
+                    <div><div class="text-3xl">${p.icon}</div><div class="font-black text-[10px] uppercase">${p.name}</div><div class="text-[8px]">+${p.income}/s</div></div>
+                    <button onclick="buyProduct('${p.id}')" class="mt-4 py-2 border rounded text-[9px] font-black ${bal >= p.price ? 'bg-emerald-500/10 border-emerald-500' : 'border-gray-800'}">${p.price.toLocaleString()} PLN</button>
+                </div>`).join('');
+
+            // Posiadane zasoby
+            document.getElementById('list-container').innerHTML = d.map(i => `
+                <div class="card flex items-center gap-3 border-l-2 border-blue-500 bg-blue-500/5">
+                    <div class="text-xl">${i.icon}</div>
+                    <div>
+                        <div class="text-[9px] font-black uppercase">${i.name}</div>
+                        <div class="text-[8px] text-blue-400">${(i.income * mult).toFixed(1)}/s</div>
+                    </div>
+                </div>`).join('');
         }
 
         function tradeStock(id, type) {
@@ -211,42 +246,13 @@
             if (type === 'buy' && getBal() >= stock.price) {
                 setBal(getBal() - stock.price);
                 owned[id] = (owned[id] || 0) + 1;
-                addLog(`KUPNO: ${id}`, "text-emerald-400");
+                addLog(`ZAKUPIONO AKCJE: ${id}`, "log-success");
             } else if (type === 'sell' && owned[id] > 0) {
                 setBal(getBal() + stock.price);
                 owned[id] -= 1;
-                addLog(`SPRZEDAŻ: ${id}`, "text-orange-400");
+                addLog(`SPRZEDANO AKCJE: ${id}`, "log-alert");
             }
             saveOwnedStocks(owned); updateUI();
-        }
-
-        function updateUI() {
-            const d = getData(); const bal = getBal(); const owned = getOwnedStocks();
-            document.getElementById('stat-balance').innerText = Math.floor(bal).toLocaleString() + " PLN";
-            document.getElementById('stat-assets').innerText = Math.floor(d.reduce((s, i) => s + (i.currentPrice || 0), 0)).toLocaleString() + " PLN";
-            const inc = d.reduce((s, i) => s + i.income, 0) * prestigeMultiplier;
-            document.getElementById('stat-income').innerText = Math.floor(inc).toLocaleString() + " /s";
-            document.getElementById('stat-leads-count').innerText = leadsCaught;
-            document.getElementById('ui-multiplier').innerText = prestigeMultiplier.toFixed(2);
-            
-            document.getElementById('market-list').innerHTML = stockItems.map(s => `
-                <div class="card border-t-2 border-blue-500">
-                    <div class="flex justify-between"><span>${s.icon} ${s.name}</span></div>
-                    <div class="text-xl font-bold">${Math.floor(s.price)} PLN</div>
-                    <div class="text-[9px] text-gray-500 mb-4">PORTFEL: ${owned[s.id] || 0}</div>
-                    <div class="flex gap-2">
-                        <button onclick="tradeStock('${s.id}', 'buy')" class="flex-1 py-2 bg-emerald-600/20 border border-emerald-500 text-[9px] font-black uppercase">Kup</button>
-                        <button onclick="tradeStock('${s.id}', 'sell')" class="flex-1 py-2 bg-red-600/20 border border-red-500 text-[9px] font-black uppercase">Sell</button>
-                    </div>
-                </div>`).join('');
-
-            document.getElementById('shop-list').innerHTML = shopItems.map(p => `
-                <div class="card flex flex-col justify-between border-t-2 ${bal >= p.price ? 'border-emerald-500' : 'border-red-900 opacity-60'}">
-                    <div><div class="text-3xl">${p.icon}</div><div class="font-black text-[10px] uppercase">${p.name}</div><div class="text-[8px]">+${p.income}/s</div></div>
-                    <button onclick="buyProduct('${p.id}')" class="mt-4 py-2 border rounded text-[9px] font-black ${bal >= p.price ? 'bg-emerald-500/10 border-emerald-500' : 'border-gray-800'}">${p.price.toLocaleString()} PLN</button>
-                </div>`).join('');
-
-            document.getElementById('list-container').innerHTML = d.map(i => `<div class="card text-center border-b border-blue-500/20 p-4"><div class="text-2xl">${i.icon}</div><div class="text-[9px] font-black">${i.name}</div><div class="text-[8px] text-blue-400">${(i.income * prestigeMultiplier).toFixed(1)}/s</div></div>`).join('');
         }
 
         function buyProduct(id) { 
@@ -254,15 +260,15 @@
             if (getBal() >= p.price) { 
                 const d = getData(); setBal(getBal() - p.price); 
                 d.push({ ...p, currentPrice: p.price }); saveData(d); 
-                addLog(`ZAKUP: ${p.name}`, "text-emerald-400 font-bold"); updateUI(); 
-            } 
+                addLog(`ZAKUP: ${p.name}`, "log-success"); updateUI(); 
+            } else { triggerShake(); }
         }
 
         function savePartner() {
             const n = document.getElementById('p-name').value, c = parseFloat(document.getElementById('p-commission').value);
             if (n && c > 0) {
                 const d = getData(); d.push({ name: n.toUpperCase(), income: c, icon: '🤝', currentPrice: 0 });
-                saveData(d); addLog(`UMOWA: ${n}`, "text-blue-400"); closeModal('partner-modal'); updateUI();
+                saveData(d); addLog(`NOWA UMOWA: ${n}`, "log-info"); closeModal('partner-modal'); updateUI();
             }
         }
 
@@ -270,47 +276,60 @@
             const n = document.getElementById('pr-name').value, p = parseFloat(document.getElementById('pr-price').value), i = parseFloat(document.getElementById('pr-income').value);
             if (n && i > 0 && getBal() >= p) {
                 const d = getData(); setBal(getBal() - p); d.push({ name: n.toUpperCase(), income: i, icon: '📦', currentPrice: p });
-                saveData(d); triggerShake(); addLog(`DODANO: ${n}`, "text-emerald-400"); closeModal('product-modal'); updateUI();
-            }
-        }
-
-        function executeTransfer() {
-            const amt = getBal(); setBal(0);
-            triggerShake(); addLog(`PRZELEW: ${Math.floor(amt)} PLN`, "text-purple-400 font-bold");
-            closeModal('transfer-modal'); updateUI();
+                saveData(d); addLog(`DODANO ZASÓB: ${n}`, "log-success"); closeModal('product-modal'); updateUI();
+            } else { triggerShake(); }
         }
 
         function catchLead() { 
             if(currentLead) { 
-                triggerShake();
                 const d = getData(); d.push({ name: `LEAD: ${currentLead.name}`, income: currentLead.income, icon: '🔥', currentPrice: 0 }); 
-                saveData(d); leadsCaught++; document.getElementById('lead-alert').style.display = 'none'; 
-                addLog("PRZEJĘTO LEAD!", "text-orange-400"); currentLead = null; updateUI(); 
+                saveData(d); leadsCaught++; localStorage.setItem(LS_KEY + '_LC', leadsCaught);
+                document.getElementById('lead-alert').style.display = 'none'; 
+                addLog("PRZEJĘTO LEAD SYSTEMOWY!", "log-alert"); currentLead = null; updateUI(); 
             } 
         }
 
+        function executeTransfer() {
+            const amt = getBal(); if(amt <= 0) return;
+            setBal(0); addLog(`TRANSFER ZEWNĘTRZNY: ${Math.floor(amt)} PLN`, "log-alert");
+            closeModal('transfer-modal'); updateUI();
+        }
+
+        function activatePrestige() {
+            const bal = getBal();
+            if (bal >= 100000000) {
+                const bonus = (bal / 200000000);
+                if (confirm(`RESET SYSTEMU. Nowy mnożnik: x${(prestigeMultiplier + bonus).toFixed(2)}`)) {
+                    localStorage.clear();
+                    localStorage.setItem(LS_KEY + '_MULT', (prestigeMultiplier + bonus).toFixed(4));
+                    location.reload();
+                }
+            } else { alert("Wymagane 100,000,000 PLN!"); }
+        }
+
         setInterval(() => {
-            let d = getData(); setBal(getBal() + (d.reduce((s, i) => s + i.income, 0) * prestigeMultiplier));
-            stockItems.forEach(s => s.price *= (1 + (Math.random() - 0.5) * s.fluctuation));
-            updateUI();
-            if (Math.random() < 0.025 && !currentLead) {
+            const d = getData();
+            const income = d.reduce((s, i) => s + i.income, 0) * prestigeMultiplier;
+            setBal(getBal() + income);
+            stockItems.forEach(s => s.price = Math.max(10, s.price * (1 + (Math.random() - 0.5) * s.fluctuation)));
+            
+            if (Math.random() < 0.03 && !currentLead) {
                 currentLead = { name: "NEURAL GRID", income: Math.floor(Math.random()*400)+200 };
                 document.getElementById('lead-name').innerText = `${currentLead.name} (+${currentLead.income}/s)`;
                 document.getElementById('lead-alert').style.display = 'block';
                 setTimeout(() => { document.getElementById('lead-alert').style.display = 'none'; currentLead = null; }, 5000);
             }
+            updateUI();
         }, 1000);
 
-        function exportCertificate() {
+        function resetSystem() { if(confirm("CZYŚCIĆ WSZYSTKIE DANE?")) { localStorage.clear(); location.reload(); } }
+        function exportCertificate() { 
             const b = Math.floor(getBal()), i = Math.floor(getData().reduce((s, x) => s + x.income, 0) * prestigeMultiplier);
             const w = window.open('', '_blank');
-            w.document.write(`<html><body style="background:#000;color:#3b82f6;text-align:center;padding:100px;font-family:monospace;border:10px double #3b82f6;"><h1>CERT_TOMASZ_HAJDUK_2026</h1><p>SALDO: ${b.toLocaleString()} PLN</p><p>MOC: ${i.toLocaleString()} /s</p><button onclick="window.print()">PRINT PDF</button></body></html>`);
-            w.document.close();
+            w.document.write(`<html><body style="background:#000;color:#3b82f6;text-align:center;padding:100px;font-family:monospace;border:10px double #3b82f6;"><h1>CERT_TOMASZ_HAJDUK_2026</h1><p>SALDO: ${b.toLocaleString()} PLN</p><p>MOC: ${i.toLocaleString()} /s</p></body></html>`);
         }
 
-        function resetSystem() { if(confirm("CZYŚCIĆ SYSTEM?")) { localStorage.clear(); location.reload(); } }
-
-        window.onload = () => { updateUI(); addLog("SYSTEM HAJDUK v2.8 READY."); };
+        window.onload = () => { updateUI(); addLog("SYSTEM HAJDUK v2.8 READY. POŁĄCZONO Z NODEM AI."); };
     </script>
 </body>
 </html>
