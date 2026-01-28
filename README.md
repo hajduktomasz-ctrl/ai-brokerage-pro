@@ -1,10 +1,9 @@
-markdown
 # 🤖 AI Brokerage PRO | Tomasz Hajduk
 
 Advanced AI Asset Management & Stock Trading Simulator (v2.7)
 
-[![Status](https://img.shields.io)](https://hajduktomasz-ctrl.github.io)
-[![Version](https://img.shields.io)](https://github.com)
+[![Status](https://img.shields.io)](https://hajduktomasz-ctrl.github.io/AI-Brokerage-PRO/)
+[![Version](https://img.shields.io)](https://hajduktomasz-ctrl.github.io/AI-Brokerage-PRO/)
 
 ## 🚀 O Projekcie
 **AI Brokerage PRO** to interaktywny symulator ekonomiczny osadzony w futurystycznym klimacie roku 2026. System pozwala użytkownikowi wcielić się w rolę brokera zasobów AI, zarządzającego portfelem aktywów, spekulującego na giełdzie oraz przejmującego kontrakty B2B w czasie rzeczywistym.
@@ -12,7 +11,7 @@ Advanced AI Asset Management & Stock Trading Simulator (v2.7)
 ## 🛠️ Stack Techniczny
 - **Frontend:** [Tailwind CSS](https://tailwindcss.com) (Modern & Responsive UI)
 - **Logika:** Vanilla JS (ES6+)
-- **Storage:** LocalStorage API (Trwałość danych bez bazy SQL)
+- **Storage:** LocalStorage API (Trwałość danych w przeglądarce)
 - **Typografia:** JetBrains Mono
 
 ## 💎 Kluczowe Funkcje
@@ -23,7 +22,7 @@ Advanced AI Asset Management & Stock Trading Simulator (v2.7)
 - **Raport PDF:** Generowanie autentycznego certyfikatu osiągnięć gotowego do druku.
 
 ## 📈 Jak zacząć?
-1. Odwiedź stronę projektu: [Link do gry](https://hajduktomasz-ctrl.github.io)
+1. Odwiedź stronę projektu: [https://hajduktomasz-ctrl.github.io/AI-Brokerage-PRO/](https://hajduktomasz-ctrl.github.io/AI-Brokerage-PRO/)
 2. Podpisuj pierwsze umowy, aby generować pasywny dochód.
 3. Inwestuj w aktywa w **Sklepie AI**.
 4. Spekuluj na **Giełdzie**, kupując tanio i sprzedając drogo.
@@ -32,3 +31,4 @@ Advanced AI Asset Management & Stock Trading Simulator (v2.7)
 ---
 **Właściciel Projektu:** [Tomasz Hajduk](https://github.com)  
 *System v2.7 Enterprise Ready // 2026*
+
