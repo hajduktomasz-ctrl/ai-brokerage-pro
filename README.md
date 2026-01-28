@@ -4,7 +4,7 @@ Futurystyczny dashboard operacyjny do zarządzania pośrednictwem w sprzedaży z
 
 ## 🚀 Live Demo
 Zaktualizowany projekt dostępny pod adresem:
-[https://hajduktomasz-ctrl.github.io](https://hajduktomasz-ctrl.github.io)
+[https://hajduktomasz-ctrl.github.io/AI-Brokerage-PRO/](https://hajduktomasz-ctrl.github.io/AI-Brokerage-PRO/)
 
 ## 🛠️ Funkcjonalności
 - **Terminal Monitorowania:** Dynamiczny strumień danych procesowych AI.
@@ -25,8 +25,7 @@ Zaktualizowany projekt dostępny pod adresem:
 ![Podgląd Systemu](preview.png)
 
 ## 🚀 Live Demo
-Projekt dostępny pod adresem:
-[https://hajduktomasz-ctrl.github.io/AI-Brokerage-PRO/](https://hajduktomasz-ctrl.github.io/AI-Brokerage-PRO/)
+Projekt dostępny pod adresem:[https://hajduktomasz-ctrl.github.io/AI-Brokerage-PRO/](https://hajduktomasz-ctrl.github.io/AI-Brokerage-PRO/)
 
 
 
