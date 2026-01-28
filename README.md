@@ -1,31 +1,34 @@
-# 🤖 AI Brokerage PRO v2.1 | Tomasz Hajduk
+markdown
+# 🤖 AI Brokerage PRO | Tomasz Hajduk
 
-Futurystyczny dashboard operacyjny do zarządzania pośrednictwem w sprzedaży zasobów AI, zaprojektowany w estetyce **Cyber-Industrial 2026**. 
+Advanced AI Asset Management & Stock Trading Simulator (v2.7)
 
-## 🚀 Live Demo
-Zaktualizowany projekt dostępny pod adresem:
-[https://hajduktomasz-ctrl.github.io/AI-Brokerage-PRO/](https://hajduktomasz-ctrl.github.io/AI-Brokerage-PRO/)
+[![Status](https://img.shields.io)](https://hajduktomasz-ctrl.github.io)
+[![Version](https://img.shields.io)](https://github.com)
 
-## 🛠️ Funkcjonalności
-- **Terminal Monitorowania:** Dynamiczny strumień danych procesowych AI.
-- **Giełda Zasobów:** Kupno i sprzedaż węzłów oraz algorytmów.
-- **System Finansowy:** Przelewy bankowe z wyborem banku i weryfikacją konta.
-- **Interfejs Cyberpunk:** Efekty Glitch FX przy kluczowych operacjach.
-- **Responsywność:** Stylizacja Tailwind CSS dostosowana do różnych ekranów.
+## 🚀 O Projekcie
+**AI Brokerage PRO** to interaktywny symulator ekonomiczny osadzony w futurystycznym klimacie roku 2026. System pozwala użytkownikowi wcielić się w rolę brokera zasobów AI, zarządzającego portfelem aktywów, spekulującego na giełdzie oraz przejmującego kontrakty B2B w czasie rzeczywistym.
 
-## 💻 Technologie
-- **HTML5 / CSS3**
-- **JavaScript (Vanilla)**
-- **Tailwind CSS**
-- **Google Fonts** (JetBrains Mono)
+## 🛠️ Stack Techniczny
+- **Frontend:** [Tailwind CSS](https://tailwindcss.com) (Modern & Responsive UI)
+- **Logika:** Vanilla JS (ES6+)
+- **Storage:** LocalStorage API (Trwałość danych bez bazy SQL)
+- **Typografia:** JetBrains Mono
+
+## 💎 Kluczowe Funkcje
+- **Dynamiczna Giełda:** System symulujący fluktuacje cen gigantów technologicznych (Tesla AI, Nvidia RTX, Palantir).
+- **Lead Generator:** Mechanizm losowych zleceń (Leads) wymagający szybkiej reakcji operatora.
+- **Wydarzenia Globalne:** Losowe eventy (np. krach giełdowy, przełom technologiczny) wpływające na ekonomię gry.
+- **System Prestiżu:** Mechanizm "Resetu" pozwalający na skalowanie zysków dzięki stałym mnożnikom (x1.0 - x100.0).
+- **Raport PDF:** Generowanie autentycznego certyfikatu osiągnięć gotowego do druku.
+
+## 📈 Jak zacząć?
+1. Odwiedź stronę projektu: [Link do gry](https://hajduktomasz-ctrl.github.io)
+2. Podpisuj pierwsze umowy, aby generować pasywny dochód.
+3. Inwestuj w aktywa w **Sklepie AI**.
+4. Spekuluj na **Giełdzie**, kupując tanio i sprzedając drogo.
+5. Po osiągnięciu 100 mln PLN aktywuj **System Prestiżu**, aby zdominować rynek.
 
 ---
-*Projekt stworzony przez Tomasza Hajduka - 2026*
-# 🤖 AI Brokerage PRO v2.1 | Tomasz Hajduk
-![Podgląd Systemu](preview.png)
-
-## 🚀 Live Demo
-Projekt dostępny pod adresem:[https://hajduktomasz-ctrl.github.io/AI-Brokerage-PRO/](https://hajduktomasz-ctrl.github.io/AI-Brokerage-PRO/)
-
-
-
+**Właściciel Projektu:** [Tomasz Hajduk](https://github.com)  
+*System v2.7 Enterprise Ready // 2026*
