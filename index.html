@@ -1,289 +1,227 @@
-
+<!-- AI BROKERAGE MASTER PRO v19.0 - TOMASZ HAJDUK - FINAL STABLE -->
+<!DOCTYPE html>
 <html lang="pl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Brokerage PRO | Tomasz Hajduk</title>
-    
+    <title>AI MASTER PRO | Tomasz Hajduk</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com" rel="stylesheet">
-    
     <style>
-        :root { --accent: #3b82f6; --bg: #05070a; --card: rgba(22, 27, 42, 0.9); }
-        body { background: var(--bg); color: #e5e7eb; font-family: 'JetBrains Mono', monospace; margin: 0; overflow: hidden; height: 100vh; }
-        .tab-content { display: none; width: 100%; height: 100%; overflow-y: auto; padding: 20px; padding-bottom: 100px; }
-        .tab-content.active { display: block; animation: slideUp 0.3s ease-out; }
-        @keyframes slideUp { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-        .card { background: var(--card); backdrop-filter: blur(15px); border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 16px; padding: 15px; }
-        .sidebar-item-active { background: linear-gradient(90deg, var(--accent), transparent) !important; border-left: 4px solid var(--accent); color: white !important; }
-        #lead-alert { display: none; position: fixed; top: 80px; right: 20px; z-index: 9999; animation: pulse 1s infinite; }
-        @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.02); } 100% { transform: scale(1); } }
-        .ticker-wrap { position: fixed; bottom: 0; width: 100%; overflow: hidden; background: rgba(0,0,0,0.9); border-top: 1px solid #f97316; z-index: 100; height: 30px; }
-        .ticker { display: inline-block; white-space: nowrap; animation: ticker 40s linear infinite; color: #f97316; font-size: 10px; line-height: 30px; font-weight: bold; }
-        @keyframes ticker { 0% { transform: translateX(100%); } 100% { transform: translateX(-100%); } }
-        #system-logs { display: flex; flex-direction: column; gap: 4px; padding: 12px; }
-        .log-entry { background: rgba(59, 130, 246, 0.03); padding: 8px 12px; border-radius: 6px; border-left: 3px solid #3b82f6; font-size: 9px; line-height: 1.4; display: flex; gap: 8px; }
-        .log-success { border-color: #10b981; color: #34d399; }
-        .log-alert { border-color: #f97316; color: #fb923c; }
+        @import url('https://fonts.googleapis.com');
+        body { background: #010206; color: #f1f5f9; font-family: 'JetBrains Mono', monospace; overflow: hidden; height: 100vh; }
+        .glass { background: rgba(15, 23, 42, 0.7); backdrop-filter: blur(12px); border: 1px solid rgba(59, 130, 246, 0.1); border-radius: 16px; padding: 18px; transition: 0.3s; }
+        .tab-content { display: none; padding: 20px; height: 100vh; flex-direction: column; }
+        .active { display: flex !important; }
+        .nav-btn { width: 100%; text-align: left; padding: 10px 14px; margin-bottom: 5px; border-radius: 10px; font-weight: 800; background: #0f172a; font-size: 10px; transition: 0.2s; color: #94a3b8; border-left: 3px solid transparent; }
+        .sidebar-item-active { background: #1d4ed8 !important; color: white; border-left-color: #3b82f6 !important; box-shadow: 0 0 15px rgba(59,130,246,0.3); }
+        .input-dark { background: #000; border: 1px solid #1e293b; padding: 8px; width: 100%; border-radius: 6px; font-size: 10px; color: white; outline: none; }
+        #pie-chart { width: 120px; height: 120px; border-radius: 50%; border: 2px solid #1e293b; margin: 0 auto; transition: 0.5s; }
+        .toast { background: #0f172a; border-left: 4px solid #3b82f6; color: white; padding: 12px; border-radius: 4px; font-size: 11px; position: fixed; top: 20px; right: 20px; z-index: 9999; animation: slideIn 0.3s ease; }
+        @keyframes pulse-blue { 0%, 100% { border-color: rgba(59,130,246,0.2); } 50% { border-color: #3b82f6; box-shadow: 0 0 20px rgba(59,130,246,0.3); } }
+        .pulse-active { animation: pulse-blue 1s infinite; }
         .custom-scrollbar::-webkit-scrollbar { width: 4px; }
-        .custom-scrollbar::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 10px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 10px; }
+        @media print { .print\:hidden { display: none !important; } }
     </style>
 </head>
-<body class="flex flex-col md:flex-row h-screen" id="main-body">
+<body class="flex">
 
-    <div id="lead-alert" class="card border-orange-500 bg-orange-950/90 w-72">
-        <p class="text-[10px] font-black text-orange-400 uppercase mb-1 italic">🔥 NOWY LEAD AI</p>
-        <p id="lead-name" class="text-[11px] mb-3 text-white font-bold italic">Skanowanie...</p>
-        <button onclick="catchLead()" class="w-full py-2 bg-orange-500 text-black text-[10px] font-black rounded uppercase">Przejmij</button>
-    </div>
-
-    <aside class="sidebar w-full md:w-72 bg-black md:p-6 flex flex-col border-r border-white/5 shrink-0">
-        <div class="mb-8 hidden md:block text-center">
-            <div class="text-xl font-black text-white tracking-tighter uppercase italic">Tomasz Hajduk</div>
-            <div class="text-[8px] text-blue-500 mt-2 font-bold uppercase tracking-widest">Operator AI 2026</div>
+    <!-- SIDEBAR -->
+    <aside class="w-64 bg-black border-r border-slate-900 flex flex-col h-screen shrink-0 print:hidden">
+        <div class="p-6 text-center border-b border-slate-900">
+            <div class="text-4xl mb-2 cursor-pointer" onclick="enableAudio()">🦅</div>
+            <h1 class="text-white font-black text-2xl" style="color:#d4af37;">TH</h1>
+            <p class="text-slate-500 text-[8px] uppercase tracking-[0.3em] mt-1">Tomasz Hajduk</p>
         </div>
-        <nav class="flex flex-col gap-2 flex-grow">
-            <button onclick="switchTab('dashboard')" id="btn-dashboard" class="nav-btn flex items-center gap-4 p-4 rounded-xl sidebar-item-active text-[10px] font-bold uppercase">📊 Dashboard</button>
-            <button onclick="switchTab('shop')" id="btn-shop" class="nav-btn flex items-center gap-4 p-4 rounded-xl text-gray-500 text-[10px] font-bold uppercase">🛒 Sklep AI</button>
-            <button onclick="switchTab('products')" id="btn-products" class="nav-btn flex items-center gap-4 p-4 rounded-xl text-gray-500 text-[10px] font-bold uppercase">📦 Zasoby</button>
-            <button onclick="switchTab('market')" id="btn-market" class="nav-btn flex items-center gap-4 p-4 rounded-xl text-gray-500 text-[10px] font-bold uppercase">📈 Giełda</button>
-            <div class="mt-auto pt-6 border-t border-white/5 flex flex-col gap-2 mb-12">
-                <button onclick="activatePrestige()" class="w-full py-3 bg-purple-600/20 border border-purple-500/50 rounded-xl text-[9px] font-black text-purple-400 uppercase italic">💎 PRESTIŻ</button>
-                <button onclick="resetSystem()" class="w-full py-3 bg-red-600/20 border border-red-500/50 rounded-xl text-[9px] font-black text-red-400 uppercase italic">💥 RESET</button>
-            </div>
+        
+        <nav class="flex-1 p-4 space-y-1 overflow-y-auto custom-scrollbar">
+            <button onclick="switchTab('dashboard')" id="btn-dashboard" class="nav-btn sidebar-item-active">📊 DASHBOARD</button>
+            <button onclick="switchTab('trader')" id="btn-trader" class="nav-btn">🤖 AI TRADER</button>
+            <button onclick="switchTab('market')" id="btn-market" class="nav-btn">📈 GIEŁDA LIVE</button>
+            <button onclick="switchTab('shop')" id="btn-shop" class="nav-btn">🛒 SKLEP AI</button>
+            <button onclick="switchTab('assets')" id="btn-assets" class="nav-btn">📦 MOJE ZASOBY</button>
+            <button onclick="switchTab('contracts')" id="btn-contracts" class="nav-btn">🤝 KONTRAKTY B2B</button>
+            <button onclick="openModal('cert-modal')" class="nav-btn text-[#d4af37]">🏆 CERTYFIKAT</button>
+            <button onclick="openTaxModal()" class="nav-btn text-red-500">⚖️ PODATKI (CIT-19)</button>
         </nav>
+        
+        <div class="p-4 border-t border-slate-900 space-y-2 bg-slate-950/50">
+            <p class="text-[7px] text-slate-500 uppercase font-bold ml-1">API Node Gateway</p>
+            <select id="api-operator" class="w-full bg-black border border-blue-900/40 text-blue-400 text-[9px] p-2 rounded outline-none font-bold">
+                <option>KIR (Elixir Core)</option>
+                <option>BLUE MEDIA (Express)</option>
+                <option>STRIPE AI GATEWAY</option>
+                <option>REVOLUT BUSINESS</option>
+            </select>
+            <button onclick="connectAPI()" class="w-full py-2 bg-blue-600/20 text-blue-400 border border-blue-500/50 text-[9px] font-black rounded uppercase italic">🌐 Połącz API</button>
+            
+            <div class="grid grid-cols-2 gap-2">
+                <button onclick="createSnapshot()" class="py-2 bg-emerald-900/40 text-emerald-400 border border-emerald-500/30 text-[8px] rounded font-bold uppercase">Snap Save</button>
+                <button onclick="restoreSnapshot()" class="py-2 bg-blue-900/40 text-blue-400 border border-blue-500/30 text-[8px] rounded font-bold uppercase">Snap Load</button>
+            </div>
+            <div class="grid grid-cols-2 gap-2">
+                <button onclick="exportData()" class="py-2 bg-slate-800 text-[8px] rounded font-bold uppercase">Export</button>
+                <button onclick="document.getElementById('imp').click()" class="py-2 bg-slate-800 text-[8px] rounded font-bold uppercase">Import</button>
+                <input type="file" id="imp" class="hidden" onchange="importData(event)">
+            </div>
+            <button onclick="masterReset()" class="w-full py-2 bg-red-600 text-white text-[9px] font-black rounded uppercase">Master Reset</button>
+        </div>
     </aside>
 
-    <main class="flex-1 relative flex flex-col overflow-hidden">
-        <header class="p-4 md:p-6 flex justify-between items-center bg-black/40 border-b border-white/5 z-40">
-            <div>
-                <div class="text-xs font-black text-white uppercase tracking-tighter">AI Brokerage System</div>
-                <div class="text-[8px] text-blue-400 font-bold italic">User: Hajduk // Mult: <span id="ui-multiplier">1.0</span>x</div>
+    <main class="flex-1 h-screen overflow-hidden relative">
+        <div id="notification-container"></div>
+        
+        <!-- DASHBOARD -->
+        <section id="content-dashboard" class="tab-content active">
+            <div class="grid grid-cols-5 gap-4 mb-6">
+                <div class="glass border-l-4 border-emerald-500"><p class="text-[8px] opacity-50 font-bold uppercase">Saldo</p><p id="ui-bal" class="text-lg font-black text-emerald-400">0</p></div>
+                <div class="glass border-l-4 border-blue-500"><p class="text-[8px] opacity-50 font-bold uppercase">Dochód /s</p><p id="ui-inc" class="text-lg font-black text-blue-400">0</p></div>
+                <div class="glass border-l-4 border-red-500"><p class="text-[8px] opacity-50 font-bold uppercase">Podatek</p><p id="ui-tax" class="text-lg font-black text-red-400">0</p></div>
+                <div class="glass border-l-4 border-white"><p class="text-[8px] opacity-50 font-bold uppercase">Exp</p><p id="ui-exp" class="text-lg font-black">0</p></div>
+                <div class="glass border-l-4 border-orange-500"><p class="text-[8px] opacity-50 font-bold uppercase">Level</p><p id="ui-lvl" class="text-lg font-black text-orange-400">1</p></div>
             </div>
-            <div class="text-[9px] font-bold text-emerald-400 font-mono border border-emerald-500/30 px-3 py-1 rounded-full uppercase">Status: Online</div>
-        </header>
 
-        <div class="flex-1 relative overflow-hidden">
-            <section id="content-dashboard" class="tab-content active">
-                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
-                    <div class="card border-l-4 border-emerald-500"><p class="text-[8px] text-emerald-500 uppercase">Saldo</p><p id="stat-balance" class="text-lg font-bold text-white">0 PLN</p></div>
-                    <div class="card border-l-4 border-blue-500"><p class="text-[8px] text-blue-400 uppercase">Zasoby</p><p id="stat-assets" class="text-lg font-bold text-white">0</p></div>
-                    <div class="card border-l-4 border-purple-500"><p class="text-[8px] text-purple-400 uppercase">Zysk/s</p><p id="stat-income" class="text-lg font-bold text-white">0 PLN</p></div>
-                    <div class="card border-l-4 border-orange-500"><p class="text-[8px] text-orange-400 uppercase">Leady</p><p id="stat-leads-count" class="text-lg font-bold text-white">0</p></div>
+            <div class="grid grid-cols-2 gap-4 flex-1 overflow-hidden">
+                <div id="logs-card" class="glass flex flex-col h-full overflow-hidden">
+                    <p class="text-[10px] font-bold text-blue-400 mb-3 uppercase italic">Command Center Logs</p>
+                    <div id="logs-box" class="flex-1 overflow-y-auto text-[9px] font-mono text-blue-200 custom-scrollbar mb-4"></div>
+                    <div class="grid grid-cols-3 gap-2 border-t border-slate-800 pt-3">
+                        <button onclick="addShopPrompt()" class="py-2 bg-purple-600/10 border border-purple-500/30 text-purple-400 text-[8px] font-bold uppercase tracking-tighter">➕ Sklep</button>
+                        <button onclick="addAssetPrompt()" class="py-2 bg-blue-600/10 border border-blue-500/30 text-blue-400 text-[8px] font-bold uppercase tracking-tighter">➕ Zasób</button>
+                        <button onclick="addContractPrompt()" class="py-2 bg-orange-600/10 border border-orange-500/30 text-orange-400 text-[8px] font-bold uppercase tracking-tighter">🤝 Kontrakt</button>
+                    </div>
                 </div>
-                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                    <div class="lg:col-span-2">
-                        <div class="card h-[450px] flex flex-col border-t-2 border-blue-500 p-0 overflow-hidden">
-                            <div id="system-logs" class="flex-1 overflow-y-auto custom-scrollbar"></div>
+
+                <div class="glass flex flex-col h-full bg-slate-900/10 overflow-hidden">
+                    <p class="text-[11px] font-bold text-blue-500 mb-4 uppercase text-center tracking-widest italic">Global Banking Terminal</p>
+                    <div id="pie-chart" class="mb-4"></div>
+                    <div id="pie-legend" class="text-[7px] space-y-1 mb-4 overflow-y-auto max-h-24 custom-scrollbar text-center px-4"></div>
+                    
+                    <div class="space-y-2 mt-auto border-t border-slate-800 pt-4 text-[9px]">
+                        <div class="grid grid-cols-2 gap-2">
+                            <select id="b-bank" class="input-dark text-blue-400 font-bold"><option>PKO Bank Polski</option><option>JP Morgan Chase</option><option>Revolut Business</option></select>
+                            <input type="number" id="b-amt" placeholder="KWOTA PLN" class="input-dark text-emerald-400 font-black">
                         </div>
-                    </div>
-                    <div class="lg:col-span-1 flex flex-col gap-4">
-                        <button onclick="openModal('partner-modal')" class="card bg-blue-600/10 border-blue-500/50 text-[10px] font-black uppercase text-blue-400">Podpisz Umowę</button>
-                        <button onclick="openModal('product-modal')" class="card bg-emerald-600/10 border-emerald-500/50 text-[10px] font-black uppercase text-emerald-400">Dodaj Zasób</button>
-                        <button onclick="openModal('transfer-modal')" class="card bg-purple-600/10 border-purple-500/50 text-[10px] font-black uppercase text-purple-400">Przelej Środki</button>
+                        <input type="text" id="b-name" placeholder="NAZWA ODBIORCY" class="input-dark uppercase">
+                        <input type="text" id="b-acc" placeholder="NR KONTA / IBAN" class="input-dark">
+                        <button onclick="executeTransfer()" class="w-full py-3 bg-emerald-600 text-white font-black rounded uppercase shadow-lg hover:bg-emerald-500 transition">🚀 Wykonaj Przelew</button>
                     </div>
                 </div>
-            </section>
-            <section id="content-shop" class="tab-content"><div id="shop-list" class="grid grid-cols-1 md:grid-cols-3 gap-4"></div></section>
-            <section id="content-products" class="tab-content"><div id="list-container" class="grid grid-cols-1 md:grid-cols-3 gap-4"></div></section>
-            <section id="content-market" class="tab-content"><div id="market-list" class="grid grid-cols-1 md:grid-cols-3 gap-4"></div></section>
+            </div>
+        </section>
+
+        <!-- SEKCJE -->
+        <section id="content-contracts" class="tab-content"><h2 class="text-xl font-black mb-4 text-orange-400 uppercase italic">🤝 Rejestr Kontraktów B2B</h2><div id="contracts-list" class="grid gap-2 overflow-y-auto custom-scrollbar"></div></section>
+        <section id="content-market" class="tab-content"><h2 class="text-xl font-black mb-4 text-emerald-400 uppercase italic">📈 Giełda Live AI</h2><div id="market-list" class="grid grid-cols-3 gap-4 mb-4"></div><div class="glass flex-1 bg-black overflow-hidden relative"><canvas id="m-canvas" class="w-full h-full"></canvas></div></section>
+        <section id="content-assets" class="tab-content"><h2 class="text-xl font-black mb-4 text-blue-400 uppercase">📦 Zasoby Serwerowe</h2><div id="assets-list" class="grid grid-cols-2 gap-3 overflow-y-auto custom-scrollbar"></div></section>
+        <section id="content-shop" class="tab-content"><h2 class="text-xl font-black mb-4 uppercase italic">🛒 Sklep AI Systems</h2><div id="shop-list" class="grid grid-cols-3 gap-4 overflow-y-auto custom-scrollbar"></div></section>
+        <section id="content-trader" class="tab-content">
+            <h2 class="text-xl font-black mb-4 text-purple-400 uppercase text-center italic">🤖 AI Trader Engine Core</h2>
+            <div id="ai-logs" class="glass flex-1 font-mono text-[10px] text-purple-300 overflow-y-auto mb-4 bg-black p-4 custom-scrollbar"></div>
+            <button onclick="toggleAI()" id="ai-btn" class="py-4 bg-purple-600 text-white font-black rounded uppercase shadow-lg">Uruchom AI Trader</button>
+        </section>
+
+        <!-- MODAL CERTYFIKAT -->
+        <div id="cert-modal" class="hidden fixed inset-0 bg-black/98 flex items-center justify-center z-50 p-4">
+            <div class="glass w-[550px] text-center border-[#d4af37] p-12 border-4 border-double bg-[#05070a]">
+                <div class="text-6xl mb-6">🦅</div>
+                <h3 class="text-[#d4af37] italic text-xl mb-2 uppercase">Autoryzacja Operatora</h3>
+                <h2 class="text-4xl font-black text-white mb-2 uppercase tracking-tighter">Tomasz Hajduk</h2>
+                <p class="text-blue-500 font-bold text-[12px] uppercase italic mb-8 border-b border-white/10 pb-4 inline-block">Właściciel projektu i Operator Systemu AI Polska</p>
+                <div class="flex justify-center gap-4">
+                    <button onclick="window.print()" class="px-8 py-3 bg-[#d4af37] text-black font-black rounded uppercase text-[10px]">Drukuj PDF</button>
+                    <button onclick="closeModal('cert-modal')" class="px-8 py-3 bg-slate-800 text-white font-bold rounded uppercase text-[10px]">Zamknij</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- MODAL TAX -->
+        <div id="tax-modal" class="hidden fixed inset-0 bg-black/95 flex items-center justify-center z-50">
+            <div class="glass w-96 text-center border-red-900/50">
+                <h2 class="text-red-500 font-black mb-4 uppercase text-2xl italic">CIT-19 Rozliczenie</h2>
+                <select id="t-reg" onchange="upOff()" class="input-dark mb-2"></select>
+                <select id="t-off" class="input-dark mb-4"></select>
+                <div id="t-val" class="text-3xl font-black text-red-500 mb-6 py-4 bg-red-900/10 rounded">0</div>
+                <button onclick="payTax()" class="w-full py-3 bg-red-600 text-white font-bold rounded uppercase">Zapłać Podatek</button>
+                <button onclick="closeModal('tax-modal')" class="mt-4 text-[9px] opacity-40 uppercase">Powrót</button>
+            </div>
         </div>
     </main>
 
-    <div id="transfer-modal" class="hidden fixed inset-0 bg-black/90 backdrop-blur-md z-50 flex items-center justify-center p-4">
-        <div class="card w-full max-w-md border-purple-500 text-center">
-            <h3 class="text-purple-400 font-black mb-4 uppercase text-xs">Przelew Środków</h3>
-            <button onclick="executeTransfer()" class="w-full bg-purple-600 py-3 rounded text-[10px] font-black text-white uppercase">Wypłać wszystko</button>
-            <button onclick="closeModal('transfer-modal')" class="mt-4 text-[8px] text-gray-500 uppercase">Anuluj</button>
-        </div>
-    </div>
-
-    <div id="partner-modal" class="hidden fixed inset-0 bg-black/90 backdrop-blur-md z-50 flex items-center justify-center p-4">
-        <div class="card w-full max-w-md border-blue-500">
-            <input type="text" id="p-name" placeholder="Firma" class="w-full bg-black border border-white/10 p-3 text-[10px] rounded text-white mb-4">
-            <input type="number" id="p-commission" placeholder="Przychód/s" class="w-full bg-black border border-white/10 p-3 text-[10px] rounded text-white mb-4">
-            <button onclick="savePartner()" class="w-full bg-blue-600 py-3 rounded text-[10px] font-black text-white uppercase tracking-widest">Podpisz</button>
-            <button onclick="closeModal('partner-modal')" class="w-full mt-2 text-[8px] text-gray-500 uppercase">Anuluj</button>
-        </div>
-    </div>
-
-    <div id="product-modal" class="hidden fixed inset-0 bg-black/90 backdrop-blur-md z-50 flex items-center justify-center p-4">
-        <div class="card w-full max-w-md border-emerald-500">
-            <input type="text" id="pr-name" placeholder="Nazwa" class="w-full bg-black border border-white/10 p-3 text-[10px] rounded text-white mb-4">
-            <input type="number" id="pr-price" placeholder="Koszt" class="w-full bg-black border border-white/10 p-3 text-[10px] rounded text-white mb-4">
-            <input type="number" id="pr-income" placeholder="Zysk/s" class="w-full bg-black border border-white/10 p-3 text-[10px] rounded text-white mb-4">
-            <button onclick="saveQuickProduct()" class="w-full bg-emerald-600 py-3 rounded text-[10px] font-black text-white uppercase tracking-widest">Aktywuj</button>
-            <button onclick="closeModal('product-modal')" class="w-full mt-2 text-[8px] text-gray-500 uppercase">Anuluj</button>
-        </div>
-    </div>
-
-    <div class="ticker-wrap"><div class="ticker">>>> SYSTEM HAJDUK v2.8 // GIEŁDA: LIVE // USER: TOMASZ HAJDUK // SYNCING NODES...</div></div>
-
     <script>
-        const LS_KEY = 'hajduk_v28_final';
-        let currentLead = null;
-        let leadsCaught = parseInt(localStorage.getItem(LS_KEY + '_LC')) || 0;
-        let prestigeMultiplier = parseFloat(localStorage.getItem(LS_KEY + '_MULT')) || 1.0;
+        const US_DATA = {"Mazowieckie":["US Warszawa-Mokotów","US Warszawa-Śródmieście"],"Śląskie":["US Katowice","US Gliwice"],"Małopolskie":["US Kraków-Centrum","US Tarnów"]};
+        const snd = new Audio('https://assets.mixkit.co'); snd.volume=0.2;
+        let db = JSON.parse(localStorage.getItem('broker_db')) || { bal:350000, ast:[{n:"PRIMARY NODE V1",v:120}], shop:[{n:"AI CORE X",p:45000,v:350}], tax:0, exp:0, lvl:1, logs:[], contracts:[] };
+        let mkt = [{id:'BTC', p:315000, c:'#f59e0b', h:Array(50).fill(315000)},{id:'NVDA', p:820, c:'#3b82f6', h:Array(50).fill(820)},{id:'GOLD', p:4200, c:'#10b981', h:Array(50).fill(4200)}];
+        let aiInt = null;
 
-        const shopItems = [
-            { id: 'n1', name: 'Bot Arbitrażowy', price: 15000, icon: '🤖', income: 30 },
-            { id: 'q1', name: 'Węzeł Kwantowy', price: 120000, icon: '⚛️', income: 280 },
-            { id: 's1', name: 'AI Sentinel V3', price: 750000, icon: '🛡️', income: 1500 },
-            { id: 'a3', name: 'AI GOD-MODE', price: 50000000, icon: '🌌', income: 150000 }
-        ];
-
-        let stockItems = [
-            { id: 'TSLA', name: 'TESLA AI', icon: '🚗', price: 620, fluctuation: 0.06 },
-            { id: 'NVDA', name: 'NVIDIA RTX', icon: '🧠', price: 950, fluctuation: 0.08 },
-            { id: 'PLTR', name: 'PALANTIR', icon: '👁️', price: 340, fluctuation: 0.04 }
-        ];
-
-        function getData() { return JSON.parse(localStorage.getItem(LS_KEY)) || [{ name:'RDZEŃ', income:120, currentPrice:0, icon:'💎' }]; }
-        function saveData(d) { localStorage.setItem(LS_KEY, JSON.stringify(d)); }
-        function getBal() { return parseFloat(localStorage.getItem(LS_KEY + '_BAL')) || 50000; }
-        function setBal(v) { localStorage.setItem(LS_KEY + '_BAL', v.toFixed(2)); }
-        function getOwnedStocks() { return JSON.parse(localStorage.getItem(LS_KEY + '_STK')) || {}; }
-        function saveOwnedStocks(s) { localStorage.setItem(LS_KEY + '_STK', JSON.stringify(s)); }
-
-        function addLog(m, type = 'log-info') { 
-            const l = document.getElementById('system-logs'); 
-            const time = new Date().toLocaleTimeString();
-            l.innerHTML = `<div class="log-entry ${type}"><span class="opacity-30">[${time}]</span> ${m}</div>` + l.innerHTML;
-            if(l.children.length > 30) l.lastElementChild.remove();
-        }
-
-        function openModal(id) { document.getElementById(id).style.display = 'flex'; }
-        function closeModal(id) { document.getElementById(id).style.display = 'none'; }
-
-        function switchTab(id) {
-            document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
-            document.getElementById(`content-${id}`).classList.add('active');
-            document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('sidebar-item-active'));
-            document.getElementById(`btn-${id}`).classList.add('sidebar-item-active');
-            updateUI();
-        }
-
-        function updateUI() {
-            const d = getData();
-            const bal = getBal();
-            const mult = prestigeMultiplier;
-            const incomePerSec = d.reduce((s, i) => s + i.income, 0) * mult;
-
-            document.getElementById('stat-balance').innerText = Math.floor(bal).toLocaleString() + " PLN";
-            document.getElementById('stat-assets').innerText = d.length;
-            document.getElementById('stat-income').innerText = incomePerSec.toFixed(1) + " PLN";
-            document.getElementById('stat-leads-count').innerText = leadsCaught;
-            document.getElementById('ui-multiplier').innerText = mult.toFixed(2);
-
-            const owned = getOwnedStocks();
-            document.getElementById('market-list').innerHTML = stockItems.map(s => `
-                <div class="card border-t-2 border-orange-500/40">
-                    <div class="flex justify-between mb-2"><span class="text-xl">${s.icon}</span><span class="text-[10px] font-black text-orange-400">${s.name}</span></div>
-                    <div class="text-lg font-bold">${Math.floor(s.price)} PLN</div>
-                    <div class="text-[8px] text-gray-500 uppercase mb-4">W portfelu: ${owned[s.id] || 0}</div>
-                    <div class="flex gap-2">
-                        <button onclick="tradeStock('${s.id}', 'buy')" class="flex-1 py-2 bg-emerald-500/10 border border-emerald-500/50 text-[8px] font-black uppercase rounded">Kup</button>
-                        <button onclick="tradeStock('${s.id}', 'sell')" class="flex-1 py-2 bg-red-500/10 border border-red-500/50 text-[8px] font-black uppercase rounded">Sprzedaj</button>
-                    </div>
-                </div>`).join('');
-
-            document.getElementById('shop-list').innerHTML = shopItems.map(p => `
-                <div class="card flex flex-col justify-between border-t-2 ${bal >= p.price ? 'border-emerald-500' : 'border-red-900 opacity-60'}">
-                    <div><div class="text-3xl">${p.icon}</div><div class="font-black text-[10px] text-white uppercase">${p.name}</div><div class="text-[8px] text-emerald-400">+${p.income}/s</div></div>
-                    <button onclick="buyProduct('${p.id}')" class="mt-4 py-2 border rounded text-[9px] font-black uppercase ${bal >= p.price ? 'bg-emerald-500 text-black border-emerald-500' : 'border-gray-800 text-gray-600'}">${p.price.toLocaleString()} PLN</button>
-                </div>`).join('');
-
-            document.getElementById('list-container').innerHTML = d.map(i => `
-                <div class="card flex items-center gap-3 border-l-2 border-blue-500 bg-blue-500/5">
-                    <div class="text-xl">${i.icon}</div>
-                    <div><div class="text-[9px] font-black uppercase text-white">${i.name}</div><div class="text-[8px] text-blue-400">${(i.income * mult).toFixed(1)}/s</div></div>
-                </div>`).join('');
-        }
-
-        function tradeStock(id, type) {
-            const s = stockItems.find(x => x.id === id);
-            let owned = getOwnedStocks();
-            if (type === 'buy' && getBal() >= s.price) {
-                setBal(getBal() - s.price);
-                owned[id] = (owned[id] || 0) + 1;
-                addLog(`NABYTO AKCJE: ${id}`, "log-success");
-            } else if (type === 'sell' && owned[id] > 0) {
-                setBal(getBal() + s.price);
-                owned[id] -= 1;
-                addLog(`SPRZEDANO AKCJE: ${id}`, "log-alert");
-            }
-            saveOwnedStocks(owned); updateUI();
-        }
-
-        function buyProduct(id) { 
-            const p = shopItems.find(x => x.id === id); 
-            if (getBal() >= p.price) { 
-                const d = getData(); setBal(getBal() - p.price); 
-                d.push({ ...p, currentPrice: p.price }); saveData(d); 
-                addLog(`AKTYWACJA: ${p.name}`, "log-success"); updateUI(); 
-            } 
-        }
-
-        function savePartner() {
-            const n = document.getElementById('p-name').value, c = parseFloat(document.getElementById('p-commission').value);
-            if (n && c > 0) {
-                const d = getData(); d.push({ name: n.toUpperCase(), income: c, icon: '🤝', currentPrice: 0 });
-                saveData(d); addLog(`KONTRAKT: ${n}`, "log-info"); closeModal('partner-modal'); updateUI();
-            }
-        }
-
-        function saveQuickProduct() {
-            const n = document.getElementById('pr-name').value, p = parseFloat(document.getElementById('pr-price').value), i = parseFloat(document.getElementById('pr-income').value);
-            if (n && i > 0 && getBal() >= p) {
-                const d = getData(); setBal(getBal() - p); d.push({ name: n.toUpperCase(), income: i, icon: '📦', currentPrice: p });
-                saveData(d); addLog(`NOWY ZASÓB: ${n}`, "log-success"); closeModal('product-modal'); updateUI();
-            }
-        }
-
-        function catchLead() { 
-            if(currentLead) { 
-                const d = getData(); d.push({ name: `LEAD: ${currentLead.name}`, income: currentLead.income, icon: '🔥', currentPrice: 0 }); 
-                saveData(d); leadsCaught++; localStorage.setItem(LS_KEY + '_LC', leadsCaught);
-                document.getElementById('lead-alert').style.display = 'none'; 
-                addLog(`PRZEJĘTO LEAD!`, "log-alert"); currentLead = null; updateUI(); 
-            } 
-        }
-
-        function executeTransfer() {
-            const amt = getBal(); setBal(0); addLog(`TRANSFER ŚRODKÓW: ${Math.floor(amt)} PLN`, "log-alert");
-            closeModal('transfer-modal'); updateUI();
-        }
-
-        function activatePrestige() {
-            const bal = getBal();
-            if (bal >= 100000000) {
-                const bonus = (bal / 200000000);
-                if (confirm(`RESET PRESTIŻU. Nowy mnożnik: x${(prestigeMultiplier + bonus).toFixed(2)}`)) {
-                    localStorage.clear();
-                    localStorage.setItem(LS_KEY + '_MULT', (prestigeMultiplier + bonus).toFixed(4));
-                    location.reload();
-                }
-            } else { alert("Wymagane 100M PLN!"); }
-        }
-
+        function save(){ localStorage.setItem('broker_db', JSON.stringify(db)); }
+        
         setInterval(() => {
-            const d = getData();
-            const inc = d.reduce((s, i) => s + i.income, 0) * prestigeMultiplier;
-            setBal(getBal() + inc);
-            stockItems.forEach(s => s.price = Math.max(10, s.price * (1 + (Math.random() - 0.5) * s.fluctuation)));
-            
-            if (Math.random() < 0.03 && !currentLead) {
-                currentLead = { name: "MODUŁ " + Math.floor(Math.random()*999), income: Math.floor(Math.random()*400)+200 };
-                document.getElementById('lead-name').innerText = `${currentLead.name} (+${currentLead.income}/s)`;
-                document.getElementById('lead-alert').style.display = 'block';
-                setTimeout(() => { document.getElementById('lead-alert').style.display = 'none'; currentLead = null; }, 5000);
-            }
-            updateUI();
+            const inc = db.ast.reduce((s,x)=>s+(parseFloat(x.v)||0),0) + db.contracts.reduce((s,x)=>s+(parseFloat(x.zysk)||0),0);
+            db.bal += inc; db.tax += inc * 0.19;
+            mkt.forEach(s => { s.p+=(Math.random()-0.5)*(s.p*0.015); s.h.push(s.p); if(s.h.length>50)s.h.shift(); });
+            uUI(); drawM(); save();
         }, 1000);
 
-        function resetSystem() { if(confirm("CZYŚCIĆ SYSTEM?")) { localStorage.clear(); location.reload(); } }
-        window.onload = () => { updateUI(); addLog("SYSTEM READY."); };
+        setInterval(() => {
+            const f=["OPENAI","NVIDIA","META"][Math.floor(Math.random()*3)], z=(Math.random()*35+5).toFixed(2);
+            log(`LEAD: ${f} oferuje kontrakt (+${z} PLN/s)`,"text-yellow-400");
+            db.contracts.push({firma:f, zysk:parseFloat(z), data:new Date().toLocaleDateString()});
+            const c=document.getElementById('logs-card'); c.classList.add('pulse-active');
+            snd.play().catch(()=>{}); setTimeout(()=>c.classList.remove('pulse-active'), 2000);
+        }, 45000);
+
+        function uUI() {
+            const inc = db.ast.reduce((s,x)=>s+(parseFloat(x.v)||0),0) + db.contracts.reduce((s,x)=>s+(parseFloat(x.zysk)||0),0);
+            document.getElementById('ui-bal').innerText = Math.floor(db.bal).toLocaleString()+" PLN";
+            document.getElementById('ui-inc').innerText = "+"+inc.toFixed(2);
+            document.getElementById('ui-tax').innerText = Math.floor(db.tax).toLocaleString();
+            document.getElementById('ui-exp').innerText = Math.floor(db.exp);
+            document.getElementById('ui-lvl').innerText = db.lvl;
+            document.getElementById('logs-box').innerHTML = db.logs.map(l=>`<div><span class="opacity-40">[${l.t}]</span> <span class="${l.c}">${l.m}</span></div>`).join('');
+            
+            const colors=['#3b82f6','#10b981','#f59e0b','#ef4444','#a855f7']; let curr=0, tot=inc||1;
+            const items = [...db.ast, ...db.contracts.map(c=>({n:c.firma, v:c.zysk}))].slice(0,8);
+            const grad = items.map((a,idx)=>{ const s=(curr/tot)*100, e=((curr+a.v)/tot)*100; curr+=a.v; return `${colors[idx%5]} ${s}% ${e}%`; });
+            document.getElementById('pie-chart').style.background = `conic-gradient(${grad.join(',') || '#1e293b 0 100%'})`;
+            document.getElementById('pie-legend').innerHTML = items.map((a,idx)=>`<div class="flex justify-between items-center"><span style="color:${colors[idx%5]}">■ ${a.n}</span><span>${((a.v/tot)*100).toFixed(1)}%</span></div>`).join('');
+
+            if(document.getElementById('shop-list')) document.getElementById('shop-list').innerHTML = db.shop.map((p,i)=>`<div class="glass text-center"><b>${p.n}</b><br><span class="text-emerald-400">${p.p.toLocaleString()} PLN</span><br><button onclick="buyP(${i})" class="w-full bg-purple-600 mt-2 py-1 rounded text-[9px] font-bold uppercase">ZAKUP</button></div>`).join('');
+            if(document.getElementById('assets-list')) document.getElementById('assets-list').innerHTML = db.ast.map((a,i)=>`<div class="glass flex justify-between"><div><b>${a.n}</b><br><span class="text-blue-400 text-[8px]">+${a.v} PLN/s</span></div><button onclick="db.ast.splice(${i},1);uUI();" class="text-red-500 font-bold text-[9px]">X</button></div>`).join('');
+            if(document.getElementById('market-list')) document.getElementById('market-list').innerHTML = mkt.map(s=>`<div class="glass border-l-2" style="border-color:${s.c}"><b>${s.id}</b><br>${Math.floor(s.p).toLocaleString()} PLN</div>`).join('');
+            if(document.getElementById('contracts-list')) document.getElementById('contracts-list').innerHTML = db.contracts.map((c,i)=>`<div class="glass flex justify-between items-center text-[10px]"><b>${c.firma}</b><div class="flex gap-2"><button onclick="pCon(${i})" class="bg-blue-600 px-2 py-1 rounded text-[8px] font-bold uppercase tracking-tighter text-white">PDF</button><button onclick="db.contracts.splice(${i},1);uUI();" class="text-red-500">X</button></div></div>`).join('');
+        }
+
+        function toggleAI(){
+            if(!aiInt){
+                aiInt=setInterval(()=>{ const p=Math.random()*150; db.bal+=p; document.getElementById('ai-logs').innerHTML=`<div>[${new Date().toLocaleTimeString()}] AI PROFIT: +${p.toFixed(2)} PLN</div>`+document.getElementById('ai-logs').innerHTML; },2000);
+                document.getElementById('ai-btn').innerText="STOP ENGINE";
+            } else { clearInterval(aiInt); aiInt=null; document.getElementById('ai-btn').innerText="URUCHOM AI TRADER"; }
+        }
+
+        function createSnapshot() { localStorage.setItem('broker_snap', JSON.stringify(db)); toast("Snap Zapisany!"); }
+        function restoreSnapshot() { const s=localStorage.getItem('broker_snap'); if(s){db=JSON.parse(s); uUI(); toast("Snap Załadowany!");} else {toast("Brak Snapa!");} }
+        function executeTransfer(){ const a=parseFloat(document.getElementById('b-amt').value); const n=document.getElementById('b-name').value; if(a>0 && a<=db.bal && n){ db.bal-=a; log(`BANK: Przelano -${a} PLN do ${n.toUpperCase()}`,"text-orange-400"); uUI(); toast("WYSŁANO"); } else { toast("Błąd danych!"); } }
+        function openTaxModal(){ document.getElementById('t-reg').innerHTML=Object.keys(US_DATA).map(r=>`<option value="${r}">${r}</option>`).join(''); upOff(); openModal('tax-modal'); }
+        function upOff(){ const r=document.getElementById('t-reg').value; document.getElementById('t-off').innerHTML=US_DATA[r].map(o=>`<option value="${o}">${o}</option>`).join(''); document.getElementById('t-val').innerText=Math.floor(db.tax).toLocaleString()+" PLN"; }
+        function payTax(){ if(db.bal>=db.tax){db.bal-=db.tax; db.tax=0; toast("OPŁACONO"); closeModal('tax-modal'); uUI();} }
+        function addShopPrompt(){ const n=prompt("Nazwa:"); const p=parseInt(prompt("Cena:")); const v=parseInt(prompt("Moc:")); if(n&&p&&v){db.shop.push({n,p,v}); uUI();} }
+        function addAssetPrompt(){ const n=prompt("Nazwa:"); const v=parseInt(prompt("Moc:")); if(n&&v){db.ast.push({n,v}); uUI();} }
+        function addContractPrompt(){ const f=prompt("Firma:"); const z=parseFloat(prompt("Zysk:")); if(f&&z){db.contracts.push({firma:f,zysk:z,data:new Date().toLocaleDateString()}); uUI();} }
+        function buyP(i){ const p=db.shop[i]; if(db.bal>=p.p){db.bal-=p.p; db.ast.push({n:p.n,v:p.v}); log(`ZAKUP: ${p.n}`,"text-emerald-400"); uUI();} }
+        function drawM(){ const c=document.getElementById('m-canvas'); if(!c||c.offsetParent===null)return; const ctx=c.getContext('2d'); c.width=c.clientWidth; c.height=c.clientHeight; mkt.forEach(s=>{ const min=Math.min(...s.h)*0.98, max=Math.max(...s.h)*1.02; ctx.beginPath(); ctx.strokeStyle=s.c; ctx.lineWidth=2; s.h.forEach((v,i)=>{ const x=(i/49)*c.width, y=c.height-((v-min)/(max-min))*c.height; if(i===0)ctx.moveTo(x,y); else ctx.lineTo(x,y); }); ctx.stroke(); }); }
+        function switchTab(id){ document.querySelectorAll('.tab-content').forEach(t=>t.classList.remove('active')); document.getElementById('content-'+id).classList.add('active'); document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('sidebar-item-active')); document.getElementById('btn-'+id).classList.add('sidebar-item-active'); if(id==='market')setTimeout(drawM,50); }
+        function log(m,c="text-blue-300"){ db.logs.unshift({t:new Date().toLocaleTimeString(),m,c}); if(db.logs.length>30)db.logs.pop(); uUI(); }
+        function toast(m){ const c=document.getElementById('notification-container'), t=document.createElement('div'); t.className="toast"; t.innerText=m; c.appendChild(t); setTimeout(()=>t.remove(),3000); }
+        function openModal(id){ document.getElementById(id).classList.remove('hidden'); }
+        function closeModal(id){ document.getElementById(id).classList.add('hidden'); }
+        function exportData(){ save(); const b=new Blob([JSON.stringify(db)],{type:'application/json'}); const a=document.createElement('a'); a.href=URL.createObjectURL(b); a.download='AI_SAVE.json'; a.click(); }
+        function importData(ev){ const r=new FileReader(); r.onload=(e)=>{ db=JSON.parse(e.target.result); uUI(); toast("OK"); }; r.readAsText(ev.target.files); }
+        function connectAPI(){ toast("ŁĄCZENIE..."); setTimeout(()=>{ log(`API Node: Tunel ${document.getElementById('api-operator').value} stabilny`,"text-blue-400"); toast("CONNECTED"); }, 1200); }
+        function enableAudio(){ snd.play().then(()=>snd.pause()); toast("Dźwięk aktywny"); }
+        function masterReset(){ if(confirm("CZYŚCIĆ WSZYSTKO?")){localStorage.clear(); location.reload();} }
+        function pCon(i){ const c=db.contracts[i]; const w=window.open('','_blank'); w.document.write(`<html><body style="font-family:monospace;padding:50px;border:5px double #000;"><h1>KONTRAKT: ${c.firma}</h1><p>Stawka: ${c.zysk} PLN/s</p><script>window.print();<\/script></body></html>`); }
+        window.onload = uUI;
     </script>
 </body>
 </html>
-
