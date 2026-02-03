@@ -1,0 +1,233 @@
+<!-- AI BROKERAGE ASSET ADMIN v32.0 PRO - TOMASZ HAJDUK -->
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <title>BIURO NOTARIALNE | Tomasz Hajduk</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com');
+        body { background: #010206; color: #f1f5f9; font-family: 'JetBrains Mono', monospace; overflow: hidden; height: 100vh; margin: 0; }
+        .glass { background: rgba(15, 23, 42, 0.7); backdrop-filter: blur(12px); border: 1px solid rgba(212, 175, 55, 0.2); border-radius: 16px; padding: 15px; }
+        .btn-gold { background: linear-gradient(45deg, #d4af37, #f1d47e); color: black; font-weight: 900; text-transform: uppercase; padding: 12px; border-radius: 8px; width: 100%; cursor: pointer; border: none; font-size: 10px; transition: 0.2s; margin-top: 10px; }
+        .btn-gold:hover { filter: brightness(1.2); transform: scale(1.01); }
+        .input-dark { background: #000; border: 1px solid #1e293b; padding: 10px; width: 100%; border-radius: 6px; color: white; outline: none; font-size: 11px; transition: border 0.3s; }
+        .input-dark:focus { border-color: #d4af37; }
+        
+        .gold-scroll::-webkit-scrollbar { width: 6px; }
+        .gold-scroll::-webkit-scrollbar-track { background: rgba(15, 23, 42, 0.8); }
+        .gold-scroll::-webkit-scrollbar-thumb { background: #d4af37; border-radius: 10px; }
+
+        @media print {
+            body * { visibility: hidden; }
+            #contract-print, #contract-print * { visibility: visible; }
+            #contract-print { position: absolute; left: 0; top: 0; width: 100%; color: black !important; background: white !important; padding: 50px; font-family: serif; line-height: 1.6; display: block !important; }
+            .print-section { border: 1px solid black; padding: 15px; margin: 15px 0; }
+        }
+    </style>
+</head>
+<body class="flex">
+    <!-- BOCZNY PANEL NAWIGACYJNY -->
+    <aside class="w-64 bg-black border-r border-slate-900 flex flex-col h-screen shrink-0">
+        <div class="p-6 text-center border-b border-slate-900">
+            <div class="text-4xl mb-2">🦅</div>
+            <h1 class="text-white font-black text-2xl" style="color:#d4af37;">TH</h1>
+            <p class="text-slate-500 text-[8px] uppercase tracking-[0.3em] mt-1">Kancelaria Notarialna</p>
+        </div>
+        <nav class="flex-1 p-4">
+            <button onclick="window.location.href='index.html'" class="w-full text-left p-3 rounded-lg bg-blue-600/10 text-blue-400 text-[10px] font-bold border-l-4 border-blue-500 uppercase hover:bg-blue-600/20 transition-all">📊 Powrót do Terminala</button>
+        </nav>
+    </aside>
+
+    <main class="flex-1 p-8 flex flex-col overflow-hidden">
+        <header class="mb-6 border-b border-white/10 pb-4 shrink-0">
+            <h1 class="text-3xl font-black text-white italic uppercase tracking-tighter">Panel <span class="text-[#d4af37]">Notarialny</span></h1>
+            <p class="text-[10px] text-slate-500 uppercase tracking-[0.4em]">Tomasz Hajduk | Obsługa Umów Kupna-Sprzedaży</p>
+        </header>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch flex-1 overflow-hidden">
+            
+            <!-- LEWE OKNO: FORMULARZ (UKŁAD PIONOWY) -->
+            <div class="glass flex flex-col overflow-hidden h-full">
+                <div class="flex-1 overflow-y-auto pr-2 gold-scroll space-y-6">
+                    
+                    <!-- NABYWCA - DANE STAŁE -->
+                    <div class="bg-white/5 p-4 rounded-lg border border-blue-500/20">
+                        <h2 class="text-blue-400 font-black mb-3 uppercase text-[10px] tracking-widest border-b border-blue-500/10 pb-1">Dane Nabywcy</h2>
+                        <div class="flex flex-col gap-2">
+                            <label class="text-[8px] text-slate-500 uppercase">Imię i Nazwisko</label>
+                            <input type="text" id="b-name" value="Tomasz Hajduk" class="input-dark font-bold text-blue-300">
+                            <label class="text-[8px] text-slate-500 uppercase">PESEL / NIP</label>
+                            <input type="text" id="b-taxid" value="[SYSTEM-ID]" class="input-dark">
+                            <label class="text-[8px] text-slate-500 uppercase">Miejscowość</label>
+                            <input type="text" id="b-city" value="Komorowo" class="input-dark">
+                            <label class="text-[8px] text-slate-500 uppercase">Ulica i Numer</label>
+                            <input type="text" id="b-address" value="ul. Komorowo" class="input-dark">
+                            <label class="text-[8px] text-slate-500 uppercase">Kod Pocztowy</label>
+                            <input type="text" id="b-zip" value="64-200" class="input-dark">
+                        </div>
+                    </div>
+
+                    <!-- SPRZEDAJĄCY - PIONOWO -->
+                    <div class="bg-white/5 p-4 rounded-lg border border-orange-500/20">
+                        <h2 class="text-orange-500 font-black mb-3 uppercase text-[10px] tracking-widest border-b border-orange-500/10 pb-1">Dane Sprzedającego</h2>
+                        <div class="flex flex-col gap-2">
+                            <input type="text" id="s-name" placeholder="Imię i Nazwisko" class="input-dark font-bold">
+                            <input type="text" id="s-taxid" placeholder="PESEL / NIP" class="input-dark">
+                            <input type="text" id="s-city" placeholder="Miejscowość" class="input-dark">
+                            <input type="text" id="s-address" placeholder="Ulica i nr" class="input-dark">
+                            <input type="text" id="s-zip" placeholder="Kod pocztowy" class="input-dark">
+                        </div>
+                    </div>
+
+                    <!-- PRZEDMIOT TRANSAKCJI -->
+                    <div class="bg-white/5 p-4 rounded-lg border border-yellow-500/10">
+                        <h2 class="text-[#d4af37] font-black mb-3 uppercase text-[10px] border-b border-white/5 pb-1">Specyfikacja Przedmiotu</h2>
+                        <div class="flex flex-col gap-2">
+                            <input type="text" id="prop-name" placeholder="Nazwa Inwestycji (np. Apartament 44)" class="input-dark">
+                            <input type="text" id="prop-loc" placeholder="Dokładna Lokalizacja / Adres" class="input-dark">
+                            <div class="grid grid-cols-2 gap-2">
+                                <input type="number" id="prop-price" placeholder="Cena Kupna (PLN)" class="input-dark font-bold text-white text-lg">
+                                <input type="number" id="prop-yield" placeholder="Zysk (PLN/H)" class="input-dark text-emerald-400 font-bold">
+                            </div>
+                            <textarea id="prop-notes" placeholder="Dodatkowe zapisy umowy (oświadczenia, stan techniczny)..." class="input-dark h-20 resize-none text-[10px]"></textarea>
+                            <button onclick="saveAndPrint()" class="btn-gold shadow-lg shadow-yellow-900/40">Podpisz/Drukuj AKT/Umowa</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PRAWE OKNO: REJESTR KANCELARYJNY -->
+            <div class="glass flex flex-col overflow-hidden h-full">
+                <h2 class="text-slate-400 font-black mb-4 uppercase text-xs border-b border-white/5 pb-2 shrink-0">Centralna Baza Umów i Aktywów</h2>
+                <div id="registry-list" class="gold-scroll space-y-3 overflow-y-auto pr-4 flex-1">
+                    <!-- Lista transakcji -->
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- ARKUSZ UMOWY (WYDRUK SYSTEMOWY) -->
+    <div id="contract-print" style="display: none;">
+        <div style="text-align: center; border-bottom: 2px solid black; padding-bottom: 20px; margin-bottom: 40px;">
+            <h1 style="font-size: 26px; margin: 0; text-transform: uppercase;">Umowa Kupna-Sprzedaży Nieruchomości</h1>
+            <p style="letter-spacing: 5px; font-size: 12px; margin-top: 10px;">REPUBLIKA POLSKA | KANCELARIA SYSTEMOWA AI MASTER PRO</p>
+        </div>
+        
+        <div style="font-size: 16px; text-align: justify;">
+            <div class="print-section">
+                <p><b>SPRZEDAJĄCY:</b> <span id="p-seller"></span></p>
+                <p><b>KUPUJĄCY:</b> <span id="p-buyer"></span></p>
+            </div>
+
+            <p><b>§ 1. Przedmiot Umowy:</b> Sprzedający oświadcza, że jest jedynym właścicielem nieruchomości: <b id="p-name"></b>, położonej w: <b id="p-loc"></b>. Sprzedający oświadcza, że przedmiot umowy wolny jest od wszelkich obciążeń na rzecz osób trzecich.</p>
+            
+            <p><b>§ 2. Warunki Cenowe:</b> Strony ustalają cenę sprzedaży na kwotę: <b id="p-price"></b> PLN. Kupujący oświadcza, że zapłata nastąpiła w całości przed podpisaniem niniejszej umowy.</p>
+            
+            <p><b>§ 3. Stan Techniczny:</b> Kupujący oświadcza, że zapoznał się ze stanem technicznym nieruchomości i nie wnosi do niego zastrzeżeń.</p>
+            
+            <p><b>§ 4. Postanowienia dodatkowe:</b> <span id="p-notes"></span></p>
+
+            <p style="margin-top: 20px;">Umowę sporządzono w dwóch jednobrzmiących egzemplarzach, po jednym dla każdej ze stron. Dokument stanowi podstawę do wpisu w rejestrze aktywów AI Brokerage.</p>
+        </div>
+
+        <div style="margin-top: 120px; display: flex; justify-content: space-between; text-align: center;">
+            <div style="width: 250px; border-top: 1px solid black; padding-top: 10px;">Podpis Sprzedającego</div>
+            <div style="width: 250px; border-top: 1px solid black; padding-top: 10px;">Podpis Kupującego</div>
+        </div>
+        <p style="text-align: right; margin-top: 50px; font-size: 10px; color: gray;">Data transakcji: <span id="p-date"></span></p>
+    </div>
+
+    <script>
+        function refreshRegistry() {
+            const re = JSON.parse(localStorage.getItem('broker_real_estate')) || [];
+            const list = document.getElementById('registry-list');
+            list.innerHTML = re.map((item, i) => `
+                <div class="bg-black/50 border border-yellow-900/20 p-4 rounded-xl flex justify-between items-start hover:border-[#d4af37]/50 transition-all">
+                    <div class="text-[10px] flex-1">
+                        <b class="text-[#d4af37] uppercase text-xs block mb-1">${item.name}</b>
+                        <p class="text-white opacity-60 uppercase mb-1">Zbywca: ${item.seller_name}</p>
+                        <div class="text-emerald-400 font-bold mt-1 text-[11px] uppercase">Wartość: ${Number(item.price).toLocaleString()} PLN</div>
+                    </div>
+                    <div class="flex gap-2 ml-4">
+                        <button onclick="printFromList(${i})" class="bg-yellow-600/10 text-yellow-500 border border-yellow-500/30 px-3 py-2 rounded text-[9px] font-black uppercase hover:bg-yellow-600 hover:text-white transition-all">UMOWA</button>
+                        <button onclick="deleteEntry(${i})" class="text-red-900 hover:text-red-500 font-bold px-2">X</button>
+                    </div>
+                </div>
+            `).join('') || '<p class="opacity-10 text-center py-20 italic">Rejestr Kancelaryjny jest pusty.</p>';
+        }
+
+        function saveAndPrint() {
+            try {
+                // Pobieranie danych Nabywcy (Tomasz Hajduk)
+                const b = { n: document.getElementById('b-name').value, t: document.getElementById('b-taxid').value, c: document.getElementById('b-city').value, a: document.getElementById('b-address').value, z: document.getElementById('b-zip').value };
+                // Pobieranie danych Sprzedawcy
+                const s = { n: document.getElementById('s-name').value, t: document.getElementById('s-taxid').value, c: document.getElementById('s-city').value, a: document.getElementById('s-address').value, z: document.getElementById('s-zip').value };
+                
+                const name = document.getElementById('prop-name').value;
+                const price = document.getElementById('prop-price').value;
+
+                if(!s.n || !name || !price) {
+                    alert("Odmowa: Uzupełnij dane Sprzedawcy, Nazwę inwestycji i Cenę.");
+                    return;
+                }
+
+                const buyerStr = `${b.n}, PESEL/NIP: ${b.t}, zam. ${b.z} ${b.c}, ${b.a}`;
+                const sellerStr = `${s.n}, PESEL/NIP: ${s.t}, zam. ${s.z} ${s.c}, ${s.a}`;
+                const date = new Date().toLocaleDateString('pl-PL', {day:'numeric', month:'long', year:'numeric'});
+
+                const deal = { 
+                    name: name.toUpperCase(), 
+                    seller: sellerStr, 
+                    seller_name: s.n,
+                    buyer: buyerStr, 
+                    location: document.getElementById('prop-loc').value, 
+                    price: price, 
+                    notes: document.getElementById('prop-notes').value || "Brak dodatkowych oświadczeń.",
+                    date: date 
+                };
+
+                const re = JSON.parse(localStorage.getItem('broker_real_estate')) || [];
+                re.unshift(deal);
+                localStorage.setItem('broker_real_estate', JSON.stringify(re));
+                
+                fillPrint(deal);
+                refreshRegistry();
+
+                // --- AUTO-RESET DANYCH SPRZEDAJĄCEGO I PRZEDMIOTU ---
+                const toReset = ['s-name', 's-taxid', 's-city', 's-address', 's-zip', 'prop-name', 'prop-loc', 'prop-price', 'prop-yield', 'prop-notes'];
+                toReset.forEach(id => document.getElementById(id).value = '');
+
+                setTimeout(() => { window.print(); }, 250);
+            } catch (err) { console.error("Błąd zapisu aktu:", err); }
+        }
+
+        function fillPrint(d) {
+            document.getElementById('p-buyer').innerText = d.buyer;
+            document.getElementById('p-seller').innerText = d.seller;
+            document.getElementById('p-name').innerText = d.name;
+            document.getElementById('p-loc').innerText = d.location;
+            document.getElementById('p-price').innerText = Number(d.price).toLocaleString();
+            document.getElementById('p-notes').innerText = d.notes;
+            document.getElementById('p-date').innerText = d.date;
+        }
+
+        function printFromList(i) {
+            const re = JSON.parse(localStorage.getItem('broker_real_estate'));
+            fillPrint(re[i]);
+            setTimeout(() => { window.print(); }, 250);
+        }
+
+        function deleteEntry(i) {
+            if(confirm("DECYZJA: Czy unieważnić akt i usunąć go z bazy?")) {
+                const re = JSON.parse(localStorage.getItem('broker_real_estate'));
+                re.splice(i, 1);
+                localStorage.setItem('broker_real_estate', JSON.stringify(re));
+                refreshRegistry();
+            }
+        }
+
+        window.onload = refreshRegistry;
+    </script>
+</body>
+</html>
