@@ -1,0 +1,211 @@
+<!-- AI BROKERAGE MASTER PRO v20.5 - TOMASZ HAJDUK -->
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <title>AI MASTER PRO | Tomasz Hajduk</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com');
+        body { background: #010206; color: #f1f5f9; font-family: 'JetBrains Mono', monospace; overflow: hidden; height: 100vh; }
+        .glass { background: rgba(15, 23, 42, 0.7); backdrop-filter: blur(12px); border: 1px solid rgba(59, 130, 246, 0.1); border-radius: 16px; padding: 18px; transition: 0.3s; }
+        .tab-content { display: none; padding: 20px; height: 100vh; flex-direction: column; }
+        .active { display: flex !important; }
+        .nav-btn { width: 100%; text-align: left; padding: 10px 14px; margin-bottom: 5px; border-radius: 10px; font-weight: 800; background: #0f172a; font-size: 10px; transition: 0.2s; color: #94a3b8; border-left: 3px solid transparent; }
+        .sidebar-item-active { background: #1d4ed8 !important; color: white; border-left-color: #3b82f6 !important; box-shadow: 0 0 15px rgba(59,130,246,0.3); }
+        .input-dark { background: #000; border: 1px solid #1e293b; padding: 8px; width: 100%; border-radius: 6px; font-size: 10px; color: white; outline: none; }
+        #pie-chart { width: 120px; height: 120px; border-radius: 50%; border: 2px solid #1e293b; margin: 0 auto; transition: 0.5s; }
+        .toast { background: #0f172a; border-left: 4px solid #3b82f6; color: white; padding: 12px; border-radius: 4px; font-size: 11px; position: fixed; top: 20px; right: 20px; z-index: 9999; animation: slideIn 0.3s ease; }
+        @keyframes slideIn { from { transform: translateX(100%); } to { transform: translateX(0); } }
+        .custom-scrollbar::-webkit-scrollbar { width: 4px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 10px; }
+    </style>
+</head>
+<body class="flex">
+
+    <aside class="w-64 bg-black border-r border-slate-900 flex flex-col h-screen shrink-0 print:hidden">
+        <div class="p-6 text-center border-b border-slate-900">
+            <div class="text-4xl mb-2 cursor-pointer" onclick="enableAudio()">🦅</div>
+            <h1 class="text-white font-black text-2xl" style="color:#d4af37;">TH</h1>
+            <p class="text-slate-500 text-[8px] uppercase tracking-[0.3em] mt-1">Tomasz Hajduk | AI Operator</p>
+        </div>
+        
+        <nav class="flex-1 p-4 space-y-1 overflow-y-auto custom-scrollbar">
+            <button onclick="switchTab('dashboard')" id="btn-dashboard" class="nav-btn sidebar-item-active">📊 DASHBOARD</button>
+            <button onclick="switchTab('trader')" id="btn-trader" class="nav-btn">🤖 AI TRADER</button>
+            <button onclick="switchTab('market')" id="btn-market" class="nav-btn">📈 GIEŁDA LIVE</button>
+            <button onclick="switchTab('shop')" id="btn-shop" class="nav-btn">🛒 SKLEP AI</button>
+            <button onclick="switchTab('assets')" id="btn-assets" class="nav-btn">📦 MOJE ZASOBY</button>
+            <button onclick="switchTab('realestate')" id="btn-realestate" class="nav-btn text-yellow-500">🏢 ZARZĄDZANIE AKTYWAMI</button>
+            <button onclick="window.location.href='admin.html'" class="nav-btn text-[#d4af37] border-l-4 border-yellow-600/50 bg-yellow-600/5">🏢 OTWÓRZ ASSET ADMIN</button>
+            <button onclick="switchTab('contracts')" id="btn-contracts" class="nav-btn">🤝 KONTRAKTY B2B</button>
+            <button onclick="openModal('cert-modal')" class="nav-btn text-[#d4af37]">🏆 CERTYFIKAT</button>
+            <button onclick="openTaxModal()" class="nav-btn text-red-500">⚖️ PODATKI (CIT-19)</button>
+        </nav>
+        
+        <div class="p-4 border-t border-slate-900 space-y-2 bg-slate-950/50 text-[9px]">
+            <select id="api-operator" class="w-full bg-black border border-blue-900/40 text-blue-400 p-2 rounded outline-none">
+                <option>KIR (Elixir Core)</option>
+                <option>BLUE MEDIA (Express)</option>
+                <option>STRIPE AI GATEWAY</option>
+                <option>REVOLUT BUSINESS</option>
+            </select>
+            <button onclick="connectAPI()" class="w-full py-2 bg-blue-600/20 text-blue-400 border border-blue-500/50 font-black rounded uppercase">Połącz API</button>
+            <div class="grid grid-cols-2 gap-2">
+                <button onclick="createSnapshot()" class="py-1 bg-emerald-900/40 text-emerald-400 border border-emerald-500/30 rounded uppercase">Save</button>
+                <button onclick="restoreSnapshot()" class="py-1 bg-blue-900/40 text-blue-400 border border-blue-500/30 rounded uppercase">Load</button>
+            </div>
+            <div class="grid grid-cols-2 gap-2">
+                <button onclick="exportData()" class="py-1 bg-slate-800 rounded uppercase">Export</button>
+                <button onclick="document.getElementById('imp').click()" class="py-1 bg-slate-800 rounded uppercase">Import</button>
+                <input type="file" id="imp" class="hidden" onchange="importData(event)">
+            </div>
+            <button onclick="masterReset()" class="w-full py-2 bg-red-900/40 text-red-500 font-bold rounded uppercase">Master Reset</button>
+        </div>
+    </aside>
+
+    <main class="flex-1 h-screen overflow-hidden relative">
+        <div id="notification-container"></div>
+        
+        <section id="content-dashboard" class="tab-content active">
+            <div class="grid grid-cols-5 gap-4 mb-6 text-center">
+                <div class="glass border-l-4 border-emerald-500 text-white"><p class="text-[8px] opacity-50 uppercase">Saldo</p><p id="ui-bal" class="text-lg font-black text-emerald-400">0</p></div>
+                <div class="glass border-l-4 border-blue-500 text-white"><p class="text-[8px] opacity-50 uppercase">Dochód /s</p><p id="ui-inc" class="text-lg font-black text-blue-400">0</p></div>
+                <div class="glass border-l-4 border-red-500 text-white"><p class="text-[8px] opacity-50 uppercase">Podatek</p><p id="ui-tax" class="text-lg font-black text-red-400">0</p></div>
+                <div class="glass border-l-4 border-white text-white"><p class="text-[8px] opacity-50 uppercase">Exp</p><p id="ui-exp" class="text-lg font-black">0</p></div>
+                <div class="glass border-l-4 border-orange-500 text-white"><p class="text-[8px] opacity-50 uppercase">Level</p><p id="ui-lvl" class="text-lg font-black text-orange-400">1</p></div>
+            </div>
+
+            <div class="grid grid-cols-2 gap-4 flex-1 overflow-hidden">
+                <div class="glass flex flex-col h-full overflow-hidden">
+                    <p class="text-[10px] font-bold text-blue-400 mb-3 uppercase italic">Command Center Logs</p>
+                    <div id="logs-box" class="flex-1 overflow-y-auto text-[9px] font-mono text-blue-200 mb-4 custom-scrollbar"></div>
+                    <div class="grid grid-cols-3 gap-2 border-t border-slate-800 pt-3">
+                        <button onclick="addShopPrompt()" class="py-2 bg-purple-600/10 border border-purple-500/30 text-purple-400 text-[8px] font-bold uppercase">➕ Sklep</button>
+                        <button onclick="addAssetPrompt()" class="py-2 bg-blue-600/10 border border-blue-500/30 text-blue-400 text-[8px] font-bold uppercase">➕ Zasób</button>
+                        <button onclick="addREPrompt()" class="py-2 bg-yellow-600/10 border border-yellow-500/30 text-yellow-400 text-[8px] font-bold uppercase">🏢 Aktywo</button>
+                    </div>
+                </div>
+
+                <div class="glass flex flex-col h-full bg-slate-900/10 text-center overflow-hidden">
+                    <p class="text-[11px] font-bold text-blue-500 mb-4 uppercase italic">Global Banking Terminal</p>
+                    <div id="pie-chart" class="mb-4"></div>
+                    <div id="pie-legend" class="text-[7px] space-y-1 mb-4 overflow-y-auto max-h-24 px-4 custom-scrollbar"></div>
+                    <div class="space-y-2 mt-auto border-t border-slate-800 pt-4 text-[9px]">
+                        <div class="grid grid-cols-2 gap-2">
+                            <select id="b-bank" class="input-dark text-blue-400 font-bold"><option>PKO Bank Polski</option><option>JP Morgan Chase</option><option>Revolut Business</option><option>Santander Corporate</option></select>
+                            <input type="number" id="b-amt" placeholder="KWOTA PLN" class="input-dark text-emerald-400 font-black">
+                        </div>
+                        <input type="text" id="b-name" placeholder="NAZWA ODBIORCY" class="input-dark uppercase">
+                        <button onclick="executeTransfer()" class="w-full py-3 bg-emerald-600 text-white font-black rounded uppercase shadow-lg">🚀 Wykonaj Przelew</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="content-realestate" class="tab-content"><h2 class="text-xl font-black mb-4 text-yellow-500 text-center uppercase">🏢 Rejestr Aktywów i Nieruchomości</h2><div id="re-list" class="grid grid-cols-2 gap-3 overflow-y-auto custom-scrollbar"></div></section>
+        <section id="content-trader" class="tab-content"><h2 class="text-xl font-black mb-4 text-purple-400 text-center">🤖 AI Trader Engine</h2><div id="ai-logs" class="glass flex-1 overflow-y-auto bg-black p-4 mb-4 text-[10px] font-mono text-purple-300"></div><button onclick="toggleAI()" id="ai-btn" class="py-4 bg-purple-600 text-white font-bold rounded">URUCHOM AI</button></section>
+        <section id="content-market" class="tab-content"><h2 class="text-xl font-black mb-4 text-emerald-400 text-center">📈 Giełda Live AI</h2><div id="market-list" class="grid grid-cols-3 gap-4 mb-4"></div><div class="glass flex-1 bg-black"><canvas id="m-canvas" class="w-full h-full"></canvas></div></section>
+        <section id="content-shop" class="tab-content"><h2 class="text-xl font-black mb-4 text-center">🛒 Sklep AI</h2><div id="shop-list" class="grid grid-cols-3 gap-4 overflow-y-auto custom-scrollbar"></div></section>
+        <section id="content-assets" class="tab-content"><h2 class="text-xl font-black mb-4 text-blue-400 text-center">📦 Moje Zasoby</h2><div id="assets-list" class="grid grid-cols-2 gap-3 overflow-y-auto custom-scrollbar"></div></section>
+        <section id="content-contracts" class="tab-content"><h2 class="text-xl font-black mb-4 text-orange-400 text-center">🤝 Kontrakty B2B</h2><div id="contracts-list" class="grid gap-2 overflow-y-auto custom-scrollbar"></div></section>
+
+        <!-- MODALE -->
+        <div id="cert-modal" class="hidden fixed inset-0 bg-black/98 flex items-center justify-center z-50 p-4">
+            <div class="glass w-[580px] text-center border-[#d4af37] p-12 border-4 border-double bg-[#05070a] shadow-[0_0_50px_rgba(212,175,55,0.2)]">
+                <div class="text-6xl mb-6">🦅</div>
+                <h3 class="text-[#d4af37] italic text-xl mb-2 uppercase tracking-widest">Certyfikat Autoryzacji</h3>
+                <h2 class="text-4xl font-black text-white mb-2 uppercase">Tomasz Hajduk</h2>
+                <p class="text-blue-500 font-bold text-[12px] uppercase italic mb-8 border-b border-white/10 pb-4 inline-block">Właściciel Projektu i Główny Operator Systemu AI</p>
+                <div class="flex justify-center gap-4">
+                    <button onclick="window.print()" class="px-8 py-3 bg-[#d4af37] text-black font-black rounded uppercase text-[10px]">Drukuj PDF</button>
+                    <button onclick="closeModal('cert-modal')" class="px-8 py-3 bg-slate-800 text-white font-bold rounded uppercase text-[10px]">Zamknij</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="tax-modal" class="hidden fixed inset-0 bg-black/95 flex items-center justify-center z-50">
+            <div class="glass w-96 text-center border-red-900/50">
+                <h2 class="text-red-500 font-black mb-4 uppercase">Podatki CIT-19</h2>
+                <select id="t-reg" onchange="upOff()" class="input-dark mb-2 text-center text-white"></select>
+                <select id="t-off" class="input-dark mb-4 text-center text-white"></select>
+                <div id="t-val" class="text-3xl font-black text-red-500 mb-6 py-4 bg-red-900/10">0 PLN</div>
+                <button onclick="payTax()" class="w-full py-3 bg-red-600 text-white font-bold rounded uppercase">Zapłać Podatek</button>
+                <button onclick="closeModal('tax-modal')" class="mt-4 text-[10px] opacity-40 uppercase cursor-pointer">Powrót</button>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        const US_DATA = {"Mazowieckie":["US Warszawa-Mokotów","US Warszawa-Śródmieście"],"Śląskie":["US Katowice","US Gliwice"],"Małopolskie":["US Kraków-Stary Rynek","US Tarnów"]};
+        let db = JSON.parse(localStorage.getItem('broker_db')) || { bal:350000, ast:[{n:"PRIMARY NODE V1",v:120}], shop:[{n:"AI CORE X",p:45000,v:350}], tax:0, exp:0, lvl:1, logs:[], contracts:[] };
+        let mkt = [{id:'BTC', p:315000, c:'#f59e0b', h:Array(50).fill(315000)},{id:'NVDA', p:820, c:'#3b82f6', h:Array(50).fill(820)},{id:'GOLD', p:4200, c:'#10b981', h:Array(50).fill(4200)}];
+        let aiInt = null;
+
+        function save(){ localStorage.setItem('broker_db', JSON.stringify(db)); }
+        
+        setInterval(() => {
+            const re = JSON.parse(localStorage.getItem('broker_real_estate')) || [];
+            const passiveInc = re.reduce((s, x) => s + (parseFloat(x.yield) / 3600), 0);
+            const inc = db.ast.reduce((s,x)=>s+(parseFloat(x.v)||0),0) + db.contracts.reduce((s,x)=>s+(parseFloat(x.zysk)||0),0) + passiveInc;
+            db.bal += inc; db.tax += inc * 0.19;
+            mkt.forEach(s => { s.p+=(Math.random()-0.5)*(s.p*0.015); s.h.push(s.p); if(s.h.length>50)s.h.shift(); });
+            uUI(); drawM(); save();
+        }, 1000);
+
+        function uUI() {
+            const re = JSON.parse(localStorage.getItem('broker_real_estate')) || [];
+            const passiveInc = re.reduce((s, x) => s + (parseFloat(x.yield) / 3600), 0);
+            const inc = db.ast.reduce((s,x)=>s+(parseFloat(x.v)||0),0) + db.contracts.reduce((s,x)=>s+(parseFloat(x.zysk)||0),0) + passiveInc;
+            
+            document.getElementById('ui-bal').innerText = Math.floor(db.bal).toLocaleString()+" PLN";
+            document.getElementById('ui-inc').innerText = "+"+inc.toFixed(2);
+            document.getElementById('ui-tax').innerText = Math.floor(db.tax).toLocaleString();
+            document.getElementById('ui-exp').innerText = Math.floor(db.exp);
+            document.getElementById('ui-lvl').innerText = db.lvl;
+            document.getElementById('logs-box').innerHTML = db.logs.slice(0,20).map(l=>`<div><span class="opacity-40">[${l.t}]</span> <span class="${l.c}">${l.m}</span></div>`).join('');
+            
+            const colors=['#3b82f6','#10b981','#f59e0b','#ef4444','#a855f7']; let curr=0, tot=inc||1;
+            const items = [...db.ast, ...db.contracts.map(c=>({n:c.firma, v:c.zysk})), ...re.map(r => ({n: r.name, v: r.yield/3600}))].slice(0,8);
+            const grad = items.map((a,idx)=>{ const s=(curr/tot)*100, e=((curr+a.v)/tot)*100; curr+=a.v; return `${colors[idx%5]} ${s}% ${e}%`; });
+            document.getElementById('pie-chart').style.background = `conic-gradient(${grad.join(',') || '#1e293b 0 100%'})`;
+            document.getElementById('pie-legend').innerHTML = items.map((a,idx)=>`<div class="flex justify-between items-center"><span style="color:${colors[idx%5]}">■ ${a.n}</span><span>${((a.v/tot)*100).toFixed(1)}%</span></div>`).join('');
+
+            document.getElementById('shop-list').innerHTML = db.shop.map((p,i)=>`<div class="glass text-center"><b>${p.n}</b><br><span class="text-emerald-400">${p.p.toLocaleString()} PLN</span><br><button onclick="buyP(${i})" class="w-full bg-purple-600 mt-2 py-1 rounded text-[9px] font-bold">ZAKUP</button></div>`).join('');
+            document.getElementById('assets-list').innerHTML = db.ast.map((a,i)=>`<div class="glass flex justify-between"><div><b>${a.n}</b><br><span class="text-blue-400">+${a.v} PLN/s</span></div><button onclick="db.ast.splice(${i},1);uUI();" class="text-red-500 font-bold">X</button></div>`).join('');
+            document.getElementById('re-list').innerHTML = re.length > 0 ? re.map((r,i)=>`<div class="glass flex justify-between items-center border-l-4 border-yellow-500"><div><b>${r.name}</b><br><span class="text-[10px] text-slate-400">Yield: +${(r.yield/3600).toFixed(4)} PLN/s</span></div><button onclick="delRE(${i})" class="text-red-500">X</button></div>`).join('') : '<p class="col-span-2 text-center opacity-30 italic py-10">Brak aktywów.</p>';
+            document.getElementById('market-list').innerHTML = mkt.map(s=>`<div class="glass border-l-2" style="border-color:${s.c}"><b>${s.id}</b><br>${Math.floor(s.p).toLocaleString()} PLN</div>`).join('');
+            document.getElementById('contracts-list').innerHTML = db.contracts.map((c,i)=>`<div class="glass flex justify-between items-center text-[10px]"><b>${c.firma}</b><button onclick="db.contracts.splice(${i},1);uUI();" class="text-red-500">X</button></div>`).join('');
+        }
+
+        function addShopPrompt(){ const n=prompt("Nazwa:"); const p=parseInt(prompt("Cena:")); const v=parseInt(prompt("Zysk/s:")); if(n&&p&&v){db.shop.push({n,p,v}); uUI();} }
+        function addAssetPrompt(){ const n=prompt("Nazwa:"); const v=parseInt(prompt("Zysk/s:")); if(n&&v){db.ast.push({n,v}); uUI();} }
+        function addREPrompt(){ const n=prompt("Nazwa Aktywa:"); const y=parseInt(prompt("Yield (dochód/h):")); if(n&&y){ const re=JSON.parse(localStorage.getItem('broker_real_estate'))||[]; re.push({name:n, yield:y}); localStorage.setItem('broker_real_estate', JSON.stringify(re)); uUI(); toast("Dodano!");}}
+        function delRE(i){ const re=JSON.parse(localStorage.getItem('broker_real_estate'))||[]; re.splice(i,1); localStorage.setItem('broker_real_estate', JSON.stringify(re)); uUI(); }
+        function openTaxModal(){ document.getElementById('t-reg').innerHTML=Object.keys(US_DATA).map(r=>`<option value="${r}">${r}</option>`).join(''); upOff(); openModal('tax-modal'); }
+        function upOff(){ const r=document.getElementById('t-reg').value; document.getElementById('t-off').innerHTML=US_DATA[r].map(o=>`<option value="${o}">${o}</option>`).join(''); document.getElementById('t-val').innerText=Math.floor(db.tax).toLocaleString()+" PLN"; }
+        function payTax(){ if(db.bal>=db.tax){db.bal-=db.tax; db.tax=0; toast("OPŁACONO"); closeModal('tax-modal'); uUI();} }
+        function exportData(){ const blob=new Blob([JSON.stringify(db)], {type:'application/json'}); const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='AI_MASTER_SAVE.json'; a.click(); }
+        function importData(ev){ const r=new FileReader(); r.onload=(e)=>{ db=JSON.parse(e.target.result); uUI(); toast("Import OK"); }; r.readAsText(ev.target.files); }
+        function createSnapshot() { localStorage.setItem('broker_snap', JSON.stringify(db)); toast("Snap Zapisany!"); }
+        function restoreSnapshot() { const s=localStorage.getItem('broker_snap'); if(s){db=JSON.parse(s); uUI(); toast("Snap Wczytany!");} }
+        function connectAPI(){ toast("Łączenie..."); setTimeout(()=>log(`API: Tunel ${document.getElementById('api-operator').value} aktywny`,"text-blue-400"),1000); }
+        function executeTransfer(){ const a=parseFloat(document.getElementById('b-amt').value); const n=document.getElementById('b-name').value; if(a>0 && a<=db.bal && n){ db.bal-=a; log(`PRZELEW: -${a} PLN do ${n.toUpperCase()} (${document.getElementById('b-bank').value})`,"text-orange-400"); uUI(); toast("Wysłano!"); } }
+        function switchTab(id){ document.querySelectorAll('.tab-content').forEach(t=>t.classList.remove('active')); document.getElementById('content-'+id).classList.add('active'); document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('sidebar-item-active')); document.getElementById('btn-'+id).classList.add('sidebar-item-active'); if(id==='market')setTimeout(drawM,50); }
+        function toggleAI(){ if(!aiInt){ aiInt=setInterval(()=>{ const p=Math.random()*150; db.bal+=p; document.getElementById('ai-logs').innerHTML=`<div>[${new Date().toLocaleTimeString()}] AI PROFIT: +${p.toFixed(2)} PLN</div>`+document.getElementById('ai-logs').innerHTML; },2000); document.getElementById('ai-btn').innerText="STOP AI"; } else { clearInterval(aiInt); aiInt=null; document.getElementById('ai-btn').innerText="URUCHOM AI"; } }
+        function buyP(i){ const p=db.shop[i]; if(db.bal>=p.p){db.bal-=p.p; db.ast.push({n:p.n,v:p.v}); log(`ZAKUP: ${p.n}`,"text-emerald-400"); uUI();} }
+        function log(m,c="text-blue-300"){ db.logs.unshift({t:new Date().toLocaleTimeString(),m,c}); uUI(); }
+        function toast(m){ const c=document.getElementById('notification-container'), t=document.createElement('div'); t.className="toast"; t.innerText=m; c.appendChild(t); setTimeout(()=>t.remove(),3000); }
+        function openModal(id){ document.getElementById(id).classList.remove('hidden'); }
+        function closeModal(id){ document.getElementById(id).classList.add('hidden'); }
+        function masterReset(){ if(confirm("CZYŚCIĆ WSZYSTKO?")){localStorage.clear(); location.reload();} }
+        function drawM(){ const c=document.getElementById('m-canvas'); if(!c)return; const ctx=c.getContext('2d'); c.width=c.clientWidth; c.height=c.clientHeight; mkt.forEach(s=>{ const min=Math.min(...s.h)*0.98, max=Math.max(...s.h)*1.02; ctx.beginPath(); ctx.strokeStyle=s.c; ctx.lineWidth=2; s.h.forEach((v,i)=>{ const x=(i/49)*c.width, y=c.height-((v-min)/(max-min))*c.height; if(i===0)ctx.moveTo(x,y); else ctx.lineTo(x,y); }); ctx.stroke(); }); }
+        function enableAudio(){ toast("Audio aktywne"); }
+        window.addEventListener('load', () => {
+            const params = new URLSearchParams(window.location.search);
+            const tab = params.get('tab');
+            if (tab) switchTab(tab); else uUI();
+        });
+    </script>
+</body>
+</html>
