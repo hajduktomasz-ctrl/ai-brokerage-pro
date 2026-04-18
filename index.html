@@ -3,12 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <title>HAJDUK GLOBAL QUANTUM TERMINAL 2026</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com" rel="stylesheet">
-    <script src="https://cdnjs.cloudflare.com"></script>
+    <link rel="preconnect" href="https://gstatic.com" crossorigin>
+    <script src="H:/guardian_core.js"></script>
     <title>PORTAL AUTORYZACJI PRZELEWU</title>
+        
     <style>
-/* QUANTUM AVATAR STYLES */
 .quantum-face { position: relative; width: 180px; height: 240px; background: radial-gradient(circle at 50% 40%, #1a3a4a 0%, #01050a 100%); border-radius: 90px 90px 70px 70px; border: 1px solid rgba(6, 182, 212, 0.3); }
 .eye-socket { position: absolute; top: 80px; width: 45px; height: 22px; background: #000; border-radius: 50%; overflow: hidden; border: 1px solid #06b6d4; }
 .left { left: 30px; } .right { right: 30px; }
@@ -44,15 +46,20 @@
     box-shadow: inset 0 0 10px rgba(59, 130, 246, 0.5);
 }
         .input-dark { background: #000; border: 1px solid #1e293b; padding: 6px; width: 100%; border-radius: 4px; font-size: 9px; color: white; outline: none; margin-bottom: 4px; }
+
         .custom-scroll { overflow-y: auto; scrollbar-width: thin; scrollbar-color: #1e293b #000; }
         .toast { background: #0f172a; border-left: 4px solid #3b82f6; color: white; padding: 12px; border-radius: 4px; font-size: 11px; position: fixed; top: 20px; right: 20px; z-index: 9999; }
+
         #splash { position: fixed; inset: 0; background: #000; z-index: 10000; display: flex; flex-direction: column; align-items: center; justify-content: center; transition: opacity 0.8s; }
         .eagle-pulsar { font-size: 120px; animation: pulse 2s infinite; }
+
         @keyframes pulse { 0%, 100% { transform: scale(1); opacity: 0.7; } 50% { transform: scale(1.1); opacity: 1; } }
+
         @media print { body * { visibility: hidden; } #print-area, #print-area *, #printable-transfer, #printable-transfer * { visibility: visible; } #print-area, #printable-transfer { position: fixed; left: 0; top: 0; width: 100%; color: black !important; background: white !important; padding: 40px; } }
 
  #searchBlock.active { display: flex !important; }
   .quantum-btn:active { transform: translateY(2px); box-shadow: 0 2px 0 0 rgba(88,28,135,0.8) !important; }
+
 #btn-super-core {
     text-shadow: 0 0 10px rgba(34, 211, 238, 0.5);
     letter-spacing: 1px;
@@ -164,7 +171,9 @@
 
  /* Animacje i Stylizacja */
         @keyframes head-float { 0%, 100% { transform: translateY(0) rotateY(-5deg); } 50% { transform: translateY(-15px) rotateY(5deg); } }
+
         @keyframes neon-pulse { 0%, 100% { filter: brightness(1) drop-shadow(0 0 10px #06b6d4); } 50% { filter: brightness(1.4) drop-shadow(0 0 25px #06b6d4); } }
+
         @keyframes data-flow { 0% { stroke-dashoffset: 100; } 100% { stroke-dashoffset: 0; } }
         
         .cyber-face {
@@ -189,13 +198,34 @@
 }
 .custom-scroll::-webkit-scrollbar { width: 3px; }
     .custom-scroll::-webkit-scrollbar-thumb { background: #10b981; border-radius: 10px; }
+
     @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
     .animate-fadeIn { animation: fadeIn 0.4s ease-out forwards; }
+
   body { background-color: #000; color: #10b981; font-family: monospace; padding: 40px; }
+
                         input, select { background: #000 !important; border: 1px solid #065f46 !important; color: #34d399 !important; padding: 12px; width: 100%; outline: none; }
+
                         input:focus { border-color: #10b981 !important; }
+
                         button { background: #059669; color: #000; font-weight: bold; width: 100%; padding: 15px; margin-top: 20px; cursor: pointer; text-transform: uppercase; }
                         button:hover { background: #10b981; }
+
+#m-canvas {
+    display: block;
+    width: 100% !important;
+    height: 250px !important;
+}
+#m-canvas {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+.relative.h-64 {
+    height: 16rem; /* 256px */
+}
 </style>
 </head>
 <body class="flex">
@@ -246,6 +276,16 @@
     class="nav-btn border-l-4 border-cyan-400 bg-cyan-950/40 text-cyan-400 font-black uppercase shadow-[0_0_15px_rgba(6,182,212,0.4)] animate-pulse px-6 py-3 transition-all hover:bg-cyan-900">
     ⚡ ARCHITEKT LAB
 </button> 
+<button id="btn-guardian-h" onclick="otworzStraznikaWizji();" 
+    class="nav-btn border-l-4 border-emerald-400 bg-emerald-950/40 text-emerald-400 font-black uppercase shadow-[0_0_15px_rgba(16,185,129,0.4)] animate-pulse px-6 py-3 transition-all hover:bg-emerald-900 group">
+    <span class="flex items-center gap-2">
+        <span class="relative flex h-2 w-2">
+            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+            <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+        </span>
+        🛡️ STRAŻNIK PROJEKTU H:
+    </span>
+</button>
 <button id="btn-trader" onclick="switchTab('trader')" class="nav-btn border-l-4 border-purple-500 bg-purple-950/20 text-purple-400 font-black uppercase">🤖 AI TRADER CORE</button>
 <!-- 1. INICJUJ Z GOOGLE -->
 <button id="btn-google-init" onclick="inicjujZGoogle()" 
@@ -261,7 +301,6 @@
     <button id="btn-contracts" onclick="switchTab('contracts')" class="nav-btn border-l-4 border-indigo-600 bg-indigo-950/20 text-indigo-400 font-black uppercase">🤝 KONTRAKTY B2B</button> 
     <button id="btn-taxes" onclick="switchTab('taxes')" class="nav-btn border-l-4 border-red-600 bg-red-950/20 text-red-500 font-black uppercase">⚖️ FISKALNY (US)</button>
     <button id="btn-admin" onclick="openAdminModule()" class="nav-btn border-l-4 border-slate-600 bg-slate-800/20 text-slate-400 font-black uppercase">🛠️ ADMIN TERMINAL</button>
-
 <!-- OKNO MODALNE -->
 <div 
   id="searchBlock" 
@@ -279,13 +318,10 @@
         <button id="submitQuery" class="w-full mt-4 bg-purple-600 text-white text-[10px] font-black py-2 hover:bg-purple-500 uppercase transition-all">
             Uruchom analizę
         </button>
-
-        <div id="results" class="mt-4 text-purple-300 font-mono text-[10px] max-h-40 overflow-auto"></div>
+        <div id="results" class="mt-4 text-purple-300 font-mono text-[10px] max-h-40 overflow-auto">    </div>
     </div>
 
-</nav>
-
-             <div class="p-4 border-t border-slate-900 space-y-2 bg-slate-950/50 text-[9px]">
+</nav>             <div class="p-4 border-t border-slate-900 space-y-2 bg-slate-950/50 text-[9px]">
             <p class="text-blue-500 font-bold uppercase italic tracking-tighter">System Gateway [LVL <span id="ui-lvl">1</span>]</p>
             <select id="api-operator" class="w-full bg-black border border-blue-900/40 text-blue-400 p-1 rounded outline-none text-[8px] mb-2">
     <optgroup label="KLUCZOWE">
@@ -685,10 +721,12 @@
                 <div id="ai-logs" class="h-64 glass p-4 text-[9px] font-mono text-purple-300 custom-scroll text-left overflow-y-auto"></div>
             </div>
         </section>
-        <section id="content-market" class="tab-content"><canvas id="m-canvas" class="w-full h-64 glass mb-4"></canvas><div id="market-list" class="grid grid-cols-3 gap-4"></div></section>
+        <section id="content-market" class="tab-content"><canvas id="m-canvas" class="w-full h-64 glass mb-4"></canvas><div id="market-list" class="grid grid-cols-3 gap-4"></div>
+       </section>
+
         <section id="content-shop" class="tab-content"><div id="shop-list" class="grid grid-cols-4 gap-4"></div>
- </section>
- 
+      </section>
+
 <!-- SEKCJA 1: CYBER HUMAN CORE -->
 <section id="content-ai-brain" class="tab-content hidden h-screen bg-[#01050a] p-8 overflow-hidden relative">
     <div class="glass border-t-2 border-purple-500 h-full flex flex-row items-center justify-between relative overflow-hidden bg-black/60">
@@ -860,7 +898,7 @@
                 </div>
             </div>
             <div id="super-chat-box" class="flex-1 overflow-y-auto p-6 space-y-6 custom-scroll font-mono text-[11px] bg-black/10">
-                <p class="text-cyan-300/60">[SYSTEM]: Witaj Tomasz! ARCHTEKT W GOTOWOŚCI. POSTAĆ I TERMINAL ZOSTAŁY SKALIBROWANE I UNIESIONE O 25MM.</p>
+                <p class="text-cyan-300/60"></p>
             </div>
             <div class="p-6 bg-black/40 border-t border-white/5 flex gap-4">
                 <input id="super-input" type="text" placeholder="Zadaj pytanie..." class="input-dark !mb-0 flex-1 py-4 px-6 !border-cyan-900/50 text-cyan-100">
@@ -881,20 +919,84 @@
         <iframe id="okno-przegladarki" src="" class="w-full h-full bg-white border-none"></iframe>
     </div>
 </section>
+<section id="content-super-core" class="tab-content relative overflow-hidden bg-[#01050a] border-2 border-cyan-500/20 rounded-2xl m-4 p-8 min-h-[700px]">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center h-full -mt-10">
+        
+        <!-- LEWA STRONA: ANDROID -->
+        <div class="relative flex flex-col justify-center items-center">
+            <div id="quantum-avatar" class="relative w-80 h-[450px] rounded-[100px] border-2 border-cyan-400/30 overflow-hidden shadow-[0_0_100px_rgba(6,182,212,0.2)] bg-black/40 backdrop-blur-sm">
+                <div class="absolute inset-0 bg-gradient-to-t from-cyan-900/40 to-transparent"></div>
+                <div class="relative w-full h-full flex flex-col items-center justify-start pt-12 scale-95">
+                    <div id="quantum-avatar-v2" class="relative w-48 h-60">
+                        <div class="absolute bottom-[-15px] left-1/2 -translate-x-1/2 w-16 h-20 bg-slate-900 border-x-2 border-slate-700 rounded-b-full overflow-hidden">
+                            <div class="absolute inset-0 opacity-30 bg-[repeating-linear-gradient(90deg,transparent,transparent_2px,#06b6d4_3px)]"></div>
+                        </div>
+                        <div class="relative w-full h-full bg-[#f8fafc] border-2 border-slate-300 rounded-[100px_100px_80px_80px] shadow-[inset_0_-10px_30px_rgba(0,0,0,0.2)] overflow-hidden">
+                            <div class="absolute top-[35%] w-full flex justify-around px-6">
+                                <div class="eye w-12 h-5 bg-black rounded-full border border-cyan-500 shadow-[0_0_15px_#06b6d4]"></div>
+                                <div class="eye w-12 h-5 bg-black rounded-full border border-cyan-500 shadow-[0_0_15px_#06b6d4]"></div>
+                            </div>
+                            <div id="avatar-mouth" class="absolute bottom-[20%] left-1/2 -translate-x-1/2 w-14 h-[2px] bg-cyan-500 shadow-[0_0_15px_#06b6d4] transition-all duration-100"></div>
+                        </div>
+                    </div>
+                    <div class="mt-12 w-64 space-y-4 px-4">
+                        <div class="space-y-1">
+                            <div class="flex justify-between text-[9px] font-mono text-cyan-400 uppercase"><span>System Integrity</span><span id="val-integrity">98%</span></div>
+                            <div class="w-full h-1.5 bg-black/60 rounded-full border border-cyan-500/30 overflow-hidden">
+                                <div id="bar-integrity" class="h-full bg-cyan-400 w-[98%] shadow-[0_0_10px_#22d3ee]"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="absolute -bottom-4 bg-cyan-500 text-black px-6 py-1 rounded-full font-black text-[10px] tracking-widest animate-pulse z-20">STRAŻNIK_H_ACTIVE</div>
+        </div>
+
+        <!-- PRAWA STRONA: TERMINAL -->
+        <div class="glass border-t-2 border-cyan-500/40 flex flex-col h-[550px] shadow-2xl bg-black/60 backdrop-blur-xl rounded-lg overflow-hidden border-2 border-white/5">
+            <div class="p-4 border-b border-cyan-500/20 flex justify-between items-center bg-black/80">
+                <span class="text-cyan-400 font-black text-xs uppercase italic tracking-widest">🧠 Strażnik Super Core</span>
+                <div class="flex gap-2 items-center">
+                    <div class="w-2 h-2 bg-emerald-500 rounded-full animate-ping"></div>
+                    <span class="text-[8px] text-emerald-400 uppercase font-mono">H: Monitoring</span>
+                </div>
+            </div>
+            
+            <div id="super-chat-box" class="flex-1 overflow-y-auto p-6 space-y-3 font-mono text-[11px] text-cyan-100/80 bg-black/20">
+                <p class="text-cyan-400/50">[SYSTEM]: Protokół Strażnika gotowy.</p>
+                <p class="text-emerald-400/50">[H-DRIVE]: Wykryto projekt index.html (844 el.)</p>
+            </div>
+
+            <!-- PANEL WPISYWANIA -->
+            <div class="p-6 bg-[#020a12] border-t border-cyan-500/30 shadow-[0_-10px_30px_rgba(0,0,0,0.5)]">
+                <div class="flex gap-3">
+                    <div class="relative flex-1">
+                        <span class="absolute left-4 top-1/2 -translate-y-1/2 text-cyan-500 font-bold font-mono text-sm">></span>
+                        <input id="super-input" type="text" 
+                               placeholder="Wpisz: napraw, status lub snap..." 
+                               class="w-full bg-black border-2 border-cyan-900/50 rounded-lg pl-10 pr-4 py-4 text-cyan-100 outline-none focus:border-cyan-400 transition-all font-mono text-sm shadow-[inset_0_0_15px_rgba(6,182,212,0.1)]"
+                               onkeydown="if(event.key==='Enter') triggerGuardianScan()">
+                    </div>
+                    <button onclick="triggerGuardianScan()" class="px-6 bg-cyan-600 hover:bg-cyan-400 text-black font-black uppercase text-[11px] rounded-lg transition-all shadow-[0_0_20px_rgba(6,182,212,0.3)] border-b-4 border-cyan-800 active:border-b-0 active:translate-y-1">
+                        ENTER
+                    </button>
+                </div>
+                <p class="mt-2 text-[8px] text-cyan-700 font-mono uppercase tracking-widest text-center italic">Kwantowy Terminal Dowodzenia v2.5</p>
+            </div>
+        </div>
+    </div>
+</section>
    <div id="architect-lab" class="hidden absolute top-10 left-10 w-[80%] h-[70%] bg-black/95 border-2 border-purple-500 shadow-[0_0_50px_rgba(168,85,247,0.4)] z-50 flex flex-col">
     <div class="p-2 bg-purple-900/50 border-b border-purple-500 flex justify-between items-center">
         <span class="text-[9px] font-black uppercase tracking-widest text-purple-200">🛡️ ARCHITEKT: LABORATORIUM ANALIZY PROJEKTU</span>
         <button onclick="toggleArchitectLab()" class="text-purple-400 hover:text-white"> [ X ] </button>
     </div>
     <div class="flex-1 p-4 overflow-hidden flex gap-4">
-        <!-- LEWA STRONA (ANALIZA KONKRETNYCH KONTENERÓW) -->
         <div id="code-display"" class="w-1/2 h-full border border-purple-500/30 bg-black p-2 font-mono text-[9px] text-green-400 overflow-y-auto">
-            // OCZEKIWANIE NA SKAN RDZENIA...
         </div>
-        <!-- PRAWA STRONA (KOMENDY) -->
         <div class="w-1/2 h-full flex flex-col">
             <div id="analysis-log" class="flex-1 bg-purple-950/20 p-2 text-[9px] font-mono text-purple-200 overflow-y-auto">
-                > Czekam na polecenie zmiany struktury...
+                > Czekam na polecenie...
             </div>
             <div class="flex gap-1 mt-2">
                 <input type="text" id="lab-input" placeholder="WPISZ ROZKAZ..." class="flex-1 bg-black border border-purple-500 p-2 text-[10px] text-white outline-none">
@@ -922,7 +1024,7 @@
     <div class="flex flex-1 overflow-hidden">
         <!-- SIDEBAR -->
         <aside class="w-72 border-r border-emerald-900/30 bg-black/50 p-6 flex flex-col shrink-0">
-            <h2 class="text-[9px] font-black mb-4 uppercase tracking-widest text-emerald-500">// KOLEJKA_OPERACYJNA</h2>
+            <h2 class="text-[9px] font-black mb-4 uppercase tracking-widest text-emerald-500">WNIOSKI_DO_ROZPATRZENIA</h2>
             <div id="credit-queue" class="flex-1 overflow-y-auto space-y-3 pr-2 custom-scroll">
                 <div onclick="loadClaimToWorkArea('Pol-Tech Sp. z o.o.', '450.000,00', 'PL-9988-XC')" class="p-3 border border-emerald-500/20 bg-emerald-500/5 hover:bg-emerald-500/20 cursor-pointer rounded transition-all group">
                     <p class="text-[10px] font-black text-white uppercase tracking-tighter">Pol-Tech Sp. z o.o.</p>
@@ -937,7 +1039,6 @@
             </div>
         </aside>
 
-        <!-- PANEL GŁÓWNY (WORKSPACE) -->
         <main class="flex-1 p-8 bg-[radial-gradient(circle_at_center,_#051505_0%,_#000_100%)] relative flex flex-col overflow-hidden">
             
             <!-- TOOLBAR GŁÓWNY -->
@@ -1069,14 +1170,11 @@
         <button onclick="toggleArchitectLab()" class="text-purple-400 hover:text-white"> [ X ] </button>
     </div>
     <div class="flex-1 p-4 overflow-hidden flex gap-4">
-        <!-- LEWA STRONA (ANALIZA KONKRETNYCH KONTENERÓW) -->
         <div id="code-display"" class="w-1/2 h-full border border-purple-500/30 bg-black p-2 font-mono text-[9px] text-green-400 overflow-y-auto">
-            // OCZEKIWANIE NA SKAN RDZENIA...
         </div>
-        <!-- PRAWA STRONA (KOMENDY) -->
         <div class="w-1/2 h-full flex flex-col">
             <div id="analysis-log" class="flex-1 bg-purple-950/20 p-2 text-[9px] font-mono text-purple-200 overflow-y-auto">
-                > Czekam na polecenie zmiany struktury...
+                > Czekam na polecenie...
             </div>
             <div class="flex gap-1 mt-2">
                 <input type="text" id="lab-input" placeholder="WPISZ ROZKAZ..." class="flex-1 bg-black border border-purple-500 p-2 text-[10px] text-white outline-none">
@@ -1088,7 +1186,6 @@
 </section>
  </main>
  <script>
-// 1. Baza danych urzędów (Zaszyta bezpośrednio)
 const officesData = {
    "Dolnośląskie": ["I US Wrocław", "US Legnica", "US Wałbrzych", "US Jelenia Góra"],
     "Kujawsko-Pomorskie": ["I US Bydgoszcz", "US Toruń", "US Włocławek"],
@@ -1265,27 +1362,72 @@ function updateOffices() {
         function connectAPI() { toast("POŁĄCZONO Z " + document.getElementById('api-operator').value); }
         function openOffice() { if(prompt("KOD:") === "1234") toast("DOSTĘP OK"); }
         function printTransfer() { window.print(); }
-        function drawM() { const c = document.getElementById('m-canvas'); const ctx = c.getContext('2d'); c.width = c.offsetWidth; c.height = c.offsetHeight; mkt.forEach(s => { ctx.beginPath(); ctx.strokeStyle = s.c; const min = Math.min(...s.h), max = Math.max(...s.h); s.h.forEach((v,i) => { const x = (i/59)*c.width, y = c.height - ((v-min)/(max-min || 1))*c.height; if(i===0) ctx.moveTo(x,y); else ctx.lineTo(x,y); }); ctx.stroke(); }); }
-    function buyP(i) {
+        function drawM() {
+    const c = document.getElementById('m-canvas');
+    const ctx = c.getContext('2d');
+    c.width = c.offsetWidth;
+    c.height = c.offsetHeight;
+
+    // Obliczamy wysokość pojedynczego pasa dla każdej linii
+    const stepY = c.height / mkt.length;
+
+    mkt.forEach((s, index) => {
+        ctx.beginPath();
+        ctx.strokeStyle = s.c;
+        ctx.lineWidth = 2;
+
+        const min = Math.min(...s.h), max = Math.max(...s.h);
+        const range = max - min || 1;
+
+        const offsetTop = index * stepY + 5; // +5px marginesu
+        const offsetBottom = (index + 1) * stepY - 5; // -5px marginesu
+        const laneHeight = offsetBottom - offsetTop;
+
+        s.h.forEach((v, i) => {
+            const x = (i / 59) * c.width;
+            
+            // Skalujemy wartość 'v' tylko w obrębie wyznaczonego pasa (laneHeight)
+            // i przesuwamy ją o offsetTop, aby linia trafiła w swój rząd
+            const y = offsetBottom - ((v - min) / range) * laneHeight;
+
+            if (i === 0) ctx.moveTo(x, y);
+            else ctx.lineTo(x, y);
+        });
+        ctx.stroke();
+    });
+}
+   function buyP(i) {
     const p = db.shop[i];
-    if (db.bal >= p.p) {
+    
+    // Sprawdzamy czy produkt istnieje i czy stać gracza
+    if (p && db.bal >= p.p) {
         db.bal -= p.p;
         
-        const nowyProdukt = { n: p.n.toUpperCase(), v: p.v, t: 'SKLEP' };
+        // Tworzymy obiekt zasobu
+        const nowyProdukt = { 
+            n: p.n.toUpperCase(), 
+            v: p.v, 
+            t: 'SKLEP' 
+        };
+        
         db.ast.push(nowyProdukt); 
    
         logAction("ZAKUPIONO: " + p.n, "text-orange-400");
-        save(); // Zapis do localStorage i na pendrive
-        uUI();  // WYMUSZENIE PRZERYSOWANIA LEGENDY I WYKRESU
+        
+        save(); // Zapis stanu
+        uUI();  // Odświeżenie interfejsu (balans, lista aktywów)
+        
+        // Jeśli masz otwarty rynek, wymuszamy przerysowanie wykresu
+        if (document.getElementById('content-market').classList.contains('active')) {
+            drawM();
+        }
+        
         toast("DODANO DO PORTFELA: " + p.n);
-
     } else {
-        toast("BRAK ŚRODKÓW!");
+        // Ten komunikat pojawi się tylko, gdy faktycznie brakuje pieniędzy
+        toast("BRAK ŚRODKÓW NA ZAKUP!");
     }
 }
-    
-   toast("BRAK ŚRODKÓW NA ZAKUP");
-  
        function saveSnap() {
     localStorage.setItem('hj_snap_v2', JSON.stringify(db));
     toast("MIGAWKA SYSTEMU ZAPISANA");
@@ -1344,9 +1486,6 @@ function loadSnap() {
             } 
         }
         
-
-
-       // Pętla czasu (Sekundowe naliczanie)
         setInterval(() => {
             const inc = (db.ast.reduce((s,x)=>s+(x.v||0),0) + db.contracts.reduce((s,x)=>s+(x.zysk||0),0)) || 0;
             db.bal += inc; db.tax += inc * 0.19;
@@ -1355,15 +1494,11 @@ function loadSnap() {
         }, 1000);
 
         function uUI() {
-  // 1. PODSTAWOWE STATYSTYKI GÓRNE
     document.getElementById('ui-bal').innerText = Math.floor(db.bal).toLocaleString() + " PLN";
     const currentIncome = (db.ast.reduce((s,x)=>s+x.v,0) + db.contracts.reduce((s,x)=>s+x.zysk,0)) || 0;
     document.getElementById('ui-inc').innerText = "+" + currentIncome.toFixed(2);
     document.getElementById('ui-tax').innerText = Math.floor(db.tax).toLocaleString();
     document.getElementById('ui-lvl-display').innerText = db.lvl;
-
-    // 2. NALICZANIE STATYSTYK MAJĄTKU (NAPRAWA MANKAMENTU)
-    // Sumujemy wartość wszystkich aktywów (db.ast)
     const totalAssetsValue = db.ast.reduce((sum, asset) => sum + (parseFloat(asset.p) || asset.v || 0), 0);
     
     const statAssetsCount = document.getElementById('stat-assets');
@@ -1372,28 +1507,22 @@ function loadSnap() {
     if (statAssetsCount) statAssetsCount.innerText = db.ast.length;
     if (statTotalVal) statTotalVal.innerText = totalAssetsValue.toLocaleString('pl-PL', { minimumFractionDigits: 2 }) + " PLN";
 
-// TEST DIAGNOSTYCZNY - WYNIK ZOBACZYSZ W KONSOLI (F12)
 console.log("TWOJE DANE DB:", db);
 console.log("ILE MASZ AKTYWÓW:", db.ast ? db.ast.length : "BRAK TABLICY AST");
 console.log("PRZYKŁADOWE AKTYWO:", db.ast && db.ast[0] ? db.ast[0] : "BRAK DANYCH");
 
-// WYMUSZONE NALICZANIE (WERSJA RADYKALNA)
 let mojZyskSesji = 0;
 
 setInterval(() => {
-    // 1. Obliczamy przychód (zabezpieczenie przed brakiem danych)
     let a = db.ast ? db.ast.reduce((s, x) => s + (Number(x.v) || 0), 0) : 0;
     let b = db.contracts ? db.contracts.reduce((s, x) => s + (Number(x.zysk) || 0), 0) : 0;
     let suma = a + b;
 
-    // 2. Jeśli suma to 0, dodajmy testowo 1 PLN, żeby sprawdzić czy licznik W OGÓLE działa
     if (suma === 0) {
-        // console.warn("Suma przychodu to 0! Sprawdź nazwy pól w db.ast i db.contracts.");
-        // Odkomentuj linię poniżej, aby wymusić testowe naliczanie +1 co sekundę:
-        // suma = 1.00; 
+       ("Suma przychodu to 0! Sprawdź nazwy pól w db.ast i db.contracts.");
+       suma = 1.00; 
     }
 
-    // 3. Aktualizacja zmiennej i DOM
     mojZyskSesji += suma;
     db.bal += suma;
 
@@ -1460,7 +1589,6 @@ document.addEventListener('DOMContentLoaded', () => {
 });
         function openAssetsModule() {
     toast("ŁĄCZENIE Z BAZĄ ZASOBÓW...");
-    // Otwiera zasoby w nowym oknie
     window.open('zasoby.html', 'ZasobyWindow', 'width=800,height=600');
 }
         function openAdminModule() {
@@ -1473,19 +1601,68 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 }
       
-        const colors = ['#3b82f6','#10b981','#f59e0b','#ef4444','#a855f7','#d4af37'];
-        let db = JSON.parse(localStorage.getItem('hj_q_final_26')) || { bal: 100000, ast: [], shop: [{n:"Serwer v1",p:25000,v:50}], tax: 0, lvl: 1, logs: [], contracts: [] };
-        let mkt = [{id:'BTC',p:420000,c:'#f59e0b',h:Array(60).fill(420000)},{id:'GOLD',p:12000,c:'#10b981',h:Array(60).fill(12000)}];
-        let aiInt = null;
+       const colors = ['#3b82f6','#10b981','#f59e0b','#ef4444','#a855f7','#d4af37','#94a3b8','#ec4899'];
+
+let db = JSON.parse(localStorage.getItem('hj_q_final_26')) || { 
+    bal: 100000, 
+    ast: [], 
+    shop: [{n:"Serwer v1",p:25000,v:50}], 
+    tax: 0, 
+    lvl: 1, 
+    logs: [], 
+    contracts: [] 
+};
+
+// Rozbudowana lista rynkowa (mkt)
+let mkt = [
+    {id:'BTC', p:420000, c:'#f59e0b', h:Array(60).fill(420000)},
+    {id:'GOLD', p:12000, c:'#d4af37', h:Array(60).fill(12000)},
+    {id:'SILVER', p:850, c:'#94a3b8', h:Array(60).fill(850)},
+    {id:'OIL', p:4500, c:'#3b82f6', h:Array(60).fill(4500)},
+    {id:'TECH_STK', p:25000, c:'#a855f7', h:Array(60).fill(25000)},
+    {id:'REAL_EST', p:850000, c:'#ef4444', h:Array(60).fill(850000)}
+];
+
+let aiInt = null;
+
+        setInterval(() => {
+    const inc = (db.ast.reduce((s, x) => s + x.v, 0) + db.contracts.reduce((s, x) => s + x.zysk, 0)) || 0;
+    db.bal += inc; 
+    db.tax += inc * 0.19;
+
+    mkt.forEach(s => {
+        // Symulacja zmiany ceny (zabezpieczona przed spadkiem do 0)
+        s.p += (Math.random() - 0.5) * (s.p * 0.012);
+        if (s.p < 0.1) s.p = 0.1; 
+
+        s.h.push(s.p);
+        if (s.h.length > 60) s.h.shift();
+    });
+
+    uUI(); 
+    save();
+
+    if (document.getElementById('content-market').classList.contains('active')) {
+        drawM();
+    }
+}, 1000);
+
 
       window.onload = () => {
   
-    if (db.ast.length === 0) {
-        db.ast.push({n: "SYSTEM_CORE", v: 0}); 
-        save(); // Zapisuje, żebyś przy następnym odświeżeniu też wszedł
-    }
+function save() {
+    localStorage.setItem('hj_q_final_26', JSON.stringify(db));
+    console.log("Gra zapisana w LocalStorage!");
+}
 
-    let prg = 0;
+// Funkcja dodawania produktu (przykład)
+function dodajProdukt(nazwa, cena, wartosc) {
+    db.shop.push({ n: nazwa, p: cena, v: wartosc });
+    save(); // TO JEST KLUCZOWE
+    uUI();  // Odświeża interfejs
+}   
+
+ let prg = 0;
     const bar = document.getElementById('loader-bar');
     const splash = document.getElementById('splash');
 
@@ -1504,6 +1681,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }, 50);
 };
  
+
         function connectAPI() { 
             const op = document.getElementById('api-operator').value;
             toast("NAWIĄZYWANIE POŁĄCZENIA Z " + op + "...");
@@ -1512,10 +1690,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
 const API_URL = "http://127.0.0.1:5000";
 
-
 async function askInternet(zapytanie) {
     const cleanQuery = zapytanie.replace(/szukaj|wizja/gi, "").trim();
-    // POPRAWIONY LINK DO GOOGLE (Z ?q= i poprawnym kodowaniem)
     const targetUrl = "https://www.google.com" + encodeURIComponent(cleanQuery);
 
     const response = await fetch('http://127.0.0.1:5000', {
@@ -1524,26 +1700,21 @@ async function askInternet(zapytanie) {
         body: JSON.stringify({query: zapytanie})
     }).catch(e => {
 
-        // JEŚLI MOSTEK OFFLINE - PROJEKT IDZIE DO CELU TUTAJ:
         console.log("Mostek offline - Architekt AI przebija blokadę portalu.");
         window.open(targetUrl, 'QuantumVision', 'width=1100,height=800,popup=yes');
         
-        // Głos Architekta (0.65), żebyś wiedział, że AI działa w trybie wizji
         const msg = new SpeechSynthesisUtterance("Inicjuję portal wizji bezpośredniej.");
         msg.pitch = 0.65;
         window.speechSynthesis.speak(msg);
         return null; 
     });
 
-    // Jeśli mostek nie odpowiedział, kończymy funkcję (okno już się otworzyło wyżej)
     if (!response) return "WIZJA_ZEWNETRZNA";
-
     const data = await response.json();
     console.log("AI otrzymała dane z sieci:", data.result);
     return data.result;
 }
 
-// 2. MONITORING SYSTEMU I ŁADOWANIE Z PENDRIVE / PYTHON
 window.addEventListener('DOMContentLoaded', () => {
     if (typeof checkServerStatus === 'function') checkServerStatus();
     if (typeof loadDataFromPython === 'function') loadDataFromPython();
@@ -1798,14 +1969,28 @@ function saveAndSign() {
     save(); // Funkcja zapisu na pendrive
     uUI();
 }
+const legend = document.getElementById('assets-legend'); // upewnij się, że masz taki ID w HTML
+const assets = db.ast || [];
+
 if (legend) {
+    // Obliczamy sumę zysków, żeby wyliczyć procenty (tot)
+    const tot = assets.reduce((sum, a) => sum + (parseFloat(a.v) || 0), 0);
+
+    if (assets.length === 0) {
+        legend.innerHTML = '<p class="text-[7px] text-gray-500 italic text-center">BRAK DANYCH</p>';
+    } else {
         legend.innerHTML = assets.map((a, idx) => `
-            <div class="flex items-center justify-between bg-white/5 border-l-2 py-0.5 px-2 rounded-sm mb-1" style="border-color: ${colors[idx % colors.length]}">
+            <div class="flex items-center justify-between bg-white/5 border-l-2 py-0.5 px-2 rounded-sm mb-1" 
+                 style="border-color: ${colors[idx % colors.length]}">
                 <span class="text-[7px] text-slate-300 uppercase truncate w-32 font-bold">${a.n}</span>
-                <span class="text-[8px] font-black text-blue-400">${((a.v / tot) * 100).toFixed(1)}%</span>
+                <span class="text-[8px] font-black text-blue-400">
+                    ${tot > 0 ? ((a.v / tot) * 100).toFixed(1) : 0}%
+                </span>
             </div>
         `).join('');
-    }  
+    }
+}
+
 function openVision(url) {
     const netSection = document.getElementById('sekcja-internet');
     const iframe = document.getElementById('okno-przegladarki');
@@ -1815,9 +2000,7 @@ function openVision(url) {
     }
 }
 
-// FUNKCJA OTWIERAJĄCA OKNO INTERNETU
 function triggerSuperCore() {
-    // 1. POBIERANIE WĘZŁÓW
     var input = document.getElementById('super-input') || document.getElementById('input-brain');
     var chat = document.getElementById('super-chat-box');
     var mouth = document.getElementById('avatar-mouth');
@@ -1831,12 +2014,10 @@ function triggerSuperCore() {
     var targetUrl = "";
     var response = "";
 
-    // 2. LOGIKA INTELIGENCJI (PROJEKTANT TOMASZ FIRST)
     if (low.indexOf("cześć") !== -1 || low.indexOf("siema") !== -1) {
         response = "Witaj Tomaszu. System Qualcomm Atheros gotowy. Co dzisiaj budujemy?";
     } 
     else if (low.indexOf("sprawdź projekt") !== -1 || low === "status") {
-        // WEWNĘTRZNA INSPEKCJA (Nie otwiera nowej karty, bo index już działa)
         response = "🛡️ INSPEKCJA: Projektancie Tomaszu, przeprowadzam skanowanie struktur INDEX.HTML na pendrive.";
         
         if (hHead && hHead.material) {
@@ -1844,7 +2025,6 @@ function triggerSuperCore() {
             setTimeout(function(){ hHead.material.emissive.setHex(0x06b6d4); }, 3000);
         }
 
-        // Generowanie raportu technicznego w czacie
         setTimeout(function() {
             if (chat) {
                 chat.innerHTML += '<div style="border:1px solid #22c55e; background:rgba(34,197,94,0.1); padding:10px; margin-top:10px; font-family:monospace; font-size:9px; color:#4ade80;">' +
@@ -1859,7 +2039,6 @@ function triggerSuperCore() {
     }
     else if (low.indexOf("napraw") !== -1) {
         response = "🛡️ ALARM: Projektancie Tomaszu, szukam rozwiązań naprawczych w sieci globalnej.";
-        // NAPRAWIONY ADRES GOOGLE
         targetUrl = "https://www.google.com" + encodeURIComponent(val) + "+javascript+fix";
         
         if (hHead && hHead.material) {
@@ -1875,12 +2054,10 @@ function triggerSuperCore() {
         response = "Skok do domeny: " + low;
     } 
     else {
-        // NAPRAWIONY ADRES WYSZUKIWANIA (DODANO /search?q=)
         targetUrl = "https://www.google.com" + encodeURIComponent(val);
         response = "🛡️ STRAŻNIK: Eksploracja dla: " + val;
     }
 
-    // 3. WYSTRZAŁ I RAPORT (Tylko jeśli targetUrl nie jest pusty)
     if (targetUrl !== "") {
         window.open(targetUrl, '_blank');
     }
@@ -1890,7 +2067,6 @@ function triggerSuperCore() {
         chat.scrollTop = chat.scrollHeight;
     }
 
-    // 4. MOWA I USTA
     if (window.speechSynthesis) {
         window.speechSynthesis.cancel();
         var msg = new SpeechSynthesisUtterance(response);
@@ -1935,7 +2111,6 @@ function speakAsArchitekt(text) {
     const mouth = document.getElementById('avatar-mouth');
     const synth = window.speechSynthesis;
     
-    // Reset poprzednich komunikatów
     synth.cancel();
 
     const utterance = new SpeechSynthesisUtterance(text);
@@ -1943,7 +2118,6 @@ function speakAsArchitekt(text) {
     utterance.pitch = 0.55; // Głęboki, cyfrowy ton
     utterance.rate = 0.85;  // Dostojne tempo
 
-    // Animacja ust (Mouth Active)
     utterance.onstart = () => {
         if(mouth) mouth.style.height = "10px"; 
         if(mouth) mouth.style.backgroundColor = "#22d3ee";
@@ -1958,7 +2132,7 @@ function speakAsArchitekt(text) {
 }document.getElementById('submitQuery').onclick = async function() {
       const query = "kurs btc i newsy rynkowe 2026";
 const url = query ? `https://www.google.pl{encodeURIComponent(query)}` : "https://pl.tradingview.com"; page.goto(searchUrl, { waitUntil: 'networkidle' });
-console.log("SUPER CORE: Tomasz, inicjuję połączenie z siecią prosze czekać");
+console.log("SUPER CORE: Projektancie, inicjuję połączenie z siecią prosze czekać");
         if (!query) {
             resultsDiv.innerHTML = "BŁĄD: BRAK DANYCH WEJŚCIOWYCH";
             return;
@@ -1966,22 +2140,20 @@ console.log("SUPER CORE: Tomasz, inicjuję połączenie z siecią prosze czekać
 
         // Efekt ładowania w stylu Quantum
         resultsDiv.innerHTML = "INICJOWANIE POŁĄCZENIA Z AI QUANTUM... PROSZĘ CZEKAĆ";
-        this.disabled = true; // Blokujemy przycisk na czas wysyłania
+        this.disabled = true; 
 
         try {
           const response = await fetch('http://127.0.0.1', { 
     method: 'POST',
     headers: {
         'Content-Type': 'application/json'
-        // 'Authorization': 'Bearer ...' // Usuń to, jeśli łączysz się lokalnie z własnym Pythonem
     },
     body: JSON.stringify({ 
-        query: query // MUSI BYĆ 'query', bo tego szuka Twój Python!
+        query: query 
     })
 });
             const data = await response.json();
 
-            // Wyświetlenie odpowiedzi (zakładając, że API zwraca tekst w data.answer)
             resultsDiv.innerHTML = `<span style="color: #a855f7;">> ODPOWIEDŹ:</span><br>${data.answer || JSON.stringify(data)}`;
             
         } catch (error) {
@@ -2001,14 +2173,10 @@ console.log("SUPER CORE: Tomasz, inicjuję połączenie z siecią prosze czekać
             resultsArea.innerText = "WPISZ PARAMETRY WIZJI...";
             return;
         }
-
-        // 1. Wizualny status w modalu
         resultsArea.innerHTML = `<span class="animate-pulse text-cyan-400 font-bold">[SKANOWANIE SIECI...]</span>`;
 
         try {
-            // 2. POŁĄCZENIE Z PRAWDZIWYM API (Przykład darmowego NBP lub Twojego serwera)
-            let responseText = "";
-            
+            let responseText = "";           
             if (userQuery.toLowerCase().includes("dolar")) {
                 const res = await fetch('https://api.nbp.pl');
                 const data = await res.json();
@@ -2017,8 +2185,6 @@ console.log("SUPER CORE: Tomasz, inicjuję połączenie z siecią prosze czekać
                 // Tutaj możesz wstawić URL do swojego serwera Python (UDA)
                 responseText = `ZAPYTANIE "${userQuery.toUpperCase()}" PRZETWORZONE PRZEZ RDZEŃ QUANTUM. BRAK KRYTYCZNYCH ZAGROŻEŃ.`;
             }
-
-            // 3. PRZEKIEROWANIE DO ARCHITEKTA AI (Głos i Usta)
            
             setTimeout(() => {
                 document.getElementById('searchBlock').style.display = 'none';
@@ -2028,11 +2194,9 @@ console.log("SUPER CORE: Tomasz, inicjuję połączenie z siecią prosze czekać
         triggerSuperCore();
     }
 });
-                // Uruchamiamy mowę i terminal Architekta
                 const mainInput = document.getElementById('super-input');
                 if(mainInput) {
-                    mainInput.value = userQuery; // Wpisujemy zapytanie do głównego pola
-                    // Wyświetlamy odpowiedź bezpośrednio w terminalu
+                    mainInput.value = userQuery;
                     const chat = document.getElementById('super-chat-box');
                     chat.innerHTML += `
                         <div class="flex flex-col items-start animate-fade-in mt-4">
@@ -2040,8 +2204,6 @@ console.log("SUPER CORE: Tomasz, inicjuję połączenie z siecią prosze czekać
                             <p class="bg-cyan-500/10 border border-cyan-500/20 p-4 rounded-r-xl text-cyan-100 max-w-[85%] shadow-lg shadow-cyan-900/20">${responseText}</p>
                         </div>`;
                     chat.scrollTop = chat.scrollHeight;
-
-                    // GŁOS I MIMIKA
                     const mouth = document.getElementById('avatar-mouth');
                     const utterance = new SpeechSynthesisUtterance(responseText);
                     utterance.lang = 'pl-PL';
@@ -2069,7 +2231,6 @@ async function loadDataFromPython() {
         db = await res.json();
         toast("DANE Z PENDRIVE: OK");
     } catch (e) {
-        // AWARYJNE ŁADOWANIE Z LOCALSTORAGE (Jeśli Python padnie)
         const backup = localStorage.getItem('hj_q_final_26');
         if(backup) {
             db = JSON.parse(backup);
@@ -2077,31 +2238,33 @@ async function loadDataFromPython() {
         }
     } finally {
         clearTimeout(timeoutId);
-        uUI(); // Wymuś odświeżenie interfejsu
+        uUI(); 
     }
 }
-const responseHTML = `
-    <div class="flex flex-col items-start animate-fade-in mt-4 border-l border-cyan-500/30 pl-4">
-        <span class="text-[8px] text-cyan-400 font-black uppercase tracking-widest italic">Architekt AI (NET):</span>
-        <p class="bg-cyan-500/10 border border-cyan-500/20 p-4 rounded-r-xl text-cyan-100 max-w-[85%] shadow-lg shadow-cyan-900/20 text-[11px] font-mono leading-relaxed">
-            ${responseText}
-        </p>
-    </div>`;
+function showAIResponse(tekst) {
+    const responseText = tekst; 
+    
+    const responseHTML = `
+        <div class="flex flex-col items-start animate-fade-in mt-4 border-l border-cyan-500/30 pl-4">
+            <span class="text-[8px] text-cyan-400 font-black uppercase tracking-widest italic">Architekt AI (NET):</span>
+            <p class="bg-cyan-500/10 border border-cyan-500/20 p-4 rounded-r-xl text-cyan-100 max-w-[85%] shadow-lg shadow-cyan-900/20 text-[11px] font-mono leading-relaxed">
+                ${responseText}
+            </p>
+        </div>`;
 
-// Wstrzyknięcie do Twojego ID super-chat-box
-const chatBox = document.getElementById('super-chat-box');
-if (chatBox) {
-    chatBox.insertAdjacentHTML('beforeend', responseHTML);
-    chatBox.scrollTop = chatBox.scrollHeight;
+    const chatBox = document.getElementById('chat-container');
+    if(chatBox) {
+        chatBox.innerHTML += responseHTML;
+    } else {
+        console.error("BŁĄD: Nie znaleziono elementu chat-container!");
+    }
 }
-
-// --- AKTYWACJA MIMIKI I GŁOSU ---
 const mouth = document.getElementById('avatar-mouth');
 const synth = window.speechSynthesis;
 const utterance = new SpeechSynthesisUtterance(responseText);
 
 utterance.lang = 'pl-PL';
-utterance.pitch = 0.65; // Głos identyczny jak postać z obrazka
+utterance.pitch = 0.65;
 utterance.rate = 0.9;
 
 if (mouth) {
@@ -2109,20 +2272,15 @@ if (mouth) {
     utterance.onend = () => mouth.classList.remove('mouth-active');
 }
 
-synth.cancel(); // Czyści kolejkę mowy (naprawia błąd LOAD)
+synth.cancel(); 
 synth.speak(utterance);
 function otworzInternet() {
     const sekcja = document.getElementById('sekcja-internet');
     const iframe = document.getElementById('okno-przegladarki');
     const mouth = document.getElementById('avatar-mouth');
 
-    // 1. USTAW ADRES (Google z parametrem IGU dla ramki)
     iframe.src = "https://www.google.com";
-
-    // 2. POKAŻ SEKCJĘ
     sekcja.style.display = 'flex';
-
-    // 3. KOMUNIKAT AI I RUCH UST (Głos Architekta)
     try {
         window.speechSynthesis.cancel();
         const msg = "INICJUJĘ DOSTĘP GLOBALNY. PORTAL WIZJI SIECIOWEJ AKTYWNY.";
@@ -2138,51 +2296,51 @@ function otworzInternet() {
     } catch(e) { console.log("Audio Lock"); }
 }
  
-    function uruchomWizjeSieciowa() {
+function uruchomWizjeSieciowa() {
     const btn = document.getElementById('btn-vision-portal');
-    btn.innerHTML = "<span>🌀 INICJACJA PROJEKTANTA...</span>";
+    const input = document.querySelector('input'); // Pobiera tekst z Twojego pola
+    const temat = input ? input.value : "";
+
+    if (!temat) return;
+
+    btn.innerHTML = "<span>🌀 ANALIZA ZNACZENIA...</span>";
     
-   
- // 2. ADRES DOCELOWY (Google Search / NBP)
-        let url = `https://www.google.com{encodeURIComponent(temat)}`;
+    // Kluczem jest dodanie słowa "definicja" lub "znaczenie" w URL, 
+    // aby Google od razu wyświetliło ramkę z tłumaczeniem i etymologią.
+    let url = `https://google.com{encodeURIComponent(temat)}`;
+    
+    window.open(url, 'QuantumWebPortal', 'width=1000,height=800,top=100,left=100,popup=yes');
 
-
-    // Parametry: width/height ustala rozmiar okna, a 'popup' robi z niego osobny panel
-    window.open(url, 'QuantumWebPortal', 'width=1000,height=800,top=100,left=  100,popup=yes,menubar=no,status=no,toolbar=no');
-
-    // 4. ARCHITEKT AI - GŁOS I RUCH UST
     try {
         window.speechSynthesis.cancel();
-        const msg = `OTWIERAM OSOBNY PORTAL WIZJI DLA PARAMETRU ${temat.toUpperCase()}. TRANSMISJA SIECIOWA USTALONA.`;
+        const msg = `POBIERAM ANALIZĘ ZNACZENIA DLA FRAZY ${temat.toUpperCase()}. TRANSMISJA DANYCH ETYMOLOGICZNYCH ROZPOCZĘTA.`;
         const utter = new SpeechSynthesisUtterance(msg);
         utter.lang = 'pl-PL';
-        utter.pitch = 0.65; // Głos Architekta
+        utter.pitch = 0.65; 
 
         const mouth = document.getElementById('avatar-mouth');
         if (mouth) {
             mouth.classList.add('mouth-active');
-            utter.onend = () => mouth.classList.remove('mouth-active');
+            utter.onend = () => {
+                mouth.classList.remove('mouth-active');
+                btn.innerHTML = "<span>GOTOWE</span>";
+            };
         }
         window.speechSynthesis.speak(utter);
     } catch(e) {
-        console.warn("SYSTEM: Głos zablokowany - wymagana interakcja.");
+        console.warn("SYSTEM: Głos zablokowany.");
     }
 
-    if(input) input.value = ""; // Czyści pole po wysłaniu
+    if(input) input.value = ""; 
 }
+
 function runNetInit() {
     const txt = document.getElementById('txt-q-net');
-    const btn = document.getElementById('btn-q-net');
-    
+    const btn = document.getElementById('btn-q-net');    
     txt.innerText = "ŁĄCZENIE...";
-    
-    // Pobieramy ścieżkę do Twojego folderu na pendrive (np. H:/PROJEKT/)
     const currentFolder = window.location.href.substring(0, window.location.href.lastIndexOf('/'));
-    
     setTimeout(() => {
-        // ZAMIAST GOOGLE: Otwieramy Twój główny plik projektu
-        window.open(`${currentFolder}/index.html`, '_blank'); 
-        
+        window.open(`${currentFolder}/index.html`, '_blank');         
         txt.innerText = "NET ACTIVE";
         btn.style.color = "#34d399"; 
         console.log("SYSTEM: Projekt zainicjowany w nowej karcie.");
@@ -2194,14 +2352,10 @@ function runNetInit() {
     const btn = document.getElementById('btn-q-net');
     
     txt.innerText = "ŁĄCZENIE...";
-    
-    // Automatycznie wykrywamy folder na pendrive (H:, G:, itp.)
     const currentFolder = window.location.href.substring(0, window.location.href.lastIndexOf('/'));
     
     setTimeout(() => {
-        // ZMIANA: Teraz otwiera główny INDEX
-        window.open(`${currentFolder}/index.html`, '_blank'); 
-        
+        window.open(`${currentFolder}/index.html`, '_blank');        
         txt.innerText = "NET ACTIVE";
         btn.style.color = "#34d399"; 
     }, 500);
@@ -2216,7 +2370,6 @@ function runVisionInit() {
     const currentFolder = window.location.href.substring(0, window.location.href.lastIndexOf('/'));
     
     setTimeout(() => {
-        // ZMIANA: Teraz otwiera panel ADMINA zamiast zasobów
         window.open(`${currentFolder}/admin.html`, '_blank'); 
         
         txt.innerText = "WIZJA ONLINE";
@@ -2228,14 +2381,12 @@ async function runNetInit() {
     txt.innerText = "ŁĄCZENIE Z MOSTEM...";
 
     try {
-        // Wysyłamy prośbę do Pythona, żeby odpalił START_TERMINAL.bat
         const response = await fetch('http://127.0.0.1', {
             method: 'POST'
         });
         
         if (response.ok) {
             txt.innerText = "SYSTEM ODPALONY";
-            // Dodatkowo otwieramy admin.html w nowoczesnej szacie
             const path = window.location.pathname.substring(0, window.location.pathname.lastIndexOf('/'));
             window.open(`file://${path}/admin.html`, '_blank');
         }
@@ -2245,23 +2396,24 @@ async function runNetInit() {
     }
 }
 async function autoScan(query = "kurs btc i newsy rynkowe 2026") {
-    console.log(`SUPER CORE: Tomasz, inicjuję skanowanie wizyjne dla: ${query}`);
-    
-    // 1. Otwarcie przeglądarki (zakładając użycie Playwright)
+    console.log(`SUPER CORE: Projektancie, inicjuję skanowanie wizyjne dla: ${query}`);
     const page = await browser.newPage();
-    await page.goto(`https://www.google.com{encodeURIComponent(query)}`);
     
-    // 2. "Oczy" AI - zrzut ekranu do analizy wizyjnej
-    const screenshot = await page.screenshot({ fullPage: true });
+    // Poprawiony URL: dodano '?' oraz 'q=' oraz brakujący '$'
+    const searchUrl = `https://google.com{encodeURIComponent(query)}`;
     
-    // 3. Przekazanie obrazu do Twojego modelu AI (np. GPT-4o lub Claude 3.5 Sonnet)
-    const analysis = await analyzeVision(screenshot, "Znajdź aktualny kurs BTC i najważniejsze newsy");
-    
-    console.log("SUPER CORE: Analiza zakończona:", analysis);
-    return analysis;
+    try {
+        await page.goto(searchUrl, { waitUntil: 'networkidle2' }); 
+        const screenshot = await page.screenshot({ fullPage: true });
+        
+        const analysis = await analyzeVision(screenshot, "Znajdź aktualny kurs BTC i najważniejsze newsy");
+        
+        console.log("SUPER CORE: Analiza zakończona:", analysis);
+        return analysis;
+    } catch (error) {
+        console.error("SUPER CORE: Błąd podczas skanowania:", error);
+    }
 }
-
-// 1. NAPRAWA TERMINALA (Dodano port 5000 i poprawny endpoint)
 function runTerminalInit() {
     const btnText = document.getElementById('txt-terminal');
     btnText.innerText = "INICJACJA KODU...";
@@ -2277,18 +2429,14 @@ function runTerminalInit() {
     });
 }
 
-// 2. NAPRAWA WIZJI (Dodano port, endpoint i przesyłanie zapytania)
 function runVisionInit(event) {
     if(event) event.preventDefault();
-    
-    // Pobieramy to co wpisałeś, żeby AI wiedziało co szukać w Google
     const input = document.getElementById('super-input') || document.getElementById('input-brain');
     const query = input ? input.value.trim() : "kurs dolara";
 
     const btnText = document.getElementById('txt-v-net');
     btnText.innerText = "ŁĄCZENIE Z SIECIĄ...";
     
-    // WYSYŁKA DO BRIDGE.PY NA PORT 5000
     fetch('http://127.0.0.1', { 
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -2298,7 +2446,6 @@ function runVisionInit(event) {
     .then(response => {
         if(response.ok) {
             btnText.innerText = "WIZJA AKTYWNA (GOOGLE)";
-            // URUCHOM USTA BIAŁEGO ANDROIDA
             if (typeof startSpeaking === "function") startSpeaking();
             setTimeout(() => { btnText.innerText = "PROJEKTANT WIZJI NET"; }, 2000);
         } else {
@@ -2315,13 +2462,8 @@ function runVisionNet(e) {
     if(e) e.preventDefault();
     const btnText = document.getElementById('txt-v-net');
     btnText.innerText = "ŁĄCZENIE Z CORE...";
-
-    // OSTATECZNA METODA: Przeglądarka myśli, że to obrazek, 
-    // ale tak naprawdę uderza w Twój bridge.py na porcie 5000
     const img = new Image();
     img.src = 'http://127.0.0.1' + new Date().getTime();
-
-    // Po wysłaniu sygnału dajemy znać użytkownikowi
     setTimeout(() => {
         btnText.innerText = "WIZJA AKTYWNA (GOOGLE)";
         setTimeout(() => { btnText.innerText = "PROJEKTANT WIZJI NET"; }, 2000);
@@ -2330,11 +2472,7 @@ function runVisionNet(e) {
 function aktywujWizjeNet() {
     const statusTxt = document.getElementById('txt-v-net');
     statusTxt.innerText = "PRZEBIJANIE BLOKADY...";
-
-    // Otwieramy ukryte mikro-okno, które wymusi sygnał do Pythona
     let ghost = window.open('http://127.0.0.1', 'ghost', 'width=1,height=1,left=-2000,top=-2000');
-
-    // Po 1 sekundzie zamykamy okno i przywracamy napis
     setTimeout(() => {
         if (ghost) ghost.close();
         statusTxt.innerText = "WIZJA AKTYWNA";
@@ -2358,26 +2496,19 @@ function directVisionNet() {
 }
 
 function directTerminal() {
-
-    // Jeśli chcesz, żeby Terminal otwierał np. konsolę Google lub inną stronę sieciową
     window.open('https://www.google.com', '_blank');
-    
     const txt = document.getElementById('txt-terminal');
     txt.innerText = "TERMINAL OTWARTY";
     setTimeout(() => { txt.innerText = "TERMINAL SYSTEMOWY"; }, 2000);
 }
 function quantumVision(e) {
-    if(e) e.preventDefault(); // Zapobiega przeładowaniu strony
+    if(e) e.preventDefault();
     
     const txt = document.getElementById('v-txt');
     if(txt) txt.innerText = "PRZEBIJANIE DO SIECI...";
 
     try {
-        // 1. Otwieramy Google (Zawsze zadziała)
-        window.open('https://www.google.com', '_blank');
-
-        // 2. Wysyłamy sygnał do AI Core (Cicho, w tle)
-     
+        window.open('https://www.google.com', '_blank');   
         const coreSignal = new Image();
         coreSignal.src = "http://127.0.0.1" + Date.now();
         
@@ -2385,8 +2516,6 @@ function quantumVision(e) {
     } catch(err) {
         console.log("AI Core: Offline, ale wizja kontynuowana.");
     }
-
-    // Przywracamy napis po 2 sekundach
     setTimeout(() => { if(txt) txt.innerText = "AI Quantum Net"; }, 2000);
 }
 
@@ -2397,13 +2526,11 @@ function quantumVision(e) {
                     if (e.key === 'Enter' && this.value.trim() !== '') {
                         const cmd = this.value.toUpperCase();
                         
-                        // Dodaj wpis użytkownika
                         const userDiv = document.createElement('div');
                         userDiv.style.color = '#fff';
                         userDiv.innerHTML = '> EXECUTING: ' + cmd;
                         output.appendChild(userDiv);
 
-                        // Symulacja odpowiedzi Core
                         setTimeout(() => {
                             const coreDiv = document.createElement('div');
                             coreDiv.innerHTML = '> STATUS: PRZETWARZANIE KOMENDY "' + cmd + '" ZAKOŃCZONE.';
@@ -2425,27 +2552,22 @@ function quantumVision(e) {
                 };
 let hScene, hCamera, hRenderer, hHead, hMouseX = 0, hMouseY = 0;
 
-// 1. INICJALIZACJA POSTACI 3D (Wewnątrz sfery)
 function initHumanoidCore() {
     const container = document.getElementById('canvas-3d-container');
     if (!container || container.children.length > 0) return; // Zapobiega dublowaniu
 
-    // Scena i Kamera
     hScene = new THREE.Scene();
     hCamera = new THREE.PerspectiveCamera(45, container.clientWidth / container.clientHeight, 0.1, 1000);
-    
-    // Renderer z przezroczystością (alpha: true)
+   
     hRenderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
     hRenderer.setSize(container.clientWidth, container.clientHeight);
     container.appendChild(hRenderer.domElement);
 
-    // Oświetlenie neonowe
     const light = new THREE.PointLight(0xa855f7, 2, 50);
     light.position.set(2, 2, 5);
     hScene.add(light);
     hScene.add(new THREE.AmbientLight(0xffffff, 0.3));
 
-    // Tworzenie głowy Cyber Humana (Kwantowy Icosahedron)
     const geometry = new THREE.IcosahedronGeometry(1.2, 2);
     const material = new THREE.MeshStandardMaterial({ 
         color: 0x000000, 
@@ -2458,16 +2580,13 @@ function initHumanoidCore() {
 
     hCamera.position.z = 4.5;
 
-    // Animacja
     function animate() {
         requestAnimationFrame(animate);
         
         if (hHead) {
-            // Head-Tracking (wodzenie wzrokiem za myszką)
             hHead.rotation.y += (hMouseX * 0.8 - hHead.rotation.y) * 0.05;
             hHead.rotation.x += (hMouseY * 0.5 - hHead.rotation.x) * 0.05;
             
-            // Delikatne lewitowanie
             hHead.position.y = Math.sin(Date.now() * 0.002) * 0.05;
         }
 
@@ -2476,13 +2595,11 @@ function initHumanoidCore() {
     animate();
 }
 
-// 2. OBSŁUGA MYSZY (Śledzenie pozycji)
 document.addEventListener('mousemove', (e) => {
     hMouseX = (e.clientX / window.innerWidth) - 0.5;
     hMouseY = (e.clientY / window.innerHeight) - 0.5;
 });
 
-// 3. LOGIKA PRZYCISKU 'INICJUJ' (Mowa + Wizja)
 function executeCyberVision() {
     const input = document.getElementById('input-brain') || document.getElementById('super-input');
     const mouth = document.getElementById('avatar-mouth');
@@ -2490,12 +2607,11 @@ function executeCyberVision() {
     if (!input || !input.value.trim()) return;
     const val = input.value.trim();
     const low = val.toLowerCase();
-    input.value = ""; // Czyścimy natychmiast
+    input.value = ""; 
 
     let targetUrl = "";
     let response = "";
 
-    // 1. WSPÓLNY ATLAS PORTALI (Wszystko bez .pl / .com)
     const atlas = {
         "google": "https://www.google.pl",
         "facebook": "https://www.facebook.com",
@@ -2511,7 +2627,6 @@ function executeCyberVision() {
         "animals": "https://www.nationalgeographic.com"
     };
 
-    // 2. LOGIKA INTELIGENTNEGO ROZPOZNANIA (IDENTYCZNA DLA OBU AI)
     if (atlas[low]) {
         targetUrl = atlas[low];
         response = "🛡️ SYSTEM: Tomasz, nawiązano bezpośredni most z: " + low.toUpperCase();
@@ -2521,15 +2636,12 @@ function executeCyberVision() {
         response = "🛡️ SYSTEM: Łączenie z domeną zewnętrzną: " + low;
     } 
     else {
-        // UNIWERSALNE WYSZUKIWANIE (KURS DOLARA ITD.) - NAPRAWIONY ADRES
         targetUrl = "https://www.google.com" + encodeURIComponent(val);
         response = "🛡️ SYSTEM: Eksploracja sieci dla frazy: " + val;
     }
 
-    // 3. WYSTRZAŁ W NOWEJ KARCIE (Znak Strażnika)
     window.open(targetUrl, '_blank');
 
-    // 4. SYNCHRONIZACJA MOWY I LIP-SYNC (Mówią oba AI)
     if (window.speechSynthesis) {
         window.speechSynthesis.cancel();
         const msg = new SpeechSynthesisUtterance(response);
@@ -2542,7 +2654,6 @@ function executeCyberVision() {
         window.speechSynthesis.speak(msg);
     }
 
-    // 5. RAPORT W TERMINALU (Podpis Qualcomm + IPv6)
     const chat = document.getElementById('super-chat-box');
     if (chat) {
         chat.innerHTML += `
@@ -2560,17 +2671,14 @@ function executeCyberVision() {
 function directVisionNet() {
     const input = document.getElementById('super-input') || document.getElementById('input-brain');
     const query = input ? input.value.trim() : "kurs dolara";
-    const portal = document.getElementById('vision-portal'); // Twoje okno portalu
-    const frame = document.getElementById('vision-frame');   // Twoja ramka
+    const portal = document.getElementById('vision-portal'); 
+    const frame = document.getElementById('vision-frame');  
 
-    // 1. BUDUJEMY ADRES (Z search/q - to naprawia błąd IP)
-    // Używamy &igu=1 - to specjalny tryb, który czasem "oszukuje" Google w ramkach
-   const targetUrl = `https://www.google.com{encodeURIComponent(query)}&igu=1`;  // 1. Otwarcie sieci (Wolność AI)
+   const targetUrl = `https://www.google.com{encodeURIComponent(query)}&igu=1`; 
     window.open(searchUrl, '_blank');
 
 if (portal) portal.style.display = 'flex';
     if (frame) frame.src = targetUrl;
-    // 2. Sygnał do Twojego Pythona (Port 5000)
 
     fetch('http://127.0.0.1', {
         method: 'POST',
@@ -2578,16 +2686,13 @@ if (portal) portal.style.display = 'flex';
         body: JSON.stringify({ query: query })
     }).catch(() => console.log("ARCHITEKT: Bridge offline, ale okno otwarte."));
 
-    // 3. Reakcja Wizualna
     const txt = document.getElementById('txt-v-net');
     txt.innerText = "KWANTOWE POŁĄCZENIE AKTYWNE";
     if (typeof startSpeaking === "function") startSpeaking(); 
     setTimeout(() => { txt.innerText = "PROJEKTANT WIZJI NET"; }, 2000);
 }
 
-
 function executeCyberVision() {
-    // 1. CHWYTAMY INPUT I CZYŚCIMY GO NATYCHMIAST
     const inputField = document.getElementById('input-brain') || document.getElementById('super-input');
     const mouth = document.getElementById('avatar-mouth');
     
@@ -2595,12 +2700,10 @@ function executeCyberVision() {
     const rawVal = inputField.value.trim();
     if (!rawVal) return;
 
-    // Pobieramy czysty temat i CZYŚCIMY POLE (Efekt czystego terminala)
     const temat = rawVal.toLowerCase().replace(/szukaj|wizja/gi, "").trim();
     inputField.value = ""; 
     inputField.placeholder = "ŁĄCZENIE Z SIECIĄ: " + temat.toUpperCase() + "...";
 
-    // 2. MODULATOR GŁOSU I RUCH UST (LIP-SYNC)
     window.speechSynthesis.cancel();
     const msg = new SpeechSynthesisUtterance("Inicjuję portal wizji dla parametru " + temat);
     msg.lang = 'pl-PL';
@@ -2613,22 +2716,17 @@ function executeCyberVision() {
     };
     window.speechSynthesis.speak(msg);
 
-   
-    // 3. INTELIGENTNY WYBÓR PORTALU
     const form = document.createElement('form');
     form.method = 'GET';
     form.target = '_blank';
 
-    // SPRAWDZAMY: Czy to jest adres (ma kropkę) czy hasło do szukania?
     if (temat.includes(".") && !temat.includes(" ")) {
-        // SKOK BEZPOŚREDNI (np. google.pl, tradingview.com)
         const fullUrl = temat.startsWith("http") ? temat : "https://" + temat;
         window.open(fullUrl, '_blank');
         console.log("CYBER CORE: Skok bezpośredni do " + fullUrl);
-        return; // Przerywamy tworzenie formularza, bo już otwarte
+        return;
     } else {
 
-        // WYSZUKIWANIE (np. "kurs btc", "pogoda")
         form.action = 'https://www.google.com'; 
         const input = document.createElement('input');
         input.type = 'hidden';
@@ -2637,7 +2735,6 @@ function executeCyberVision() {
         form.appendChild(input);
     }
 
-    // 4. STRZAŁ (Dla wyszukiwania)
     document.body.appendChild(form);
     form.submit();
     document.body.removeChild(form);
@@ -2650,7 +2747,7 @@ function executeCyberVision() {
         location: `${source}:${lineno}`,
         timestamp: new Date().toISOString()
     };
-    // Wysyłka do Twojego modułu AI
+ 
     QuantumAI.analyzeFailure(report);
 }; 
  const QuantumOverseer = {
@@ -2660,26 +2757,22 @@ function executeCyberVision() {
         version: "2.0.alpha"
     },
 
-    // 1. MONITORING ZDARZEŃ
     logChange: function(action, status) {
         console.log(`%c[NADZORCA]: ${action} | Status: ${status}`, "color: #00ffcc; font-weight: bold;");
         // Tutaj można dodać wysyłkę do bazy danych lub powiadomienie PUSH
     },
 
-    // 2. SYSTEM AUTONAPRAWY (REKONSTRUKCJA)
     reconstruct: function(errorType, details) {
         this.logChange("Wykryto anomalię: " + errorType, "INICJACJA REKONSTRUKCJI");
         
         if (errorType === "CONNECTION_REFUSED") {
             this.logChange("Naprawa mostka sieciowego...", "W TOKU");
-            // Logika naprawy: np. zmiana adresu z 127.0.0.1 na localhost lub proxy
             return "Zrekonstruowano ścieżkę komunikacji.";
         }
         
         return "Błąd krytyczny - wymagana interwencja Architekta.";
     },
 
-    // 3. RAPORTOWANIE ZMIAN
     notifyArchitekt: function(msg) {
         const btn = document.getElementById('btn-google-init');
         if(btn) {
@@ -2689,59 +2782,57 @@ function executeCyberVision() {
     }
 };
 
-// Globalny przechwytywacz błędów dla AI
 window.addEventListener('error', (event) => {
     const fixResult = QuantumOverseer.reconstruct("JS_ERROR", event.message);
     QuantumOverseer.notifyArchitekt(fixResult);
 });  
-// --- MODUŁ REJESTRU I STATYSTYK (DYNAMICZNY) ---
+
+// --- DYNAMIKA STATYSTYK SYSTEMOWYCH ---
 function refreshRegistryStats() {
-    // 1. IDENTYFIKACJA WĘZŁÓW (Tomasz, sprawdź czy masz takie ID w HTML!)
-    const neuralBar = document.getElementById('neural-load-bar'); // pasek fioletowy
-    const neuralVal = document.getElementById('neural-val');      // tekst %
-    const coreBar = document.getElementById('core-stability-bar');// pasek cyjan
-    const coreVal = document.getElementById('core-val');          // tekst %
-    const netSpeed = document.getElementById('net-speed-val');    // Twoje 144 Mbps
+    const neuralBar = document.getElementById('neural-load-bar');
+    const neuralVal = document.getElementById('neural-val');
+    const coreBar = document.getElementById('core-stability-bar');
+    const coreVal = document.getElementById('core-val');
+    const netSpeed = document.getElementById('net-speed-val');
 
-    if (!neuralBar) return; // Zabezpieczenie przed błędem "STOP"
+    if (!neuralBar) return; 
 
-    // 2. SYMULACJA PRACY QUALCOMMA (SKOK PRZY AKCJI)
-    // Neural Load skacze do góry (AI myśli)
     let load = Math.floor(Math.random() * (92 - 85 + 1)) + 85;
     neuralBar.style.width = load + "%";
     if(neuralVal) neuralVal.innerText = load + "%";
-    neuralBar.style.boxShadow = "0 0 15px #a855f7"; // Rozbłysk fioletu
+    neuralBar.style.boxShadow = "0 0 15px #a855f7"; 
 
-    // Stabilność Core (delikatne wahania 98-100%)
     let stability = Math.floor(Math.random() * (100 - 98 + 1)) + 98;
     if(coreBar) coreBar.style.width = stability + "%";
     if(coreVal) coreVal.innerText = stability + "%";
 
-    // 3. POWRÓT DO STANU CZUWANIA (Po 2 sekundach)
     setTimeout(() => {
-        neuralBar.style.width = "24%"; // Twój bazowy poziom
+        if(neuralBar) {
+            neuralBar.style.width = "24%";
+            neuralBar.style.boxShadow = "none";
+        }
         if(neuralVal) neuralVal.innerText = "24%";
-        neuralBar.style.boxShadow = "none";
         
         if(coreBar) coreBar.style.width = "99%";
         if(coreVal) coreVal.innerText = "99%";
         
-        // Twoja stała prędkość Qualcomm
         if(netSpeed) netSpeed.innerText = "144 Mbps";
     }, 2500);
 }
-function launchArchitectLab() {
-    // 1. BUDOWA "WIRTUALNEGO MOSTU"
+
+setInterval(refreshRegistryStats, 5000);
+
+window.onload = () => {
+    authenticate();
+    refreshRegistryStats();
+};function launchArchitectLab() {
     const link = document.createElement('a');
     link.href = 'architekt_lab.html'; // Ścieżka do Twojego nowego pliku na pendrive
     link.target = '_blank';
     
-    // Parametry okna (opcjonalne, ale 'target=_blank' jest najpewniejsze)
-    // 2. POWIADOMIENIE PROJEKTANTA
-    const msg = "🛡️ ARCHITEKT: Projektancie Tomaszu, wymuszam otwarcie laboratorium. Rdzeń Qualcomm Atheros autoryzuje start.";
+    const msg = "🛡️ ARCHITEKT: Projektancie Tomaszu, otwarcie laboratorium. Rdzeń Qualcomm Atheros autoryzuje start.";
     if (typeof speakAsArchitekt === 'function') speakAsArchitekt(msg);
 
-    // 3. SYMULACJA KLIKNIĘCIA (Omija blokady Pop-up)
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
@@ -2749,17 +2840,14 @@ function launchArchitectLab() {
     console.log("🛡️ SENTINEL: Protokół Architekt Lab WYSTRZELONY.");
 }
 
-// 1. ZEGAR I PODSTAWOWA KONFIGURACJA
 setInterval(() => { document.getElementById('sys-clock').innerText = new Date().toLocaleTimeString(); }, 1000);
 
-// 2. BAZA PORTALI (TWOJE SKRÓTY)
 const sites = {
     "google": "https://www.google.pl", "fb": "https://www.facebook.com", "ig": "https://www.instagram.com",
     "dolar": "https://pl.tradingview.com", "giełda": "https://www.gpw.pl",
     "github": "https://github.com", "binance": "https://www.binance.com", "chatgpt": "https://chat.openai.com"
 };
 
-// 3. ARCHITEKT_BRAIN: LOGIKA TWORZENIA CAŁYCH KONTENERÓW
 function generateMajorComponent(type) {
     const components = {
         "projekt": `
@@ -2787,7 +2875,6 @@ function generateMajorComponent(type) {
     return components[type] || null;
 }
 
-// 4. MODUŁ ANALIZY I NAPRAWY (AUDYT)
 function runDeepAudit() {
     const viewer = document.getElementById('code-viewer');
     const source = document.documentElement.innerHTML;
@@ -2805,7 +2892,7 @@ function runDeepAudit() {
         report += `<p class="text-green-500">✓ STRUKTURA INDEX.HTML: INTEGRALNA (Divs: ${divs}/${cDivs})</p>`;
     }
     
-    report += `<p class="mt-4 text-purple-500 uppercase text-[9px] font-black tracking-tighter animate-pulse">// SYSTEM_CLEAN // BRAK_WIRUSZÓW // PAMIĘĆ_H_OK</p>`;
+    report += `<p class="mt-4 text-purple-500 uppercase text-[9px] font-black tracking-tighter animate-pulse">// SYSTEM_CLEAN // BRAK_WIRUSÓW // PAMIĘĆ_H_OK</p>`;
     viewer.innerHTML = report;
 }
 
@@ -2822,54 +2909,89 @@ document.getElementById('super-input').addEventListener('keypress', (e) => {
             save(); uUI();
         }
 
-        // 6. POMOCNICZE
-        function save() { localStorage.setItem('hj_q_final_26', JSON.stringify(db)); }
-        function switchTab(id) { 
-            document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
-            document.getElementById('content-' + id).classList.add('active');
-            document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('sidebar-item-active'));
-            if(document.getElementById('btn-' + id)) document.getElementById('btn-' + id).classList.add('sidebar-item-active');
-        }
-        function logAction(m, c="text-blue-300") { db.logs.unshift({t:new Date().toLocaleTimeString(), m, c}); uUI(); }
-        function openOffice() { if(prompt("KOD DOSTĘPU:") === "1234") switchTab('office'); else alert("BŁĄD"); }
+function save() { 
+    localStorage.setItem('hj_q_final_26', JSON.stringify(db)); 
+    updateOfficeDashboard(); 
+}
+
+function switchTab(id) { 
+    document.querySelectorAll('.tab-content').forEach(t => {
+        t.classList.remove('active');
+        t.classList.add('hidden'); // Dodaj hidden dla pewności
+    });
+    
+    const target = document.getElementById('content-' + id);
+    if(target) {
+        target.classList.add('active');
+        target.classList.remove('hidden');
+    }
+
+    document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('sidebar-item-active'));
+    const btn = document.getElementById('btn-' + id);
+    if(btn) btn.classList.add('sidebar-item-active');
+
+    if(id === 'market' && typeof drawChart === 'function') {
+        setTimeout(drawChart, 50); 
+    }
+    
+    // Jeśli wchodzimy do biura, odśwież statystyki
+    if(id === 'office') updateOfficeDashboard();
+}
+
+function logAction(m, c="text-blue-300") { 
+    db.logs.unshift({t:new Date().toLocaleTimeString(), m, c}); 
+    if(db.logs.length > 20) db.logs.pop(); // limit logów
+    uUI(); 
+    save(); 
+}
+
+function openOffice() { 
+    if(prompt("KOD DOSTĘPU:") === "1234") switchTab('office'); 
+    else alert("BŁĄD AUTORYZACJI"); 
+}
+
 function updateOfficeDashboard() {
     const registry = document.getElementById('assets-registry');
     const statAssets = document.getElementById('stat-assets');
     const statTotalValue = document.getElementById('stat-total-value');
     
-    // 1. POBIERZ DANE Z TWOJEJ BAZY (ZAMIAST assetsData)
+    if(!registry) return; // Zabezpieczenie przed błędem jeśli elementu nie ma w HTML
+
     const currentAssets = db.ast || []; 
     registry.innerHTML = '';
     let totalValue = 0;
 
-    // 2. RENDERUJ ELEMENTY Z BAZY
+    if(currentAssets.length === 0) {
+        registry.innerHTML = '<p class="text-[10px] text-gray-500 italic p-2 text-center">SYSTEM_CORE_EMPTY: Brak zarejestrowanych aktywów</p>';
+    }
+
     currentAssets.forEach((asset, index) => {
-        // Obliczamy wartość (p = cena zakupu, v = zysk/s)
+        // Obliczamy wartość (cena p lub zysk v * 100)
         const val = parseFloat(asset.p) || (parseFloat(asset.v) * 100) || 0;
         totalValue += val;
         
         const assetRow = document.createElement('div');
-        assetRow.className = "flex justify-between items-center bg-white/5 p-2 rounded border border-white/10 mb-1 hover:bg-white/10";
+        assetRow.className = "flex justify-between items-center bg-white/5 p-2 rounded border border-white/10 mb-1 hover:bg-white/10 transition-colors";
         assetRow.innerHTML = `
             <div>
-                <p class="text-[11px] font-bold text-white/80">${asset.n || asset.name}</p>
-                <p class="text-[9px] uppercase text-emerald-400">STATUS: AKTYWNY</p>
+                <p class="text-[11px] font-bold text-white/80">${asset.n || "Nieznany zasób"}</p>
+                <p class="text-[9px] uppercase text-emerald-400 font-mono">ID: #${index.toString().padStart(3,'0')} | STATUS: ONLINE</p>
             </div>
             <div class="text-right">
                 <p class="text-[11px] font-mono font-black text-emerald-400">${val.toLocaleString()} PLN</p>
+                <button onclick="db.bal+=${val}; db.ast.splice(${index},1); save(); uUI();" class="text-[8px] text-red-500 hover:text-white uppercase">[Zlikwiduj]</button>
             </div>
         `;
         registry.appendChild(assetRow);
     });
 
-    // 3. AKTUALIZUJ LICZNIKI
     if(statAssets) statAssets.innerText = currentAssets.length;
-    if(statTotalValue) statTotalValue.innerText = totalValue.toLocaleString('pl-PL', { minimumFractionDigits: 2 }) + " PLN";
+    if(statTotalValue) statTotalValue.innerText = totalValue.toLocaleString() + " PLN";
 }
- /* --- BANK GLOBAL POLAND T.H. ENGINE --- */
+
 let activeClaim = null;
 
-const NAMES = ["Janusz Kowalski", "TechCorp Sp. z o.o.", "Anna Nowak", "Hajduk Logistics", "CryptoMiner Ltd", "Marek Projektant"];
+const NAMES = ["Tomasz Hajduk Właściciel ", "HITAG Sp. z o.o.", "Izabela Hajduk Obsługa klienta", "Tomasz Hajduk Logistics", "CryptoMiner Ltd", "Tomasz Hajduk Projektant"];
 const RISKS = ["NISKI", "MODEROWANY", "WYSOKI", "KRYTYCZNY"];
 
 function generateRandomClaim() {
@@ -2948,13 +3070,12 @@ function openPolandBank() {
         for(let i=0; i<3; i++) generateRandomClaim();
     }
 } 
- // Funkcja obsługująca połączenie z biurem
+
 function startSupportCall() {
     const support = document.getElementById('support-module');
     support.style.display = 'flex';
 }
 
-// Funkcja ładowania przykładowego wniosku
 function loadClaim(id) {
     const content = document.getElementById('active-claim-content');
     if(id === 'claim1') {
@@ -2998,14 +3119,13 @@ function vReset() {
 
 function checkAccess() {
     var screenDisplay = document.getElementById('v-screen');
-    var correctCode = "0000"; // TWOJE HASŁO
+    var correctCode = "6609"; 
     
     if (vaultInput === correctCode) {
         screenDisplay.innerText = "OPEN";
         screenDisplay.style.color = "#10b981";
         
         setTimeout(function() {
-            // 1. Otwieramy czyste okno
             var transferWin = window.open("", "TransferPortal", "width=600,height=700,menubar=no,status=no");
             
             if (!transferWin) {
@@ -3013,10 +3133,8 @@ function checkAccess() {
                 return;
             }
 
-            // 2. Przygotowujemy czysty dokument
             transferWin.document.open();
             
-            // 3. Wstawiamy prosty, pancerny HTML bez konfliktów w kodzie
             var content = '<html><head><title>TERMINAL TRANSFEROWY</title>';
             content += '<style>body{background:#000;color:#10b981;font-family:monospace;padding:30px;text-align:center;}';
             content += 'input,select{background:#111;border:1px solid #10b981;color:#fff;padding:12px;width:100%;margin-bottom:20px;outline:none;}';
@@ -3024,7 +3142,7 @@ function checkAccess() {
             content += 'label{font-size:11px;display:block;text-align:left;margin-bottom:5px;}</style></head><body>';
             
             content += '<h2>PROTOKÓŁ TRANSFERU</h2>';
-            content += '<label>BANK:</label><select id="b"><option value="S">SANTANDER</option><option value="B">BNP PARIBAS</option></select>';
+            content += '<label>BANK:</label><select id="b"><option value="S">SANTANDER</option><option value="B">BNP PARIBAS</option><option value="P">PKO BP</option></select>';
             content += '<label>ODBIORCA:</label><input type="text" id="u" placeholder="Nazwa...">';
             content += '<label>NR KONTA:</label><input type="text" id="a" maxlength="26">';
             content += '<label>KWOTA (PLN):</label><input type="number" id="m">';
@@ -3035,7 +3153,6 @@ function checkAccess() {
             transferWin.document.write(content);
             transferWin.document.close();
 
-            // 4. Dodajemy logikę przycisku bezpośrednio po załadowaniu
             transferWin.document.getElementById('go').onclick = function() {
                 var b = transferWin.document.getElementById('b').value;
                 var url = (b === 'S') ? 'https://www.santander.pl' : 'https://www.bnpparibas.pl';
@@ -3043,7 +3160,7 @@ function checkAccess() {
                 transferWin.close();
             };
 
-            vReset(); // Czyścimy sejf w głównym oknie
+            vReset(); 
         }, 500);
 
     } else {
@@ -3083,9 +3200,204 @@ function submitClaim() {
 
     alert(`Wniosek zapisany:\nFirma: ${firma}\nNIP: ${nip}\nKwota: ${kwota} PLN`);
 }
+
+function startSpeaking(duration = 3000) {
+    const mouth = document.getElementById('avatar-mouth');
+    if(!mouth) return;
+    
+    const interval = setInterval(() => {
+        const height = Math.floor(Math.random() * 15) + 2;
+        mouth.style.height = `${height}px`;
+        mouth.style.borderRadius = '50%';
+    }, 100);
+
+    setTimeout(() => {
+        clearInterval(interval);
+        mouth.style.height = '2px';
+        mouth.style.borderRadius = '0';
+    }, duration);
+}
+
+async function triggerGuardianScan() {
+    const input = document.getElementById('super-input');
+    const chat = document.getElementById('super-chat-box');
+    const status = document.getElementById('txt-v-net');
+    const query = input.value.trim() || "kurs btc i newsy rynkowe 2026";
+
+    const log = (msg, color = "text-cyan-400/80") => {
+        const p = document.createElement('p');
+        p.className = color;
+        p.innerText = `[CORE]: ${msg}`;
+        chat.appendChild(p);
+        chat.scrollTop = chat.scrollHeight;
+    };
+
+    log(`Inicjuję skanowanie wizyjne dla: ${query}...`);
+    status.innerText = "SKANOWANIE DYSKU H...";
+    startSpeaking(4000);
+
+    const searchUrl = `https://google.com{encodeURIComponent(query)}`;
+    window.open(searchUrl, '_blank');
+
+    try {
+        if (typeof autoScan === "function") {
+            log("Nawiązywanie połączenia z Puppeteer...");
+            const analysis = await autoScan(query);
+            log(`ANALIZA ZAKOŃCZONA: ${analysis ? 'SUKCES' : 'BRAK DANYCH'}`);
+        } else {
+          
+            setTimeout(() => {
+                log("Dysk H: Skanowanie index.html zakończone.");
+                log("Projekt: SPRAWNY. Nie wykryto krytycznych błędów.");
+            }, 2000);
+        }
+
+        navigator.sendBeacon('http://127.0.0.1:5000', JSON.stringify({ 
+            task: "GUARDIAN_SCAN", 
+            target: "H:/index.html",
+            query: query 
+        }));
+
+    } catch (err) {
+        log(`BŁĄD KRYTYCZNY: ${err.message}`, "text-red-500");
+    } finally {
+        setTimeout(() => { status.innerText = "🧠 Strażnik Super Core"; }, 3000);
+    }
+}
+
+function otworzStraznikaWizji() {
+    const container = document.getElementById('guardian-container');
+    if (container) {
+        container.classList.remove('hidden');
+        document.getElementById('super-input').focus();
+    }
+
+    if (window.uruchomStraznikaH) {
+        const query = document.getElementById('super-input')?.value || "Analiza Projektu H:";
+        window.uruchomStraznikaH(query);
+        return;
+    }
+
+    console.log("🛡️ Nawiązywanie połączenia z dyskiem H:/guardian_core.js...");
+    const script = document.createElement('script');
+    script.src = 'file:///H:/guardian_core.js'; 
+    
+    script.onload = () => {
+        console.log("✅ MODUŁ STRAŻNIKA ZAŁADOWANY.");
+        const logBox = document.getElementById('super-chat-box');
+        const p = document.createElement('p');
+        p.className = "text-emerald-400";
+        p.innerText = "[SYSTEM]: Połączono z rdzeniem H:";
+        logBox.appendChild(p);
+    };
+
+    script.onerror = () => {
+        console.error("❌ BŁĄD ODCZYTU DYSKU H:");
+        alert("BŁĄD: Nie znaleziono pliku 'guardian_core.js' na dysku H:!");
+    };
+
+    document.head.appendChild(script);
+}
+
+function triggerGuardianScan() {
+    const input = document.getElementById('super-input');
+    const chat = document.getElementById('super-chat-box');
+    const cmd = input.value.toLowerCase().trim();
+    if(!cmd) return;
+
+    const log = (text, color = "text-cyan-100") => {
+        const p = document.createElement('p');
+        p.className = color;
+        p.innerHTML = `[CORE]: ${text}`;
+        chat.appendChild(p);
+        chat.scrollTop = chat.scrollHeight;
+    };
+
+    log(`WYKONUJĘ: ${cmd.toUpperCase()}`, "text-white font-bold italic");
+
+    if (cmd === 'napraw') {
+        speakAndAnimate("Inicjuję skanowanie i naprawę jądra systemu.");
+        log("Skanowanie drzewa DOM...");
+        setTimeout(() => log("Naprawa zakończona.", "text-emerald-400"), 1500);
+    } 
+    else if (cmd === 'status') {
+        const count = document.querySelectorAll('*').length;
+        speakAndAnimate(`Status stabilny. Wykryto ${count} elementów.`);
+        log(`System H: Online. Elementy: ${count}`);
+    }
+    else {
+        speakAndAnimate("Nie rozumiem. Spróbuj: napraw, status.");
+        log("BŁĄD: Komenda nieznana.", "text-red-500");
+    }
+
+    input.value = ''; 
+}
+
+function speakAndAnimate(text) {
+    const mouth = document.getElementById('avatar-mouth');
+    if (!mouth) return;
+    
+    const msg = new SpeechSynthesisUtterance(text);
+    msg.lang = 'pl-PL';
+    msg.pitch = 0.8;
+
+    const interval = setInterval(() => {
+        mouth.style.height = Math.floor(Math.random() * 12 + 2) + 'px';
+        mouth.style.backgroundColor = '#34d399'; // Błysk przy mówieniu
+    }, 100);
+
+    msg.onend = () => {
+        clearInterval(interval);
+        mouth.style.height = '2px';
+        mouth.style.backgroundColor = '';
+    };
+
+    window.speechSynthesis.speak(msg);
+}
+
+function triggerGuardianScan() {
+    const input = document.getElementById('super-input');
+    const chat = document.getElementById('super-chat-box');
+    const cmd = input.value.toLowerCase().trim();
+    if(!cmd) return;
+
+    const log = (text, color = "text-cyan-100") => {
+        const p = document.createElement('p');
+        p.className = color;
+        p.innerHTML = `[CORE]: ${text}`;
+        chat.appendChild(p);
+        chat.scrollTop = chat.scrollHeight;
+    };
+
+    log(`WYKONUJĘ: ${cmd.toUpperCase()}`, "text-white font-bold italic");
+
+    if (cmd === 'napraw') {
+        speakAndAnimate("Inicjuję skanowanie i naprawę jądra systemu.");
+        log("Skanowanie drzewa DOM w poszukiwaniu błędów...");
+        setTimeout(() => log("Naprawa zakończona. Spójność kodu H:/index.html przywrócona.", "text-emerald-400"), 1500);
+    } 
+    else if (cmd === 'status') {
+        const count = document.querySelectorAll('*').length;
+        speakAndAnimate(`Status stabilny. Wykryto ${count} elementów strukturalnych.`);
+        log(`System H: Online. Liczba aktywnych elementów: ${count}`);
+    }
+    else if (cmd === 'snap') {
+        if (typeof snapSave === "function") {
+            snapSave();
+            speakAndAnimate("Punkt przywracania został zapisany pomyślnie.");
+            log("SNAPSHOT: Stan projektu zabezpieczony.", "text-purple-400");
+        } else {
+            log("BŁĄD: Funkcja Snap-Save niedostępna.", "text-red-500");
+        }
+    }
+    else {
+        speakAndAnimate("Nie rozumiem tego polecenia. Spróbuj: napraw, status lub snap.");
+        log("BŁĄD: Komenda nieznana.", "text-red-800");
+    }
+
+    input.value = ''; 
+}
 </script>
 </body>
 </html>
-
-
 
