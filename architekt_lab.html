@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <title>HAJDUK GLOBAL QUANTUM TERMINAL 2026</title>
+    <title>🛡️ ARCHITEKT: OMNI_CORE v7.0 PRO</title>
+    <style>
+        body, html { height: 100vh; width: 100vw; margin: 0; padding: 0; background: #000; color: #06b6d4; font-family: 'Courier New', monospace; overflow: hidden; }
+        .flex { display: flex; flex-direction: column; }
+        
+        /* HEADER - UKŁAD TRZYKOLUMNOWY */
+        .header { height: 60px; border-bottom: 1px solid #06b6d4; display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; padding: 0 10px; background: #050505; }
+        .header-left { font-weight: bold; padding-left: 50px; }
+        .header-center { text-align: center; display: flex; flex-direction: column; align-items: center; }
+        #ui-bal { color: #22c55e; text-shadow: 0 0 10px rgba(34, 197, 94, 0.5); }
+        #clock { color: #facc15; font-size: 1.2rem; font-weight: bold; }
+
+        /* TICKER GIEŁDOWY */
+        #ticker-container { height: 30px; background: #080808; border-bottom: 1px solid #1a331a; overflow: hidden; display: flex; align-items: center; white-space: nowrap; }
+        #ticker { display: inline-block; padding-left: 100%; animation: ticker-move 30s linear infinite; font-size: 11px; color: #22c55e; }
+
+        @keyframes ticker-move { 0% { transform: translate3d(0, 0, 0); } 100% { transform: translate3d(-100%, 0, 0); } }
+        .ticker-item { display: inline-block; margin-right: 50px; }
+        .ticker-label { color: #888; margin-right: 5px; }
+        .ticker-val { color: #facc15; }
+
+        /* DASHBOARD */
+        .dashboard { flex: 1; display: flex; gap: 5px; padding: 5px; overflow: hidden; }
+        main { flex: 3; border: 1px solid #1e293b; display: flex; flex-direction: column; background: #020617; }
+        aside { flex: 1; border: 1px solid #1e1e1e; display: flex; flex-direction: column; background: #050505; }
+        .label { background: #0f172a; font-size: 10px; padding: 6px; text-align: center; border-bottom: 1px solid #06b6d4; color: #94a3b8; text-transform: uppercase; }
+        .scroll { flex: 1; overflow-y: auto; padding: 15px; font-size: 12px; }
+
+        /* KAFELKI */
+        .res-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 10px; }
+        .res-card { background: #0f172a; border: 1px solid #1e293b; padding: 15px; cursor: pointer; transition: 0.2s; position: relative; overflow: hidden; }
+        .res-card:hover { border-color: #06b6d4; background: #1e293b; transform: translateY(2px); }
+        .type-tag { font-size: 9px; color: #a855f7; font-weight: bold; margin-bottom: 5px; }
+
+        /* CONTROLS & ALPHABET */
+        .controls { border-top: 1px solid #06b6d4; background: #000; padding: 10px; }
+        .alpha-row { display: flex; justify-content: center; gap: 8px; margin-bottom: 10px; border-bottom: 1px solid #111; padding-bottom: 5px; flex-wrap: wrap; }
+        .alpha-key { color: #444; font-size: 11px; cursor: pointer; transition: 0.2s; font-weight: bold; }
+        .alpha-key:hover { color: #fff; text-shadow: 0 0 8px #fff; }
+        
+        input { background: #000; border: 1px solid #334155; color: #fff; padding: 15px; width: 100%; box-sizing: border-box; outline: none; font-size: 14px; font-family: inherit; cursor: text !important; }
+
+        * { cursor: crosshair !important; }
+        .res-card, .alpha-key, .nav-link, button { cursor: pointer !important; }
+body::before {
+    content: " ";
+    display: block;
+    position: absolute;
+    top: 0; left: 0; bottom: 0; right: 0;
+    background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), 
+                linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+    z-index: 9999;
+    background-size: 100% 2px, 3px 100%;
+    pointer-events: none;
+}
+/* Styl dla całego panelu bocznego */
+aside { 
+    flex: 1; 
+    border: 1px solid #1e1e1e; 
+    display: flex; 
+    flex-direction: column; 
+    background: #050505; 
+    overflow-y: auto; /* Włącza przewijanie całego bocznego panelu */
+    max-height: calc(100vh - 90px); /* Dopasowanie do wysokości ekranu */
+}
+
+/* WŁASNY CIEMNY PASEK PRZEWIJANIA (Webkit) */
+aside::-webkit-scrollbar {
+    width: 6px;
+}
+
+aside::-webkit-scrollbar-track {
+    background: #000;
+}
+
+aside::-webkit-scrollbar-thumb {
+    background: #1e293b; /* Ciemny kolor suwaka */
+    border-radius: 10px;
+    border: 1px solid #06b6d4; /* Turkusowa obwódka */
+}
+
+aside::-webkit-scrollbar-thumb:hover {
+    background: #06b6d4; /* Rozjaśnia się po najechaniu */
+}
+
+/* Ograniczenie wysokości logów, żeby nie wypychały kalkulatora */
+#logs { 
+    max-height: 250px; 
+    overflow-y: auto; 
+    border-bottom: 1px solid #111;
+}
+    </style>
+</head>
+<body class="flex">
+
+<div class="header">
+    <div class="header-left">BAL: <span id="ui-bal">1,250,000.00</span> PLN</div>
+    <div class="header-center">
+        <strong>🛡️ HAJDUK GLOBAL QUANTUM TERMINAL 2026</strong>
+        <div id="clock">00:00:00:00</div>
+    </div>
+    <div class="header-right" style="text-align:right; font-size:10px; color:#444;">CORE_PRO_v7.0_STABLE</div>
+</div>
+<div id="ticker-container">
+    <div id="ticker">
+        <span class="ticker-item"><span class="ticker-label">BTC/PLN:</span><span class="ticker-val">261,842.10</span> <span style="color:#22c55e">▲</span></span>
+        <span class="ticker-item"><span class="ticker-label">ETH/PLN:</span><span class="ticker-val">7,941.50</span> <span style="color:#22c55e">▲</span></span>
+        <span class="ticker-item"><span class="ticker-label">USD/PLN:</span><span class="ticker-val">3.7251</span></span>
+        <span class="ticker-item"><span class="ticker-label">EUR/PLN:</span><span class="ticker-val">4.2488</span></span>
+        <span class="ticker-item"><span class="ticker-label">ZŁOTO (1g):</span><span class="ticker-val">564.12 PLN</span></span>
+        <span class="ticker-item"><span class="ticker-label">STATUS:</span><span class="ticker-val" style="color:#22c55e">MARKET_OPEN_LIVE</span></span>
+    </div>
+</div>
+<div class="dashboard">
+    <main>
+        <div class="label">VISUAL_INTERFACE / GLOBAL_RESOURCES</div>
+        <div id="viewer" class="scroll">
+            <div id="welcome" style="color: #64748b;">SYSTEM ONLINE. WPISZ NAZWĘ LUB WYBIERZ LITERĘ...</div>
+            <div id="results" class="res-grid"></div>
+        </div>
+    </main>
+    <aside>
+<!-- 1. PRZELICZNIK WALUT -->
+<div class="label" style="border-top: 1px solid #06b6d4;">CURRENCY_CONVERTER</div>
+<div style="padding: 10px; background: #050505; font-size: 11px;">
+    <div style="margin-bottom: 5px;">
+        <input type="number" id="conv-amount" value="10" style="width: 60px; padding: 2px; font-size: 10px; background:#000; color:#fff; border:1px solid #334155;">
+        <select id="conv-currency" style="background:#000; color:#fff; border:1px solid #334155; font-size: 10px;">
+            <option value="4.02">USD ($)</option>
+            <option value="4.35">EUR (€)</option>
+            <option value="5.10">GBP (£)</option>
+        </select>
+        <button onclick="convertCurrency()" style="background:#22c55e; border:none; padding:2px 5px; color:#000; font-weight:bold; cursor:pointer;">CALC</button>
+    </div>
+    <div style="color: #facc15;">WYNIK: <span id="conv-result">0.00</span> PLN</div>
+</div>
+
+<!-- 2. STATYSTYKI SESJI (PRZENIESIONE WYŻEJ) -->
+<div class="label" style="border-top: 1px solid #06b6d4;">SESSION_ANALYTICS</div>
+<div style="padding: 10px; font-size: 11px; background: #050505;">
+    <div style="color: #94a3b8;">ZYSK SESJI: <span id="session-profit" style="color: #22c55e;">0.00</span> PLN</div>
+    <div style="color: #94a3b8;">CZAS SESJI: <span id="session-time" style="color: #facc15;">00:00</span></div>
+</div>
+
+<!-- 3. KANAŁY ZAROBKOWE -->
+<div class="label" style="border-top: 1px solid #22c55e; color: #22c55e;">💰 ACTIVE_EARNING_CHANNELS</div>
+<div style="padding: 10px; display: flex; flex-direction: column; gap: 5px;">
+    <button onclick="window.open('https://www.prolific.co', '_blank')" style="background:#050505; border:1px solid #22c55e; color:#22c55e; font-size:10px; padding:5px; cursor:pointer;">▶ PROLIFIC (ANKIETY NAUKOWE)</button>
+    <button onclick="window.open('https://www.usertesting.com', '_blank')" style="background:#050505; border:1px solid #22c55e; color:#22c55e; font-size:10px; padding:5px; cursor:pointer;">▶ USERTESTING (TESTY UX)</button>
+    <button onclick="window.open('https://www.fiverr.com', '_blank')" style="background:#050505; border:1px solid #22c55e; color:#22c55e; font-size:10px; padding:5px; cursor:pointer;">▶ FIVERR (GIG_ECONOMY)</button>
+</div>
+
+<!-- 4. LOGI SYSTEMOWE (TYLKO JEDNO OKNO NA DOLE) -->
+<div class="label" style="border-top: 1px solid #a855f7;">LIVE_LOGS / AI_DECRYPTOR</div>
+<div id="logs" class="scroll" style="color: #a855f7; font-size: 10px; padding: 10px; height: 120px; overflow-y: auto; background: #000;">
+    > INITIALIZING DECRYPTOR...
+</div>    
+    </aside>
+</div>
+<div class="controls">
+    <div class="alpha-row" id="alpha-bar"></div>
+    <input type="text" id="input" placeholder="SZUKAJ (np. 'mBank', 'Warszawa', 'A')..." oninput="omniSearch(this.value)" onkeydown="if(event.key==='Enter') handleOmniEnter(this.value)">
+    <button onclick="zapiszProjektH()" style="background:#06b6d4; border:none; padding:10px; margin-top:10px; font-weight:bold; width:100%; color:#000;">💾 ZAPISZ ARCHIWUM NA DYSK H:</button>
+    <!-- DODANE OKNO AUDIO/VIDEO -->
+    <button onclick="openMediaWindow()" style="background:#facc15; border:none; padding:10px; margin-top:10px; font-weight:bold; width:100%; color:#000;">
+🎵 OTWÓRZ AUDIO/VIDEO RELAX
+</button>
+</div>
+<script>
+   
+    const startTime = Date.now();
+    const startBalance = 1250000.00;
+    let balance = parseFloat(localStorage.getItem('quantum_bal')) || startBalance;
+
+    setInterval(() => {
+        balance += 0.01;
+        document.getElementById('ui-bal').innerText = balance.toLocaleString('pl-PL', {minimumFractionDigits: 2});
+        localStorage.setItem('quantum_bal', balance);
+
+        const sessionProfit = balance - startBalance;
+        document.getElementById('session-profit').innerText = sessionProfit.toFixed(2);
+
+        const now = new Date();
+        const ms = Math.floor(now.getMilliseconds() / 10).toString().padStart(2,'0');
+        document.getElementById('clock').innerText = now.toLocaleTimeString() + ':' + ms;
+    }, 100);
+
+    const alphaBar = document.getElementById('alpha-bar');
+    "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("").forEach(l => {
+        const s = document.createElement('span'); 
+        s.className = 'alpha-key'; 
+        s.innerText = l;
+        s.onclick = () => { 
+            const input = document.getElementById('input');
+            input.value = l; 
+            omniSearch(l); 
+        };
+        alphaBar.appendChild(s);
+    });
+
+   function handleOmniEnter(value) {
+    const cmd = value.toLowerCase().trim();
+    logToSystem("Przetwarzanie komendy: " + cmd);
+
+    if (cmd === "google" || cmd === "architekt") {
+        window.open("https://google.com", "_blank");
+        logToSystem("SYSTEM: Otwieranie Google Architect Tool...");
+    } else {
+
+        omniSearch(value);
+    }
+    document.getElementById('input').value = ""; // Czyści pole po Enterze
+}
+    function zapiszProjektH() {
+        const timestamp = new Date().toLocaleString();
+        const report = `--- ARCHITEKT QUANTUM REPORT ---\nDATA: ${timestamp}\nBALANS: ${balance.toFixed(2)} PLN\nZYSK: ${document.getElementById('session-profit').innerText} PLN\nSTATUS: STABLE`;
+        
+        const blob = new Blob([report], {type: 'text/plain'});
+        const a = document.createElement('a');
+        a.href = URL.createObjectURL(blob);
+        a.download = `ARCHITEKT_H_${Date.now()}.txt`;
+        a.click();
+        logToSystem("ZAPISANO ARCHIWUM NA DYSK.");
+    }
+
+    function logToSystem(msg) {
+        const logs = document.getElementById('logs');
+        logs.innerHTML += `<div>[${new Date().toLocaleTimeString()}] ${msg}</div>`;
+        logs.scrollTop = logs.scrollHeight;
+    }
+
+    function openMediaWindow() {
+        logToSystem("OTWIERANIE MODUŁU RELAX...");
+        window.open('https://youtube.com', '_blank');
+    }
+function convertCurrency() {
+    const amount = document.getElementById('conv-amount').value;
+    const rate = document.getElementById('conv-currency').value;
+    const result = amount * rate;
+    document.getElementById('conv-result').innerText = result.toFixed(2);
+}
+    const cityStats = {
+        warszawa: { name: "Warszawa", sections: { population: { label: "📊 Populacja", value: "1.8M", growth: "+1.2%" }, economy: { label: "💰 Ekonomia", value: "320B PLN", growth: "+3.5%" }, transport: { label: "🚗 Transport", value: "Duży ruch", growth: "↑" } } },
+    londyn: { name: "Londyn", sections: { population: { label: "📊 Populacja", value: "9M", growth: "+0.8%" }, economy: { label: "💰 Ekonomia", value: "600B GBP", growth: "+2.1%" }, transport: { label: "🚇 Transport", value: "Metro + busy", growth: "↑" } } },
+    sydney: { name: "Sydney", sections: { population: { label: "📊 Populacja", value: "5.3M", growth: "+1.5%" }, economy: { label: "💰 Ekonomia", value: "400B AUD", growth: "+2.8%" }, transport: { label: "🚗 Transport", value: "Średni ruch", growth: "=" } } },
+    nowyJork: { name: "Nowy Jork", sections: { population: { label: "📊 Populacja", value: "8.5M", growth: "+0.5%" }, economy: { label: "💰 Ekonomia", value: "1T USD", growth: "+2.0%" }, transport: { label: "🚇 Transport", value: "Metro 24/7", growth: "↑" } } },
+    tokio: { name: "Tokio", sections: { population: { label: "📊 Populacja", value: "14M", growth: "-0.2%" }, economy: { label: "💰 Ekonomia", value: "1.6T USD", growth: "+1.5%" }, transport: { label: "🚄 Transport", value: "Top świat", growth: "↑" } } },
+    berlin: { name: "Berlin", sections: { population: { label: "📊 Populacja", value: "3.6M", growth: "+0.7%" }, economy: { label: "💰 Ekonomia", value: "200B EUR", growth: "+2.3%" }, transport: { label: "🚇 Transport", value: "U-Bahn + S-Bahn", growth: "↑" } } },
+    paryz: { name: "Paryż", sections: { population: { label: "📊 Populacja", value: "2.1M", growth: "+0.3%" }, economy: { label: "💰 Ekonomia", value: "700B EUR", growth: "+1.9%" }, transport: { label: "🚇 Transport", value: "Metro gęste", growth: "↑" } } },
+    madryt: { name: "Madryt", sections: { population: { label: "📊 Populacja", value: "3.3M", growth: "+0.6%" }, economy: { label: "💰 Ekonomia", value: "230B EUR", growth: "+2.2%" }, transport: { label: "🚇 Metro", value: "Bardzo rozwinięte", growth: "↑" } } },
+    barcelona: { name: "Barcelona", sections: { population: { label: "📊 Populacja", value: "1.6M", growth: "+0.4%" }, economy: { label: "💰 Ekonomia", value: "170B EUR", growth: "+2.5%" }, transport: { label: "🚇 Transport", value: "Płynny", growth: "↑" } } },
+    kair: { name: "Kair", sections: { population: { label: "📊 Populacja", value: "10M", growth: "+2.1%" }, economy: { label: "💰 Ekonomia", value: "150B USD", growth: "+4.1%" }, transport: { label: "🚗 Transport", value: "Ekstremalny", growth: "↑" } } },
+    melbourne: { name: "Melbourne", sections: { population: { label: "📊 Populacja", value: "5.1M", growth: "+1.3%" }, economy: { label: "💰 Ekonomia", value: "350B AUD", growth: "+2.4%" }, transport: { label: "🚋 Tramwaje", value: "Największa sieć", growth: "↑" } } }
+};
+    const OMNI_DB = [
+  
+    { n: "Warszawa", t: "MIASTO", u: "https://um.warszawa.pl", k: "W" },
+    { n: "Londyn", t: "MIASTO", u: "https://www.visitlondon.com", k: "L" },
+    { n: "Sydney", t: "MIASTO", u: "https://www.sydney.com", k: "S" },
+    { n: "Nowy Jork", t: "MIASTO", u: "https://www.nyc.gov", k: "N" },
+    { n: "Tokio", t: "MIASTO", u: "https://www.gotokyo.org", k: "T" },
+    { n: "Berlin", t: "MIASTO", u: "https://www.berlin.de", k: "B" },
+    { n: "Paryż", t: "MIASTO", u: "https://en.parisinfo.com", k: "P" },
+    { n: "Wenecja", t: "MIASTO_PIEKNO", u: "https://www.veneziaunica.it", k: "W" },
+    { n: "Praga", t: "MIASTO_PIEKNO", u: "https://www.prague.eu", k: "P" },
+       // --- GEOGRAFIA I KONTYNENTY ---
+    { n: "Hiszpania", t: "KRAJ", u: "https://www.spain.info", k: "H" },
+    { n: "Afryka", t: "KONTYNENT", u: "https://www.nationalgeographic.com", k: "A" },
+    { n: "Australia", t: "KONTYNENT", u: "https://www.australia.com", k: "A" },
+    { n: "Wyspy Świata", t: "WYSPY", u: "https://www.islands.com", k: "W" },
+    { n: "Malediwy", t: "WYSPY_PIEKNO", u: "https://visitmaldives.com", k: "M" },
+    { n: "Bora Bora", t: "WYSPY_PIEKNO", u: "https://tahititourisme.com", k: "B" },
+    { n: "Kanary", t: "WYSPY_H", u: "https://www.hellocanaryislands.com", k: "K" },
+    // --- MIĘDZYNARODOWE ---
+    { n: "Barcelona", t: "MIASTO_H", u: "https://www.barcelonaturisme.com", k: "B" },
+    { n: "Madryt", t: "MIASTO_H", u: "https://www.esmadrid.com", k: "M" },
+    { n: "RPA", t: "AFRYKA_H", u: "https://www.southafrica.net", k: "R" },
+    { n: "Egipt", t: "KRAJ_W_", u: "https://www.egypt.travel", k: "E" }, 
+    { n: "Jemen", t: "Stolica_Sana", u: "https://www.google.com/search?q=jemen+stolicą", k: "J" },
+    { n: "Zimbabwe", t: "Kraj_w_Afryce", u: "https://www.egypt.travel", k: "Z" },      
+    // --- AI & TECHNOLOGIA ---
+    { n: "Chat GPT (OpenAI)", t: "AI_CORE", u: "https://chatgpt.com", k: "C" },
+    { n: "Claude AI", t: "AI_CORE", u: "https://claude.ai", k: "C" },
+    { n: "GitHub", t: "DEV_REPO", u: "https://github.com", k: "G" },
+    { n: "Stack Overflow", t: "DEV_FORUM", u: "https://stackoverflow.com", k: "S" },
+    // --- BANKI & FINANSE ---
+    { n: "Alior Bank", t: "BANK", u: "https://www.aliorbank.pl", k: "A" },
+    { n: "mBank", t: "BANK", u: "https://www.mbank.pl", k: "M" },
+    { n: "PKO BP (IPKO)", t: "BANK", u: "https://www.pkobp.pl", k: "P" },
+    { n: "Santander", t: "BANK", u: "https://www.santander.pl", k: "S" },
+    { n: "ING Business", t: "BANK", u: "https://www.ingbusiness.pl", k: "I" },
+    { n: "Binance", t: "CRYPTO", u: "https://www.binance.com", k: "B" },
+    { n: "Revolut", t: "FINTECH", u: "https://www.revolut.com", k: "R" },
+    // --- TV & STREAMING ---
+    { n: "Netflix", t: "STREAM", u: "https://www.netflix.com", k: "N" },
+    { n: "HBO Max", t: "STREAM", u: "https://www.max.com", k: "H" },
+    { n: "Disney+", t: "STREAM", u: "https://www.disneyplus.com", k: "D" },
+    { n: "YouTube", t: "MEDIA", u: "https://www.youtube.com", k: "Y" },
+    { n: "Twitch", t: "LIVE", u: "https://www.twitch.tv", k: "T" },
+    { n: "TVN24", t: "TV_NEWS", u: "https://tvn24.pl", k: "T" },
+    { n: "Polsat Box", t: "TV_LIVE", u: "https://polsatboxgo.pl", k: "P" },
+    { n: "Canal+ Online", t: "TV_LIVE", u: "https://www.canalplus.com", k: "C" },
+    // --- PORTALE & NEWS ---
+    { n: "Onet", t: "PORTAL", u: "https://www.onet.pl", k: "O" },
+    { n: "Wirtualna Polska", t: "PORTAL", u: "https://www.wp.pl", k: "W" },
+    { n: "Interia", t: "PORTAL", u: "https://www.interia.pl", k: "I" },
+    { n: "BBC World", t: "NEWS", u: "https://www.bbc.com", k: "B" },
+    { n: "Reuters", t: "NEWS_AGENCY", u: "https://www.reuters.com", k: "R" },
+    { n: "Google", t: "SZUKAJ", u: "https://www.google.com", k: "G" },
+    { n: "Wikipedia", t: "ENCYKLOPEDIA", u: "https://pl.wikipedia.org", k: "W" },
+    { n: "Google_Maps", t: "SZUKAJ", u: "https://www.google.com/maps/@52.1189927,16.1327819,14z?entry=ttu&g_ep=EgoyMDI2MDQyMi4wIKXMDSoASAFQAw%3D%3D", k: "G" },
+
+    // --- SPOŁECZNOŚĆ & FORA ---
+    { n: "Facebook", t: "SOCIAL", u: "https://www.facebook.com", k: "F" },
+    { n: "Instagram", t: "SOCIAL", u: "https://www.instagram.com", k: "I" },
+    { n: "X (Twitter)", t: "SOCIAL", u: "https://www.x.com", k: "X" },
+    { n: "Reddit", t: "FORUM", u: "https://www.reddit.com", k: "R" },
+    { n: "Wykop", t: "FORUM", u: "https://www.wykop.pl", k: "W" },
+    { n: "Discord", t: "CHAT", u: "https://www.discord.com", k: "D" },
+    { n: "LinkedIn", t: "B2B_SOCIAL", u: "https://www.linkedin.com", k: "L" },
+    { n: "Quora", t: "QA_FORUM", u: "https://www.quora.com", k: "Q" },
+// --- NOWA KATEGORIA: GIEŁDY I FINANSE ŚWIATOWE ---
+    { n: "NYSE - New York", t: "STOCKS_LIVE", u: "https://www.nyse.com", k: "N" },
+    { n: "NASDAQ", t: "STOCKS_LIVE", u: "https://www.nasdaq.com", k: "N" },
+    { n: "GPW Warszawa", t: "STOCKS_LIVE", u: "https://www.gpw.pl", k: "G" },
+    { n: "London Stock Exchange", t: "STOCKS_LIVE", u: "https://www.londonstockexchange.com", k: "L" },
+    { n: "Tokyo Stock Exchange", t: "STOCKS_LIVE", u: "https://www.jpx.co.jp", k: "T" },
+     // --- KRYPTOWALUTY ---
+    { n: "Binance Terminal", t: "CRYPTO_HUB", u: "https://www.binance.com", k: "B" },
+    { n: "CoinMarketCap", t: "CRYPTO_DATA", u: "https://coinmarketcap.com", k: "C" },
+    { n: "TradingView", t: "CHARTS_PRO", u: "https://pl.tradingview.com", k: "T" },
+ // ... poprzednie wpisy ...
+    { k: "U", n: "UserTesting", t: "EARN_TESTING", u: "https://www.usertesting.com" }, // Zarabianie na testowaniu stron i aplikacji
+    { k: "F", n: "Fiverr", t: "FREELANCE", u: "https://www.fiverr.com" }, // Sprzedaż własnych usług (grafika, teksty, kod)
+    { k: "A", n: "Amazon Mechanical Turk", t: "MICRO_TASKS", u: "https://www.mturk.com" }, // Proste zadania od Amazon (klasyfikacja danych)
+    { k: "U", n: "Upwork", t: "PROFESSIONAL", u: "https://www.upwork.com" }, // Największa platforma dla freelancerów
+    { k: "P", n: "Prolific", t: "SURVEYS", u: "https://www.prolific.co" }, // Wysokiej jakości ankiety naukowe (płacą w GBP/USD)
+    { k: "C", n: "Clickworker", t: "MICRO_JOBS", u: "https://www.clickworker.com" } // Zadania AI, pisanie tekstów, kategoryzacja
+];
+    function addLog(msg) {
+        const logs = document.getElementById('logs');
+        const entry = document.createElement('div');
+        entry.innerText = `[${new Date().toLocaleTimeString()}] ${msg}`;
+        logs.prepend(entry);
+    }
+
+    function omniSearch(query) {
+        const q = query.toUpperCase().trim();
+        const resDiv = document.getElementById('results');
+        const welcome = document.getElementById('welcome');
+        if (welcome) welcome.style.display = (q === "") ? "block" : "none";
+        resDiv.innerHTML = "";
+        if (q === "") return;
+
+        const filtered = OMNI_DB.filter(item => q.length===1 ? item.k===q : item.n.toUpperCase().includes(q));
+        filtered.forEach(res => {
+            const card = document.createElement('div');
+            card.className = 'res-card';
+            card.innerHTML = `<div class="type-tag">${res.t}</div><div style="font-weight:bold">${res.n}</div>`;
+            card.onclick = () => { addLog("OPEN_PORTAL: " + res.n); window.open(res.u, '_blank'); };
+            resDiv.appendChild(card);
+        });
+    }  
+
+   function openMediaWindow() {
+    const audioLinks = [
+        { n: "Ambient Relaxation (YouTube 24/7)", u: "https://www.youtube.com" },
+        { n: "Lo-Fi Hip Hop Radio", u: "https://www.youtube.com" },
+        { n: "Dźwięki Natury: Deszcz i Las", u: "https://www.youtube.com" },
+        { n: "Muzyka do Pracy/Nauki (Deep Focus)", u: "https://www.youtube.com" }
+    ];
+
+    const videoLinks = [
+        { n: "LIVE: Widok z Kosmosu (ISS)", u: "https://www.youtube.com" },
+        { n: "Kolekcja: Natura 4K (Pixabay)", u: "https://pixabay.com" },
+        { n: "Kolekcja: Podwodny Świat", u: "https://pixabay.com" },
+        { n: "Cyberpunk City Ambient", u: "https://www.youtube.com" }
+    ];
+
+    const mediaWin = window.open("", "_blank", "width=1000,height=900");
+    if (!mediaWin) return alert("Zablokowano okno! Zezwól na pop-upy.");
+
+    mediaWin.document.write(`
+        <html>
+        <head>
+            <title>🌌 QUANTUM MEDIA HUB</title>
+            <style>
+                body { background:#020617; color:#06b6d4; font-family:monospace; padding:30px; display:flex; flex-direction:column; align-items:center; }
+                .container { width:100%; max-width:700px; background:#000; border:1px solid #06b6d4; padding:25px; box-shadow:0 0 20px #06b6d4; }
+                h2 { color:#22c55e; text-align:center; border-bottom:1px solid #1e293b; padding-bottom:15px; text-transform:uppercase; }
+                .label { color:#facc15; margin:25px 0 10px 0; font-size:11px; text-transform:uppercase; letter-spacing:1px; border-bottom:1px solid #111; }
+                .btn-list { display:flex; flex-direction:column; gap:8px; }
+                button { background:#0f172a; border:1px solid #1e293b; color:#fff; padding:18px; cursor:pointer; text-align:left; font-family:inherit; transition:0.2s; border-radius:4px; }
+                button:hover { background:#06b6d4; color:#000; font-weight:bold; transform:translateX(5px); }
+                #status { text-align:center; color:#22c55e; font-size:13px; margin-bottom:15px; }
+            </style>
+        </head>
+        <body>
+            <div class="container">
+                <h2>🌌 SYSTEM_MEDIA_GATEWAY</h2>
+                <div id="status">WYBIERZ ŹRÓDŁO ZEWNĘTRZNE...</div>
+                
+                <div class="label">🎵 STACJE AUDIO (OTWIERA W NOWEJ KARCIE)</div>
+                <div class="btn-list" id="al"></div>
+
+                <div class="label">📺 KANAŁY WIDEO (OTWIERA W NOWEJ KARCIE)</div>
+                <div class="btn-list" id="vl"></div>
+            </div>
+
+            <script>
+                const st = document.getElementById('status');
+
+                function openSource(u, n) {
+                    window.open(u, "_blank");
+                    st.innerText = "URUCHOMIONO: " + n;
+                }
+
+                (${JSON.stringify(audioLinks)}).forEach(m => {
+                    let b = document.createElement('button');
+                    b.innerHTML = "🔊 [AUDIO_STREAM] " + m.n;
+                    b.onclick = () => openSource(m.u, m.n);
+                    document.getElementById('al').appendChild(b);
+                });
+
+                (${JSON.stringify(videoLinks)}).forEach(m => {
+                    let b = document.createElement('button');
+                    b.innerHTML = "📺 [VIDEO_CHANNEL] " + m.n;
+                    b.onclick = () => openSource(m.u, m.n);
+                    document.getElementById('vl').appendChild(b);
+                });
+            <\/script>
+        </body>
+        </html>
+    `);
+    mediaWin.document.close();
+}
+function decryptText(elementId, finalNetText) {
+    const chars = "!@#$%^&*()_+DB0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    let iteration = 0;
+    const element = document.getElementById(elementId);
+    
+    const interval = setInterval(() => {
+        element.innerText = finalNetText.split("")
+            .map((char, index) => {
+                if(index < iteration) return finalNetText[index];
+                return chars[Math.floor(Math.random() * chars.length)];
+            })
+            .join("");
+        
+        if(iteration >= finalNetText.length) clearInterval(interval);
+        iteration += 1 / 3; 
+    }, 30);
+}
+
+const currentMilestone = Math.floor(sessionProfit / 100); 
+if (currentMilestone > lastAlertMilestone) {
+    lastAlertMilestone = currentMilestone;
+    addLog(`💎 SUCCESS: ZYSK SESJI PRZEKROCZYŁ ${currentMilestone * 100} PLN!`);
+   
+    const profitEl = document.getElementById('session-profit');
+    profitEl.style.color = "#fff";
+    setTimeout(() => profitEl.style.color = "#22c55e", 500);
+}
+</script>
+</body>
+</html>
