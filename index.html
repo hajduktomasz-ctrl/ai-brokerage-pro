@@ -1,0 +1,3390 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <title>🦅HAJDUK GLOBAL QUANTUM TERMINAL 2026</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://googleapis.com">
+    <link rel="preconnect" href="https://gstatic.com" crossorigin>
+    <link href="/src/style.css" rel="stylesheet">
+    <script src="guardian_core.js"></script>
+    <title>PORTAL AUTORYZACJI PRZELEWU</title>   
+    <style>
+.quantum-face { position: relative; width: 180px; height: 240px; background: radial-gradient(circle at 50% 40%, #1a3a4a 0%, #01050a 100%); border-radius: 90px 90px 70px 70px; border: 1px solid rgba(6, 182, 212, 0.3); }
+.eye-socket { position: absolute; top: 80px; width: 45px; height: 22px; background: #000; border-radius: 50%; overflow: hidden; border: 1px solid #06b6d4; }
+.left { left: 30px; } .right { right: 30px; }
+.iris { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 18px; height: 18px; background: radial-gradient(circle, #06b6d4 0%, #002233 100%); border-radius: 50%; box-shadow: 0 0 10px #06b6d4; }
+.glint { position: absolute; top: 4px; left: 8px; width: 4px; height: 4px; background: white; border-radius: 50%; opacity: 0.8; }
+.quantum-mouth { position: absolute; bottom: 50px; left: 50%; transform: translateX(-50%); width: 30px; height: 4px; background: #06b6d4; border-radius: 20px; box-shadow: 0 0 15px #06b6d4; transition: 0.1s ease; }
+
+.mouth-active { animation: lip-sync 0.15s infinite alternate; }
+@keyframes lip-sync { from { height: 4px; width: 30px; border-radius: 20px; } to { height: 16px; width: 25px; border-radius: 50%; } }
+
+/* SYMBOLE Z OBRAZKA (MATRIX OVERLAY) */
+.matrix-overlay {
+    position: absolute; inset: 0; pointer-events: none;
+    background-image: url('https://www.transparenttextures.com'); /* Struktura skóry */
+    mask-image: radial-gradient(circle, transparent 20%, black 80%);
+    opacity: 0.3;
+}
+.matrix-overlay::after {
+    content: "Σ=C√S  λ+8  φ=9  ∆X";
+    position: absolute; top: 20px; left: 40px; color: #06b6d4; font-size: 10px; font-weight: 900; opacity: 0.5; filter: blur(0.5px);
+}
+       body { background: #010206; color: #f1f5f9; font-family: 'JetBrains Mono', monospace; overflow: hidden; height: 100vh;}
+        .glass { background: rgba(15, 23, 42, 0.7); backdrop-filter: blur(12px); border: 1px solid rgba(59, 130, 246, 0.1); border-radius: 12px; padding: 12px; }
+        .tab-content { display: none; padding: 20px; height: 100vh; flex-direction: column; overflow-y: auto; }
+        .active { display: flex !important; }
+        .nav-btn { width: 100%; text-align: left; padding: 10px 14px; margin-bottom: 5px; border-radius: 10px; font-weight: 800; background: #0f172a; font-size: 10px; transition: 0.2s; color: #94a3b8; border-left: 3px solid transparent; cursor: pointer; }
+
+       .sidebar-item-active { 
+    background: #1d4ed8 !important; /* Mocny niebieski */
+    color: white !important; 
+    border-left-color: #3b82f6 !important; 
+    box-shadow: inset 0 0 10px rgba(59, 130, 246, 0.5);
+}
+        .input-dark { background: #000; border: 1px solid #1e293b; padding: 6px; width: 100%; border-radius: 4px; font-size: 9px; color: white; outline: none; margin-bottom: 4px; }
+
+        .custom-scroll { overflow-y: auto; scrollbar-width: thin; scrollbar-color: #1e293b #000; }
+        .toast { background: #0f172a; border-left: 4px solid #3b82f6; color: white; padding: 12px; border-radius: 4px; font-size: 11px; position: fixed; top: 20px; right: 20px; z-index: 9999; }
+
+        #splash { position: fixed; inset: 0; background: #000; z-index: 10000; display: flex; flex-direction: column; align-items: center; justify-content: center; transition: opacity 0.8s; }
+        .eagle-pulsar { font-size: 120px; animation: pulse 2s infinite; }
+
+        @keyframes pulse { 0%, 100% { transform: scale(1); opacity: 0.7; } 50% { transform: scale(1.1); opacity: 1; } }
+
+        @media print { body * { visibility: hidden; } #print-area, #print-area *, #printable-transfer, #printable-transfer * { visibility: visible; } #print-area, #printable-transfer { position: fixed; left: 0; top: 0; width: 100%; color: black !important; background: white !important; padding: 40px; } }
+
+ #searchBlock.active { display: flex !important; }
+  .quantum-btn:active { transform: translateY(2px); box-shadow: 0 2px 0 0 rgba(88,28,135,0.8) !important; }
+
+#btn-super-core {
+    text-shadow: 0 0 10px rgba(34, 211, 238, 0.5);
+    letter-spacing: 1px;
+}
+
+#btn-super-core:hover {
+    box-shadow: 0 0 25px rgba(34, 211, 238, 0.6);
+    background: rgba(8, 51, 68, 0.8);
+    transform: translateX(5px);
+}
+
+@keyframes brain-throb {
+    0% { transform: scale(1); opacity: 0.8; }
+    50% { transform: scale(1.1); opacity: 1; }
+    100% { transform: scale(1); opacity: 0.8; }
+}
+
+#btn-super-core svg {
+    animation: brain-throb 2s infinite ease-in-out;
+}
+#canvas-container canvas {
+    filter: drop-shadow(0 0 20px rgba(6, 182, 212, 0.6));
+    cursor: grab;
+}
+
+#canvas-container canvas:active {
+    cursor: grabbing;
+}
+
+@keyframes pulse-cyan {
+    0% { shadow: 0 0 5px rgba(6, 182, 212, 0.4); }
+    50% { shadow: 0 0 20px rgba(6, 182, 212, 0.8); }
+    100% { shadow: 0 0 5px rgba(6, 182, 212, 0.4); }
+
+#brain-3d-container {
+    width: 100% !important;
+    height: 500px !important;
+    min-height: 500px !important;
+    display: block !important;
+    position: relative !important;
+}
+
+#avatar-mouth.mouth-active {
+    display: block !important;
+    animation: lipSync 0.15s infinite alternate;
+}
+.quantum-face {
+    position: relative;
+    width: 200px;
+    height: 250px;
+    background: radial-gradient(circle at 50% 40%, rgba(6, 182, 212, 0.15), transparent 70%);
+    border-radius: 50% 50% 45% 45%;
+    box-shadow: inset 0 0 40px rgba(6, 182, 212, 0.1);
+}
+
+.matrix-overlay {
+    position: absolute;
+    inset: 0;
+    background: url('https://www.transparenttextures.com'); 
+    opacity: 0.3;
+    pointer-events: none;
+}
+
+.matrix-overlay::after {
+    content: "∑  ∫  ∆  Ω  ≈  √  ∞  π";
+    position: absolute;
+    top: 20%;
+    left: 10%;
+    right: 10%;
+    font-family: monospace;
+    font-size: 14px;
+    color: #22d3ee;
+    text-shadow: 0 0 10px #22d3ee;
+    letter-spacing: 15px;
+    line-height: 2;
+    opacity: 0.8;
+    text-align: center;
+}
+
+.quantum-mouth {
+    position: absolute;
+    bottom: 25%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 40px;
+    height: 2px;
+    background: #22d3ee;
+    box-shadow: 0 0 15px #22d3ee;
+    transition: all 0.1s ease;
+}
+#hologram-image {
+    mask-image: linear-gradient(to bottom, 
+        rgba(0,0,0,1) 0%, 
+        rgba(0,0,0,0.8) 50%, 
+        rgba(0,0,0,1) 100%);
+    animation: hologram-flicker 2s infinite;
+}
+
+@keyframes hologram-flicker {
+    0% { opacity: 0.8; }
+    5% { opacity: 0.5; transform: translateX(-1px); }
+    10% { opacity: 0.8; }
+    100% { opacity: 0.9; }
+}
+
+        @keyframes head-float { 0%, 100% { transform: translateY(0) rotateY(-5deg); } 50% { transform: translateY(-15px) rotateY(5deg); } }
+
+        @keyframes neon-pulse { 0%, 100% { filter: brightness(1) drop-shadow(0 0 10px #06b6d4); } 50% { filter: brightness(1.4) drop-shadow(0 0 25px #06b6d4); } }
+
+        @keyframes data-flow { 0% { stroke-dashoffset: 100; } 100% { stroke-dashoffset: 0; } }
+        
+        .cyber-face {
+            width: 180px; height: 240px;
+            background: radial-gradient(ellipse at 50% 40%, rgba(6, 182, 212, 0.3) 0%, rgba(0, 0, 0, 0.8) 75%);
+            border-radius: 90px 90px 75px 75px;
+            border: 1px solid rgba(6, 182, 212, 0.4);
+            box-shadow: inset 0 0 50px rgba(6, 182, 212, 0.3);
+            animation: head-float 6s ease-in-out infinite, neon-pulse 4s infinite;
+        }
+
+        .terminal-scroll::-webkit-scrollbar { width: 4px; }
+        .terminal-scroll::-webkit-scrollbar-thumb { background: #06b6d4; border-radius: 10px; }
+        
+        .btn-active:active { transform: scale(0.95); filter: brightness(1.5); }
+#avatar-mouth {
+    transition: all 0.1s ease-in-out;
+}
+
+.mouth-active {
+    animation: blink-mouth 0.2s infinite alternate;
+}
+.custom-scroll::-webkit-scrollbar { width: 3px; }
+    .custom-scroll::-webkit-scrollbar-thumb { background: #10b981; border-radius: 10px; }
+
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+   .animate-fadeIn { 
+    animation: fadeIn 0.4s ease-out forwards; 
+}
+
+.core-input, .core-select { 
+    background: #000 !important; 
+    border: 1px solid #065f46 !important; 
+    color: #34d399 !important; 
+    padding: 12px; 
+    width: 100%; 
+    outline: none; 
+    font-family: monospace;
+}
+
+.core-input:focus { 
+    border-color: #10b981 !important; 
+    box-shadow: 0 0 10px rgba(16, 185, 129, 0.2);
+}
+
+.core-btn { 
+    background: #059669; 
+    color: #000; 
+    font-weight: bold; 
+    width: 100%; 
+    padding: 15px; 
+    margin-top: 20px; 
+    cursor: pointer; 
+    text-transform: uppercase; 
+    border: none;
+    transition: 0.3s;
+}
+
+.core-btn:hover { 
+    background: #10b981; 
+    box-shadow: 0 0 20px rgba(16, 185, 129, 0.4);
+}
+
+#m-canvas {
+    display: block;
+    width: 100% !important;
+    height: 250px !important; 
+    background: rgba(0, 0, 0, 0.2);
+}
+
+.avatar-container-fixed {
+    height: 16rem; /* Odpowiednik h-64 */
+    position: relative;
+    overflow: hidden;
+}
+
+@keyframes fadeIn { 
+    from { opacity: 0; transform: translateY(10px); } 
+    to { opacity: 1; transform: translateY(0); } 
+}
+.system-alert {
+    animation: alert-pulse 1.5s infinite;
+    border-color: #ef4444 !important; /* Czerwień */
+}
+
+@keyframes alert-pulse {
+    0% { shadow: 0 0 10px #ef4444; }
+    50% { shadow: 0 0 40px #ef4444; border-color: #f87171; }
+    100% { shadow: 0 0 10px #ef4444; }
+}
+
+.eye-scanning {
+    animation: eye-move 2s infinite ease-in-out;
+}
+
+@keyframes eye-move {
+    0%, 100% { transform: translateX(-5px); }
+    50% { transform: translateX(5px); }
+}
+.matrix-bg {
+    background: linear-gradient(180deg, rgba(6, 182, 212, 0.05) 0%, transparent 100%);
+    background-size: 100% 2px;
+    animation: scanline 10s linear infinite;
+}
+
+@keyframes scanline {
+    0% { background-position: 0 0; }
+    100% { background-position: 0 100%; }
+}
+#quantum-avatar {
+    animation: float 6s infinite ease-in-out;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0px) rotate(0deg); }
+    50% { transform: translateY(-15px) rotate(1deg); }
+}
+
+.mouth-speaking {
+    animation: speech-vibration 0.2s infinite;
+    height: 4px !important;
+    border-radius: 50%;
+}
+
+@keyframes speech-vibration {
+    0% { transform: scaleX(1) translateX(-50%); opacity: 0.8; }
+    50% { transform: scaleX(1.4) translateX(-35%); opacity: 1; }
+    100% { transform: scaleX(1) translateX(-50%); opacity: 0.8; }
+}
+#avatar-mouth {
+    transition: all 0.2s ease-in-out;
+}
+.mouth-talking {
+    height: 12px !important; /* Otwarcie ust */
+    border-radius: 50% !important; /* Zaokrąglenie */
+    background: #22d3ee !important; /* Rozjaśnienie */
+    box-shadow: 0 0 20px #06b6d4, 0 0 40px #06b6d4 !important; /* Mocniejszy blask */
+    animation: mouth-pulse 0.15s infinite alternate;
+}
+
+@keyframes mouth-pulse {
+    from {
+        transform: translateX(-50%) scaleX(1);
+    }
+    to {
+        transform: translateX(-50%) scaleX(1.3);
+    }
+}
+@keyframes mouth-vibrate {
+    0% { transform: translateX(-50%) scaleX(1) translateY(0); }
+    50% { transform: translateX(-50%) scaleX(1.1) translateY(-1px); }
+    100% { transform: translateX(-50%) scaleX(1) translateY(0); }
+}
+
+.error-alert {
+    animation: alert-red 0.5s infinite alternate !important;
+}
+
+@keyframes alert-red {
+    from { border-color: #06b6d4; box-shadow: 0 0 15px #06b6d4; }
+    to { border-color: #ff0000; box-shadow: 0 0 30px #ff0000; }
+}
+</style>
+</head>
+<body class="flex">
+
+    <div id="splash">
+        <div class="eagle-pulsar">🦅</div>
+        <h1 class="text-[#d4af37] font-black text-xl mt-4 uppercase tracking-widest">Hajduk Master Pro 2026</h1>
+        <div class="w-64 h-1 bg-slate-900 mt-4 overflow-hidden"><div id="loader-bar" class="h-full bg-[#d4af37] w-0 transition-all"></div></div>
+    </div>
+
+   <aside class="w-64 bg-black border-r border-slate-900 flex flex-col h-screen shrink-0">
+    <div class="p-6 text-center border-b border-slate-900 shrink-0">
+        <div class="text-3xl mb-2">🦅</div>
+        <h1 class="text-[#d4af37] font-black text-[10px]">HAJDUK GLOBAL QUANTUM TERMINAL PRO</h1>
+    </div>
+
+   <nav class="flex-1 p-4 space-y-2 custom-scroll overflow-y-auto">
+<button onclick="document.getElementById('bank-poland-portal').style.display='flex'" 
+        class="group flex items-center gap-4 px-6 py-4 bg-emerald-950/20 border-l-4 border-emerald-600 hover:bg-emerald-500/10 transition-all">
+    <span class="text-2xl group-hover:scale-125 transition-transform">🦅</span>
+    <div class="text-left">
+        <span class="block text-[11px] font-black text-emerald-500 uppercase tracking-widest">Terminal Bankowy T.H.</span>
+        <span class="block text-[8px] text-emerald-700 uppercase">System: Gotowy do autoryzacji</span>
+    </div>
+</button>
+<button id="btn-dashboard" onclick="switchTab('dashboard')" class="nav-btn border-l-4 border-emerald-500 bg-emerald-950/20 text-emerald-400 font-black uppercase">📊 PANEL OPERACYJNY DASHBOARD</button>
+
+<button id="btn-cyber-human" onclick="switchTab('ai-brain'); setTimeout(initHumanoidCore, 400);" 
+    class="nav-btn group relative flex items-center gap-3 border-l-4 border-purple-500 bg-purple-950/30 px-6 py-3 text-purple-400 font-black uppercase shadow-[0_0_15px_rgba(168,85,247,0.4)] transition-all hover:bg-purple-900 active:scale-95 animate-pulse">
+    
+    <div class="relative w-5 h-5 transition-transform group-hover:rotate-12">
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org" class="w-full h-full drop-shadow-[0_0_8px_rgba(168,85,247,1)]">
+            <path d="M12 12C14.21 12 16 10.21 16 8C16 5.79 14.21 4 12 4C9.79 4 8 5.79 8 8C8 10.21 9.79 12 12 12ZM12 14C9.33 14 4 15.34 4 18V20H20V18C20 15.34 14.67 14 12 14Z" fill="currentColor"/>
+        </svg>
+        <div class="absolute -top-1 -right-1 w-2 h-2 bg-emerald-400 rounded-full animate-ping"></div>
+    </div>
+
+    <span class="tracking-widest">⚡ CYBER HUMAN</span>
+</button>
+<button id="btn-super-core" onclick="switchTab('super-core'); launchCyberMind();" 
+    class="nav-btn border-l-4 border-cyan-400 bg-cyan-950/40 text-cyan-400 font-black uppercase shadow-[0_0_15px_rgba(6,182,212,0.4)] animate-pulse px-6 py-3 transition-all hover:bg-cyan-900">
+    ⚡ SUPER CORE AI
+</button>
+<button id="btn-super-core" onclick="launchArchitectLab();" 
+    class="nav-btn border-l-4 border-cyan-400 bg-cyan-950/40 text-cyan-400 font-black uppercase shadow-[0_0_15px_rgba(6,182,212,0.4)] animate-pulse px-6 py-3 transition-all hover:bg-cyan-900">
+    ⚡ ARCHITEKT LAB
+</button> 
+<button id="btn-guardian-h" onclick="otworzStraznikaWizji();" 
+    class="nav-btn border-l-4 border-emerald-400 bg-emerald-950/40 text-emerald-400 font-black uppercase shadow-[0_0_15px_rgba(16,185,129,0.4)] animate-pulse px-6 py-3 transition-all hover:bg-emerald-900 group">
+    <span class="flex items-center gap-2">
+        <span class="relative flex h-2 w-2">
+            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+            <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+        </span>
+        🛡️ STRAŻNIK PROJEKTU H:
+    </span>
+</button>
+<button id="btn-trader" onclick="switchTab('trader')" class="nav-btn border-l-4 border-purple-500 bg-purple-950/20 text-purple-400 font-black uppercase">🤖 AI TRADER CORE</button>
+<button id="btn-google-init" onclick="inicjujZGoogle()" 
+        class="nav-btn border-l-4 border-blue-500 bg-blue-950/20 text-blue-400 font-black uppercase py-2 px-4 transition-all hover:bg-blue-900/40 w-full text-left mb-2">🌐 INICJUJ Z GOOGLE</button>
+    <button id="btn-market" onclick="switchTab('market')" class="nav-btn border-l-4 border-blue-500 bg-blue-950/20 text-blue-400 font-black uppercase">📈 GIEŁDA LIVE</button>
+    <button id="btn-shop" onclick="switchTab('shop')" class="nav-btn border-l-4 border-orange-500 bg-orange-950/20 text-orange-400 font-black uppercase">🛒 SKLEP SYSTEMOWY</button>
+    
+    <div class="h-[1px] bg-slate-800 my-4"></div>
+
+    <!-- PRZYWRÓCONE PRZYCISKI -->
+    <button id="btn-assets" onclick="openAssetsModule()" class="nav-btn border-l-4 border-cyan-600 bg-cyan-950/20 text-cyan-400 font-black uppercase">📦 ZASOBY ZEWNĘTRZNE</button>
+    <button id="btn-office" onclick="openOffice()" class="nav-btn border-l-4 border-yellow-600 bg-yellow-950/20 text-yellow-500 font-black uppercase">🏢 REJESTR MAJĄTKU</button>
+    <button id="btn-contracts" onclick="switchTab('contracts')" class="nav-btn border-l-4 border-indigo-600 bg-indigo-950/20 text-indigo-400 font-black uppercase">🤝 KONTRAKTY B2B</button> 
+    <button id="btn-taxes" onclick="switchTab('taxes')" class="nav-btn border-l-4 border-red-600 bg-red-950/20 text-red-500 font-black uppercase">⚖️ FISKALNY (US)</button>
+    <button id="btn-admin" onclick="openAdminModule()" class="nav-btn border-l-4 border-slate-600 bg-slate-800/20 text-slate-400 font-black uppercase">🛠️ ADMIN TERMINAL</button>
+<!-- OKNO MODALNE -->
+<div 
+  id="searchBlock" 
+  style="display:none;" 
+  class="fixed inset-0 z-[9999] items-center justify-center bg-black/90 backdrop-blur-md"
+>
+    <div class="bg-purple-950 border border-purple-500/50 p-6 rounded-lg w-[500px] shadow-[0_0_50px_rgba(168,85,247,0.3)]">
+        <div class="flex justify-between mb-4">
+            <span class="text-purple-400 text-[10px] font-black uppercase tracking-widest">Quantum Interface</span>
+            <button onclick="document.getElementById('searchBlock').classList.remove('active')" class="text-purple-400 hover:text-white font-bold text-xl">✕</button>
+        </div>
+        
+        <input type="text" id="searchInput" placeholder="WPISZ ZAPYTANIE..." class="w-full bg-black/50 border border-purple-500/30 p-3 text-purple-100 text-xs focus:outline-none focus:border-purple-400">
+        
+        <button id="submitQuery" class="w-full mt-4 bg-purple-600 text-white text-[10px] font-black py-2 hover:bg-purple-500 uppercase transition-all">
+            Uruchom analizę
+        </button>
+        <div id="results" class="mt-4 text-purple-300 font-mono text-[10px] max-h-40 overflow-auto">    </div>
+    </div>
+
+</nav>             <div class="p-4 border-t border-slate-900 space-y-2 bg-slate-950/50 text-[9px]">
+            <p class="text-blue-500 font-bold uppercase italic tracking-tighter">System Gateway [LVL <span id="ui-lvl">1</span>]</p>
+            <select id="api-operator" class="w-full bg-black border border-blue-900/40 text-blue-400 p-1 rounded outline-none text-[8px] mb-2">
+    <optgroup label="KLUCZOWE">
+        <option>PKO BANK POLSKI</option>
+        <option>PEKAO SA</option>
+        <option>SANTANDER BANK POLSKA</option>
+        <option>mBANK SA</option>
+        <option>ING BANK ŚLĄSKI</option>
+    </optgroup>
+    <optgroup label="KOMERCYJNE">
+        <option>BNP PARIBAS</option>
+        <option>ALIOR BANK</option>
+        <option>BANK HANDLOWY (CITI)</option>
+        <option>BANK MILLENNIUM</option>
+        <option>VeloBank</option>
+        <option>BOŚ BANK</option>
+        <option>NEST BANK</option>
+    </optgroup>
+    <optgroup label="SPÓŁDZIELCZE">
+        <option>BANK BPS</option>
+        <option>SGB-BANK SA</option>
+    </optgroup>
+</select>
+            <button onclick="connectAPI()" class="w-full py-1 bg-blue-600/20 text-blue-400 border border-blue-500/30 rounded font-black uppercase">Połącz API</button>
+            
+         <div class="space-y-2 mt-4 px-2">
+    <p class="text-[7px] text-slate-500 uppercase font-black ml-1 mb-2 tracking-widest">System Control Unit</p>
+    
+    <!-- PARA 1: TRANSFER DANYCH -->
+    <div class="grid grid-cols-2 gap-2">
+        <button onclick="exportData()" class="nav-btn border-l-4 border-slate-500 bg-slate-800/20 text-slate-300 font-black uppercase text-[7px] py-2">
+            📤 EXPORT
+        </button>
+        <button onclick="document.getElementById('imp-file').click()" class="nav-btn border-l-4 border-blue-500 bg-blue-900/20 text-blue-400 font-black uppercase text-[7px] py-2">
+            📥 IMPORT
+        </button>
+    </div>
+
+    <!-- PARA 2: MIGAWKI SYSTEMOWE (SNAP) -->
+    <div class="grid grid-cols-2 gap-2">
+        <button onclick="saveSnap()" class="nav-btn border-l-4 border-emerald-600 bg-emerald-950/20 text-emerald-500 font-black uppercase text-[7px] py-2">
+            💾 SNAP SAVE
+        </button>
+        <button onclick="loadSnap()" class="nav-btn border-l-4 border-amber-600 bg-amber-950/20 text-amber-500 font-black uppercase text-[7px] py-2">
+            📂 SNAP LOAD
+        </button>
+    </div>
+
+    <!-- PRZYCISK GŁÓWNY: PRZYWRACANIE -->
+    <button onclick="document.getElementById('restore-file').click()" class="nav-btn border-l-4 border-cyan-500 bg-cyan-950/20 text-cyan-400 font-black uppercase text-[8px] w-full flex justify-between items-center py-2">
+        🔄 PRZYWRACANIE PROJEKTU <span class="opacity-50 text-[6px]">[FULL RESTORE]</span>
+    </button>
+
+    <!-- PRZYCISK KRYTYCZNY: RESET -->
+    <button onclick="masterReset()" class="nav-btn border-l-4 border-red-600 bg-red-950/20 text-red-500 font-black uppercase text-[8px] w-full py-2">
+        ⚠️ RESET SYSTEMU
+    </button>
+
+    <!-- UKRYTE INPUTY -->
+    <input type="file" id="imp-file" class="hidden" onchange="importData(event)">
+    <input type="file" id="restore-file" class="hidden" onchange="importData(event)">
+</div>
+
+  </aside>
+    <main class="flex-1 h-screen flex flex-col relative bg-slate-950 overflow-hidden">
+        <div id="notification-container"></div>
+
+        <!-- DASHBOARD -->
+        <section id="content-dashboard" class="tab-content active">
+            <div class="grid grid-cols-4 gap-4 mb-4">
+                <div class="glass border-l-4 border-emerald-500 text-center"><p class="text-[7px] uppercase opacity-50">Saldo</p><p id="ui-bal" class="text-sm font-black text-emerald-400">0</p></div>
+                <div class="glass border-l-4 border-blue-500 text-center"><p class="text-[7px] uppercase opacity-50">Przychód/s</p><p id="ui-inc" class="text-sm font-black text-blue-400">0</p></div>
+                <div class="glass border-l-4 border-red-500 text-center"><p class="text-[7px] uppercase opacity-50">Podatek</p><p id="ui-tax" class="text-sm font-black text-red-400">0</p></div>
+                <div class="glass border-l-4 border-yellow-500 text-center"><p class="text-[7px] uppercase opacity-50">Poziom</p><p id="ui-lvl-display" class="text-sm font-black text-yellow-500">1</p></div>
+            </div>
+            <div class="grid grid-cols-2 gap-4 flex-1 overflow-hidden">
+                <div class="glass flex flex-col border-t-2 border-purple-500/30 overflow-hidden">
+                    <p class="text-[9px] font-bold text-purple-400 uppercase p-2 border-b border-white/5 italic">Rejestr Operacyjny (Logi)</p>
+                    <div id="logs-box" class="flex-1 text-[8px] font-mono custom-scroll overflow-y-auto p-2 space-y-1"></div>
+                    <div class="grid grid-cols-3 gap-1 p-2 bg-black/30 border-t border-white/5">
+                        <button onclick="quickAddShop()" class="py-1 bg-orange-900/20 text-orange-400 border border-orange-500/20 rounded font-bold uppercase text-[7px]">➕ Sklep</button>
+                        <button onclick="quickAddAsset()" class="py-1 bg-emerald-900/20 text-emerald-400 border border-emerald-500/20 rounded font-bold uppercase text-[7px]">➕ Zasób</button>
+                        <button onclick="quickAddMarket()" class="py-1 bg-blue-900/20 text-blue-400 border border-blue-500/20 rounded font-bold uppercase text-[7px]">➕ Giełda</button>
+                    </div>
+                </div>
+
+<div class="flex-1 flex flex-col overflow-hidden">
+    <div class="flex justify-center items-center py-6 shrink-0 relative">
+        <div class="relative w-44 h-44">
+            <div id="pie-chart" class="w-full h-full rounded-full transition-all duration-1000" 
+                 style="background: conic-gradient(#1e293b 0% 100%); border: 4px solid rgba(0,0,0,0.2);">
+            </div>
+            <div class="absolute inset-0 flex items-center justify-center">
+                <div class="w-20 h-20 bg-[#010206] rounded-full border border-blue-500/20 flex items-center justify-center shadow-2xl">
+                    <span class="text-4xl filter drop-shadow-[0_0_8px_rgba(59,130,246,0.4)]">🦅</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="pie-legend" class="flex-1 overflow-y-auto px-3 space-y-1 custom-scroll">
+    </div>
+    <div class="p-3 mt-auto border-t border-white/5 bg-black/20">
+    <button onclick="switchTab('bank-panel')" class="w-full py-2.5 bg-emerald-600/10 hover:bg-emerald-600/30 border border-emerald-500/40 rounded text-emerald-400 font-black uppercase text-[8px] tracking-widest transition-all">
+        PLATINUM QUANTUM BANK POLAND
+    </button>
+</div>
+    </div>
+</div>
+</section>
+  <section id="content-bank-panel" class="tab-content">
+            <div class="glass p-8 max-w-5xl mx-auto w-full h-full flex flex-col border-t-4 border-emerald-500">
+                <div class="flex justify-between items-center border-b border-emerald-500/30 pb-4 mb-6">
+                    <div>
+                        <h2 class="text-emerald-400 font-black text-2xl uppercase italic tracking-tighter">Platinum Quantum Banking</h2>
+                        <p class="text-[8px] text-emerald-600 font-bold uppercase tracking-[0.3em]">Obsługa: HAJDUK_CORE_FINANCE_2026</p>
+                    </div>
+                    <button onclick="switchTab('dashboard')" class="text-[10px] bg-slate-900 text-slate-400 px-4 py-1 rounded border border-slate-700 font-bold uppercase">Zamknij</button>
+                </div>
+                <div class="grid grid-cols-2 gap-8 flex-1 overflow-hidden">
+                    <div class="glass bg-black/40 p-6 flex flex-col justify-center">
+                        <p class="text-[10px] font-bold text-emerald-400 mb-6 uppercase border-b border-emerald-500/20 pb-2 italic">Zlecenie Transferu</p>
+                        <input id="q-receiver-v2" type="text" placeholder="Nazwa Odbiorcy" class="input-dark py-4 px-4 text-xs mb-3">
+                        <input id="q-acc-v2" type="text" placeholder="Numer Rachunku" class="input-dark py-4 px-4 text-xs mb-3">
+                        <input id="q-amt-v2" type="number" placeholder="Kwota PLN" class="input-dark py-4 px-4 text-xl text-emerald-400 font-black mb-3">
+                        <button onclick="executeQuantumTransferV2()" class="w-full py-4 bg-emerald-600 hover:bg-emerald-500 text-white font-black text-xs uppercase rounded transition-all">Autoryzuj Transakcję</button>
+                    </div>
+                    <div class="glass bg-white/5 p-4 flex flex-col">
+                        <div class="flex justify-between items-center mb-4">
+                            <p class="text-[9px] font-bold text-slate-500 uppercase italic">Potwierdzenie</p>
+                            <button onclick="printTransfer()" class="bg-white text-black px-4 py-1 rounded text-[9px] font-black uppercase">Drukuj / PDF</button>
+                        </div>
+                        <div id="transfer-doc-preview" class="flex-1 bg-white text-black p-6 rounded shadow-inner overflow-y-auto font-mono text-[9px]">
+                            <div class="h-full flex items-center justify-center text-slate-400 italic">Oczekiwanie na autoryzację...</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+<section id="content-contracts" class="tab-content">
+    <div class="grid grid-cols-3 gap-6 h-full overflow-hidden">
+        <div class="glass p-4 flex flex-col h-full border-l-4 border-blue-500 overflow-y-auto custom-scroll">
+            <h3 class="text-blue-400 font-black text-xs mb-4 uppercase italic tracking-widest">Kancelaria Quantum UDA</h3>
+            <div class="space-y-4 pr-2">
+                <div>
+                    <p class="text-[7px] text-slate-500 uppercase font-bold mb-1 ml-1">Typ Dokumentu / Usługi</p>
+                    <select id="ct-doc-type" class="input-dark border-blue-900/50" onchange="toggleFormFields()">
+                        <option value="B2B">KONTRAKT B2B (USŁUGI)</option>
+                        <option value="SALE">UMOWA KUPNA-SPRZEDAŻY (MAJĄTEK)</option>
+                        <option value="STOCKS">OBRÓT AKCJAMI</option>
+                        <option value="BONDS">OBLIGACJE</option>
+                        <option value="SECURITIES">PAPIERY WARTOŚCIOWE</option>
+                    </select>
+                </div>
+                <div class="p-2 bg-white/5 rounded border border-white/5">
+                    <p class="text-[8px] text-blue-400 font-black uppercase mb-2 border-b border-blue-900/30 pb-1">Strona A (Zbywca / Wykonawca)</p>
+                    <input id="ct-a-name" type="text" placeholder="Nazwa / Imię i Nazwisko" class="input-dark mb-1">
+                    <input id="ct-a-nip" type="text" placeholder="NIP / PESEL" class="input-dark mb-1">
+                    <div class="grid grid-cols-2 gap-1 mb-1">
+                        <input id="ct-a-city" type="text" placeholder="Miejscowość" class="input-dark">
+                        <input id="ct-a-zip" type="text" placeholder="Kod pocztowy" class="input-dark">
+                    </div>
+                    <input id="ct-a-adr" type="text" placeholder="Adres (Ulica i nr)" class="input-dark">
+                </div>
+                <div class="p-2 bg-white/5 rounded border border-white/5">
+                    <p class="text-[8px] text-emerald-400 font-black uppercase mb-2 border-b border-emerald-900/30 pb-1">Strona B (Nabywca / Zleceniodawca)</p>
+                    <input id="ct-b-name" type="text" placeholder="Nazwa / Imię i Nazwisko" class="input-dark mb-1">
+                    <input id="ct-b-nip" type="text" placeholder="NIP / PESEL" class="input-dark mb-1">
+                    <div class="grid grid-cols-2 gap-1 mb-1">
+                        <input id="ct-b-city" type="text" placeholder="Miejscowość" class="input-dark">
+                        <input id="ct-b-zip" type="text" placeholder="Kod pocztowy" class="input-dark">
+                    </div>
+                    <input id="ct-b-adr" type="text" placeholder="Adres (Ulica i nr)" class="input-dark">
+                </div>
+                <div class="p-2 bg-white/5 rounded border border-white/5">
+                    <p class="text-[8px] text-amber-400 font-black uppercase mb-2 border-b border-amber-900/30 pb-1">Umowy Dotyczy</p>
+                    <input id="ct-obj-name" type="text" placeholder="Nazwa (np. Lokal użytkowy / Budynek)" class="input-dark mb-1">
+                    <input id="ct-obj-size" type="text" placeholder="Powierzchnia (m2 / opis)" class="input-dark mb-1">
+                    <div class="grid grid-cols-2 gap-1 mb-1">
+                        <input id="ct-obj-city" type="text" placeholder="Miejscowość" class="input-dark">
+                        <input id="ct-obj-zip" type="text" placeholder="Kod pocztowy" class="input-dark">
+                    </div>
+                    <input id="ct-obj-adr" type="text" placeholder="Adres (Ulica i nr)" class="input-dark">
+                </div>
+                <div class="p-2 bg-black/40 rounded">
+                    <p class="text-[7px] text-slate-500 uppercase font-bold mb-1">Specyfikacja i Wycena</p>
+                    <textarea id="ct-desc" placeholder="Dodatkowe informacje / uwagi do przedmiotu umowy..." class="input-dark h-16 mb-1 text-[8px]"></textarea>
+                    <input id="ct-val" type="number" placeholder="Wartość (PLN)" class="input-dark">
+                </div>
+            </div>
+            <div class="grid grid-cols-2 gap-2 mt-4">
+                <button onclick="generateLegalDoc()" class="py-3 bg-blue-600 hover:bg-blue-500 text-white font-black text-[9px] uppercase rounded">Generuj</button>
+                <button onclick="saveAndSign()" class="py-3 bg-emerald-600 hover:bg-emerald-500 text-white font-black text-[9px] uppercase rounded">Zapisz/Podpisz</button>
+            </div>
+        </div>
+        <div class="glass col-span-2 bg-white/5 p-4 flex flex-col relative overflow-hidden">
+            <button onclick="window.print()" class="absolute top-6 right-6 px-4 py-1 bg-white text-black font-black text-[9px] uppercase hover:bg-slate-200 transition-all z-10">
+                DRUKUJ DO PDF
+            </button>
+            <div id="print-area" class="bg-white text-black p-10 font-serif text-[10px] flex-1 overflow-y-auto shadow-2xl mx-auto w-full max-w-[800px] leading-relaxed">
+                <div id="contract-preview" class="flex flex-col h-full items-center justify-center opacity-30 italic">
+                    <div class="text-4xl mb-4">📄</div>
+                    System gotowy do generowania dokumentu prawnego.
+                 </div>
+               </div>
+            </div>
+         </div>
+       </section>
+        <section id="content-taxes" class="tab-content">
+            <div class="grid grid-cols-3 gap-6 h-full p-4 overflow-hidden">
+                <div class="glass border-t-4 border-red-500 p-6 flex flex-col justify-between overflow-y-auto">
+                    <div>
+                        <h2 class="text-red-500 font-black text-xl mb-4 italic uppercase">🏛️ PROTOKÓŁ ROZLICZENIOWY</h2>
+                        <label class="text-[7px] text-red-400 uppercase font-bold ml-1">Województwo</label>
+                        <select id="tax-region" class="input-dark text-[10px] py-3 mt-1" onchange="populateOffices()">
+                        </select>
+                        <label class="text-[7px] text-red-400 uppercase font-bold ml-1 mt-4 block">Urząd Skarbowy</label>
+                        <select id="tax-office" class="input-dark text-[10px] py-3 mt-1" disabled>
+                            <option>Wybierz region...</option>
+                        </select>
+                    </div>
+                    <div class="mt-8">
+                        <p class="text-[10px] text-slate-400 mb-2">Metoda: <span class="text-white font-bold">CIT-8 / QUANTUM</span></p>
+                        <button onclick="payTax()" class="w-full py-4 bg-red-600 hover:bg-red-500 text-white font-black rounded shadow-lg uppercase transition-all">Autoryzuj Przelew do US</button>
+                    </div>
+                </div>
+                <div class="glass border-t-4 border-slate-700 flex flex-col items-center justify-center text-center p-6 overflow-hidden">
+                    <div class="relative shrink-0">
+                        <svg class="w-48 h-48 transform -rotate-90">
+                            <circle cx="96" cy="96" r="80" stroke="currentColor" stroke-width="8" fill="transparent" class="text-slate-800" />
+                            <circle id="tax-progress-circle" cx="96" cy="96" r="80" stroke="currentColor" stroke-width="8" fill="transparent" stroke-dasharray="502" stroke-dashoffset="502" class="text-red-500 transition-all duration-1000" />
+                        </svg>
+                        <div class="absolute inset-0 flex flex-col items-center justify-center">
+                            <p class="text-[9px] uppercase opacity-50">Zaległość</p>
+                            <p id="tax-display" class="text-2xl font-black text-white">0 PLN</p>
+                        </div>
+                    </div>
+                    <div class="mt-6 w-full shrink-0">
+                        <div class="flex justify-between text-[8px] mb-1">
+                            <span>RYZYKO KONTROLI</span>
+                            <span id="risk-percent">0%</span>
+                        </div>
+                        <div class="w-full h-1 bg-slate-800 rounded-full overflow-hidden">
+                            <div id="risk-bar" class="h-full bg-red-500 w-0 transition-all"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="glass border-t-4 border-emerald-500 p-6 overflow-y-auto">
+                    <h3 class="text-emerald-400 font-black text-xs mb-4 uppercase italic">💡 OPTYMALIZACJA</h3>
+                    <div class="space-y-4 text-[9px] text-slate-400">
+                        <div class="p-3 bg-white/5 rounded border-l-2 border-emerald-500">
+                            <p class="text-white font-bold mb-1">ULGA B+R</p>
+                            <p>Inwestuj w AI Trader, aby obniżyć podatki o 15%.</p>
+                        </div>
+                        <div id="tax-alert" class="p-3 bg-red-900/20 rounded border border-red-500/50 text-red-400 hidden">
+                            <strong>OSTRZEŻENIE!</strong> Urząd Skarbowy monitoruje Twoje IP.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+<!-- MODUŁ FISKALNY (US) - GOTOWY DO WKLEJENIA -->
+<section id="content-taxes" class="tab-content">
+    <div class="grid grid-cols-3 gap-6 h-full p-4 overflow-hidden">
+        
+        <!-- LEWO: FORMULARZ ROZLICZENIOWY -->
+        <div class="glass border-t-4 border-red-500 p-6 flex flex-col justify-between">
+            <div>
+                <h2 class="text-red-500 font-black text-xl mb-4 italic uppercase">🏛️ PROTOKÓŁ ROZLICZENIOWY</h2>
+                
+                <label class="text-[7px] text-red-400 uppercase font-bold ml-1">Województwo</label>
+                <!-- ZDARZENIE ONCHANGE JEST KLUCZOWE -->
+                <select id="tax-region" class="input-dark text-[10px] py-3 mt-1" onchange="updateTaxOffices()">
+                      <option value="">WYBIERZ REGION OPERACYJNY...</option>
+    <option value="Dolnośląskie">DOLNOŚLĄSKIE</option>
+    <option value="Kujawsko-Pomorskie">KUJAWSKO-POMORSKIE</option>
+    <option value="Lubelskie">LUBELSKIE</option>
+    <option value="Lubuskie">LUBUSKIE</option>
+    <option value="Łódzkie">ŁÓDZKIE</option>
+    <option value="Małopolskie">MAŁOPOLSKIE</option>
+    <option value="Mazowieckie">MAZOWIECKIE</option>
+    <option value="Opolskie">OPOLSKIE</option>
+    <option value="Podkarpackie">PODKARPACKIE</option>
+    <option value="Podlaskie">PODLASKIE</option>
+    <option value="Pomorskie">POMORSKIE</option>
+    <option value="Śląskie">ŚLĄSKIE</option>
+    <option value="Świętokrzyskie">ŚWIĘTOKRZYSKIE</option>
+    <option value="Warmińsko-Mazurskie">WARMIŃSKO-MAZURSKIE</option>
+    <option value="Wielkopolskie">WIELKOPOLSKIE</option>
+    <option value="Zachodniopomorskie">ZACHODNIOPOMORSKIE</option>
+                </select>
+
+                <label class="text-[7px] text-red-400 uppercase font-bold ml-1 mt-4 block">Urząd Skarbowy</label>
+                <select id="tax-office" class="input-dark text-[10px] py-3 mt-1" disabled>
+                    <option>Wybierz województwo...</option>
+                </select>
+            </div>
+            
+            <div class="mt-8">
+                <button onclick="payTax()" class="w-full py-4 bg-red-600 hover:bg-red-500 text-white font-black rounded shadow-lg uppercase transition-all">
+                    Autoryzuj Przelew do US
+                </button>
+            </div>
+        </div>
+        <!-- ŚRODEK: STATYSTYKA (BEZ ZMIAN) -->
+        <div class="glass border-t-4 border-slate-700 flex flex-col items-center justify-center text-center p-6">
+            <p class="text-[9px] uppercase opacity-50">Zaległość</p>
+            <p id="tax-display-v2" class="text-2xl font-black text-white">0 PLN</p>
+            <p class="text-[7px] text-red-500 mt-2 font-bold animate-pulse">RYZYKO KONTROLI: <span id="risk-val">0</span>%</p>
+        </div>
+        <div class="glass border-t-4 border-emerald-500 p-6">
+            <h3 class="text-emerald-400 font-black text-[10px] mb-2 uppercase">STATUS OPTYMALIZACJI</h3>
+            <div class="text-[8px] text-slate-400 p-2 bg-white/5 rounded border-l-2 border-emerald-500">
+                System Hajduk Quantum wykrył możliwość ulgi B+R.
+            </div>
+        </div>
+    </div>
+    setInterval(() => {
+            const display = document.getElementById('tax-display-v2');
+            const risk = document.getElementById('risk-val');
+            if(display && typeof db !== 'undefined') {
+                display.innerText = Math.floor(db.tax).toLocaleString() + " PLN";
+                risk.innerText = Math.min(100, Math.floor(db.tax / 50000 * 100)); 
+            }
+        }, 1000);
+</section>
+<section id="content-office" class="tab-content">
+    <div class="grid grid-cols-3 gap-4 h-full">
+        <!-- LEWA STRONA: REJESTR -->
+        <div class="glass border-t-2 border-emerald-500 col-span-2 flex flex-col">
+            <h3 class="text-emerald-400 font-black text-xs p-3 border-b border-white/5 uppercase italic">
+                📋 REJESTR AKTYWÓW I MAJĄTKU
+            </h3>
+            <div id="assets-registry" class="flex-1 overflow-y-auto p-3 space-y-2 custom-scroll">
+                <p class="text-[10px] opacity-20 italic">Oczekiwanie na dane...</p>
+            </div>
+        </div>
+
+        <!-- PRAWA STRONA: STATYSTYKI -->
+     <div class="glass border-t-2 border-purple-500 p-4">
+    <h3 class="text-purple-400 font-black text-xs mb-4 uppercase italic">📊 STATYSTYKI</h3>
+    <div class="space-y-4">
+        <div>
+            <p class="text-[10px] text-white/50 uppercase tracking-widest">Aktywne jednostki</p>
+            <p id="stat-assets" class="text-2xl font-black text-blue-400">0</p>
+        </div>
+        <div>
+            <p class="text-[10px] text-white/50 uppercase tracking-widest">Łączna wartość</p>
+            <p id="stat-total-value" class="text-2xl font-black text-emerald-400">0.00 PLN</p>
+        </div>
+        <div>
+            <p class="text-[10px] text-purple-400 uppercase tracking-widest">Zysk Sesji</p>
+            <p id="stat-session-income" class="text-2xl font-black text-purple-400">0.00 PLN</p>
+        </div>
+    </div>
+</div>
+</section>    
+
+   <!-- AI TRADER -->
+        <section id="content-trader" class="tab-content text-center">
+            <div class="glass p-10 max-w-2xl mx-auto w-full text-center">
+                <div class="text-6xl mb-4">🧠</div>
+                <h2 class="text-purple-400 font-black text-xl mb-4 uppercase italic">Neural Quantum Core</h2>
+                <button id="ai-btn" onclick="toggleAI()" class="w-full py-4 bg-purple-600 hover:bg-purple-500 font-black rounded mb-4 uppercase transition-all">Uruchom Procesor AI</button>
+                <div id="ai-logs" class="h-64 glass p-4 text-[9px] font-mono text-purple-300 custom-scroll text-left overflow-y-auto"></div>
+            </div>
+        </section>
+        <section id="content-market" class="tab-content"><canvas id="m-canvas" class="w-full h-64 glass mb-4"></canvas><div id="market-list" class="grid grid-cols-3 gap-4"></div>
+       </section>
+
+        <section id="content-shop" class="tab-content"><div id="shop-list" class="grid grid-cols-4 gap-4"></div>
+      </section>
+
+<!-- SEKCJA 1: CYBER HUMAN CORE -->
+<section id="content-ai-brain" class="tab-content hidden h-screen bg-[#01050a] p-8 overflow-hidden relative">
+    <div class="glass border-t-2 border-purple-500 h-full flex flex-row items-center justify-between relative overflow-hidden bg-black/60">
+        
+        <!-- LEWA STRONA: STATUSY I STEROWANIE -->
+        <div class="flex-1 flex flex-col h-full p-10 z-10">
+            <div class="mb-auto">
+                <h2 class="text-purple-400 font-black italic uppercase tracking-widest text-xl mb-2">🧠 CYBER HUMAN CORE</h2>
+                <div class="font-mono text-[10px] space-y-1 bg-black/40 p-4 border-l-2 border-purple-500 inline-block">
+                    <p class="text-emerald-400 font-bold italic uppercase tracking-tighter">Status: <span class="animate-pulse text-white">NEURAL_LINK_ACTIVE</span></p>
+                    <p class="text-cyan-400 uppercase tracking-tighter">Neural Load: <span id="load-val" class="text-white">24%</span></p>
+                </div>
+            </div>
+            <div class="w-full max-w-md mb-10">
+                <div class="flex w-full gap-2 bg-black/90 p-2 border border-purple-500/30 rounded-xl backdrop-blur-xl shadow-2xl">
+                    <input id="input-brain" type="text" placeholder=" Wpisz: szukaj [temat]..." 
+                           onkeydown="if(event.key==='Enter') executeCyberVision()"
+                           class="flex-1 bg-transparent border-none p-3 text-white outline-none font-mono text-xs focus:ring-1 focus:ring-purple-500">
+                    <button onclick="executeCyberVision()" class="bg-purple-600 hover:bg-purple-400 px-8 py-3 font-black text-white uppercase italic transition-all shadow-[0_0_20px_purple]">
+                        Inicjuj
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div id="humanoid-visual-core" class="w-1/2 h-full relative z-0 flex items-center justify-center scale-110">
+            <div class="absolute w-full h-full bg-[radial-gradient(circle_at_center,_rgba(34,211,238,0.05)_0%,_transparent_70%)]"></div>
+            <div class="absolute w-[500px] h-[500px] bg-purple-600/5 rounded-full blur-[120px] animate-pulse"></div>
+            <div id="cyber-goddess-wrap" class="relative z-10 flex flex-col items-center transition-all duration-500 hover:scale-105">
+                <div class="absolute -top-10 flex justify-center w-[600px] h-[400px] opacity-40 pointer-events-none">
+                    <div class="w-1/2 h-full bg-gradient-to-br from-cyan-400/40 via-transparent to-transparent rounded-[100%_50%_100%_0%] border-r border-cyan-400/20 rotate-[-15deg] origin-right animate-[pulse_4s_infinite] blur-[1px]"></div>
+                    <div class="w-1/2 h-full bg-gradient-to-bl from-cyan-400/40 via-transparent to-transparent rounded-[50%_100%_0%_100%] border-l border-cyan-400/20 rotate-[15deg] origin-left animate-[pulse_4s_infinite] blur-[1px]"></div>
+                </div>
+                <div class="relative w-32 h-44 bg-black/80 border border-cyan-400/40 rounded-t-[60px] rounded-b-[40px] shadow-[0_0_50px_rgba(34,211,238,0.2)] backdrop-blur-md overflow-hidden flex flex-col items-center">
+                    <div class="absolute top-0 w-full h-6 bg-cyan-400/20 border-b border-cyan-400/30 flex justify-center gap-2 pt-2">
+                        <div class="w-1 h-1 bg-cyan-400 rounded-full animate-ping"></div>
+                        <div class="w-1 h-1 bg-cyan-400 rounded-full animate-ping"></div>
+                    </div>
+                    <div class="mt-20 w-full flex justify-around px-8">
+                        <div class="w-10 h-2 bg-cyan-400 shadow-[0_0_15px_#22d3ee] rounded-full brightness-125"></div>
+                        <div class="w-10 h-2 bg-cyan-400 shadow-[0_0_15px_#22d3ee] rounded-full brightness-125"></div>
+                    </div>
+                    <div id="avatar-mouth" class="absolute bottom-[25%] w-12 h-1 bg-cyan-300 shadow-[0_0_20px_#22d3ee] rounded-full transition-all duration-75"></div> 
+                    <div class="absolute inset-0 opacity-10 pointer-events-none font-mono text-[5px] text-cyan-200 p-4 leading-tight">
+                        SYSTEM_LOAD_99%<br>NEURAL_INTERFACE_READY<br>GLOBAL_VISION_ACTIVE
+                    </div>
+                </div>
+                <div class="w-6 h-8 bg-gradient-to-b from-cyan-900/60 to-black border-x border-cyan-400/20"></div>
+                <div class="relative w-56 h-48">
+                    <div class="absolute inset-0 bg-black/90 border-x-2 border-t-2 border-cyan-400/30 rounded-t-[50px] rounded-b-[20px] shadow-2xl overflow-hidden">
+                        <div class="absolute top-8 left-1/2 -translate-x-1/2 w-24 h-24 flex items-center justify-center">
+                            <div class="absolute w-full h-full bg-purple-500/10 rounded-full animate-ping"></div>
+                            <div class="w-12 h-12 border-2 border-purple-500/50 rounded-full flex items-center justify-center rotate-45">
+                                <div class="w-6 h-6 bg-white rounded-full shadow-[0_0_25px_#fff] blur-[1px]"></div>
+                            </div>
+                        </div>
+                        <div class="absolute bottom-4 w-full px-6 space-y-2 opacity-40">
+                            <div class="h-[1px] bg-cyan-400/50 w-full"></div>
+                            <div class="h-[1px] bg-cyan-400/40 w-4/5 mx-auto"></div>
+                        </div>
+                    </div>
+                    <div class="absolute -left-12 top-0 w-24 h-24 bg-gradient-to-br from-amber-500/20 to-black border border-amber-500/30 rounded-tl-[60px] rounded-br-[30px] -rotate-12 shadow-[0_0_30px_rgba(245,158,11,0.1)]"></div>
+                    <div class="absolute -right-12 top-0 w-24 h-24 bg-gradient-to-bl from-amber-500/20 to-black border border-amber-500/30 rounded-tr-[60px] rounded-bl-[30px] rotate-12 shadow-[0_0_30px_rgba(245,158,11,0.1)]"></div>
+                </div>
+            </div>
+            <div class="absolute bottom-20 w-96 h-10 bg-cyan-500/10 blur-[50px] rounded-[100%]"></div>
+        </div>
+        <div id="vision-portal" class="absolute top-2 left-16 right-16 bottom-32 z-50 bg-[#01050a] border-2 border-purple-500 hidden flex-col shadow-[0_0_80px_rgba(168,85,247,0.6)] rounded-xl overflow-hidden transform scale-95 transition-all">
+            <div class="h-8 bg-purple-900 flex justify-between px-4 items-center border-b border-purple-500/30">
+                <span class="text-purple-200 font-black text-[8px] uppercase tracking-widest">Quantum Vision: <span id="portal-query" class="text-white ml-2"></span></span>
+                <button onclick="closePortal()" class="text-white hover:text-red-500 font-bold text-lg">✕</button>
+            </div>
+            <iframe id="vision-frame" src="about:blank" class="w-full h-full border-none bg-white"></iframe>
+        </div>
+    </div>
+</section> 
+ <!-- AVATAR QUANTUM LIVE -->
+</section>
+<section id="content-super-core" class="tab-content relative overflow-hidden bg-[#01050a] border-2 border-cyan-500/20 rounded-2xl m-4 p-8 min-h-[700px]">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center h-full -mt-10">
+        <div class="relative flex flex-col justify-center items-center">
+            <div id="quantum-avatar" class="relative w-80 h-[450px] rounded-[100px] border-2 border-cyan-400/30 overflow-hidden shadow-[0_0_100px_rgba(6,182,212,0.2)] bg-black/40 backdrop-blur-sm">
+                <div class="absolute inset-0 bg-gradient-to-t from-cyan-900/40 to-transparent"></div>
+                <div class="relative w-full h-full flex flex-col items-center justify-start pt-12 scale-95">
+                    <div id="quantum-avatar-v2" class="relative w-48 h-60">
+                        <div class="absolute bottom-[-15px] left-1/2 -translate-x-1/2 w-16 h-20 bg-slate-900 border-x-2 border-slate-700 rounded-b-full overflow-hidden">
+                            <div class="absolute inset-0 opacity-30 bg-[repeating-linear-gradient(90deg,transparent,transparent_2px,#06b6d4_3px)]"></div>
+                        </div>
+                        <div class="relative w-full h-full bg-[#f8fafc] border-2 border-slate-300 rounded-[100px_100px_80px_80px] shadow-[inset_0_-10px_30px_rgba(0,0,0,0.2)] overflow-hidden">
+                            <div class="absolute top-[35%] w-full flex justify-around px-6">
+                                <div class="eye w-12 h-5 bg-black rounded-full border border-cyan-500 shadow-[0_0_15px_#06b6d4] transition-transform duration-75"></div>
+                                <div class="eye w-12 h-5 bg-black rounded-full border border-cyan-500 shadow-[0_0_15px_#06b6d4] transition-transform duration-75"></div>
+                            </div>
+                            <!-- USTA Z ID DO ANIMACJI -->
+                            <div id="core-mouth-straznik" class="absolute bottom-[20%] left-1/2 -translate-x-1/2 w-14 h-[2px] bg-cyan-500 shadow-[0_0_15px_#06b6d4] transition-all duration-200"></div>
+                        </div>
+                    </div>
+                    
+                    <!-- DWA PASKI POSTĘPU -->
+                    <div class="mt-12 w-64 space-y-6 px-4">
+                        <!-- Pasek 1: System Integrity -->
+                        <div class="space-y-1">
+                            <div class="flex justify-between text-[9px] font-mono text-cyan-400 uppercase">
+                                <span>System Integrity</span>
+                                <span id="val-integrity">98%</span>
+                            </div>
+                            <div class="w-full h-1.5 bg-black/60 rounded-full border border-cyan-500/30 overflow-hidden">
+                                <div id="bar-integrity" class="h-full bg-cyan-400 w-[98%] shadow-[0_0_10px_#22d3ee] transition-all duration-1000"></div>
+                            </div>
+                        </div>
+
+                        <!-- Pasek 2: Core Processing (NOWY) -->
+                        <div class="space-y-1">
+                            <div class="flex justify-between text-[9px] font-mono text-emerald-400 uppercase">
+                                <span>Core Processing</span>
+                                <span id="val-processing">42%</span>
+                            </div>
+                            <div class="w-full h-1.5 bg-black/60 rounded-full border border-emerald-500/30 overflow-hidden">
+                                <div id="bar-processing" class="h-full bg-emerald-400 w-[42%] shadow-[0_0_10px_#10b981] transition-all duration-500"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="absolute -bottom-4 bg-cyan-500 text-black px-6 py-1 rounded-full font-black text-[10px] tracking-widest animate-pulse z-20">STRAŻNIK_H_ACTIVE</div>
+        </div>
+
+        <!-- PANEL CHATU I INPUTA -->
+        <div class="glass border-t-2 border-cyan-500/40 flex flex-col h-[550px] shadow-2xl bg-black/60 backdrop-blur-xl rounded-lg overflow-hidden border-2 border-white/5">
+            <div class="p-4 border-b border-cyan-500/20 flex justify-between items-center bg-black/80">
+                <span class="text-cyan-400 font-black text-xs uppercase italic tracking-widest">🧠 Strażnik Super Core</span>
+                <div class="flex gap-2 items-center">
+                    <div class="w-2 h-2 bg-emerald-500 rounded-full animate-ping"></div>
+                    <span class="text-[8px] text-emerald-400 uppercase font-mono">H: Monitoring</span>
+                </div>
+            </div>
+            
+            <div id="super-chat-box" class="flex-1 overflow-y-auto p-6 space-y-3 font-mono text-[11px] text-cyan-100/80 bg-black/20">
+                <p class="text-cyan-400/50">[SYSTEM]: Protokół Strażnika gotowy.</p>
+                <p class="text-emerald-400/50">[H-DRIVE]: Wykryto projekt index.html (844 el.)</p>
+            </div>
+
+            <div class="p-6 bg-[#020a12] border-t border-cyan-500/30">
+                <div class="flex gap-3">
+                    <div class="relative flex-1">
+                        <span class="absolute left-4 top-1/2 -translate-y-1/2 text-cyan-500 font-bold font-mono text-sm">></span>
+                        <input id="super-input" type="text" 
+                               placeholder="napraw, status, skanuj..." 
+                               class="w-full bg-black border-2 border-cyan-900/50 rounded-lg pl-10 pr-4 py-4 text-cyan-100 outline-none focus:border-cyan-400 transition-all font-mono text-sm shadow-[inset_0_0_15px_rgba(6,182,212,0.1)]">
+                    </div>
+                    <button onclick="triggerSuperCore()" class="px-6 bg-cyan-600 hover:bg-cyan-400 text-black font-black uppercase text-[11px] rounded-lg transition-all shadow-[0_0_20px_rgba(6,182,212,0.3)]">
+                        ENTER
+                    </button>
+                </div>
+                <p class="mt-2 text-[8px] text-cyan-700 font-mono uppercase tracking-widest text-center italic">Kwantowy Terminal Dowodzenia v2.5</p>
+            </div>
+        </div>
+    </div>
+</section>
+ <div id="architect-lab" class="hidden absolute top-10 left-10 w-[80%] h-[70%] bg-black/95 border-2 border-purple-500 shadow-[0_0_50px_rgba(168,85,247,0.4)] z-50 flex flex-col">
+    <div class="p-2 bg-purple-900/50 border-b border-purple-500 flex justify-between items-center">
+        <span class="text-[9px] font-black uppercase tracking-widest text-purple-200">🛡️ ARCHITEKT: LABORATORIUM ANALIZY PROJEKTU</span>
+        <button onclick="toggleArchitectLab()" class="text-purple-400 hover:text-white"> [ X ] </button>
+    </div>
+    <div class="flex-1 p-4 overflow-hidden flex gap-4">
+        <div id="code-display"" class="w-1/2 h-full border border-purple-500/30 bg-black p-2 font-mono text-[9px] text-green-400 overflow-y-auto">
+        </div>
+        <div class="w-1/2 h-full flex flex-col">
+            <div id="analysis-log" class="flex-1 bg-purple-950/20 p-2 text-[9px] font-mono text-purple-200 overflow-y-auto">
+                > Czekam na polecenie...
+            </div>
+            <div class="flex gap-1 mt-2">
+                <input type="text" id="lab-input" placeholder="WPISZ ROZKAZ..." class="flex-1 bg-black border border-purple-500 p-2 text-[10px] text-white outline-none">
+                <button id="lab-send-btn" onclick="sendLabCommand()" class="bg-purple-600 px-3 text-[9px] font-black text-white hover:bg-cyan-500 transition-all uppercase italic">WYŚLIJ</button>
+            </div>
+        </div>
+    </div>
+</div>
+</section>
+<!-- GLOBAL TERMINAL POLAND BANK T.H. -->
+<div id="bank-poland-portal" style="display:none;" class="fixed inset-10 z-[9999] bg-[#000500] border-2 border-emerald-500/50 rounded-2xl shadow-[0_0_80px_rgba(16,185,129,0.4)] flex flex-col overflow-hidden font-mono text-emerald-500">
+    <div class="h-14 bg-emerald-950/80 border-b border-emerald-500/30 flex justify-between items-center px-8 shrink-0">
+        <div class="flex items-center gap-4">
+            <span class="text-2xl animate-pulse">🦅</span>
+            <div>
+                <h1 class="text-[10px] font-black tracking-[4px] uppercase text-emerald-400">Global Terminal Poland Bank T.H.</h1>
+                <p class="text-[7px] text-emerald-600 uppercase tracking-widest">Procedura Autoryzacji Płynności // Centrala Warszawa</p>
+            </div>
+        </div>
+        <button onclick="document.getElementById('bank-poland-portal').style.display='none'" class="text-emerald-500 hover:text-red-500 text-2xl transition-colors cursor-pointer">✕</button>
+    </div>
+    <div class="flex flex-1 overflow-hidden">
+        <!-- SIDEBAR -->
+          <aside class="w-72 border-r border-emerald-900/30 bg-black/50 p-6 flex flex-col shrink-0">
+            <h2 class="text-[9px] font-black mb-4 uppercase tracking-widest text-emerald-500">WNIOSKI_DO_ROZPATRZENIA</h2>
+            <!-- Tutaj będą lądować zapisane wnioski -->
+            <div id="credit-queue" class="flex-1 overflow-y-auto space-y-3 pr-2 custom-scroll">
+                <div class="p-3 border border-emerald-500/10 bg-emerald-500/5 rounded opacity-50 italic text-[8px] text-emerald-700">
+                    OCZEKIWANIE_NA_DANE_WEJŚCIOWE...
+                </div>
+            </div>
+            <div class="mt-6 p-3 bg-emerald-900/10 border border-emerald-500/20 rounded">
+                <p class="text-[7px] uppercase text-emerald-700 mb-1">Terminal Status:</p>
+                <p class="text-[9px] font-bold text-emerald-400 animate-pulse">● POŁĄCZONO_SZYFROWANIE_TLS</p>
+            </div>
+        </aside>
+
+        <main class="flex-1 p-8 bg-[radial-gradient(circle_at_center,_#051505_0%,_#000_100%)] relative flex flex-col overflow-hidden">
+            <div class="grid grid-cols-4 gap-4 mb-4 shrink-0 -mt-2">
+                <button onclick="switchWorkView('form')" class="py-2 px-4 border border-emerald-500/40 bg-emerald-500/5 hover:bg-emerald-500/20 rounded-xl transition-all group text-center cursor-pointer">
+                    <span class="block text-xl mb-0.5 group-hover:scale-110 transition-transform">📝</span>
+                    <span class="text-[7px] font-black uppercase text-emerald-500 tracking-tighter">Nowy Wniosek</span>
+                </button>
+                <button onclick="switchWorkView('poczta')" class="py-2 px-4 border border-blue-500/40 bg-blue-900/10 hover:bg-blue-600/20 rounded-xl transition-all group text-center cursor-pointer relative">
+                    <span class="block text-xl mb-0.5">📩</span>
+                    <!-- Dodano adres e-mail poniżej nazwy sekcji -->
+                    <span class="text-[7px] font-black uppercase text-blue-400 tracking-tighter">Poczta / Zatwierdź</span>
+                    <span class="block text-[6px] text-blue-300/50 lowercase mt-0.5 font-mono">hajduk.tomasz@gmail.com</span>
+                    <div class="absolute top-1 right-2 w-1.5 h-1.5 bg-red-500 rounded-full animate-pulse shadow-[0_0_8px_red]"></div>
+                </button>
+    <button onclick="switchWorkView('vault')" class="py-2 px-4 border border-yellow-600/40 bg-yellow-600/5 hover:bg-yellow-600/20 rounded-xl transition-all group text-center cursor-pointer">
+        <span class="block text-xl mb-0.5 group-hover:scale-110 transition-transform">🔐</span>
+        <span class="text-[7px] font-black uppercase text-yellow-500 tracking-tighter">Sejf Bankowy</span>
+    </button>
+    <button onclick="window.location.href='admin.html'" class="py-2 px-4 border border-slate-600/40 bg-slate-900/20 hover:bg-slate-500 rounded-xl transition-all group text-center cursor-pointer">
+        <span class="block text-xl mb-0.5 group-hover:scale-110 transition-transform">🏢</span>
+        <span class="text-[7px] font-black uppercase text-slate-400 group-hover:text-black tracking-tighter">Panel Admin</span>
+    </button>
+</div>
+<div id="dynamic-workspace" class="flex-1 bg-black/60 border border-emerald-500/20 rounded-3xl p-10 overflow-y-auto custom-scroll relative">
+    <div id="view-empty" class="h-full flex flex-col items-center justify-center opacity-20">
+        <span class="text-6xl mb-6">🏦</span>
+        <p class="text-xs tracking-[10px] uppercase">System Gotowy</p>
+    </div>
+    <div id="view-form" style="display:none;" class="animate-fadeIn">
+        <h2 class="text-xl font-black text-emerald-500 mb-8 uppercase tracking-widest">WNIOSKI</h2>
+        <div class="grid grid-cols-2 gap-6">
+            <div class="space-y-4">
+                <input type="text" placeholder="NAZWA FIRMY" class="w-full bg-black border border-emerald-900 p-4 text-xs text-white">
+                <input type="text" placeholder="NIP" class="w-full bg-black border border-emerald-900 p-4 text-xs text-white">
+            </div>
+            <div class="space-y-4">
+                <input type="number" placeholder="KWOTA PLN" class="w-full bg-black border border-emerald-900 p-4 text-xs text-emerald-500 font-bold">
+                <button onclick="submitClaim()" class="w-full bg-emerald-600 text-black font-black py-4 uppercase text-[10px]">
+                    Zatwierdź
+                </button>
+            </div>
+        </div>
+    </div>
+</section>  
+<div id="view-vault" style="display:none;" class="absolute inset-x-0 top-0 z-[100] flex flex-col items-center pt-4 bg-black/95 animate-fadeIn min-h-full">
+    <div class="w-48 p-4 border-2 border-emerald-500/40 bg-[#010301] rounded-xl shadow-[0_0_40px_rgba(16,185,129,0.25)]">
+        <p class="text-emerald-500 text-[6px] font-black uppercase tracking-[2px] mb-2 text-center">Security Terminal v2.0</p>
+        <div id="v-screen" class="bg-black border border-emerald-500/30 py-2 mb-3 rounded-lg font-mono text-xl tracking-[6px] text-emerald-400 text-center shadow-[inset_0_0_8px_rgba(16,185,129,0.4)]">____</div>
+        <div class="grid grid-cols-3 gap-1.5">
+            <button type="button" onclick="vKey('1')" class="p-2 bg-emerald-900/15 border border-emerald-500/20 text-emerald-400 text-[10px] rounded hover:bg-emerald-500 hover:text-black transition-all font-bold">1</button>
+            <button type="button" onclick="vKey('2')" class="p-2 bg-emerald-900/15 border border-emerald-500/20 text-emerald-400 text-[10px] rounded hover:bg-emerald-500 hover:text-black transition-all font-bold">2</button>
+            <button type="button" onclick="vKey('3')" class="p-2 bg-emerald-900/15 border border-emerald-500/20 text-emerald-400 text-[10px] rounded hover:bg-emerald-500 hover:text-black transition-all font-bold">3</button>
+            <button type="button" onclick="vKey('4')" class="p-2 bg-emerald-900/15 border border-emerald-500/20 text-emerald-400 text-[10px] rounded hover:bg-emerald-500 hover:text-black transition-all font-bold">4</button>
+            <button type="button" onclick="vKey('5')" class="p-2 bg-emerald-900/15 border border-emerald-500/20 text-emerald-400 text-[10px] rounded hover:bg-emerald-500 hover:text-black transition-all font-bold">5</button>
+            <button type="button" onclick="vKey('6')" class="p-2 bg-emerald-900/15 border border-emerald-500/20 text-emerald-400 text-[10px] rounded hover:bg-emerald-500 hover:text-black transition-all font-bold">6</button>
+            <button type="button" onclick="vKey('7')" class="p-2 bg-emerald-900/15 border border-emerald-500/20 text-emerald-400 text-[10px] rounded hover:bg-emerald-500 hover:text-black transition-all font-bold">7</button>
+            <button type="button" onclick="vKey('8')" class="p-2 bg-emerald-900/15 border border-emerald-500/20 text-emerald-400 text-[10px] rounded hover:bg-emerald-500 hover:text-black transition-all font-bold">8</button>
+            <button type="button" onclick="vKey('9')" class="p-2 bg-emerald-900/15 border border-emerald-500/20 text-emerald-400 text-[10px] rounded hover:bg-emerald-500 hover:text-black transition-all font-bold">9</button>
+            <button type="button" onclick="vReset()" class="p-2 bg-red-950/30 border border-red-500/30 text-red-500 text-[7px] rounded hover:bg-red-600 hover:text-white transition-all font-black">CLR</button>
+            <button type="button" onclick="vKey('0')" class="p-2 bg-emerald-900/15 border border-emerald-500/20 text-emerald-400 text-[10px] rounded hover:bg-emerald-500 hover:text-black transition-all font-bold">0</button>
+            <button type="button" onclick="checkAccess()" class="p-2 bg-emerald-600 text-black text-[7px] font-black rounded hover:bg-emerald-400 uppercase transition-all shadow-md">ENTER</button>
+        </div>
+    </div>
+</div>
+    <div id="view-transfer" style="display:none;" class="absolute inset-0 z-[100] flex flex-col items-center pt-10 bg-black min-h-full">
+        <div class="w-full max-w-2xl p-8 border-2 border-emerald-500/30 bg-[#020502] rounded-3xl shadow-[0_0_60px_rgba(16,185,129,0.2)]">
+            <h2 class="text-emerald-500 text-sm font-black mb-6 uppercase tracking-[5px] text-center">Portal Autoryzacji Przelewu</h2>
+            <div class="grid grid-cols-2 gap-6">
+                <div class="space-y-4">
+                    <label class="block text-[7px] text-emerald-700 uppercase">Wybór Banku</label>
+                    <select id="t-bank" class="w-full bg-black border border-emerald-900 p-3 text-xs text-emerald-400 outline-none">
+                        <option value="SANTANDER">Santander Bank Polska</option>
+                        <option value="BNP">BNP Paribas Bank Polska</option>
+                    </select>
+                    <label class="block text-[7px] text-emerald-700 uppercase">Odbiorca</label>
+                    <input type="text" id="t-user" class="w-full bg-black border border-emerald-900 p-3 text-xs text-white">
+                </div>
+                <div class="space-y-4">
+                    <label class="block text-[7px] text-emerald-700 uppercase">Nr Konta (26 cyfr)</label>
+                    <input type="text" id="t-acc" maxlength="26" class="w-full bg-black border border-emerald-900 p-3 text-xs text-white font-mono">
+                    <label class="block text-[7px] text-emerald-700 uppercase">Kwota (PLN)</label>
+                    <input type="number" id="t-amount" class="w-full bg-black border border-emerald-900 p-3 text-xl text-emerald-500 font-black">
+                </div>
+            </div>
+            <button onclick="executeFinal()" class="w-full mt-8 bg-emerald-600 text-black font-black py-4 uppercase text-[10px] hover:bg-emerald-400 transition-all">Wykonaj Transfer Zewnętrzny</button>
+        </div>
+    </div>
+</div>
+                <div id="view-biuro" style="display:none;" class="h-full flex items-center justify-center animate-fadeIn">
+                    <div class="w-96 text-center border-2 border-amber-600 p-10 bg-amber-950/10 rounded-3xl shadow-[0_0_40px_rgba(217,119,6,0.1)]">
+                        <span class="text-5xl block mb-6 animate-pulse">📡</span>
+                        <h3 class="text-amber-500 font-black uppercase mb-2">Łącze z Biurem Głównym</h3>
+                        <p id="biuro-msg" class="text-[10px] text-amber-800 font-mono mb-8 italic">OCZEKIWANIE NA AUTORYZACJĘ TLS...</p>
+                        <button onclick="window.location.href='admin.html'" id="admin-entry-btn" style="display:none;" class="w-full bg-amber-600 text-black font-black py-4 uppercase text-[10px] hover:bg-amber-400 transition-all cursor-pointer">Wejdź do Panelu Admina</button>
+                    </div>
+                </div>
+
+            </div>
+        </main>
+    </div>
+</div>
+</section>
+   <div id="architect-lab" class="hidden absolute top-10 left-10 w-[80%] h-[70%] bg-black/95 border-2 border-purple-500 shadow-[0_0_50px_rgba(168,85,247,0.4)] z-50 flex flex-col">
+    <div class="p-2 bg-purple-900/50 border-b border-purple-500 flex justify-between items-center">
+        <span class="text-[9px] font-black uppercase tracking-widest text-purple-200">🛡️ ARCHITEKT: LABORATORIUM ANALIZY PROJEKTU</span>
+        <button onclick="toggleArchitectLab()" class="text-purple-400 hover:text-white"> [ X ] </button>
+    </div>
+    <div class="flex-1 p-4 overflow-hidden flex gap-4">
+        <div id="code-display"" class="w-1/2 h-full border border-purple-500/30 bg-black p-2 font-mono text-[9px] text-green-400 overflow-y-auto">
+        </div>
+        <div class="w-1/2 h-full flex flex-col">
+            <div id="analysis-log" class="flex-1 bg-purple-950/20 p-2 text-[9px] font-mono text-purple-200 overflow-y-auto">
+                > Czekam na polecenie...
+            </div>
+            <div class="flex gap-1 mt-2">
+                <input type="text" id="lab-input" placeholder="WPISZ ROZKAZ..." class="flex-1 bg-black border border-purple-500 p-2 text-[10px] text-white outline-none">
+                <button id="lab-send-btn" onclick="sendLabCommand()" class="bg-purple-600 px-3 text-[9px] font-black text-white hover:bg-cyan-500 transition-all uppercase italic">WYŚLIJ</button>
+            </div>
+        </div>
+    </div>
+</div>
+</section>
+ </main>
+ <script>
+const officesData = {
+   "Dolnośląskie": ["I US Wrocław", "US Legnica", "US Wałbrzych", "US Jelenia Góra"],
+    "Kujawsko-Pomorskie": ["I US Bydgoszcz", "US Toruń", "US Włocławek"],
+    "Lubelskie": ["I US Lublin", "US Chełm", "US Zamość"],
+    "Lubuskie": ["I US Zielona Góra", "US Gorzów Wlkp."],
+    "Łódzkie": ["I US Łódź", "US Piotrków Tryb.", "US Skierniewice"],
+    "Małopolskie": ["I US Kraków", "US Tarnów", "US Nowy Sącz"],
+    "Mazowieckie": ["I US Warszawa", "US Radom", "US Płock", "US Siedlce"],
+    "Opolskie": ["I US Opole", "US Nysa", "US Kędzierzyn-Koźle"],
+    "Podkarpackie": ["I US Rzeszów", "US Przemyśl", "US Stalowa Wola"],
+    "Podlaskie": ["I US Białystok", "US Łomża", "US Suwałki"],
+    "Pomorskie": ["I US Gdańsk", "US Gdynia", "US Słupsk"],
+    "Śląskie": ["I US Katowice", "US Sosnowiec", "US Gliwice", "US Częstochowa"],
+    "Świętokrzyskie": ["I US Kielce", "US Ostrowiec Św.", "US Sandomierz"],
+    "Warmińsko-Mazurskie": ["I US Olsztyn", "US Elbląg", "US Ełk"],
+    "Wielkopolskie": ["I US Poznań", "US Kalisz", "US Konin", "US Leszno", "US Wolsztyn"],
+    "Zachodniopomorskie": ["I US Szczecin", "US Koszalin", "US Stargard"]
+};
+window.aktualizujUS = function() {
+    const regVal = document.getElementById('tax-region').value;
+    const usSelect = document.getElementById('tax-office');
+
+    if (regVal && M_OFFICES[regVal]) {
+        usSelect.disabled = false;
+        usSelect.innerHTML = M_OFFICES[regVal].map(o => `<option value="${o}">${o}</option>`).join('');
+        usSelect.style.color = "#ff4444"; // Czerwony sygnał ostrzegawczy US
+        console.log("SYSTEM: Urzędy dla " + regVal + " załadowane.");
+    } else {
+        usSelect.disabled = true;
+        usSelect.innerHTML = '<option>Wybierz województwo...</option>';
+    }
+};
+
+document.addEventListener('DOMContentLoaded', () => {
+    const regSelect = document.getElementById('tax-region');
+    if(regSelect && regSelect.options.length <= 1) {
+        let html = '<option value="">Wybierz Województwo</option>';
+        for(let r in officesData) { html += `<option value="${r}">${r}</option>`; }
+        regSelect.innerHTML = html;
+    }
+
+ const currentAssets = JSON.parse(localStorage.getItem('myAssets')) || [];
+    updateAssetsUI(currentAssets);
+
+});
+
+function updateAssetsUI(assets) {
+    const legend = document.getElementById('pie-legend');
+    const statCounter = document.getElementById('stat-assets');
+    
+    if(!legend) return;
+
+    legend.innerHTML = assets.map(item => `
+        <div class="flex items-center justify-between bg-white/5 p-2 rounded border-l-2 border-emerald-500">
+            <span class="text-[10px]">${item.name}</span>
+            <span class="text-[10px] font-bold">${item.price} PLN</span>
+        </div>
+    `).join('');
+
+   
+    if(statCounter) statCounter.innerText = assets.length;
+}
+function initTaxSystem() {
+    const regSelect = document.getElementById('tax-region');
+    if (regSelect) {
+        let options = '<option value="">WYBIERZ REGION</option>';
+        for (let province in US_DATA) {
+            options += `<option value="${province}">${province}</option>`;
+        }
+        regSelect.innerHTML = options;
+        console.log("SYSTEM FISKALNY: ZAŁADOWANO REGIONY");
+    }
+}
+
+function updateOffices() {
+    const province = document.getElementById('tax-region').value;
+    const officeSelect = document.getElementById('tax-office');
+    
+    if (province && US_DATA[province]) {
+        officeSelect.disabled = false;
+        officeSelect.innerHTML = US_DATA[province].map(o => `<option value="${o}">${o}</option>`).join('');
+        officeSelect.style.color = "#ef4444"; 
+    } else {
+        officeSelect.disabled = true;
+        officeSelect.innerHTML = '<option>Wybierz region...</option>';
+    }
+}
+     
+        function executeQuantumTransferV2() {
+            const amt = parseFloat(document.getElementById('q-amt-v2').value);
+            const rec = document.getElementById('q-receiver-v2').value;
+            if(db.bal >= amt && amt > 0 && rec) {
+                db.bal -= amt; const time = new Date().toLocaleString();
+                document.getElementById('transfer-doc-preview').innerHTML = `<div id="printable-transfer" style="color:black; padding:20px; border:2px solid black; background:white;"><h2>POTWIERDZENIE PRZELEWU</h2><p>DATA: ${time}</p><p>ODBIORCA: ${rec.toUpperCase()}</p><p>KWOTA: ${amt.toLocaleString()} PLN</p><p style="margin-top:20px; font-size:8px;">ID: ${Math.random().toString(36).toUpperCase()}</p></div>`;
+                logAction(`TRANSFER: -${amt} PLN -> ${rec}`, "text-emerald-400"); toast("WYSŁANO"); uUI();
+            } else toast("BŁĄD DANYCH");
+        }
+
+       function generateContract() {
+    const type = document.getElementById('ct-type').value;
+    const data = {
+        me: document.getElementById('ct-zle-name').value || "HAJDUK_GLOBAL",
+        client: document.getElementById('ct-client').value || "KONTRAHENT",
+        nip: document.getElementById('ct-nip').value || "0000000000",
+        val: document.getElementById('ct-value').value || 0
+    };
+
+    let title = "UMOWA RAMOWA B2B";
+    let scope = "Świadczenie usług konsultingowych w środowisku cyfrowym.";
+    
+    if(type === 'it') { title = "UMOWA O ŚWIADCZENIE USŁUG IT"; scope = "Nadzór nad infrastrukturą serwerową i optymalizacja kodu Quantum."; }
+    if(type === 'agt') { title = "UMOWA POŚREDNICTWA"; scope = "Pozyskiwanie kontraktów handlowych i analiza rynkowa."; }
+
+    document.getElementById('contract-preview').innerHTML = `
+        <div style="font-family: 'Times New Roman', serif; color: black; line-height: 1.5;">
+            <h2 style="text-align:center; text-decoration: underline;">${title} nr ${Math.floor(Math.random()*9000)}/2026</h2>
+            <p>Zawarta w dniu ${new Date().toLocaleDateString()} pomiędzy:</p>
+            <p><b>Zleceniobiorca:</b> ${data.me}</p>
+            <p><b>Zleceniodawca:</b> ${data.client}, NIP: ${data.nip}</p>
+            <hr>
+            <p><b>§1 Przedmiot umowy:</b> ${scope}</p>
+            <p><b>§2 Wynagrodzenie:</b> Strony ustalają stawkę progresywną w wysokości ${data.val} PLN/s.</p>
+            <p><b>§3 Poufność:</b> Umowa objęta klauzulą NDA Systemu Hajduk Global.</p>
+            <br><br>
+            <div style="display:flex; justify-content: space-between;">
+                <span>..........................<br>Podpis Zleceniobiorcy</span>
+                <span>..........................<br>Podpis Zleceniodawcy</span>
+            </div>
+        </div>
+    `;
+    
+    db.contracts.push({ firma: data.client, zysk: parseFloat(data.val) });
+    logAction(`NOWY KONTRAKT: ${data.client}`, "text-blue-400");
+    save(); uUI();
+}
+
+        function populateRegions() { document.getElementById('tax-region').innerHTML = '<option value="">Województwo</option>' + Object.keys(officesData).map(x => `<option value="${x}">${x}</option>`).join(''); }
+        function populateOffices() { const r = document.getElementById('tax-region').value; if(r) { document.getElementById('tax-office').innerHTML = officesData[r].map(x => `<option>${x}</option>`).join(''); document.getElementById('tax-office').disabled = false; } }
+        function switchTab(id) { document.querySelectorAll('.tab-content').forEach(t=>t.classList.remove('active')); document.getElementById('content-'+id).classList.add('active'); document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('sidebar-item-active')); if(document.getElementById('btn-'+id)) document.getElementById('btn-'+id).classList.add('sidebar-item-active'); }
+        function logAction(m, c="text-blue-300") { db.logs.unshift({t:new Date().toLocaleTimeString(), m, c}); uUI(); }
+        function save() { localStorage.setItem('hj_q_final_26', JSON.stringify(db)); }
+        function toast(m) { const t = document.createElement('div'); t.className="toast"; t.innerText=m; document.getElementById('notification-container').appendChild(t); setTimeout(()=>t.remove(), 3000); }
+        function exportData() { const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([JSON.stringify(db)], {type:'application/json'})); a.download = "HAJDUK_PROJECT_2026.json"; a.click(); }
+        function importData(e) { const r = new FileReader(); r.onload = (x) => { db = JSON.parse(x.target.result); uUI(); save(); toast("SYSTEM PRZYWRÓCONY"); }; r.readAsText(e.target.files[0]); }
+        function masterReset() { if(confirm("RESET SYSTEMU?")) { localStorage.clear(); location.reload(); } }
+        function saveSnap() { localStorage.setItem('hj_snap', JSON.stringify(db)); toast("SNAP ZAPISANY"); }
+        function loadSnap() { const s = localStorage.getItem('hj_snap'); if(s) { db = JSON.parse(s); uUI(); toast("SNAP ZAŁADOWANY"); } }
+        function connectAPI() { toast("POŁĄCZONO Z " + document.getElementById('api-operator').value); }
+        function openOffice() { if(prompt("KOD:") === "1234") toast("DOSTĘP OK"); }
+        function printTransfer() { window.print(); }
+        function drawM() {
+    const c = document.getElementById('m-canvas');
+    const ctx = c.getContext('2d');
+    c.width = c.offsetWidth;
+    c.height = c.offsetHeight;
+
+    // Obliczamy wysokość pojedynczego pasa dla każdej linii
+    const stepY = c.height / mkt.length;
+
+    mkt.forEach((s, index) => {
+        ctx.beginPath();
+        ctx.strokeStyle = s.c;
+        ctx.lineWidth = 2;
+
+        const min = Math.min(...s.h), max = Math.max(...s.h);
+        const range = max - min || 1;
+
+        const offsetTop = index * stepY + 5; // +5px marginesu
+        const offsetBottom = (index + 1) * stepY - 5; // -5px marginesu
+        const laneHeight = offsetBottom - offsetTop;
+
+        s.h.forEach((v, i) => {
+            const x = (i / 59) * c.width;          
+            const y = offsetBottom - ((v - min) / range) * laneHeight;
+
+            if (i === 0) ctx.moveTo(x, y);
+            else ctx.lineTo(x, y);
+        });
+        ctx.stroke();
+    });
+}
+   function buyP(i) {
+    const p = db.shop[i];
+    
+    if (p && db.bal >= p.p) {
+        db.bal -= p.p;
+        
+        const nowyProdukt = { 
+            n: p.n.toUpperCase(), 
+            v: p.v, 
+            t: 'SKLEP' 
+        };
+        
+        db.ast.push(nowyProdukt); 
+   
+        logAction("ZAKUPIONO: " + p.n, "text-orange-400");
+        
+        save(); 
+        uUI();  
+        
+        if (document.getElementById('content-market').classList.contains('active')) {
+            drawM();
+        }
+        
+        toast("DODANO DO PORTFELA: " + p.n);
+    } else {
+        toast("BRAK ŚRODKÓW NA ZAKUP!");
+    }
+}
+       function saveSnap() {
+    localStorage.setItem('hj_snap_v2', JSON.stringify(db));
+    toast("MIGAWKA SYSTEMU ZAPISANA");
+    logAction("SNAP: Utworzono punkt przywracania", "text-emerald-500");
+}
+
+function updateStats(assetsArray) {
+    const total = assetsArray.length;
+    document.getElementById('stat-assets').innerText = total;
+   
+}
+
+function loadSnap() {
+    const snap = localStorage.getItem('hj_snap_v2');
+    if(snap) {
+        db = JSON.parse(snap);
+        uUI();
+        save();
+        toast("MIGAWKA SYSTEMU PRZYWRÓCONA");
+        logAction("SNAP: Przywrócono dane z pamięci Snap", "text-amber-500");
+    } else {
+        toast("BRAK ZAPISANEJ MIGAWKI");
+    }
+}
+    
+    function exportData() { 
+            const blob = new Blob([JSON.stringify(db)], {type:'application/json'});
+            const a = document.createElement('a'); 
+            a.href = URL.createObjectURL(blob); 
+            a.download = "HAJDUK_GLOBAL_QUANTUM_TERMINAL_PROJECT_2026.json"; 
+            a.click();
+            toast("EKSPORT ZAKOŃCZONY");
+        }
+         
+        function importData(e) { 
+            const f = e.target.files[0];
+            if(f) {
+                const r = new FileReader(); 
+                r.onload = (x) => { 
+                    try {
+                        db = JSON.parse(x.target.result); 
+                        uUI(); save(); 
+                        toast("PROJEKT I SYSTEM PRZYWRÓCONY");
+                    } catch(err) {
+                        toast("BŁĄD PLIKU IMPORTU");
+                    }
+                }; 
+                r.readAsText(f); 
+            } 
+        }
+
+        function masterReset() { 
+            if(confirm("CZY NA PEWNO CHCESZ ZRESETOWAĆ CAŁY SYSTEM? WSZYSTKIE DANE ZNIKNĄ.")) { 
+                localStorage.clear(); 
+                location.reload(); 
+            } 
+        }
+        
+        setInterval(() => {
+            const inc = (db.ast.reduce((s,x)=>s+(x.v||0),0) + db.contracts.reduce((s,x)=>s+(x.zysk||0),0)) || 0;
+            db.bal += inc; db.tax += inc * 0.19;
+            mkt.forEach(s => { s.p += (Math.random()-0.5)*(s.p*0.015); s.h.push(s.p); if(s.h.length > 60) s.h.shift(); });
+            uUI(); save();
+        }, 1000);
+
+        function uUI() {
+    document.getElementById('ui-bal').innerText = Math.floor(db.bal).toLocaleString() + " PLN";
+    const currentIncome = (db.ast.reduce((s,x)=>s+x.v,0) + db.contracts.reduce((s,x)=>s+x.zysk,0)) || 0;
+    document.getElementById('ui-inc').innerText = "+" + currentIncome.toFixed(2);
+    document.getElementById('ui-tax').innerText = Math.floor(db.tax).toLocaleString();
+    document.getElementById('ui-lvl-display').innerText = db.lvl;
+    const totalAssetsValue = db.ast.reduce((sum, asset) => sum + (parseFloat(asset.p) || asset.v || 0), 0);
+    
+    const statAssetsCount = document.getElementById('stat-assets');
+    const statTotalVal = document.getElementById('stat-total-value');
+
+    if (statAssetsCount) statAssetsCount.innerText = db.ast.length;
+    if (statTotalVal) statTotalVal.innerText = totalAssetsValue.toLocaleString('pl-PL', { minimumFractionDigits: 2 }) + " PLN";
+
+console.log("TWOJE DANE DB:", db);
+console.log("ILE MASZ AKTYWÓW:", db.ast ? db.ast.length : "BRAK TABLICY AST");
+console.log("PRZYKŁADOWE AKTYWO:", db.ast && db.ast[0] ? db.ast[0] : "BRAK DANYCH");
+
+let mojZyskSesji = 0;
+
+setInterval(() => {
+    let a = db.ast ? db.ast.reduce((s, x) => s + (Number(x.v) || 0), 0) : 0;
+    let b = db.contracts ? db.contracts.reduce((s, x) => s + (Number(x.zysk) || 0), 0) : 0;
+    let suma = a + b;
+
+    if (suma === 0) {
+       ("Suma przychodu to 0! Sprawdź nazwy pól w db.ast i db.contracts.");
+       suma = 1.00; 
+    }
+
+    mojZyskSesji += suma;
+    db.bal += suma;
+
+    const pole = document.getElementById('stat-session-income');
+    if (pole) {
+        pole.innerText = mojZyskSesji.toFixed(2) + " PLN";
+    }
+}, 1000);
+        function systemIntegrityCheck() {
+    const hasServer = db.ast.some(a => a.n === "SERWER_MATKA" || a.n === "SYSTEM_CORE");
+    
+    let lock = document.getElementById('critical-error-overlay');
+    
+    if (!hasServer) {
+        if (!lock) {
+            lock = document.createElement('div');
+            lock.id = "critical-error-overlay";
+            lock.style = "position:fixed; inset:0; background:#000; z-index:100000; display:flex; flex-direction:column; align-items:center; justify-content:center; color:#ff4444; font-family:monospace; border: 5px solid #ff4444;";
+            lock.innerHTML = `
+                <h1 style="font-size:30px; margin-bottom:10px;">⚠️ CRITICAL FAILURE</h1>
+                <p>HARDWARE DISCONNECTED: [SYSTEM_CORE_SERVER]</p>
+                <div style="width:50px; h:50px; border:4px solid #ff4444; border-top-color:transparent; border-radius:50%; animation:spin 1s linear infinite; margin:20px;"></div>
+                <p style="font-size:10px; color:#555;">PROSZĘ PODŁĄCZYĆ SERWER W MODULE ADMIN LUB ZASOBY</p>
+                <style>@keyframes spin { to { transform: rotate(360deg); } }</style>
+            `;
+            document.body.appendChild(lock);
+        }
+    }
+ else
+ {
+        if (lock) {
+            lock.remove();
+            toast("POŁĄCZENIE PRZYWRÓCONE");
+        }
+    }
+}
+            document.getElementById('ui-bal').innerText = Math.floor(db.bal).toLocaleString() + " PLN";
+            document.getElementById('ui-inc').innerText = "+" + (db.ast.reduce((s,x)=>s+x.v,0) + db.contracts.reduce((s,x)=>s+x.zysk,0)).toFixed(2);
+            document.getElementById('ui-tax').innerText = Math.floor(db.tax).toLocaleString();
+            document.getElementById('ui-lvl-display').innerText = db.lvl;
+            document.getElementById('tax-display').innerText = Math.floor(db.tax).toLocaleString() + " PLN";
+            document.getElementById('logs-box').innerHTML = db.logs.slice(0,35).map(l=>`<div class="border-b border-white/5 pb-1 mb-1 text-[7px]"><span class="opacity-30">[${l.t}]</span> <span class="${l.c} font-bold">${l.m}</span></div>`).join('');
+            document.getElementById('shop-list').innerHTML = db.shop.map((p,i)=>`<div class="glass text-center p-4"><b>${p.n}</b><br><button onclick="buyP(${i})" class="bg-blue-600 w-full py-1 mt-2 rounded text-[7px] uppercase">KUP: ${p.p}</button></div>`).join('');
+            document.getElementById('market-list').innerHTML = mkt.map(s=>`<div class="glass border-l-2 p-2 text-[9px]" style="border-color:${s.c}"><b>${s.id}</b>: ${Math.floor(s.p).toLocaleString()}</div>`).join('');
+            
+            const assets = [...db.ast, ...db.contracts.map(c => ({ n: c.firma, v: c.zysk }))];
+            const tot = assets.reduce((s,x)=>s+x.v,0) || 1; let cur = 0;
+            const grads = assets.map((a,idx)=>{ const s=cur; const e=s+(a.v/tot)*100; cur=e; return `${colors[idx%colors.length]} ${s}% ${e}%`; });
+            document.getElementById('pie-chart').style.background = assets.length ? `conic-gradient(${grads.join(',')})` : '#1e293b';
+            document.getElementById('pie-legend').innerHTML = assets.map((a,idx)=>`<div class="flex justify-between bg-white/5 p-1 rounded border-l-2 text-[6px]" style="border-left-color:${colors[idx%colors.length]}"><span>${a.n}</span><b>${((a.v/tot)*100).toFixed(1)}%</b></div>`).join('');
+        }
+
+        function openAssetsModule() {
+    toast("ŁĄCZENIE Z BAZĄ ZASOBÓW...");
+    window.open('zasoby.html', 'ZasobyWindow', 'width=800,height=600');
+}
+        function openAdminModule() {
+    const pass = prompt("AUTORYZACJA BIURA - PODAJ KOD:");
+    if(pass === "1234") {
+        toast("OTWIERANIE MODUŁU ADMINA...");
+        window.open('admin.html', '_blank'); // Otwiera plik w nowej karcie
+    } else {
+        toast("BŁĄD AUTORYZACJI");
+    }
+}
+      
+       const colors = ['#3b82f6','#10b981','#f59e0b','#ef4444','#a855f7','#d4af37','#94a3b8','#ec4899'];
+
+let db = JSON.parse(localStorage.getItem('hj_q_final_26')) || { 
+    bal: 100000, 
+    ast: [], 
+    shop: [{n:"Serwer v1",p:25000,v:50}], 
+    tax: 0, 
+    lvl: 1, 
+    logs: [], 
+    contracts: [] 
+};
+
+let mkt = [
+    {id:'BTC', p:420000, c:'#f59e0b', h:Array(60).fill(420000)},
+    {id:'GOLD', p:12000, c:'#d4af37', h:Array(60).fill(12000)},
+    {id:'SILVER', p:850, c:'#94a3b8', h:Array(60).fill(850)},
+    {id:'OIL', p:4500, c:'#3b82f6', h:Array(60).fill(4500)},
+    {id:'TECH_STK', p:25000, c:'#a855f7', h:Array(60).fill(25000)},
+    {id:'REAL_EST', p:850000, c:'#ef4444', h:Array(60).fill(850000)}
+];
+
+let aiInt = null;
+
+        setInterval(() => {
+    const inc = (db.ast.reduce((s, x) => s + x.v, 0) + db.contracts.reduce((s, x) => s + x.zysk, 0)) || 0;
+    db.bal += inc; 
+    db.tax += inc * 0.19;
+
+    mkt.forEach(s => {
+        // Symulacja zmiany ceny (zabezpieczona przed spadkiem do 0)
+        s.p += (Math.random() - 0.5) * (s.p * 0.012);
+        if (s.p < 0.1) s.p = 0.1; 
+
+        s.h.push(s.p);
+        if (s.h.length > 60) s.h.shift();
+    });
+
+    uUI(); 
+    save();
+
+    if (document.getElementById('content-market').classList.contains('active')) {
+        drawM();
+    }
+}, 1000);
+
+
+      window.onload = () => {
+  
+function save() {
+    localStorage.setItem('hj_q_final_26', JSON.stringify(db));
+    console.log(" Zapisano w LocalStorage!");
+}
+
+function dodajProdukt(nazwa, cena, wartosc) {
+    db.shop.push({ n: nazwa, p: cena, v: wartosc });
+    save(); 
+    uUI(); 
+}   
+
+ let prg = 0;
+    const bar = document.getElementById('loader-bar');
+    const splash = document.getElementById('splash');
+
+    const int = setInterval(() => {
+        prg += 10;
+        if(bar) bar.style.width = prg + "%";
+        
+        if(prg >= 100) {
+            clearInterval(int);
+            if(splash) {
+                splash.style.opacity = '0';
+                setTimeout(() => splash.remove(), 800);
+            }
+            uUI(); // Odśwież dashboard po wejściu
+        }
+    }, 50);
+};
+ 
+
+        function connectAPI() { 
+            const op = document.getElementById('api-operator').value;
+            toast("NAWIĄZYWANIE POŁĄCZENIA Z " + op + "...");
+            setTimeout(() => toast("API " + op + " POŁĄCZONE POMYŚLNIE"), 1000);
+        }
+
+const API_URL = "http://127.0.0.1:5000";
+
+async function askInternet(zapytanie) {
+    const cleanQuery = zapytanie.replace(/szukaj|wizja/gi, "").trim();
+    const targetUrl = "https://www.google.com" + encodeURIComponent(cleanQuery);
+
+    const response = await fetch('http://127.0.0.1:5000', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({query: zapytanie})
+    }).catch(e => {
+
+        console.log("Mostek offline - Architekt AI przebija blokadę portalu.");
+        window.open(targetUrl, 'QuantumVision', 'width=1100,height=800,popup=yes');
+        
+        const msg = new SpeechSynthesisUtterance("Inicjuję portal wizji bezpośredniej.");
+        msg.pitch = 0.65;
+        window.speechSynthesis.speak(msg);
+        return null; 
+    });
+
+    if (!response) return "WIZJA_ZEWNETRZNA";
+    const data = await response.json();
+    console.log("AI otrzymała dane z sieci:", data.result);
+    return data.result;
+}
+
+window.addEventListener('DOMContentLoaded', () => {
+    if (typeof checkServerStatus === 'function') checkServerStatus();
+    if (typeof loadDataFromPython === 'function') loadDataFromPython();
+    
+    if (typeof populateRegions === 'function') populateRegions();
+    
+    setInterval(() => {
+        if (typeof checkServerStatus === 'function') checkServerStatus();
+    }, 5000);
+});  
+
+      function toggleAI() {
+    const lb = document.getElementById('ai-logs');
+    if(!aiInt) { 
+        aiInt = setInterval(() => { 
+            const p = (Math.random() * 85).toFixed(2); 
+            db.bal += parseFloat(p); 
+            
+            const msg = `TRADER_CORE: Przetworzono sygnał - Zysk +${p} PLN`;
+            const time = new Date().toLocaleTimeString();
+            
+         
+            const l = document.createElement('div');
+            l.className="text-[8px] text-purple-400 border-b border-white/5 mb-1";
+            l.innerText=`[${time}] ${msg}`;
+            lb.prepend(l);
+            
+           
+            logAction(msg, "text-purple-500"); 
+            
+            // 3. Automatyczny zapis do Pythona co 10 sekund
+            if(new Date().getSeconds() % 10 === 0) save(); 
+            
+            uUI(); 
+        }, 1000); 
+
+        document.getElementById('ai-btn').innerText = "ZATRZYMAJ PROCESOR AI";
+        toast("AI TRADER URUCHOMIONY");
+
+    } else { 
+        clearInterval(aiInt); aiInt = null; 
+        document.getElementById('ai-btn').innerText = "URUCHOM PROCESOR AI";
+        toast("PROCESOR WSTRZYMANY");
+    }
+}
+
+function save() { 
+    localStorage.setItem('hj_q_final_26', JSON.stringify(db));
+    console.log(`Core Intelligence: Dane Tomasza zabezpieczone lokalnie.`);
+}
+
+const SuperCoreNet = {
+    async askNet(query) {
+        console.log(`CORE: Inicjacja zapytania dla ${SC_CONFIG.userName}: ${query}`);
+
+        try {
+        
+const response = await fetch('http://127.0.0.1', {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify({ query: query }) 
+});
+
+            const data = await response.json();
+            return data.status === 'ok' ? "POŁĄCZONO Z GOOGLE" : "BŁĄD SIECI";
+        } catch (e) {
+            logAction("ALARM: Mostek offline! AI działa w trybie offline.", "text-red-500");
+            return "OFFLINE";
+        }
+    }
+};
+       function openOffice() { 
+    const pass = prompt("PODAJ KOD DOSTĘPU DO BIURA:");
+    if(pass === "1234") {
+
+        toast("REJESTR STATYSTYKI OTWARTE");
+        switchTab('office'); 
+    } else {
+        toast("BŁĘDNY KOD");
+    }
+}
+
+        function printTransfer() { 
+            const content = document.getElementById('transfer-doc-preview').innerHTML;
+            if(content.includes("Oczekiwanie")) return toast("BRAK DANYCH DO DRUKU");
+            window.print(); 
+        }
+
+        function quickAddShop() { 
+            const n = prompt("Nazwa produktu:"); 
+            const p = parseInt(prompt("Cena (PLN):")); 
+            const v = parseInt(prompt("Zysk/s:")); 
+            if(n && p && v) { db.shop.push({n,p,v}); uUI(); save(); } 
+        }
+        function quickAddAsset() { 
+            const n = prompt("Nazwa zasobu:"); 
+            const v = parseInt(prompt("Zysk/s:")); 
+            if(n && v) { db.ast.push({n,v}); uUI(); save(); } 
+        }
+        function quickAddMarket() { 
+            const id = prompt("Symbol (np. ETH):").toUpperCase(); 
+            const p = parseInt(prompt("Cena startowa:")); 
+            if(id && p) { 
+                mkt.push({id, p, c: colors[mkt.length % colors.length], h: Array(60).fill(p)}); 
+                uUI(); 
+
+            } 
+        }
+
+function addToStore(product) {
+    products.push(product); 
+    updateUI();            
+}
+
+function refreshRegistry() {
+    const reg = document.getElementById('assets-registry');
+
+    if(!reg) return;
+    const data = localStorage.getItem('hj_q_final_26');
+    if(data) db = JSON.parse(data);
+
+    if(db.ast && db.ast.length > 0) {
+        reg.innerHTML = db.ast.map((a, i) => `
+            <div class="flex justify-between items-center bg-white/5 p-2 rounded border border-white/10 mb-1">
+                <div>
+                    <p class="text-[10px] font-black text-white uppercase">🏠 ${a.n}</p>
+                    <p class="text-[8px] text-emerald-500">+${a.v} PLN/s</p>
+                </div>
+                <button onclick="db.bal+=${a.v*100}; db.ast.splice(${i},1); save(); uUI(); refreshRegistry();" class="text-red-500 text-[8px] border border-red-900/50 px-2 py-1 rounded">SPRZEDAJ</button>
+            </div>
+        `).join('');
+    }
+}
+
+window.addEventListener('storage', (e) => {
+    if (e.key === 'hj_q_final_26') {
+        db = JSON.parse(e.newValue);
+        uUI();
+        refreshRegistry();
+    }
+});
+
+function payTax() {
+    const amount = Math.floor(db.tax);
+    const office = document.getElementById('tax-office').value;
+    
+    if (amount <= 0) return toast("BRAK ZALEGŁOŚCI PODATKOWYCH");
+    if (!document.getElementById('tax-region').value) return toast("WYBIERZ URZĄD SKARBOWY");
+
+    if (db.bal >= amount) {
+        db.bal -= amount;
+        db.tax = 0;
+        logAction(`PODATEK OPŁACONY: ${amount} PLN -> ${office}`, "text-red-400");
+        toast("PODATEK ROZLICZONY POMYŚLNIE");
+        uUI();
+        save();
+    } else {
+        toast("NIEWYSTARCZAJĄCE ŚRODKI NA PODATEK!");
+    }
+} 
+const btn = document.getElementById('btn-google-init');
+const originalText = btn.innerHTML;
+
+btn.addEventListener('click', () => {
+    window.open('https://pl.tradingview.com', '_blank');
+
+    const quantumSignal = new Image();
+    quantumSignal.src = "http://127.0.0.1" + new Date().getTime();
+
+    btn.innerHTML = "🌀 ARCHITEKT: ŁĄCZENIE Z SIECIĄ...";
+    btn.disabled = true; 
+    
+    setTimeout(() => {
+        btn.innerHTML = "✅ WIZJA ZSYNCHRONIZOWANA";
+        setTimeout(() => { 
+            btn.innerHTML = originalText; 
+            btn.disabled = false;
+        }, 2000);
+    }, 1000);
+});
+function importData(event) {
+    const reader = new FileReader();
+    reader.onload = function(e) {
+        try {
+            const importedData = JSON.parse(e.target.result);
+            db = importedData;
+            save();
+            uUI();
+            toast("PROJEKT ZAIMPORTOWANY POMYŚLNIE");
+            location.reload(); 
+        } catch (err) {
+            toast("BŁĄD: NIEPRAWIDŁOWY PLIK PROJEKTU");
+        }
+    };
+    reader.readAsText(event.target.files[0]);
+}
+
+function generateLegalDoc() {
+    const docType = document.getElementById('ct-doc-type').value;
+    const a = { n: document.getElementById('ct-a-name').value, nip: document.getElementById('ct-a-nip').value, adr: `${document.getElementById('ct-a-zip').value} ${document.getElementById('ct-a-city').value}, ${document.getElementById('ct-a-adr').value}` };
+    const b = { n: document.getElementById('ct-b-name').value, nip: document.getElementById('ct-b-nip').value, adr: `${document.getElementById('ct-b-zip').value} ${document.getElementById('ct-b-city').value}, ${document.getElementById('ct-b-adr').value}` };
+    const desc = document.getElementById('ct-desc').value;
+    const val = document.getElementById('ct-val').value;
+
+    let docTitle = docType === 'B2B' ? "UMOWA ŚWIADCZENIA USŁUG (KONTRAKT B2B)" : "UMOWA KUPNA-SPRZEDAŻY MAJĄTKU";
+    let roleA = docType === 'B2B' ? "Zleceniobiorca (Wykonawca)" : "Zbywca (Sprzedawca)";
+    let roleB = docType === 'B2B' ? "Zleceniodawca (Zamawiający)" : "Nabywca (Kupujący)";
+
+    document.getElementById('contract-preview').innerHTML = `
+        <div style="color: black; padding: 20px;">
+            <p style="text-align: right;">Sporządzono dnia: ${new Date().toLocaleDateString()}</p>
+            <h1 style="text-align: center; text-decoration: underline; margin-bottom: 30px;">${docTitle}</h1>
+            
+            <table style="width: 100%; margin-bottom: 30px; border-collapse: collapse;">
+                <tr>
+                    <td style="width: 50%; vertical-align: top; padding: 10px; border: 1px solid #ddd;">
+                        <strong>${roleA}:</strong><br>${a.n}<br>NIP/PESEL: ${a.nip}<br>Adres: ${a.adr}
+                    </td>
+                    <td style="width: 50%; vertical-align: top; padding: 10px; border: 1px solid #ddd;">
+                        <strong>${roleB}:</strong><br>${b.n}<br>NIP/PESEL: ${b.nip}<br>Adres: ${b.adr}
+                    </td>
+                </tr>
+            </table>
+
+            <p><strong>§1 PRZEDMIOT UMOWY:</strong> ${desc}</p>
+            <p><strong>§2 WARUNKI FINANSOWE:</strong> Strony ustalają wartość przedmiotu umowy na kwotę ${val} PLN.</p>
+            <p><strong>§3 POSTANOWIENIA:</strong> Umowa sporządzona w formie elektronicznej, autoryzowana przez SERWER_UDA.exe.</p>
+
+            <div style="margin-top: 80px; display: flex; justify-content: space-between; text-align: center;">
+                <div style="width: 45%; border-top: 1px solid black; padding-top: 5px;">Podpis ${roleA}</div>
+                <div style="width: 45%; border-top: 1px solid black; padding-top: 5px;">Podpis ${roleB}</div>
+            </div>
+            <div style="margin-top: 40px; text-align: center; font-size: 8px; color: #666;">
+                ID Dokumentu: ${Math.random().toString(36).substring(2, 15).toUpperCase()} | System: HAJDUK QUANTUM 2026
+            </div>
+        </div>
+    `;
+    toast("DOKUMENT WYGENEROWANY");
+}
+
+function saveAndSign() {
+    const val = parseFloat(document.getElementById('ct-val').value) || 0;
+    const client = document.getElementById('ct-b-name').value || "NIEZNANY";
+   
+    db.contracts.push({ firma: client, zysk: val });
+    logAction(`ZAPISANO DOKUMENT: ${client} | WARTOŚĆ: ${val} PLN`, "text-blue-400");
+    save(); // Funkcja zapisu na pendrive
+    uUI();
+}
+const legend = document.getElementById('assets-legend'); // upewnij się, że masz taki ID w HTML
+const assets = db.ast || [];
+
+if (legend) {
+    const tot = assets.reduce((sum, a) => sum + (parseFloat(a.v) || 0), 0);
+
+    if (assets.length === 0) {
+        legend.innerHTML = '<p class="text-[7px] text-gray-500 italic text-center">BRAK DANYCH</p>';
+    } else {
+        legend.innerHTML = assets.map((a, idx) => `
+            <div class="flex items-center justify-between bg-white/5 border-l-2 py-0.5 px-2 rounded-sm mb-1" 
+                 style="border-color: ${colors[idx % colors.length]}">
+                <span class="text-[7px] text-slate-300 uppercase truncate w-32 font-bold">${a.n}</span>
+                <span class="text-[8px] font-black text-blue-400">
+                    ${tot > 0 ? ((a.v / tot) * 100).toFixed(1) : 0}%
+                </span>
+            </div>
+        `).join('');
+    }
+}
+function activateSuperCore() {
+    if(typeof switchTab === 'function') {
+        switchTab('super-core');
+    } else {
+       
+        document.querySelectorAll('.tab-content').forEach(t => t.style.display = 'none');
+        document.getElementById('content-super-core').style.display = 'block';
+    }
+    
+    if (typeof initBrain3D === 'function') {
+        setTimeout(initBrain3D, 300); 
+    }
+  
+    const mainStat = document.getElementById('stat-assets');
+    const cyberStat = document.getElementById('cyber-count');
+    if (mainStat && cyberStat) {
+        cyberStat.innerText = mainStat.innerText;
+    }
+
+    console.log("⚡ SUPER CORE AI: System Neuralny Aktywny");
+}
+
+
+function openVision(url) {
+    const netSection = document.getElementById('sekcja-internet');
+    const iframe = document.getElementById('okno-przegladarki');
+    if (netSection && iframe) {
+        netSection.style.display = 'flex';
+        iframe.src = url;
+    }
+}
+
+function logToTerminal(msg, color) {
+    const chat = document.getElementById('super-chat-box');
+    const mouth = document.getElementById('straznik-mouth');
+    if (!chat) return;
+
+    const p = document.createElement('p');
+    p.style.color = color;
+    p.style.fontFamily = 'monospace';
+    p.style.fontSize = '11px';
+    p.innerHTML = `[${new Date().toLocaleTimeString()}] ${msg}`;
+    chat.appendChild(p);
+    chat.scrollTop = chat.scrollHeight;
+
+  
+    if (mouth) {
+        mouth.style.height = "12px"; mouth.style.borderRadius = "50%";
+        setTimeout(() => { mouth.style.height = "2px"; mouth.style.borderRadius = "0px"; }, 2000);
+    }
+}
+const systemFileSystem = {
+    'c:': ['[DIR] Windows', '[DIR] Program Files', '[DIR] Users', 'bootmgr.sys', 'pagefile.sys'],
+    'd:': ['[DIR] Multimedia', '[DIR] Gry', 'filmy_2024.mp4', 'kopia_zapasowa.iso'],
+    'e:/': ['[DIR] '],
+    'f:': ['[DIR] Win11_Polish_x64v1 aktywacja', 'MediaCreationTool', 'pycharm-2026.1'],
+    'g:/': ['[DIR] '],
+    'h:': ['[DIR] HAJDUK_GLOBAL_QUANTUM', 'terminal_core.js', 'index.html', 'config.json', 'quantum_api.v3'],
+    'I:/': ['[DIR] '],
+    'J:/': ['[DIR] '],
+    'K:/': ['[DIR] '],
+
+};
+
+let activeDrive = "C:\, D:\, E:\, F:\, G:\, H:\, I:\, J:\, K:\,"; 
+
+async function triggerSuperCore() {
+    const input = document.getElementById('super-input') || document.getElementById('input-brain');
+    const chat = document.getElementById('super-chat-box');
+    const status = document.getElementById('txt-v-net');
+    
+    if (!input || !chat) return;
+    const val = input.value.trim();
+    if (!val) return;
+    input.value = "";
+
+    const low = val.toLowerCase();
+    let response = "";
+    let targetUrl = "";
+
+    if (window.speechSynthesis) window.speechSynthesis.cancel();
+
+    if (low.includes("cześć") || low.includes("siema")) {
+        response = "Witam Projektanta. System Hajduk Global Quantum Terminal 2026 gotowy.";
+    } 
+    else if (low.includes("skanuj")) {
+        response = "Rozpoczynam skanowanie struktury kodu projektu Hajduk Global Quantum Terminal 2026 index.html przeskanowano 163 Kilo Bitów nie znaleziono zmian w projekcie.";
+        if (status) status.innerText = "SKANOWANIE DYSKU H:";
+        if (typeof runDeepAudit === "function") runDeepAudit();
+    }
+    else if (low.includes("status")) {
+        response = "Status projektu: Wszystkie pliki zaawansowanej technologi sprawne, brak naruszeń strukturalnych.";
+        if (status) status.innerText = "H: INTEGRALNY";
+    }
+    else if (low.includes("diagnoza")) {
+        response = "Diagnoza: System Windows 11 stabilny wydajność 100%. Nie wykryto zmian w strukturach plików systemowych i lokalnych.";
+        if (status) status.innerText = "DIAGNOSTYKA: OK";
+    }
+    else if (low.includes("system")) {
+        response = "Sprawdzam Windows 11: System stabilny wydajnością 100%. Nie wykryto zmian brak zagrozeń.";
+        if (status) status.innerText = "OPROGRAMOWANIE WINDOWS 11: OK";
+    }
+
+    else if (low.startsWith("dir")) {
+        let driveToDir = activeDrive;
+        const parts = low.split(" ");
+        
+        if (parts.length > 1) {
+            let requested = parts[1];
+            if (!requested.endsWith(":")) requested += ":";
+            if (systemFileSystem[requested]) {
+                driveToDir = requested;
+            }
+        }
+
+        logToTerminal(`Directory of ${driveToDir.toUpperCase()}\\`, "white");
+        
+        if (systemFileSystem[driveToDir]) {
+            systemFileSystem[driveToDir].forEach(file => {
+                const isDir = file.includes('[DIR]');
+                logToTerminal(`${isDir ? '&lt;DIR&gt;' : 'FILE'} > ${file.replace('[DIR] ', '')}`, isDir ? "cyan" : "gray");
+            });
+            response = `Skanowanie jednostki ${driveToDir.toUpperCase()} zakończone.`;
+        } else {
+            response = "Błąd:  Nie rozpoznano jednostki dyskowej lub brak wymaganego dysku.";
+        }
+    }
+    else if (low.length === 2 && low.endsWith(':')) {
+        if (systemFileSystem[low]) {
+            activeDrive = low;
+            response = `Zmieniono aktywną ścieżkę na ${activeDrive.toUpperCase()}`;
+        } else {
+            response = "System nie może odnaleźć podanego dysku.";
+        }
+    }
+    else if (low.includes("napraw")) {
+        response = "Inicjuję protokół naprawy. Przeszukuję StackOverflow, GitHub i Google.";
+        const sites = ["https://google.com", "https://stackoverflow.com", "https://github.com"];
+        sites.forEach((url, i) => setTimeout(() => window.open(url, '_blank'), i * 800));
+    }
+    else if (low === "ipconfig") {
+        logToTerminal("IPv4 Address. . . . . : 192.168.1.105", "white");
+        response = "Konfiguracja IP wyświetlona.";
+    }
+    else if (low === "giełda") {
+        targetUrl = "https://tradingview.com";
+        response = "Otwieram terminal giełdowy.";
+    }
+    else if (low === "google maps") {
+        targetUrl = "https://www.google.com/maps";
+        response = "Otwieram terminal google maps.";
+    }
+
+    else {
+        targetUrl = `https://google.com`;
+        response = "Eksploracja sieci dla: " + val;
+    }
+
+    if (response) {
+        logToTerminal(`ARCHITEKT: ${response}`, "#22d3ee");
+        
+        if (typeof speak === "function") {
+            speak(response);
+        } else {
+            const msg = new SpeechSynthesisUtterance(response);
+            msg.lang = 'pl-PL';
+            window.speechSynthesis.speak(msg);
+        }
+
+        if (targetUrl) {
+            setTimeout(() => window.open(targetUrl, '_blank'), 600);
+        }
+    }
+}
+document.addEventListener('mousemove', (e) => {
+    const eyes = document.querySelectorAll('#content-super-core .eye');
+    
+    if (eyes.length === 0) return;
+
+    eyes.forEach(eye => {
+        const rect = eye.getBoundingClientRect();
+        const eyeX = rect.left + rect.width / 2;
+        const eyeY = rect.top + rect.height / 2;
+        const angle = Math.atan2(e.clientY - eyeY, e.clientX - eyeX);
+        const distance = 6; 
+        const moveX = Math.cos(angle) * distance;
+        const moveY = Math.sin(angle) * distance;
+        eye.style.transform = `translate(${moveX}px, ${moveY}px)`;
+    });
+});
+
+function animateMouth() {
+    const mouth = document.querySelector('#content-super-core .mouth');
+    if (!mouth) return;
+
+    mouth.classList.add('talking'); 
+    setTimeout(() => {
+        mouth.classList.remove('talking');
+    }, 2000); 
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    const input = document.getElementById('super-input');
+    if (input) {
+        input.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                triggerSuperCore();
+                console.log("🛡️ STRAŻNIK: Przechwycono sygnał wejściowy przez Qualcomm.");
+            }
+        });
+    }
+});
+
+function toggleArchitectLab() {
+    const lab = document.getElementById('architect-lab'); 
+    if (!lab) return;
+
+    if (lab.classList.contains('hidden') || lab.style.display === 'none') {
+        lab.style.display = 'flex';
+        lab.classList.remove('hidden');
+       
+        const msg = "🛡️ ARCHITEKT: Inicjuję laboratorium analizy. Rdzeń Qualcomm Atheros gotowy do weryfikacji kodu index.html.";
+        if (typeof speakAsArchitekt === 'function') speakAsArchitekt(msg);
+        
+        const log = document.getElementById('analysis-log');
+        if(log) log.innerHTML += `<p class="text-purple-400 mt-2">> POŁĄCZONO Z PENDRIVE: SYGNATURA fd00::20f9... AKTYWNA.</p>`;
+        
+    } else {
+        lab.style.display = 'none';
+        lab.classList.add('hidden');
+    }
+}
+function speakAsArchitekt(text) {
+    const mouth = document.getElementById('avatar-mouth');
+    const synth = window.speechSynthesis;
+    
+    synth.cancel();
+
+    const utterance = new SpeechSynthesisUtterance(text);
+    utterance.lang = 'pl-PL';
+    utterance.pitch = 0.55; 
+    utterance.rate = 0.85; 
+
+    utterance.onstart = () => {
+        if(mouth) mouth.style.height = "10px"; 
+        if(mouth) mouth.style.backgroundColor = "#22d3ee";
+    };
+    
+    utterance.onend = () => {
+        if(mouth) mouth.style.height = "2px";
+        if(mouth) mouth.style.backgroundColor = "#06b6d4";
+    };
+  
+     synth.speak(utterance);
+}
+document.getElementById('submitQuery').onclick = async function() {
+      const query = "kurs btc i newsy rynkowe 2026";
+const url = query ? `https://www.google.pl` : "https://pl.tradingview.com"; page.goto(searchUrl, { waitUntil: 'networkidle' });
+console.log("SUPER CORE: Projektancie, inicjuję połączenie z siecią prosze czekać");
+        if (!query) {
+            resultsDiv.innerHTML = "BŁĄD: BRAK DANYCH WEJŚCIOWYCH";
+            return;
+        }
+
+        resultsDiv.innerHTML = "INICJOWANIE POŁĄCZENIA Z AI QUANTUM... PROSZĘ CZEKAĆ";
+        this.enable = true; 
+
+        try {
+          const response = await fetch('http://127.0.0.1', { 
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ 
+        query: query 
+    })
+});
+            const data = await response.json();
+
+            resultsDiv.innerHTML = `<span style="color: #a855f7;">> ODPOWIEDŹ:</span><br>${data.answer || JSON.stringify(data)}`;
+            
+        } catch (error) {
+            resultsDiv.innerHTML = `<span style="color: #ef4444;">BŁĄD KRYTYCZNY:</span> ${error.message}`;
+        } finally {
+            this.disabled = true;
+        }
+    };
+ const submitBtn = document.getElementById('submitQuery');
+    const inputField = document.getElementById('searchInput');
+    const resultsArea = document.getElementById('results');
+
+    submitBtn.onclick = async function() {
+        const userQuery = inputField.value;
+
+        if (!userQuery) {
+            resultsArea.innerText = "WPISZ PARAMETRY WIZJI...";
+            return;
+        }
+        resultsArea.innerHTML = `<span class="animate-pulse text-cyan-400 font-bold">[SKANOWANIE SIECI...]</span>`;
+
+        try {
+            let responseText = "";           
+            if (userQuery.toLowerCase().includes("dolar")) {
+                const res = await fetch('https://api.nbp.pl');
+                const data = await res.json();
+                responseText = `ANALIZA SIECIOWA: KURS DOLARA WYNOSI ${data.rates[0].mid} PLN. PROTOKÓŁ STABILNY.`;
+            } else {
+              
+                responseText = `ZAPYTANIE "${userQuery.toUpperCase()}" PRZETWORZONE PRZEZ RDZEŃ QUANTUM. BRAK KRYTYCZNYCH ZAGROŻEŃ.`;
+            }
+           
+            setTimeout(() => {
+                document.getElementById('searchBlock').style.display = 'none';
+                switchTab('super-core');
+              document.getElementById('super-input').addEventListener('keypress', function (e) {
+    if (e.key === 'Enter') {
+        triggerSuperCore();
+    }
+});
+                const mainInput = document.getElementById('super-input');
+                if(mainInput) {
+                    mainInput.value = userQuery;
+                    const chat = document.getElementById('super-chat-box');
+                    chat.innerHTML += `
+                        <div class="flex flex-col items-start animate-fade-in mt-4">
+                            <span class="text-[8px] text-cyan-400 font-black uppercase">Architekt AI (NET):</span>
+                            <p class="bg-cyan-500/10 border border-cyan-500/20 p-4 rounded-r-xl text-cyan-100 max-w-[85%] shadow-lg shadow-cyan-900/20">${responseText}</p>
+                        </div>`;
+                    chat.scrollTop = chat.scrollHeight;
+                    const mouth = document.getElementById('avatar-mouth');
+                    const utterance = new SpeechSynthesisUtterance(responseText);
+                    utterance.lang = 'pl-PL';
+                    utterance.pitch = 0.65;
+                    utterance.onstart = () => mouth.classList.add('mouth-active');
+                    utterance.onend = () => mouth.classList.remove('mouth-active');
+                    window.speechSynthesis.speak(utterance);
+                }
+            }, 800);
+
+        } catch (error) {
+            resultsArea.innerText = "BŁĄD POŁĄCZENIA SIECIOWEGO.";
+            console.error("UDA Error:", error);
+        }
+    };
+
+async function loadDataFromPython() {
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 2000); 
+
+    try {
+        const res = await fetch(`${API_URL}/load`, { signal: controller.signal });
+        if(!res.ok) throw new Error("BŁĄD_SERWERA");
+        
+        db = await res.json();
+        toast("DANE Z PENDRIVE: OK");
+    } catch (e) {
+        const backup = localStorage.getItem('hj_q_final_26');
+        if(backup) {
+            db = JSON.parse(backup);
+            toast("STATUS_LOAD: TRYB LOKALNY");
+        }
+    } finally {
+        clearTimeout(timeoutId);
+        uUI(); 
+    }
+}
+function showAIResponse(tekst) {
+    const responseText = tekst; 
+    
+    const responseHTML = `
+        <div class="flex flex-col items-start animate-fade-in mt-4 border-l border-cyan-500/30 pl-4">
+            <span class="text-[8px] text-cyan-400 font-black uppercase tracking-widest italic">Architekt AI (NET):</span>
+            <p class="bg-cyan-500/10 border border-cyan-500/20 p-4 rounded-r-xl text-cyan-100 max-w-[85%] shadow-lg shadow-cyan-900/20 text-[11px] font-mono leading-relaxed">
+                ${responseText}
+            </p>
+        </div>`;
+
+    const chatBox = document.getElementById('chat-container');
+    if(chatBox) {
+        chatBox.innerHTML += responseHTML;
+        chatBox.scrollTop = chatBox.scrollHeight;
+    } else {
+        console.error("BŁĄD: Nie znaleziono elementu chat-container!");
+    }
+
+    const synth = window.speechSynthesis;
+    const mouth = document.getElementById('avatar-mouth');
+    
+    if (synth) {
+        synth.cancel(); 
+        const utterance = new SpeechSynthesisUtterance(responseText); 
+
+        utterance.lang = 'pl-PL';
+        utterance.pitch = 0.65;
+        utterance.rate = 0.9;
+
+        if (mouth) {
+            utterance.onstart = () => mouth.classList.add('mouth-active');
+            utterance.onend = () => mouth.classList.remove('mouth-active');
+        }
+
+        synth.speak(utterance);
+    }
+}
+function otworzInternet() {
+    const sekcja = document.getElementById('sekcja-internet');
+    const iframe = document.getElementById('okno-przegladarki');
+    const mouth = document.getElementById('avatar-mouth');
+
+    if (iframe) iframe.src = "https://google.com"; // igu=1 pomaga wczytać Google w iframe
+    if (sekcja) sekcja.style.display = 'flex';
+
+    try {
+        const synth = window.speechSynthesis;
+        synth.cancel(); 
+
+        const msg = "INICJUJĘ DOSTĘP GLOBALNY. PORTAL WIZJI SIECIOWEJ AKTYWNY.";
+        const utter = new SpeechSynthesisUtterance(msg); // Spójna nazwa zmiennej
+        
+        utter.lang = 'pl-PL';
+        utter.pitch = 0.65;
+        utter.rate = 0.9;
+
+        if (mouth) {
+            utter.onstart = () => mouth.classList.add('mouth-active');
+            utter.onend = () => mouth.classList.remove('mouth-active');
+        }
+
+        synth.speak(utter); 
+        
+    } catch(e) { 
+        console.warn("Błąd syntezy mowy lub blokada Audio:", e); 
+    }
+}
+ 
+function uruchomWizjeSieciowa() {
+    const mainBtn = document.getElementById('btn-vision-portal');
+    const input = document.getElementById('ai-command-input'); // Używamy konkretnego ID
+    const temat = input ? input.value : "";
+
+    if (!temat) return;
+
+    if (mainBtn) mainBtn.innerHTML = "<span>🌀 ANALIZA ZNACZENIA...</span>";
+    let url = `https://google.com{encodeURIComponent(temat)}`;    
+    window.open(url, 'QuantumWebPortal', 'width=1000,height=800,top=100,left=100,popup=yes');
+
+    try {
+        window.speechSynthesis.cancel();
+        const msg = `POBIERAM ANALIZĘ ZNACZENIA DLA FRAZY ${temat.toUpperCase()}. TRANSMISJA DANYCH ETYMOLOGICZNYCH ROZPOCZĘTA.`;
+        const utter = new SpeechSynthesisUtterance(msg);
+        utter.lang = 'pl-PL';
+        utter.pitch = 0.65; 
+
+        const mouth = document.getElementById('avatar-mouth');
+        const coreBtn = document.getElementById('btn-super-core') || document.querySelector('.nav-btn');
+
+        if (mouth) {
+            mouth.classList.add('mouth-active');
+            
+            utter.onend = () => {
+                mouth.classList.remove('mouth-active');
+                if (coreBtn) {
+                    coreBtn.innerHTML = "<span>GOTOWE</span>";
+                }
+            };
+        }
+        window.speechSynthesis.speak(utter);
+    } catch(e) {
+        console.warn("SYSTEM:");
+    }
+
+    if(input) input.value = ""; 
+}
+
+function runNetInit() {
+    const txt = document.getElementById('txt-q-net');
+    const btn = document.getElementById('btn-q-net');    
+    txt.innerText = "ŁĄCZENIE...";
+    const currentFolder = window.location.href.substring(0, window.location.href.lastIndexOf('/'));
+    setTimeout(() => {
+        window.open(`${currentFolder}/index.html`, '_blank');         
+        txt.innerText = "NET ACTIVE";
+        btn.style.color = "#34d399"; 
+        console.log("SYSTEM: Projekt zainicjowany w nowej karcie.");
+    }, 500);
+}
+
+function runVisionInit() {
+    const txt = document.getElementById('txt-v-net');
+    const btn = document.getElementById('btn-v-net');
+    
+    txt.innerText = "PROJEKTOWANIE...";
+    
+    const currentFolder = window.location.href.substring(0, window.location.href.lastIndexOf('/'));
+    
+    setTimeout(() => {
+        window.open(`${currentFolder}/admin.html`, '_blank'); 
+        
+        txt.innerText = "WIZJA ONLINE";
+        btn.style.color = "#a78bfa"; 
+    }, 500);
+}
+async function runNetInit() {
+    const txt = document.getElementById('txt-q-net');
+    txt.innerText = "ŁĄCZENIE Z MOSTEM...";
+
+    try {
+        const response = await fetch('http://127.0.0.1', {
+            method: 'POST'
+        });
+        
+        if (response.ok) {
+            txt.innerText = "SYSTEM ODPALONY";
+            const path = window.location.pathname.substring(0, window.location.pathname.lastIndexOf('/'));
+            window.open(`file://${path}/admin.html`, '_blank');
+        }
+    } catch (e) {
+        txt.innerText = "BŁĄD: MOST NIEAKTYWNY";
+        console.error("Uruchom najpierw bridge.py!");
+    }
+}
+async function autoScan(query = "kurs btc i newsy rynkowe 2026") {
+    console.log(`SUPER CORE: Projektancie, inicjuję skanowanie wizyjne dla: ${query}`);
+    const page = await browser.newPage();
+    const searchUrl = `https://google.com`;
+    
+    try {
+        await page.goto(searchUrl, { waitUntil: 'networkidle2' }); 
+        const screenshot = await page.screenshot({ fullPage: true });
+        
+        const analysis = await analyzeVision(screenshot, "Znajdź aktualny kurs BTC i najważniejsze newsy");
+        
+        console.log("SUPER CORE: Analiza zakończona:", analysis);
+        return analysis;
+    } catch (error) {
+        console.error("SUPER CORE: Błąd podczas skanowania:", error);
+    }
+}
+function runTerminalInit() {
+    const btnText = document.getElementById('txt-terminal');
+    btnText.innerText = "INICJACJA KODU...";
+    
+    fetch('http://127.0.0.1', { method: 'POST' })
+    .then(() => {
+        btnText.innerText = "TERMINAL URUCHOMIONY";
+        setTimeout(() => { btnText.innerText = "TERMINAL SYSTEMOWY"; }, 2000);
+    })
+    .catch(() => {
+        btnText.innerText = "BŁĄD CORE (PORT 5000?)";
+        setTimeout(() => { btnText.innerText = "TERMINAL SYSTEMOWY"; }, 2000);
+    });
+}
+
+function runVisionInit(event) {
+    if(event) event.preventDefault();
+    const input = document.getElementById('super-input') || document.getElementById('input-brain');
+    const query = input ? input.value.trim() : "kurs dolara";
+
+    const btnText = document.getElementById('txt-v-net');
+    btnText.innerText = "ŁĄCZENIE Z SIECIĄ...";
+    
+    fetch('http://127.0.0.1', { 
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        mode: 'cors',
+        body: JSON.stringify({ query: query })
+    })
+    .then(response => {
+        if(response.ok) {
+            btnText.innerText = "WIZJA AKTYWNA (GOOGLE)";
+            if (typeof startSpeaking === "function") startSpeaking();
+            setTimeout(() => { btnText.innerText = "PROJEKTANT WIZJI NET"; }, 2000);
+        } else {
+            throw new Error();
+        }
+    })
+    .catch(() => {
+        btnText.innerText = "BŁĄD AI CORE (SPRAWDŹ PORT 5000)";
+        setTimeout(() => { btnText.innerText = "PROJEKTANT WIZJI NET"; }, 3000);
+    });
+}
+
+function aktywujWizjeNet() {
+    const statusTxt = document.getElementById('txt-v-net');
+    statusTxt.innerText = "PRZEBIJANIE BLOKADY...";
+    let ghost = window.open('http://127.0.0.1', 'ghost', 'width=1,height=1,left=-2000,top=-2000');
+    setTimeout(() => {
+        if (ghost) ghost.close();
+        statusTxt.innerText = "WIZJA AKTYWNA";
+        setTimeout(() => { statusTxt.innerText = "PROJEKTANT WIZJI NET"; }, 2000);
+    }, 1000);
+}
+function directVisionNet() {
+
+    const queryInput = document.getElementById('super-input') || document.getElementById('input-brain');
+   const query = document.getElementById('super-input').value.trim() || "kurs dolara";
+
+    const searchUrl= `https://www.google.com`;
+ 
+    window.open(searchUrl, '_blank');
+    
+    navigator.sendBeacon('http://127.0.0.1', JSON.stringify({query: query}));
+    const txt = document.getElementById('txt-v-net');
+    txt.innerText = "KWANTOWE POŁĄCZENIE AKTYWNE";
+    if (typeof startSpeaking === "function") startSpeaking(); 
+    setTimeout(() => { txt.innerText = "PROJEKTANT WIZJI NET"; }, 2000);
+}
+
+function directTerminal() {
+    window.open('https://www.google.com', '_blank');
+    const txt = document.getElementById('txt-terminal');
+    txt.innerText = "TERMINAL OTWARTY";
+    setTimeout(() => { txt.innerText = "TERMINAL SYSTEMOWY"; }, 2000);
+}
+document.addEventListener('keypress', function (e) {
+    if (e.key === 'Enter' && e.target && e.target.id === 'ai-command-input') {
+        const input = e.target;
+        const val = input.value.trim();
+        
+        if (val !== '') {
+            const output = document.getElementById('ai-terminal-output');
+            if (!output) return;
+
+            const cmd = val.toUpperCase();
+            const userDiv = document.createElement('div');
+            userDiv.style.color = '#fff';
+            userDiv.innerHTML = `> EXECUTING: ${cmd}`;
+            output.appendChild(userDiv);
+
+            if (cmd === 'VISION' || cmd === 'WIZJA') {
+                quantumVision();
+            }
+
+            setTimeout(() => {
+                const coreDiv = document.createElement('div');
+                coreDiv.innerHTML = `> STATUS: PRZETWARZANIE KOMENDY "${cmd}" ZAKOŃCZONE.`;
+                output.appendChild(coreDiv);
+                output.scrollTop = output.scrollHeight;
+            }, 600);
+
+            input.value = '';
+            output.scrollTop = output.scrollHeight;
+        }
+    }
+});                document.getElementById('voice-btn').onclick = () => {
+                    const vDiv = document.createElement('div');
+                    vDiv.style.color = '#ef4444';
+                    vDiv.innerHTML = '> SYSTEM: VOICE RECOGNITION NOT LINKED.';
+                    output.appendChild(vDiv);
+                    output.scrollTop = output.scrollHeight;
+                };
+let hScene, hCamera, hRenderer, hHead, hMouseX = 0, hMouseY = 0;
+
+function initHumanoidCore() {
+    const container = document.getElementById('canvas-3d-container');
+    if (!container || container.children.length > 0) return;
+
+    hScene = new THREE.Scene();
+    hCamera = new THREE.PerspectiveCamera(45, container.clientWidth / container.clientHeight, 0.1, 1000);
+   
+    hRenderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+    hRenderer.setSize(container.clientWidth, container.clientHeight);
+    container.appendChild(hRenderer.domElement);
+
+    const light = new THREE.PointLight(0xa855f7, 2, 50);
+    light.position.set(2, 2, 5);
+    hScene.add(light);
+    hScene.add(new THREE.AmbientLight(0xffffff, 0.3));
+
+    const geometry = new THREE.IcosahedronGeometry(1.2, 2);
+    const material = new THREE.MeshStandardMaterial({ 
+        color: 0x000000, 
+        emissive: 0x06b6d4, 
+        wireframe: true,
+        emissiveIntensity: 1
+    });
+    hHead = new THREE.Mesh(geometry, material);
+    hScene.add(hHead);
+
+    hCamera.position.z = 4.5;
+
+    function animate() {
+        requestAnimationFrame(animate);
+        
+        if (hHead) {
+            hHead.rotation.y += (hMouseX * 0.8 - hHead.rotation.y) * 0.05;
+            hHead.rotation.x += (hMouseY * 0.5 - hHead.rotation.x) * 0.05;
+            
+            hHead.position.y = Math.sin(Date.now() * 0.002) * 0.05;
+        }
+
+        hRenderer.render(hScene, hCamera);
+    }
+    animate();
+}
+
+document.addEventListener('mousemove', (e) => {
+    hMouseX = (e.clientX / window.innerWidth) - 0.5;
+    hMouseY = (e.clientY / window.innerHeight) - 0.5;
+});
+
+function executeCyberVision() {
+    const input = document.getElementById('input-brain') || document.getElementById('super-input');
+    const mouth = document.getElementById('avatar-mouth');
+    
+    if (!input || !input.value.trim()) return;
+    const val = input.value.trim();
+    const low = val.toLowerCase();
+    input.value = ""; 
+
+    let targetUrl = "";
+    let response = "";
+
+    const atlas = {
+        "google": "https://www.google.pl",
+        "facebook": "https://www.facebook.com",
+        "youtube": "https://www.youtube.com",
+        "santander": "https://www.santander.pl",
+        "allegro": "https://www.allegro.pl",
+        "tradingview": "https://pl.tradingview.com",
+        "giełda": "https://pl.tradingview.com",
+        "onet": "https://www.onet.pl",
+        "wp": "https://www.wp.pl",
+        "interia": "https://www.interia.pl",
+        "wilk": "https://pl.wikipedia.org",
+        "animals": "https://www.nationalgeographic.com"
+    };
+
+    if (atlas[low]) {
+        targetUrl = atlas[low];
+        response = "🛡️ SYSTEM: Nawiązano bezpośredni most z: " + low.toUpperCase();
+    } 
+    else if (low.includes(".") && !low.includes(" ")) {
+        targetUrl = low.startsWith("http") ? low : "https://" + low;
+        response = "🛡️ SYSTEM: Łączenie z domeną zewnętrzną: " + low;
+    } 
+    else {
+        targetUrl = "https://www.google.com" + encodeURIComponent(val);
+        response = "🛡️ SYSTEM: Eksploracja sieci dla frazy: " + val;
+    }
+
+    window.open(targetUrl, '_blank');
+
+    if (window.speechSynthesis) {
+        window.speechSynthesis.cancel();
+        const msg = new SpeechSynthesisUtterance(response);
+        msg.lang = 'pl-PL';
+        msg.pitch = 0.6; 
+        
+        msg.onstart = () => { if(mouth) mouth.classList.add('mouth-active'); };
+        msg.onend = () => { if(mouth) mouth.classList.remove('mouth-active'); };
+        
+        window.speechSynthesis.speak(msg);
+    }
+
+    const chat = document.getElementById('super-chat-box');
+    if (chat) {
+        chat.innerHTML += `
+            <div class="flex flex-col items-start mb-4 animate-fade-in">
+                <span class="text-[8px] text-cyan-400 font-black uppercase tracking-widest">🧠 CORE SYNCHRONIZED:</span>
+                <p class="bg-cyan-500/10 border border-cyan-500/20 p-3 rounded-r-xl text-cyan-100 max-w-[85%] text-[10px] border-l-4 border-l-cyan-500 shadow-lg">
+                    ${response} <br>
+                    <span class="text-[7px] text-purple-500/50">[QUALCOMM AR956x | IPv6: fd00::20f9...]</span>
+                </p>
+            </div>`;
+        chat.scrollTop = chat.scrollHeight;
+    }
+}
+
+function directVisionNet() {
+    const input = document.getElementById('super-input') || document.getElementById('input-brain');
+    const query = input ? input.value.trim() : "kurs dolara";
+    const portal = document.getElementById('vision-portal'); 
+    const frame = document.getElementById('vision-frame');  
+
+   const targetUrl = `https://www.google.com{encodeURIComponent(query)}&igu=1`; 
+    window.open(searchUrl, '_blank');
+
+if (portal) portal.style.display = 'flex';
+    if (frame) frame.src = targetUrl;
+
+    fetch('http://127.0.0.1', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({ query: query })
+    }).catch(() => console.log("ARCHITEKT: Bridge offline, ale okno otwarte."));
+
+    const txt = document.getElementById('txt-v-net');
+    txt.innerText = "KWANTOWE POŁĄCZENIE AKTYWNE";
+    if (typeof startSpeaking === "function") startSpeaking(); 
+    setTimeout(() => { txt.innerText = "PROJEKTANT WIZJI NET"; }, 2000);
+}
+
+function executeCyberVision() {
+    const inputField = document.getElementById('input-brain') || document.getElementById('super-input');
+    const mouth = document.getElementById('avatar-mouth');
+    
+    if (!inputField) return;
+    const rawVal = inputField.value.trim();
+    if (!rawVal) return;
+
+    const temat = rawVal.toLowerCase().replace(/szukaj|wizja/gi, "").trim();
+    inputField.value = ""; 
+    inputField.placeholder = "ŁĄCZENIE Z SIECIĄ: " + temat.toUpperCase() + "...";
+
+    window.speechSynthesis.cancel();
+    const msg = new SpeechSynthesisUtterance("Inicjuję portal wizji dla parametru " + temat);
+    msg.lang = 'pl-PL';
+    msg.pitch = 0.65;
+    
+    msg.onstart = () => { if(mouth) mouth.classList.add('mouth-active'); };
+    msg.onend = () => { 
+        if(mouth) mouth.classList.remove('mouth-active');
+        inputField.placeholder = "SZUKAJ W SIECI LUB PISZ...";
+    };
+    window.speechSynthesis.speak(msg);
+
+    const form = document.createElement('form');
+    form.method = 'GET';
+    form.target = '_blank';
+
+    if (temat.includes(".") && !temat.includes(" ")) {
+        const fullUrl = temat.startsWith("http") ? temat : "https://" + temat;
+        window.open(fullUrl, '_blank');
+        console.log("CYBER CORE: Skok bezpośredni do " + fullUrl);
+        return;
+    } else {
+
+        form.action = 'https://www.google.com'; 
+        const input = document.createElement('input');
+        input.type = 'hidden';
+        input.name = 'q';
+        input.value = temat;
+        form.appendChild(input);
+    }
+
+    document.body.appendChild(form);
+    form.submit();
+    document.body.removeChild(form);
+    console.log("HARD_RESET: Wymuszono wyszukiwanie dla: " + temat);
+} 
+ window.onerror = function(message, source, lineno, colno, error) {
+    const report = {
+        type: "CRITICAL_ERROR",
+        info: message,
+        location: `${source}:${lineno}`,
+        timestamp: new Date().toISOString()
+    };
+ 
+    QuantumAI.analyzeFailure(report);
+}; 
+ const QuantumOverseer = {
+    config: {
+        projectName: "Quantum Vision Portal",
+        autoHeal: true,
+        version: "2.0.alpha"
+    },
+
+    logChange: function(action, status) {
+        console.log(`%c[NADZORCA]: ${action} | Status: ${status}`, "color: #00ffcc; font-weight: bold;");
+       
+    },
+
+    reconstruct: function(errorType, details) {
+        this.logChange("Wykryto anomalię: " + errorType, "INICJACJA REKONSTRUKCJI");
+        
+        if (errorType === "CONNECTION_REFUSED") {
+            this.logChange("Naprawa mostka sieciowego...", "W TOKU");
+            return "Zrekonstruowano ścieżkę komunikacji.";
+        }
+        
+        return "Błąd krytyczny - wymagana interwencja Architekta.";
+    },
+
+    notifyArchitekt: function(msg) {
+        const btn = document.getElementById('btn-google-init');
+        if(btn) {
+            btn.innerHTML = `⚠️ NADZORCA: ${msg}`;
+            setTimeout(() => { btn.innerHTML = "POWRÓT DO OPERACJI"; }, 3000);
+        }
+    }
+};
+
+window.onload = () => {
+    authenticate();
+    refreshRegistryStats();
+};function launchArchitectLab() {
+    const link = document.createElement('a');
+    link.href = 'architekt_lab.html';
+    link.target = '_blank';
+    
+    const msg = "🛡️ ARCHITEKT: Witaj Projektańcie, otwieram laboratorium. Rdzeń projektu aktywny autoryzuje start.";
+    if (typeof speakAsArchitekt === 'function') speakAsArchitekt(msg);
+
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+
+    console.log("🛡️ SENTINEL: Protokół Architekt Lab WYSTRZELONY.");
+}
+
+setInterval(() => { document.getElementById('sys-clock').innerText = new Date().toLocaleTimeString(); }, 1000);
+
+const sites = {
+    "google": "https://www.google.pl", "fb": "https://www.facebook.com", "ig": "https://www.instagram.com",
+    "dolar": "https://pl.tradingview.com", "giełda": "https://www.gpw.pl",
+    "github": "https://github.com", "binance": "https://www.binance.com", "chatgpt": "https://chat.openai.com"
+};
+
+function generateMajorComponent(type) {
+    const components = {
+        "projekt": `
+            <div class="p-6 neon-box bg-black/80 border-t-4 border-t-cyan-500 min-h-[300px]">
+                <header class="flex justify-between border-b border-purple-900 pb-2 mb-4">
+                    <h2 class="text-cyan-400 font-bold uppercase tracking-widest">Global_Dashboard_v1</h2>
+                    <span class="text-[9px] text-green-500">STATUS: ACTIVE</span>
+                </header>
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="p-4 border border-purple-900 bg-purple-900/5">SEKCJA_ALFA</div>
+                    <div class="p-4 border border-purple-900 bg-purple-900/5">SEKCJA_BETA</div>
+                </div>
+                <footer class="mt-8 pt-2 border-t border-purple-900 text-right text-[10px] opacity-40">ENGINE: ARCHITEKT_CORE</footer>
+            </div>`,
+        "kontener": `
+            <section class="p-4 border-2 border-dashed border-purple-600 rounded-lg bg-zinc-950">
+                <div class="flex items-center gap-2 mb-4">
+                    <div class="w-3 h-3 rounded-full bg-red-500"></div>
+                    <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
+                    <div class="w-3 h-3 rounded-full bg-green-500"></div>
+                </div>
+                <div class="text-white">WSTAW_TREŚĆ_TUTAJ</div>
+            </section>`
+    };
+    return components[type] || null;
+}
+
+function runDeepAudit() {
+    const viewer = document.getElementById('code-viewer');
+    if (!viewer) return;
+
+    const source = document.documentElement.innerHTML;
+    const divs = (source.match(/<div/gi) || []).length;
+    const cDivs = (source.match(/<\/div>/gi) || []).length;
+    
+    let report = `<h3 class="text-white font-bold underline mb-4 tracking-widest uppercase">Protocol: Deep_Scan_H:\\</h3>`;
+    
+    if (divs !== cDivs) {
+        const diff = Math.abs(divs - cDivs);
+        const missingTag = divs > cDivs ? "ZAMYKAJĄCYCH (</div>)" : "OTWIERAJĄCYCH (<div>)";
+        
+        report += `<p class="text-red-500 animate-pulse">⚠️ USZKODZENIE STRUKTURY: Niezgodność tagów DIV (${divs} vs ${cDivs}).</p>`;
+        report += `<p class="text-cyan-400 mt-2">BRAK ${diff} ELEMENTÓW ${missingTag}.</p>`;
+        report += `<p class="text-amber-400 text-[10px] mt-1">GENEROWANIE KODU NAPRAWCZEGO DLA AI CORE...</p>`;
+        
+        const patch = divs > cDivs ? "</div>".repeat(diff) : "<div>".repeat(diff);
+        report += `<textarea readonly class="w-full bg-black text-green-500 h-10 mt-2 p-1 border border-cyan-900 font-mono text-[10px] focus:outline-none">${patch}</textarea>`;
+        
+        if (typeof speak === "function") speak("Wykryto krytyczne uszkodzenie struktury dokumentu. Przygotowano łatkę naprawczą.");
+    } else {
+        report += `<p class="text-emerald-500 font-bold">✓ STRUKTURA INDEX.HTML: INTEGRALNA</p>`;
+        report += `<p class="text-emerald-500/60 text-[10px]">Zweryfikowano ${divs} bloków kontenerowych.</p>`;
+        if (typeof speak === "function") speak("Audyt zakończony. Integralność danych potwierdzona.");
+    }
+    
+    report += `<p class="mt-4 text-purple-600 uppercase text-[9px] font-black tracking-tighter animate-pulse">// SYSTEM_CLEAN // BRAK_WIRUSÓW // PAMIĘĆ_H_OK</p>`;
+    
+    viewer.innerHTML = report;
+}
+
+document.getElementById('super-input')?.addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') {
+        if (typeof triggerGuardianScan === "function") {
+            triggerGuardianScan();
+        } else if (typeof triggerSuperCore === "function") {
+            triggerSuperCore();
+        }
+    }
+}); 
+  function saveAndSign() {
+            const val = parseFloat(document.getElementById('ct-val').value) || 0;
+            const client = document.getElementById('ct-b-name').value || "KONTRAHENT";
+            db.contracts.push({ firma: client, zysk: val / 100 });
+            db.ast.push({ n: "KONTRAKT: " + client, v: val / 1000, p: val });
+            logAction(`ZAAKCEPTOWANO KONTRAKT: ${client} (${val} PLN)`, "text-cyan-400");
+            save(); uUI();
+        }
+
+function save() { 
+    localStorage.setItem('hj_q_final_26', JSON.stringify(db)); 
+    updateOfficeDashboard(); 
+}
+
+function switchTab(id) { 
+    document.querySelectorAll('.tab-content').forEach(t => {
+        t.classList.remove('active');
+        t.classList.add('hidden'); 
+    });
+    
+    const target = document.getElementById('content-' + id);
+    if(target) {
+        target.classList.add('active');
+        target.classList.remove('hidden');
+    }
+
+    document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('sidebar-item-active'));
+    const btn = document.getElementById('btn-' + id);
+    if(btn) btn.classList.add('sidebar-item-active');
+
+    if(id === 'market' && typeof drawChart === 'function') {
+        setTimeout(drawChart, 50); 
+    }
+    
+    if(id === 'office') updateOfficeDashboard();
+}
+
+function logAction(m, c="text-blue-300") { 
+    db.logs.unshift({t:new Date().toLocaleTimeString(), m, c}); 
+    if(db.logs.length > 20) db.logs.pop();
+    uUI(); 
+    save(); 
+}
+
+function openOffice() { 
+    if(prompt("KOD DOSTĘPU:") === "1234") switchTab('office'); 
+    else alert("BŁĄD AUTORYZACJI"); 
+}
+
+function updateOfficeDashboard() {
+    const registry = document.getElementById('assets-registry');
+    const statAssets = document.getElementById('stat-assets');
+    const statTotalValue = document.getElementById('stat-total-value');
+    
+    if(!registry) return; 
+
+    const currentAssets = db.ast || []; 
+    registry.innerHTML = '';
+    let totalValue = 0;
+
+    if(currentAssets.length === 0) {
+        registry.innerHTML = '<p class="text-[10px] text-gray-500 italic p-2 text-center">SYSTEM_CORE_EMPTY: Brak zarejestrowanych aktywów</p>';
+    }
+
+    currentAssets.forEach((asset, index) => {
+        const val = parseFloat(asset.p) || (parseFloat(asset.v) * 100) || 0;
+        totalValue += val;
+        
+        const assetRow = document.createElement('div');
+        assetRow.className = "flex justify-between items-center bg-white/5 p-2 rounded border border-white/10 mb-1 hover:bg-white/10 transition-colors";
+        assetRow.innerHTML = `
+            <div>
+                <p class="text-[11px] font-bold text-white/80">${asset.n || "Nieznany zasób"}</p>
+                <p class="text-[9px] uppercase text-emerald-400 font-mono">ID: #${index.toString().padStart(3,'0')} | STATUS: ONLINE</p>
+            </div>
+            <div class="text-right">
+                <p class="text-[11px] font-mono font-black text-emerald-400">${val.toLocaleString()} PLN</p>
+                <button onclick="db.bal+=${val}; db.ast.splice(${index},1); save(); uUI();" class="text-[8px] text-red-500 hover:text-white uppercase">[Zlikwiduj]</button>
+            </div>
+        `;
+        registry.appendChild(assetRow);
+    });
+
+    if(statAssets) statAssets.innerText = currentAssets.length;
+    if(statTotalValue) statTotalValue.innerText = totalValue.toLocaleString() + " PLN";
+}
+
+let activeClaim = null;
+
+const NAMES = ["Tomasz Hajduk Właściciel ", "HITAG Sp. z o.o.", "Izabela Hajduk Obsługa klienta", "Tomasz Hajduk Logistics", "CryptoMiner Ltd", "Tomasz Hajduk Projektant"];
+const RISKS = ["NISKI", "MODEROWANY", "WYSOKI", "KRYTYCZNY"];
+
+function generateRandomClaim() {
+    const claim = {
+        id: "PL-" + Math.random().toString(36).substring(2, 8).toUpperCase(),
+        name: NAMES[Math.floor(Math.random() * NAMES.length)],
+        amount: Math.floor(Math.random() * 500000) + 10000,
+        risk: RISKS[Math.floor(Math.random() * RISKS.length)],
+        desc: "Wniosek o finansowanie operacyjne na rozwój infrastruktury kwantowej oraz zakup nowych serwerów UDA."
+    };
+
+    const queue = document.getElementById('credit-queue');
+    const div = document.createElement('div');
+    div.className = "p-4 bg-emerald-950/10 border border-emerald-500/20 rounded-lg hover:border-emerald-500 cursor-pointer transition-all animate-fade-in";
+    div.onclick = () => showAnalysis(claim);
+    div.innerHTML = `
+        <p class="text-[8px] text-emerald-700">${claim.id}</p>
+        <p class="text-[10px] text-white font-bold">${claim.name}</p>
+        <p class="text-[10px] text-emerald-400 font-black">${claim.amount.toLocaleString()} PLN</p>
+    `;
+    queue.prepend(div);
+}
+
+function showAnalysis(claim) {
+    activeClaim = claim;
+    document.getElementById('empty-bank-state').style.display = 'none';
+    document.getElementById('credit-analysis').classList.remove('hidden');
+    document.getElementById('credit-analysis').classList.add('flex');
+    
+    document.getElementById('client-name').innerText = claim.name;
+    document.getElementById('client-id').innerText = "IDENTYFIKATOR: " + claim.id;
+    document.getElementById('client-amount').innerText = claim.amount.toLocaleString() + " PLN";
+    document.getElementById('risk-score').innerText = claim.risk;
+    
+    const report = document.getElementById('ai-report');
+    report.innerHTML = `<p class="animate-pulse">Skanowanie historii kredytowej...</p>`;
+    
+    setTimeout(() => {
+        report.innerHTML = `
+            <p>> Historia operacyjna podmiotu wykazuje stabilność na poziomie 88%.</p>
+            <p>> Poziom ryzyka ${claim.risk} sugeruje zachowanie ostrożności przy transferze.</p>
+            <p>> Zalecenie Architekta: ${claim.risk === 'KRYTYCZNY' ? 'ODRZUCIĆ' : 'ZAAKCEPTOWAĆ Z MONITORINGIEM'}.</p>
+        `;
+        aiSpeak(`Otrzymano nowy wniosek kredytowy od ${claim.name}. Kwota: ${claim.amount} złotych. Poziom ryzyka: ${claim.risk}.`);
+    }, 1000);
+}
+
+function handleCreditDecision(approved) {
+    if(!activeClaim) return;
+    
+    const portal = document.getElementById('bank-poland-portal');
+    const msg = approved ? 
+        `DECYZJA POZYTYWNA: Udzielono kredytu dla ${activeClaim.name}. Środki w drodze.` : 
+        `DECYZJA NEGATYWNA: Odmowa finansowania dla ${activeClaim.name} z powodu ryzyka ${activeClaim.risk}.`;
+    
+    aiSpeak(msg);
+    if(typeof logAction === 'function') logAction(msg, approved ? "text-emerald-400" : "text-red-500");
+    
+    if(approved) {
+        db.bal += (activeClaim.amount * 0.05); // Bank zarabia 5% prowizji od razu
+        if(typeof uUI === 'function') uUI();
+    }
+
+    document.getElementById('credit-analysis').classList.add('hidden');
+    document.getElementById('empty-bank-state').style.display = 'flex';
+    activeClaim = null;
+    
+}
+
+function openPolandBank() {
+    document.getElementById('bank-poland-portal').style.display = 'flex';
+    if(document.getElementById('credit-queue').children.length === 0) {
+        for(let i=0; i<3; i++) generateRandomClaim();
+    }
+} 
+
+function startSupportCall() {
+    const support = document.getElementById('support-module');
+    support.style.display = 'flex';
+}
+
+function loadClaim(id) {
+    const content = document.getElementById('active-claim-content');
+    if(id === 'claim1') {
+        content.innerHTML = `
+            <div class="animate-fadeIn">
+                <h2 class="text-2xl font-black text-white mb-1 uppercase">Pol-Tech Solutions Sp. z o.o.</h2>
+                <p class="text-[10px] text-emerald-500 mb-8 font-mono">NIP: 5210003321 | STATUS: AKTYWNY</p>
+                <div class="grid grid-cols-2 gap-6 mb-8 text-[10px]">
+                    <div class="bg-emerald-950/20 p-5 border border-emerald-500/10 rounded-xl">
+                        <span class="block text-emerald-700 text-[8px] uppercase mb-2">Wnioskowana kwota</span>
+                        <span class="text-xl font-bold text-emerald-400">450.000,00 PLN</span>
+                    </div>
+                    <div class="bg-emerald-950/20 p-5 border border-emerald-500/10 rounded-xl text-right">
+                        <span class="block text-emerald-700 text-[8px] uppercase mb-2">Wiarygodność AI</span>
+                        <span class="text-xl font-bold text-emerald-400">98.4%</span>
+                    </div>
+                </div>
+                <div class="space-y-4 text-[11px] text-slate-300 italic leading-relaxed">
+                    <p>// Analiza przepływów wykazuje stały wzrost przychodów w sektorze technologicznym.</p>
+                    <p>// Brak wpisów w rejestrach dłużników (KRD, BIG).</p>
+                    <p>// Rekomendacja: Szybka ścieżka procesowa.</p>
+                </div>
+            </div>`;
+    }
+}
+  var vaultInput = "";
+
+function vKey(num) {
+    var screen = document.getElementById('v-screen');
+    if (vaultInput.length < 4) {
+        vaultInput += num;
+        screen.innerText = vaultInput.padEnd(4, '_');
+    }
+}
+
+function vReset() {
+    vaultInput = "";
+    var screen = document.getElementById('v-screen');
+    if (screen) screen.innerText = "____";
+}
+
+function checkAccess() {
+    var screenDisplay = document.getElementById('v-screen');
+    var correctCode = "6609"; 
+    
+    if (vaultInput === correctCode) {
+        screenDisplay.innerText = "OPEN";
+        screenDisplay.style.color = "#10b981";
+        
+        setTimeout(function() {
+            var transferWin = window.open("", "TransferPortal", "width=600,height=700,menubar=no,status=no");
+            
+            if (!transferWin) {
+                alert("Błąd: Zablokowano okno pop-up!");
+                return;
+            }
+
+            transferWin.document.open();
+            
+            var content = '<html><head><title>TERMINAL TRANSFEROWY</title>';
+            content += '<style>body{background:#000;color:#10b981;font-family:monospace;padding:30px;text-align:center;}';
+            content += 'input,select{background:#111;border:1px solid #10b981;color:#fff;padding:12px;width:100%;margin-bottom:20px;outline:none;}';
+            content += 'button{background:#10b981;color:#000;width:100%;padding:18px;font-weight:bold;cursor:pointer;border:none;text-transform:uppercase;}';
+            content += 'label{font-size:11px;display:block;text-align:left;margin-bottom:5px;}</style></head><body>';
+            
+            content += '<h2>PROTOKÓŁ TRANSFERU</h2>';
+            content += '<label>BANK:</label><select id="b"><option value="S">SANTANDER</option><option value="B">BNP PARIBAS</option><option value="P">PKO BP</option></select>';
+            content += '<label>ODBIORCA:</label><input type="text" id="u" placeholder="Nazwa...">';
+            content += '<label>NR KONTA:</label><input type="text" id="a" maxlength="26">';
+            content += '<label>KWOTA (PLN):</label><input type="number" id="m">';
+            content += '<button id="go">ZATWIERDŹ I OTWÓRZ BANK</button>';
+            
+            content += '</body></html>';
+
+            transferWin.document.write(content);
+            transferWin.document.close();
+
+            transferWin.document.getElementById('go').onclick = function() {
+                var b = transferWin.document.getElementById('b').value;
+                var url = (b === 'S') ? 'https://www.santander.pl' : 'https://www.bnpparibas.pl';
+                window.open(url, '_blank');
+                transferWin.close();
+            };
+
+            vReset(); 
+        }, 500);
+
+    } else {
+        screenDisplay.innerText = "ERR!";
+        setTimeout(vReset, 1000);
+    }
+}
+function switchWorkView(viewName) {
+    const workspace = document.getElementById('dynamic-workspace');
+    Array.from(workspace.children).forEach(child => {
+        child.style.display = 'none';
+    });
+
+    const target = document.getElementById('view-' + viewName);
+    if (target) {
+        target.style.display = (viewName === 'vault' || viewName === 'transfer' || viewName === 'empty') ? 'flex' : 'block';
+        if (viewName === 'vault') vReset();
+    }
+}
+
+function executeFinal() {
+    const bank = document.getElementById('t-bank').value;
+    const url = (bank === 'SANTANDER') ? "https://www.santander.pl" : "https://www.bnpparibas.pl";
+    window.open(url, "_blank", "width=1200,height=800");
+}
+function submitClaim() {
+    const inputs = document.querySelectorAll('#view-form input');
+    
+    const firma = inputs[0].value;
+    const nip = inputs[1].value;
+    const kwota = inputs[2].value;
+
+    if (!firma || !nip || !kwota) {
+        alert("Uzupełnij wszystkie pola!");
+        return;
+    }
+
+    alert(`Wniosek zapisany:\nFirma: ${firma}\nNIP: ${nip}\nKwota: ${kwota} PLN`);
+}
+
+function startSpeaking(duration = 3000) {
+    const mouth = document.getElementById('avatar-mouth');
+    if(!mouth) return;
+    
+    const interval = setInterval(() => {
+        const height = Math.floor(Math.random() * 15) + 2;
+        mouth.style.height = `${height}px`;
+        mouth.style.borderRadius = '50%';
+    }, 100);
+
+    setTimeout(() => {
+        clearInterval(interval);
+        mouth.style.height = '2px';
+        mouth.style.borderRadius = '0';
+    }, duration);
+}
+
+async function triggerGuardianScan() {
+    const input = document.getElementById('super-input');
+    const chat = document.getElementById('super-chat-box');
+    const status = document.getElementById('txt-v-net');
+    
+    if (!input || !chat || !status) return;
+
+    const query = input.value.trim() || "kurs btc i newsy rynkowe 2026";
+
+    const log = (msg, color = "text-cyan-400/80") => {
+        const p = document.createElement('p');
+        p.className = `font-mono ${color}`;
+        p.innerText = `[CORE]: ${msg}`;
+        chat.appendChild(p);
+        chat.scrollTop = chat.scrollHeight;
+    };
+
+    log(`Inicjuję skanowanie wizyjne dla: ${query}...`);
+    status.innerText = "SKANOWANIE DYSKU H...";
+    if (typeof speak === "function") {
+        speak(`Inicjuję procedurę skanowania dla zapytania: ${query}. Sprawdzam zasoby dysku H.`);
+    }
+
+    const searchUrl = `https://google.com{encodeURIComponent(query)}`;
+    window.open(searchUrl, '_blank');
+
+    try {
+        if (typeof autoScan === "function") {
+            log("Nawiązywanie połączenia z Puppeteer...", "text-amber-400");
+            if (typeof speak === "function") speak("Łączę z modułem Puppeteer. Rozpoczynam analizę wizyjną.");
+            
+            const analysis = await autoScan(query);
+            
+            const resultMsg = analysis ? 'SUKCES' : 'BRAK DANYCH';
+            log(`ANALIZA ZAKOŃCZONA: ${resultMsg}`, "text-emerald-400");
+            if (typeof speak === "function") speak(`Analiza zewnętrzna zakończona statusem: ${resultMsg}.`);
+        } else {
+ 
+            log("OSTRZEŻENIE: Moduł autoScan nieaktywny. Uruchamiam diagnostykę lokalną.", "text-amber-500");
+            if (typeof speak === "function") speak("Uwaga. Nie wykryto aktywnego silnika skanującego. Wykonuję jedynie skan integralności lokalnej.");
+            
+            await new Promise(resolve => setTimeout(resolve, 2000));
+            
+            log("Dysk H: Skanowanie index.html zakończone.");
+            log("Projekt: SPRAWNY. Nie wykryto krytycznych błędów.", "text-emerald-400");
+            if (typeof speak === "function") speak("Skanowanie dysku H zakończone. Projekt jest spójny.");
+        }
+
+        navigator.sendBeacon('http://127.0.0.1:5000', JSON.stringify({ 
+            task: "GUARDIAN_SCAN", 
+            target: "H:/index.html",
+            query: query 
+        }));
+
+    } catch (err) {
+        log(`BŁĄD KRYTYCZNY: ${err.message}`, "text-red-500");
+        if (typeof speak === "function") speak("Wykryto błąd krytyczny w jądrze strażnika. Przerwano procedurę.");
+    } finally {
+        setTimeout(() => { 
+            status.innerText = "🧠 Strażnik Super Core"; 
+        }, 3000);
+    }
+}
+function otworzStraznikaWizji() {
+    const container = document.getElementById('guardian-container');
+    if (container) {
+        container.classList.remove('hidden');
+        document.getElementById('super-input').focus();
+    }
+
+    if (window.uruchomStraznikaH) {
+        const query = document.getElementById('super-input')?.value || "Analiza Projektu H:";
+        window.uruchomStraznikaH(query);
+        return;
+    }
+
+    console.log("🛡️ Nawiązywanie połączenia z dyskiem H:/guardian_core.js...");
+    const script = document.createElement('script');
+    script.src = 'file:///H:/guardian_core.js'; 
+    
+    script.onload = () => {
+        console.log("✅ MODUŁ STRAŻNIKA ZAŁADOWANY.");
+        const logBox = document.getElementById('super-chat-box');
+        const p = document.createElement('p');
+        p.className = "text-emerald-400";
+        p.innerText = "[SYSTEM]: Połączono z rdzeniem H:";
+        logBox.appendChild(p);
+    };
+
+    script.onerror = () => {
+        console.error("❌ BŁĄD ODCZYTU DYSKU H:");
+        alert("BŁĄD: Nie znaleziono pliku 'guardian_core.js' na dysku H:!");
+    };
+
+    document.head.appendChild(script);
+}
+
+function executeEmergencyRepair() {
+    logToTerminal("⚙️ PROCES: Optymalizacja logiki systemowej...", "amber-400");
+    animateMouth(true);
+    setTimeout(() => {
+
+        logToTerminal("✅ SUKCES: Wszystkie procesy zostały wyrównane.", "emerald-500");
+        speak("Naprawa zakończona.");
+        animateMouth(false);
+    }, 1500);
+}
+
+function logToTerminal(text, colorClass) {
+    const chat = document.getElementById('super-chat-box');
+    if (chat) {
+        chat.innerHTML += `<div class="p-1 border-l-2 border-${colorClass} mb-1 bg-white/5 font-mono text-[10px] animate-fade-in"><span class="text-${colorClass}">[ARCHITEKT]:</span> ${text}</div>`;
+        chat.scrollTop = chat.scrollHeight;
+    }
+}
+function updateIntegrityBar(percent) {
+    const bar = document.getElementById('bar-integrity');
+    if (bar) bar.style.width = percent + "%";
+}
+function animateMouth(active) {
+    const m = document.getElementById('avatar-mouth');
+    if (m) m.style.height = active ? "15px" : "2px";
+}
+function speak(t) {
+    if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+        window.speechSynthesis.speak(new SpeechSynthesisUtterance(t));
+    }
+}
+const AutoGuardian = {
+    interval: null,
+    checkCount: 0,
+
+    start: function() {
+        logToTerminal("🛡️ AUTO-WARTOWNIK: Monitoring aktywny (interwał 30s).", "cyan-700");
+        this.interval = setInterval(() => this.performAudit(), 30000);
+    },
+
+    performAudit: function() {
+        this.checkCount++;
+        const status = document.getElementById('super-chat-box') && document.getElementById('super-input');
+        
+        if (!status) {
+            console.error("⚠️ KRYTYCZNA AWARIA DOM: Nie odnaleziono kluczowych komponentów!");
+            speak("Alarm. Wykryto naruszenie struktury projektu.");
+        } else {
+            if (this.checkCount % 5 === 0) {
+                logToTerminal(`📡 HEARTBEAT: Skany: ${this.checkCount} | Stabilność: 100% | Qualcomm: OK`, "cyan-900");
+            }
+        }
+    },
+
+    stop: function() {
+        clearInterval(this.interval);
+        logToTerminal("⚠️ AUTO-WARTOWNIK: Nadzór wstrzymany.", "amber-700");
+    }
+};
+
+AutoGuardian.start();
+function executeEmergencyRepair() {
+    logToTerminal("⚙️ PROCES: Głęboka optymalizacja struktur...", "amber-400");
+    animateMouth(true);
+    
+    setTimeout(() => {
+        AutoGuardian.checkCount = 0; 
+        updateIntegrityBar(100);
+        logToTerminal("✅ SUKCES: Pamięć Qualcomm Atheros została wyrównana.", "emerald-500");
+        speak("Wszystkie procesy zostały udoskonalone i zabezpieczone.");
+        animateMouth(false);
+    }, 2000);
+}
+function monitorSystemState() {
+    const loadElement = document.getElementById('load-val');
+    const neuralLoad = parseInt(loadElement.innerText);
+    const coreAvatar = document.getElementById('quantum-avatar');
+    const superChat = document.getElementById('super-chat-box');
+
+    if (neuralLoad > 80) {
+        coreAvatar.classList.add('system-alert');
+        superChat.style.borderColor = "#ef4444";
+        console.warn("[STRAŻNIK]: WYKRYTO PRZECIĄŻENIE NEURAL_CORE!");
+    } else {
+        coreAvatar.classList.remove('system-alert');
+        superChat.style.borderColor = "";
+    }
+}
+
+function triggerSpeechAnimation(duration = 2000) {
+    const mouths = document.querySelectorAll('#avatar-mouth');
+    mouths.forEach(mouth => {
+        mouth.classList.add('mouth-speaking');
+        
+        setTimeout(() => {
+            mouth.classList.remove('mouth-speaking');
+        }, duration);
+    });
+}
+
+const originalTriggerSuperCore = window.triggerSuperCore;
+window.triggerSuperCore = function() {
+    triggerSpeechAnimation(3000);
+    
+    const eyes = document.querySelectorAll('.eye-socket-v2');
+    eyes.forEach(eye => eye.classList.add('eye-scanning'));
+    
+    setTimeout(() => {
+        eyes.forEach(eye => eye.classList.remove('eye-scanning'));
+    }, 3000);
+
+    if (originalTriggerSuperCore) originalTriggerSuperCore();
+};
+
+setInterval(monitorSystemState, 5000);
+
+console.log("[ARCHITEKT]: Logika dynamicznego CSS została zainicjowana.");
+
+
+</script>
+</body>
+</html>
+
