@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <title>HAJDUK PRO - TWOJE ZASOBY</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { background: #010206; color: #f1f5f9; font-family: 'monospace'; padding: 20px; }
+        .glass { background: rgba(15, 23, 42, 0.7); backdrop-filter: blur(12px); border: 1px solid rgba(59, 130, 246, 0.1); border-radius: 12px; }
+        .asset-card { background: rgba(30, 41, 59, 0.5); border: 1px solid rgba(59, 130, 246, 0.2); transition: 0.3s; }
+        .asset-card:hover { border-color: #3b82f6; background: rgba(30, 41, 59, 0.8); }
+    </style>
+</head>
+<body>
+    <div class="max-w-4xl mx-auto">
+        <div class="flex justify-between items-center mb-6 border-b border-blue-500/30 pb-4">
+            <h1 class="text-2xl font-black text-blue-400 italic">📦 MOJE ZASOBY KORPORACYJNE</h1>
+            <button onclick="location.reload()" class="bg-blue-600 px-4 py-1 rounded text-[10px] uppercase font-bold">Odśwież Listę</button>
+        </div>
+
+        <div id="assets-grid" class="grid grid-cols-2 gap-4">
+            <!-- Tu pojawią się zasoby -->
+        </div>
+    </div>
+
+    <script>
+        function render() {
+            // Pobieranie danych z głównej bazy projektu
+            const db = JSON.parse(localStorage.getItem('hj_q_final_26')) || { ast: [] };
+            const container = document.getElementById('assets-grid');
+            
+            if (db.ast.length === 0) {
+                container.innerHTML = '<p class="col-span-2 text-center opacity-30 italic py-10">Brak aktywnych zasobów w inwentarzu...</p>';
+                return;
+            }
+
+            container.innerHTML = db.ast.map((a, i) => `
+                <div class="glass p-4 asset-card flex justify-between items-center">
+                    <div>
+                        <p class="text-blue-400 font-black uppercase text-xs">${a.n}</p>
+                        <p class="text-emerald-500 text-[10px] font-mono">Generuje: +${a.v} PLN/s</p>
+                    </div>
+                    <div class="text-right">
+                        <p class="text-[8px] text-slate-500 mb-2">STATUS: AKTYWNY</p>
+                        <button onclick="sellAsset(${i})" class="bg-red-600/20 text-red-500 border border-red-500/40 px-2 py-1 rounded text-[8px] hover:bg-red-600 hover:text-white transition-all">SPRZEDAJ</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function sellAsset(index) {
+            let db = JSON.parse(localStorage.getItem('hj_q_final_26'));
+            const asset = db.ast[index];
+            db.bal += (asset.v * 100); // Zwrot gotówki
+            db.ast.splice(index, 1); // Usunięcie z listy
+            localStorage.setItem('hj_q_final_26', JSON.stringify(db));
+            render();
+        }
+
+        // Automatyczne odświeżanie co 2 sekundy
+        setInterval(render, 2000);
+        render();
+    </script>
+</body>
+</html>
